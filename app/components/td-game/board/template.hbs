@@ -1,3 +1,11 @@
 {{#if attrs.waveStarted}}
-  <div class="board__tower-groups">Tower Groups</div>
+  <div class="board__tower-groups">
+    {{#each attrs.towerGroups as |towerGroup|}}
+      {{td-game/board/tower-group towers=(readonly towerGroup.towers)}}
+    {{/each}}
+  </div>
+
+  {{#each attrs.mobs as |mob|}}
+    {{td-game/board/mob mob=(readonly mob)}}
+  {{/each}}
 {{/if}}

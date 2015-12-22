@@ -26,8 +26,8 @@ function addMobsToWave(wave) {
 function addTowerGroupsToWave(wave) {
   const towerGroup = TowerGroup.create();
   const tower = Tower.create();
-  tower.set('type', 1); // TODO THIS COMMIT: adjust this
-  towerGroup.set('tower', tower);
+  tower.set('type', 1); // TODO THIS COMMIT: adjust this;
+  towerGroup.set('towers', [tower]);
 
   wave.set('towerGroups', [towerGroup]);
 }
