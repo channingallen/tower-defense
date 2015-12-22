@@ -1,1 +1,6 @@
-{{yield}}
+{{#unless waveStarted}}
+  <button class="td-game__start-btn"
+          onclick={{action (action "startWave")}}>
+    Start Wave
+  </button>
+{{/unless}}
