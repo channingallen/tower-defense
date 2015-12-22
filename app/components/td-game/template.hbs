@@ -5,6 +5,4 @@
   </button>
 {{/unless}}
 
-{{#if waveStarted}}
-  {{td-game/board}}
-{{/if}}
+{{td-game/board waveStarted=(readonly waveStarted)}}
