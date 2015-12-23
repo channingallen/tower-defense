@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: ['stylesheet__block'],
+
+  tagName: 'ol',
+
   selector: Ember.computed(
     'attrs.tower.selector',
     'attrs.towerGroup.selector',

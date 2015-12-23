@@ -1,1 +1,28 @@
+$color--muted: hsla(0, 50%, 0%, 0.5);
+
+.stylesheet__block {
+}
+
+// a line of code
+.block__line {
+
+}
+
+.block__brace-line {
+  color: $color--muted;
+}
+
+.block__selector {
+
+}
+
+.block__brace {
+
+}
+
+.block__declaration {
+  color: $color--muted;
+  padding-left: 1em;
+}
+
 @import "block/input";

@@ -1,3 +1,18 @@
-{{selector}} {<br>
-{{input}}<br>
-}
+<li class="block__line block__brace-line">
+  <span class="block__selector">{{selector}}</span>
+  <span class="block__brace">{</span>
+</li>
+
+{{#if attrs.towerGroup}}
+  <li class="block__line block__declaration">
+    display: flex;
+  </li>
+{{/if}}
+
+<li class="block__line block__declaration">
+  {{input class="block__input"}}
+</li>
+
+<li class="block__line block__brace-line">
+  <span class="block__brace">}</span>
+</li>
