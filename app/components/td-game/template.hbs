@@ -1,8 +1,10 @@
 {{#unless waveStarted}}
-  <button class="td-game__start-btn"
-          onclick={{action (action "startWave")}}>
-    Start Wave
-  </button>
+  <div class="td-game__start-btn-overlay">
+    <button class="td-game__start-btn"
+            onclick={{action (action "startWave")}}>
+      Start Wave
+    </button>
+  </div>
 {{/unless}}
 
 <div class="td-game__sidebar">
