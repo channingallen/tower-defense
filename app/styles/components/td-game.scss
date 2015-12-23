@@ -1,8 +1,9 @@
+$td-game__sidebar__width: 200px;
+
 .td-game {
   display: flex;
   flex-direction: row;
-  margin-left: 20px;
-  margin-top: 40px;
+  min-height: 100vh;
 }
 
 .td-game__start-btn {
@@ -11,15 +12,16 @@
   color: white;
   padding: 3px;
   position: absolute;
-  left: 20px;
-  top: 10px;
+  top: 40px;
 }
 
 .td-game__sidebar {
+  background-color: hsl(0, 0%, 90%);
   border-right: 1px solid black;
   display: flex;
   flex-direction: column;
   padding-right: 30px;
+  width: $td-game__sidebar__width;
 }
 
 .sidebar__instructions {

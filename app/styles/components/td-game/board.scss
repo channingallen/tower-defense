@@ -1,10 +1,10 @@
 .td-game__board {
-  background: blue;
+  background-image: url("http://3.bp.blogspot.com/-K3i3bFLCu6Y/U1165_R88ZI/AAAAAAAA1Oc/TuIoUdj4grs/s1600/Capture.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
-  margin-left: 30px;
   padding: 20px 30px 0;
-  width: 100px;
-  height: 200px;
+  width: calc(100% - #{$td-game__sidebar__width});
 }
 
 @import
