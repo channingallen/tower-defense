@@ -6,12 +6,12 @@
 {{/unless}}
 
 <div class="td-game__sidebar">
-  {{td-game/stylesheet towerGroups=(readonly currentWave.towerGroups)
-                       waveStarted=(readonly waveStarted)}}
-
-  <div class="td-game__instructions">
+  <div class="sidebar__instructions">
     Instructions
   </div>
+
+  {{td-game/stylesheet towerGroups=(readonly currentWave.towerGroups)
+                       waveStarted=(readonly waveStarted)}}
 </div>
 
 {{td-game/board mobs=(readonly currentWave.mobs)

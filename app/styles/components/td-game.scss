@@ -1,0 +1,42 @@
+.td-game {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-top: 40px;
+}
+
+.td-game__start-btn {
+  position: absolute;
+  left: 24px;
+  top: 10px;
+}
+
+.td-game__sidebar {
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding-right: 30px;
+}
+
+.sidebar__instructions {
+  background: gray;
+  color: white;
+  flex: none;
+}
+
+.sidebar__stylesheet {
+  flex: none;
+}
+
+.td-game__board {
+  background: green;
+  color: white;
+  margin-left: 30px;
+  padding: 20px 30px 0;
+  width: 100px;
+  height: 200px;
+}
+
+@import
+  "td-game/board",
+  "td-game/stylesheet";
