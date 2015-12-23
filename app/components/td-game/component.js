@@ -6,12 +6,16 @@ export default Ember.Component.extend({
 
   currentWave: createWave(),
 
+  selectedTower: null,
+
   selectedTowerGroup: null,
 
   waveStarted: false,
 
   actions: {
-    // TODO THIS COMMIT: add selectTower action
+    selectTower(tower) {
+      this.set('selectedTower', tower);
+    },
 
     selectTowerGroup(towerGroup) {
       this.set('selectedTowerGroup', towerGroup);

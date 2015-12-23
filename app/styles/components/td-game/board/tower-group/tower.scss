@@ -1,6 +1,6 @@
 .tower-group__tower {
-  $dimensions: $board__tower-group__height - ($board__tower-group__padding * 2);
   $background-color: hsl(0, 100%, 50%);
+  $dimensions: $board__tower-group__height - ($board__tower-group__padding * 2);
 
   background-color: $background-color;
   border-radius: 9999px;
@@ -9,5 +9,14 @@
 
   &:hover {
     box-shadow: 0 0 10px transparentize($background-color, 0.15);
+  }
+}
+
+.tower-group__tower--selected {
+  $background-color--selected: hsl(60, 100%, 50%);
+  background-color: $background-color--selected;
+
+  &:hover {
+    box-shadow: 0 0 10px transparentize($background-color--selected, 0.15);
   }
 }

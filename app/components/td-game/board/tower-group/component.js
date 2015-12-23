@@ -15,11 +15,7 @@ export default Ember.Component.extend({
      }
   ),
 
-  actions: {
-    selectTower(tower) {
-      if (this.attrs['select-tower']) {
-        this.attrs['select-tower'](tower);
-      }
-    }
-  }
+  selectedTower: Ember.computed('attrs.selectedTower', function () {
+    return this.attrs.selectedTower;
+  })
 });
