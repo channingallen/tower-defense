@@ -1,7 +1,11 @@
 {{#if attrs.waveStarted}}
   <div class="board__tower-groups">
     {{#each attrs.towerGroups as |towerGroup|}}
-      {{td-game/board/tower-group towers=(readonly towerGroup.towers)}}
+      {{td-game/board/tower-group click=(action "selectTowerGroup" towerGroup)
+                                  selectedTowerGroup=(readonly selectedTowerGroup)
+                                  select-tower=(action "selectTower")
+                                  towerGroup=(readonly towerGroup)
+                                  towers=(readonly towerGroup.towers)}}
     {{/each}}
   </div>
 

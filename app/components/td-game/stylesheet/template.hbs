@@ -1,9 +1,12 @@
 {{#if attrs.waveStarted}}
   {{#each attrs.towerGroups as |towerGroup|}}
-    {{td-game/stylesheet/block towerGroup=(readonly towerGroup)}}
+    {{td-game/stylesheet/block selectedTowerGroup=(readonly attrs.selectedTowerGroup)
+                               towerGroup=(readonly towerGroup)}}
 
     {{#each towerGroup.towers as |tower|}}
-      {{td-game/stylesheet/block tower=(readonly tower)}}
+      {{td-game/stylesheet/block selectedTowerGroup=(readonly attrs.selectedTowerGroup)
+                                 tower=(readonly tower)
+                                 towerGroup=(readonly towerGroup)}}
     {{/each}}
   {{/each}}
 {{/if}}

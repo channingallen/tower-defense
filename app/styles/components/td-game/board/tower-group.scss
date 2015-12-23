@@ -1,9 +1,8 @@
 $board__tower-group__height: 60px;
 $board__tower-group__padding: 6px;
+$background-color: hsla(0, 0%, 100%, 0.25);
 
 .board__tower-group {
-  $background-color: hsla(0, 0%, 100%, 0.25);
-
   background-color: $background-color;
   border-radius: 4px;
   cursor: pointer;
@@ -15,6 +14,11 @@ $board__tower-group__padding: 6px;
     background-color: opacify($background-color, 0.25);
     box-shadow: 0 0 10px opacify($background-color, 0.6);
   }
+}
+
+.board__tower-group--selected {
+  background-color: opacify($background-color, 0.25);
+  box-shadow: 0 0 10px opacify($background-color, 0.6);
 }
 
 @import "tower-group/tower";

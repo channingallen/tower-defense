@@ -12,10 +12,13 @@
     Instructions
   </div>
 
-  {{td-game/stylesheet towerGroups=(readonly currentWave.towerGroups)
+  {{td-game/stylesheet selectedTowerGroup=(readonly selectedTowerGroup)
+                       towerGroups=(readonly currentWave.towerGroups)
                        waveStarted=(readonly waveStarted)}}
 </div>
 
 {{td-game/board mobs=(readonly currentWave.mobs)
+                select-tower-group=(action "selectTowerGroup")
+                selectedTowerGroup=(readonly selectedTowerGroup)
                 towerGroups=(readonly currentWave.towerGroups)
                 waveStarted=(readonly waveStarted)}}
