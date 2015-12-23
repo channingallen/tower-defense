@@ -15,10 +15,12 @@ export default Ember.Component.extend({
   actions: {
     selectTower(tower) {
       this.set('selectedTower', tower);
+      this.set('selectedTowerGroup', null);
     },
 
     selectTowerGroup(towerGroup) {
       this.set('selectedTowerGroup', towerGroup);
+      this.set('selectedTower', null);
     },
 
     startWave() {
