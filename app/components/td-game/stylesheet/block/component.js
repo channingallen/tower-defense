@@ -39,7 +39,9 @@ export default Ember.Component.extend({
     },
 
     selectTowerGroup() {
-      alert('you clicked a Tower Group!');
+      if (this.attrs['select-tower-group'] && this.attrs.towerGroup) {
+        this.attrs['select-tower-group'](this.attrs.towerGroup);
+      }
     }
   }
 });

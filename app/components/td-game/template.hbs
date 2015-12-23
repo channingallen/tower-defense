@@ -12,7 +12,8 @@
     Instructions
   </div>
 
-  {{td-game/stylesheet selectedTowerGroup=(readonly selectedTowerGroup)
+  {{td-game/stylesheet select-tower-group=(action "selectTowerGroup")
+                       selectedTowerGroup=(readonly selectedTowerGroup)
                        towerGroups=(readonly currentWave.towerGroups)
                        waveStarted=(readonly waveStarted)}}
 </div>
