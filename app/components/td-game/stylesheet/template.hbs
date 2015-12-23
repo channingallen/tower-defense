@@ -5,9 +5,9 @@
                                towerGroup=(readonly towerGroup)}}
 
     {{#each towerGroup.towers as |tower|}}
-      {{td-game/stylesheet/block selectedTowerGroup=(readonly attrs.selectedTowerGroup)
-                                 tower=(readonly tower)
-                                 towerGroup=(readonly towerGroup)}}
+      {{td-game/stylesheet/block select-tower=(action attrs.select-tower)
+                                 selectedTower=(readonly attrs.selectedTower)
+                                 tower=(readonly tower)}}
     {{/each}}
   {{/each}}
 {{/if}}

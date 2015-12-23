@@ -34,8 +34,10 @@ export default Ember.Component.extend({
   ),
 
   actions: {
-    selectTowerAndGroup() {
-      alert('you clicked a Tower!');
+    selectTower() {
+      if (this.attrs['select-tower']) {
+        this.attrs['select-tower'](this.attrs.tower);
+      }
     },
 
     selectTowerGroup() {
