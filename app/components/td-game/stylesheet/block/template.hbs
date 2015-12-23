@@ -12,13 +12,13 @@
 {{#if attrs.tower}}
   <li class="block__line block__declaration">
     {{input class="block__input"
-            click=(action "selectTower")
+            click=(action attrs.select-tower attrs.tower)
             viewName=(readonly inputViewName)}}
   </li>
 {{else}}
   <li class="block__line block__declaration">
     {{input class="block__input"
-            click=(action "selectTowerGroup")
+            click=(action attrs.select-tower-group attrs.tower-group)
             viewName=(readonly inputViewName)}}
   </li>
 {{/if}}

@@ -9,13 +9,5 @@ export default Ember.Component.extend({
 
   selectedTowerGroup: Ember.computed('attrs.selectedTowerGroup', function () {
     return this.attrs.selectedTowerGroup;
-  }),
-
-  actions: {
-    selectTowerGroup(towerGroup) {
-      if (this.attrs['select-tower-group']) {
-        this.attrs['select-tower-group'](towerGroup);
-      }
-    }
-  }
+  })
 });
