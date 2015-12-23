@@ -8,17 +8,25 @@ export default Ember.Component.extend({
   tagName: 'ol',
 
   _autoFocusInput: Ember.observer(
+    'attrs.selectedTower',
     'attrs.selectedTowerGroup',
+    'attrs.tower',
     'attrs.towerGroup',
     function () {
-      if (this.attrs.selectedTowerGroup === this.attrs.towerGroup) {
-        if (this.attrs.tower) {
-          return;
+      if (this.attrs.selectedTower) {
+        if (this.attrs.selectedTower === this.attrs.tower) {
+          const inputViewName = this.get('inputViewName');
+          const inputComponent = this.get(inputViewName);
+          const inputEl = inputComponent.get('element');
+          inputEl.focus();
         }
-        const inputViewName = this.get('inputViewName');
-        const inputComponent = this.get(inputViewName);
-        const inputEl = inputComponent.get('element');
-        inputEl.focus();
+      } else if (this.attrs.selectedTowerGroup) {
+        if (this.attrs.selectedTowerGroup === this.attrs.towerGroup) {
+          const inputViewName = this.get('inputViewName');
+          const inputComponent = this.get(inputViewName);
+          const inputEl = inputComponent.get('element');
+          inputEl.focus();
+        }
       }
     }
   ),
@@ -41,7 +49,7 @@ export default Ember.Component.extend({
     },
 
     selectTowerGroup() {
-      if (this.attrs['select-tower-group'] && this.attrs.towerGroup) {
+      if (this.attrs['select-tower-group']) {
         this.attrs['select-tower-group'](this.attrs.towerGroup);
       }
     }
