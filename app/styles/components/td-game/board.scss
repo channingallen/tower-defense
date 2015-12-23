@@ -1,3 +1,12 @@
+.td-game__board {
+  background: blue;
+  color: white;
+  margin-left: 30px;
+  padding: 20px 30px 0;
+  width: 100px;
+  height: 200px;
+}
+
 @import
   "board/mob",
   "board/tower-group";

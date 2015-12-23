@@ -1,2 +1,11 @@
 @import
-  "components/td-game";
+  "global/colors",
+  "global/fonts",
+  "global/mixins",
+  "global/z-indices";
+
+@import
+  "base/reset",
+  "base/elements";
+
+@import "components/td-game";

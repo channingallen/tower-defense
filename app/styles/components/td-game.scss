@@ -6,8 +6,12 @@
 }
 
 .td-game__start-btn {
+  background: green;
+  border-radius: 4px;
+  color: white;
+  padding: 3px;
   position: absolute;
-  left: 24px;
+  left: 20px;
   top: 10px;
 }
 
@@ -22,19 +26,6 @@
   background: gray;
   color: white;
   flex: none;
-}
-
-.sidebar__stylesheet {
-  flex: none;
-}
-
-.td-game__board {
-  background: green;
-  color: white;
-  margin-left: 30px;
-  padding: 20px 30px 0;
-  width: 100px;
-  height: 200px;
 }
 
 @import
