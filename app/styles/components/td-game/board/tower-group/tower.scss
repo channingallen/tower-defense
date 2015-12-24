@@ -13,7 +13,7 @@
 }
 
 .tower-group__tower--selected {
-  $background-color--selected: hsl(60, 100%, 50%);
+  $background-color--selected: hsl(120, 100%, 50%);
   background-color: $background-color--selected;
 
   &:hover {

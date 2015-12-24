@@ -13,9 +13,5 @@ export default Ember.Component.extend({
              true :
              false;
      }
-  ),
-
-  selectedTower: Ember.computed('attrs.selectedTower', function () {
-    return this.attrs.selectedTower;
-  })
+  )
 });

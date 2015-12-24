@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import createWave from 'tower-defense/utils/create-wave';
 
-const TdGameComponent = Ember.Component.extend({
+export default Ember.Component.extend({
   classNames: ['td-game'],
 
   currentWave: createWave(),
@@ -34,5 +34,3 @@ const TdGameComponent = Ember.Component.extend({
     }
   }
 });
-
-export default TdGameComponent;

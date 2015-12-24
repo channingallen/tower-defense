@@ -7,9 +7,6 @@ export default Ember.Component.extend({
 
   tagName: 'ol',
 
-  _logTGChange: Ember.observer('attrs.selectedTowerGroup', function () {
-  }),
-
   _autoFocusInput: Ember.observer(
     'attrs.selectedTower',
     'attrs.selectedTowerGroup',
