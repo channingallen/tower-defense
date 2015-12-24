@@ -6,9 +6,9 @@ export default Ember.Component.extend({
   classNameBindings: ['currentTowerSelected:tower-group__tower--selected'],
 
   _sendSelectAction: Ember.on('click', function (clickEvent) {
-    this.attrs.select(this.attrs.tower);
-
     clickEvent.stopPropagation();
+
+    this.attrs.select(this.attrs.tower);
   }),
 
   currentTowerSelected: Ember.computed(

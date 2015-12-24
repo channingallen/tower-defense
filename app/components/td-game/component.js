@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import createWave from 'tower-defense/utils/create-wave';
 
-export default Ember.Component.extend({
+const TdGameComponent = Ember.Component.extend({
   classNames: ['td-game'],
 
   currentWave: createWave(),
@@ -14,13 +14,19 @@ export default Ember.Component.extend({
 
   actions: {
     selectTower(tower) {
-      this.set('selectedTower', tower);
-      this.set('selectedTowerGroup', null);
+      if (this.get('selectedTowerGroup')) {
+        this.forceSet('selectedTowerGroup', null);
+      }
+
+      this.forceSet('selectedTower', tower);
     },
 
     selectTowerGroup(towerGroup) {
-      this.set('selectedTowerGroup', towerGroup);
-      this.set('selectedTower', null);
+      if (this.get('selectedTower')) {
+        this.forceSet('selectedTower', null);
+      }
+
+      this.forceSet('selectedTowerGroup', towerGroup);
     },
 
     startWave() {
@@ -28,3 +34,5 @@ export default Ember.Component.extend({
     }
   }
 });
+
+export default TdGameComponent;

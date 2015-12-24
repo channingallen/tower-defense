@@ -7,20 +7,25 @@ export default Ember.Component.extend({
 
   tagName: 'ol',
 
+  _logTGChange: Ember.observer('attrs.selectedTowerGroup', function () {
+  }),
+
   _autoFocusInput: Ember.observer(
     'attrs.selectedTower',
     'attrs.selectedTowerGroup',
     'attrs.tower',
     'attrs.towerGroup',
     function () {
-      if (this.attrs.selectedTower && this.attrs.selectedTower === this.attrs.tower) {
+      if (this.attrs.selectedTower &&
+          this.attrs.selectedTower === this.attrs.tower) {
+        console.log('selected tower changed'); // TODO THIS COMMIT: remove this
         const inputViewName = this.get('inputViewName');
         const inputComponent = this.get(inputViewName);
         const inputEl = inputComponent.get('element');
         inputEl.focus();
-      }
-
-      if (this.attrs.selectedTowerGroup === this.attrs.towerGroup) {
+      } else if (this.attrs.selectedTowerGroup &&
+                 this.attrs.selectedTowerGroup === this.attrs.towerGroup) {
+        console.log('selected tower group changed'); // TODO THIS COMMIT: remove this
         const inputViewName = this.get('inputViewName');
         const inputComponent = this.get(inputViewName);
         const inputEl = inputComponent.get('element');
