@@ -39,5 +39,15 @@ export default Ember.Component.extend({
              this.attrs.tower.get('selector') :
              this.attrs.towerGroup.get('selector');
     }
-  )
+  ),
+
+  actions: {
+    enterCodeLine() {
+      alert('entering new line...');
+    },
+
+    submitCode() {
+      alert('submitting code...');
+    }
+  }
 });

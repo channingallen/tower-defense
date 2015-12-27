@@ -25,4 +25,10 @@ $color--muted: hsla(0, 50%, 0%, 0.5);
   padding-left: 1em;
 }
 
+.block__submit-btn {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 3px;
+}
+
 @import "block/input";

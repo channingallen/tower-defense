@@ -1,1 +1,11 @@
-{{input}}
+{{input class="block__input"
+        enter=(action "handleInputEnter")
+        focusOnInsert=true
+        key-up=(action "handleKeyUp")
+        value=(readonly inputValue)}}
+
+{{#if inputValid}}
+  <i class="fa fa-check-circle"></i>
+{{else}}
+  <i class="fa fa-times-circle"></i>
+{{/if}}

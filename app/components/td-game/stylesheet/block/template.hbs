@@ -11,15 +11,24 @@
 
 {{#if attrs.tower}}
   <li class="block__line block__declaration">
-    {{input class="block__input"
-            click=(action attrs.select-tower attrs.tower)
-            viewName=(readonly inputViewName)}}
+    {{td-game/stylesheet/block/input class="block__input-container"
+                                     click=(action attrs.select-tower attrs.tower)
+                                     enter-code-line=(action "enterCodeLine")
+                                     viewName=(readonly inputViewName)}}
+
+    <button {{action "submitCode"}} class="block__submit-btn">Submit code</button>
   </li>
+
 {{else}}
   <li class="block__line block__declaration">
-    {{input class="block__input"
-            click=(action attrs.select-tower-group attrs.towerGroup)
-            viewName=(readonly inputViewName)}}
+    {{!-- TODO: each loop (inputFields as |inputField|) --}}
+    {{!--        --}}
+    {{td-game/stylesheet/block/input class="block__input-container"
+                                     click=(action attrs.select-tower-group attrs.towerGroup)
+                                     enter-code-line=(action "enterCodeLine")
+                                     viewName=(readonly inputViewName)}}
+
+    <button {{action "submitCode"}} class="block__submit-btn">Submit code</button>
   </li>
 {{/if}}
 
