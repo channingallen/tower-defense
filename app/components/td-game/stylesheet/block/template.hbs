@@ -14,9 +14,8 @@
     {{td-game/stylesheet/block/input class="block__input-container"
                                      click=(action attrs.select-tower attrs.tower)
                                      enter-code-line=(action "enterCodeLine")
-                                     viewName=(readonly inputViewName)}}
-
-    <button {{action "submitCode"}} class="block__submit-btn">Submit code</button>
+                                     selectedTower=(readonly attrs.selectedTower)
+                                     tower=(readonly attrs.selectedTower)}}
   </li>
 
 {{else}}
@@ -26,9 +25,8 @@
     {{td-game/stylesheet/block/input class="block__input-container"
                                      click=(action attrs.select-tower-group attrs.towerGroup)
                                      enter-code-line=(action "enterCodeLine")
-                                     viewName=(readonly inputViewName)}}
-
-    <button {{action "submitCode"}} class="block__submit-btn">Submit code</button>
+                                     selectedTowerGroup=(readonly attrs.selectedTowerGroup)
+                                     towerGroup=(readonly attrs.selectedTowerGroup)}}
   </li>
 {{/if}}
 

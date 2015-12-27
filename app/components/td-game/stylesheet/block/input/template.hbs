@@ -1,8 +1,8 @@
 {{input class="block__input"
         enter=(action "handleInputEnter")
-        focusOnInsert=true
         key-up=(action "handleKeyUp")
-        value=(readonly inputValue)}}
+        value=(readonly inputValue)
+        viewName=(readonly inputViewName)}}
 
 {{#if inputValid}}
   <i class="fa fa-check-circle"></i>

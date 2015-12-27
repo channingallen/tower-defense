@@ -5,6 +5,32 @@ export default Ember.Component.extend({
 
   inputValue: null,
 
+  inputViewName: 'input', // This can be called anything.
+
+  _autoFocusInput: Ember.observer(
+    'attrs.selectedTower',
+    'attrs.selectedTowerGroup',
+    'attrs.tower',
+    'attrs.towerGroup',
+    function () {
+      if (this.attrs.selectedTower &&
+          this.attrs.selectedTower === this.attrs.tower) {
+        console.log('selected tower changed'); // TODO THIS COMMIT: remove this
+        const inputViewName = this.get('inputViewName');
+        const inputComponent = this.get(inputViewName);
+        const inputEl = inputComponent.get('element');
+        inputEl.focus();
+      } else if (this.attrs.selectedTowerGroup &&
+                 this.attrs.selectedTowerGroup === this.attrs.towerGroup) {
+        console.log('selected tower group changed'); // TODO THIS COMMIT: remove this
+        const inputViewName = this.get('inputViewName');
+        const inputComponent = this.get(inputViewName);
+        const inputEl = inputComponent.get('element');
+        inputEl.focus();
+      }
+    }
+  ),
+
   actions: {
     addValue(string) {
       this.set('inputValue', string);
