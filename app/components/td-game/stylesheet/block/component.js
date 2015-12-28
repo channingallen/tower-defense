@@ -16,8 +16,6 @@ export default Ember.Component.extend({
   ),
 
   actions: {
-    enterCodeLine() {
-      alert('entering new line...');
-    }
+    enterCodeLine() {}
   }
 });
