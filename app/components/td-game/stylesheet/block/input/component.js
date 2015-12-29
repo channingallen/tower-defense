@@ -1,11 +1,49 @@
 import Ember from 'ember';
+import createFlexboxRef from 'tower-defense/utils/create-flexbox-ref';
 
 export default Ember.Component.extend({
+  flexboxRef: createFlexboxRef(),
+
   inputValid: false,
 
   inputValue: null,
 
   inputViewName: 'input', // This can be called anything.
+
+  _getValidProperty(keyUpVal) {
+    keyUpVal = keyUpVal.toLowerCase();
+    let property;
+
+    const colonLocation = keyUpVal.indexOf(':');
+    if (colonLocation > 0) {
+      property = keyUpVal.substring(0, colonLocation);
+    } else {
+      return undefined;
+    }
+
+    let propertyFoundInFlexboxRef = false;
+    if (this.get('flexboxRef')[property]) {
+      propertyFoundInFlexboxRef = true;
+    }
+
+    return propertyFoundInFlexboxRef ? property : undefined;
+  },
+
+  _getValidValue(keyUpVal, propertyString) {
+    keyUpVal = keyUpVal.toLowerCase();
+    const startIndex = propertyString.length + 1;
+    const endIndex = keyUpVal.length;
+
+    let value = keyUpVal.substring(startIndex, endIndex).trim();
+    let valueFoundInFlexboxProp = false;
+    this.get('flexboxRef')[propertyString].forEach(function (validValue) {
+      if (value === validValue.toString()) {
+        valueFoundInFlexboxProp = true;
+      }
+    });
+
+    return valueFoundInFlexboxProp ? value : undefined;
+  },
 
   _autoFocusInput: Ember.observer(
     'attrs.selectedTower',
@@ -30,21 +68,25 @@ export default Ember.Component.extend({
   ),
 
   actions: {
-    addValue(string) {
-      this.set('inputValue', string);
-    },
-
     handleInputEnter() {
       if (this.get('inputValid') && this.attrs['enter-code-line']) {
         this.attrs['enter-code-line'](this.get('inputValue'));
       }
     },
 
-    handleKeyUp(value) {
-      this.set('inputValue', value);
+    handleKeyUp(keyUpVal) {
+      this.set('inputValue', keyUpVal);
 
-      const validText = 'asdf';
-      if (this.get('inputValue') === validText) {
+      const validProperty = this._getValidProperty(keyUpVal);
+      let validValue;
+
+      if (validProperty !== undefined) {
+        validValue = this._getValidValue(keyUpVal, validProperty);
+      } else {
+        return;
+      }
+
+      if (validValue !== undefined) {
         this.set('inputValid', true);
       } else {
         this.set('inputValid', false);
