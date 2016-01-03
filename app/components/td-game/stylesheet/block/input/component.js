@@ -55,6 +55,10 @@ export default Ember.Component.extend({
     'attrs.tower',
     'attrs.towerGroup',
     function () {
+      if (this.get('submitted')) {
+        return;
+      }
+
       if (this.attrs.selectedTower &&
           this.attrs.selectedTower === this.attrs.tower) {
         const inputViewName = this.get('inputViewName');
