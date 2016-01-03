@@ -10,11 +10,11 @@
 {{/if}}
 
 {{#if attrs.tower}}
-  {{!-- {{#each twrGrpCodeLines as |twrGrpCodeLine|}} --}}
+  {{#each twrCodeLines as |twrCodeLine|}}
     <li class="block__line block__declaration">
       {{td-game/stylesheet/block/input blockCodeLine=(readonly twrCodeLine.codeLine)
                                        blockSubmitted=(readonly twrCodeLine.submitted)
-                                       blockId=(readonly twrCodeLine.uid)
+                                       blockId=(readonly twrCodeLine.id)
                                        class="block__input-container"
                                        click=(action attrs.select-tower attrs.tower)
                                        edit-code-line=(action "editCodeLine")
@@ -23,14 +23,14 @@
                                        tower=(readonly attrs.selectedTower)
                                        unitType=(readonly "tower")}}
     </li>
-  {{!-- {{/each}} --}}
+  {{/each}}
 
 {{else}}
-  {{!-- {{#each twrGrpCodeLines as |twrGrpCodeLine|}} --}}
+  {{#each twrGrpCodeLines as |twrGrpCodeLine|}}
     <li class="block__line block__declaration">
       {{td-game/stylesheet/block/input blockCodeLine=(readonly twrGrpCodeLine.codeLine)
                                        blockSubmitted=(readonly twrGrpCodeLine.submitted)
-                                       blockId=(readonly twrGrpCodeLine.uid)
+                                       blockId=(readonly twrGrpCodeLine.id)
                                        class="block__input-container"
                                        click=(action attrs.select-tower-group attrs.towerGroup)
                                        edit-code-line=(action "editCodeLine")
@@ -39,7 +39,7 @@
                                        towerGroup=(readonly attrs.selectedTowerGroup)
                                        unitType=(readonly "tower group")}}
     </li>
-  {{!-- {{/each}} --}}
+  {{/each}}
 {{/if}}
 
 <li class="block__line block__brace-line">

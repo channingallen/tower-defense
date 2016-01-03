@@ -6,9 +6,9 @@ export default Ember.Component.extend({
 
   tagName: 'ol',
 
-  twrCodeLine: createUnitCodeLine(),
+  twrCodeLines: Ember.A([createUnitCodeLine()]),
 
-  twrGrpCodeLine: createUnitCodeLine(),
+  twrGrpCodeLines: Ember.A([createUnitCodeLine()]),
 
   selector: Ember.computed(
     'attrs.tower.selector',
@@ -21,21 +21,29 @@ export default Ember.Component.extend({
   ),
 
   actions: {
-    editCodeLine(unitType/*, uid*/) {
-      const unitProperty = unitType === 'tower' ?
-                                        'twrCodeLine' :
-                                        'twrGrpCodeLine';
+    editCodeLine(unitType, id) {
+      const codeLinesProp = unitType === 'tower' ?
+                                         'twrCodeLines' :
+                                         'twrGrpCodeLines';
 
-      this.set(unitProperty + '.submitted', false);
+      this.get(codeLinesProp).forEach((unitCodeLine) => {
+        if (unitCodeLine.get('id') === id) {
+          unitCodeLine.set('submitted', false);
+        }
+      });
     },
 
-    enterCodeLine(codeStr, unitType/*, uid*/) {
-      const unitProperty = unitType === 'tower' ?
-                                        'twrCodeLine' :
-                                        'twrGrpCodeLine';
+    enterCodeLine(codeStr, unitType, id) {
+      const codeLinesProp = unitType === 'tower' ?
+                                         'twrCodeLines' :
+                                         'twrGrpCodeLines';
 
-      this.set(unitProperty + '.codeLine', codeStr);
-      this.set(unitProperty + '.submitted', true);
+      this.get(codeLinesProp).forEach((unitCodeLine) => {
+        if (unitCodeLine.get('id') === id) {
+          unitCodeLine.set('codeLine', codeStr);
+          unitCodeLine.set('submitted', true);
+        }
+      });
     }
   }
 });
