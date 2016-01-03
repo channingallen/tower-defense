@@ -45,16 +45,14 @@ export default Ember.Component.extend({
     return valueFoundInFlexboxProp ? value : undefined;
   },
 
-  submitted: Ember.computed('attrs.blockSubmitted', function () {
-    return this.attrs.blockSubmitted ? true : false;
-  }),
-
   _autoFocusInput: Ember.observer(
     'attrs.selectedTower',
     'attrs.selectedTowerGroup',
     'attrs.tower',
     'attrs.towerGroup',
     function () {
+      // TODO THIS COMMIT: flag below needs to account for both
+      // newly inserted inputs and to-be-edited (formerly submitted) inserts
       if (this.get('submitted')) {
         return;
       }
@@ -75,14 +73,26 @@ export default Ember.Component.extend({
     }
   ),
 
+  focusNewInput: Ember.computed('attrs.blockSubmitted', function () {
+    return !this.attrs.blockSubmitted ? true : false;
+  }),
+
+  submitted: Ember.computed('attrs.blockSubmitted', function () {
+    return this.attrs.blockSubmitted ? true : false;
+  }),
+
   actions: {
+    delete() {
+      this.attrs['delete-code-line'](this.attrs.unitType, this.attrs.blockId);
+    },
+
     edit() {
       this.attrs['edit-code-line'](this.attrs.unitType, this.attrs.blockId);
     },
 
     handleInputEnter() {
       if (this.get('inputValid')) {
-        this.attrs['enter-code-line'](
+        this.attrs['submit-code-line'](
           this.get('inputValue'),
           this.attrs.unitType,
           this.attrs.blockId

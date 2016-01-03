@@ -1,15 +1,13 @@
-<div>attrs.blockCodeLine: {{attrs.blockCodeLine}}</div>
-<div>attrs.blockSubmitted: {{attrs.blockSubmitted}}</div>
-<div>attrs.blockId: {{attrs.blockId}}</div>
-
 {{#if submitted}}
   <div>
     {{attrs.blockCodeLine}}
     <button {{action "edit"}}>Edit</button>
+    <button {{action "delete"}}>Delete</button>
   </div>
 {{else}}
   {{input class="block__input"
           enter=(action "handleInputEnter")
+          focusOnInsert=(readonly focusNewInput)
           key-up=(action "handleKeyUp")
           submitted=(readonly attrs.submitted)
           value=(readonly inputValue)

@@ -17,8 +17,9 @@
                                        blockId=(readonly twrCodeLine.id)
                                        class="block__input-container"
                                        click=(action attrs.select-tower attrs.tower)
+                                       delete-code-line=(action "deleteCodeLine")
                                        edit-code-line=(action "editCodeLine")
-                                       enter-code-line=(action "enterCodeLine")
+                                       submit-code-line=(action "submitCodeLine")
                                        selectedTower=(readonly attrs.selectedTower)
                                        tower=(readonly attrs.selectedTower)
                                        unitType=(readonly "tower")}}
@@ -33,8 +34,9 @@
                                        blockId=(readonly twrGrpCodeLine.id)
                                        class="block__input-container"
                                        click=(action attrs.select-tower-group attrs.towerGroup)
+                                       delete-code-line=(action "deleteCodeLine")
                                        edit-code-line=(action "editCodeLine")
-                                       enter-code-line=(action "enterCodeLine")
+                                       submit-code-line=(action "submitCodeLine")
                                        selectedTowerGroup=(readonly attrs.selectedTowerGroup)
                                        towerGroup=(readonly attrs.selectedTowerGroup)
                                        unitType=(readonly "tower group")}}
