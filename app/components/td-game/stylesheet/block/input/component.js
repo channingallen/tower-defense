@@ -45,6 +45,10 @@ export default Ember.Component.extend({
     return valueFoundInFlexboxProp ? value : undefined;
   },
 
+  submitted: Ember.computed('attrs.blockSubmitted', function () {
+    return this.attrs.blockSubmitted ? true : false;
+  }),
+
   _autoFocusInput: Ember.observer(
     'attrs.selectedTower',
     'attrs.selectedTowerGroup',
@@ -68,9 +72,16 @@ export default Ember.Component.extend({
   ),
 
   actions: {
+    edit() {
+      this.attrs['edit-code-line'](this.attrs.blockId);
+    },
+
     handleInputEnter() {
-      if (this.get('inputValid') && this.attrs['enter-code-line']) {
-        this.attrs['enter-code-line'](this.get('inputValue'));
+      if (this.get('inputValid')) {
+        this.attrs['enter-code-line'](
+          this.get('inputValue'),
+          this.attrs.blockId
+        );
       }
     },
 

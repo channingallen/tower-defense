@@ -1,5 +1,9 @@
-import UnitCodeLine from 'tower-defense/objects/unit-code-line';
+import Ember from 'ember';
 
-export default function createUnitCodeLine() {
-  return UnitCodeLine.create();
-}
+const UnitCodeLine = Ember.Object.extend({
+  codeLine: undefined,
+  submitted: false,
+  uid: null
+});
+
+export default UnitCodeLine;

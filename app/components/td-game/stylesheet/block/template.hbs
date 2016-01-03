@@ -10,22 +10,28 @@
 {{/if}}
 
 {{#if attrs.tower}}
-  <li class="block__line block__declaration">
+  {{!-- <li class="block__line block__declaration">
     {{td-game/stylesheet/block/input class="block__input-container"
                                      click=(action attrs.select-tower attrs.tower)
                                      enter-code-line=(action "enterCodeLine")
                                      selectedTower=(readonly attrs.selectedTower)
                                      tower=(readonly attrs.selectedTower)}}
-  </li>
+  </li> --}}
 
 {{else}}
-  <li class="block__line block__declaration">
-    {{td-game/stylesheet/block/input class="block__input-container"
-                                     click=(action attrs.select-tower-group attrs.towerGroup)
-                                     enter-code-line=(action "enterCodeLine")
-                                     selectedTowerGroup=(readonly attrs.selectedTowerGroup)
-                                     towerGroup=(readonly attrs.selectedTowerGroup)}}
-  </li>
+  {{!-- {{#each twrGrpCodeLines as |twrGrpCodeLine|}} --}}
+    <li class="block__line block__declaration">
+      {{td-game/stylesheet/block/input blockCodeLine=(readonly twrGrpCodeLine.codeLine)
+                                       blockSubmitted=(readonly twrGrpCodeLine.submitted)
+                                       blockId=(readonly twrGrpCodeLine.uid)
+                                       class="block__input-container"
+                                       click=(action attrs.select-tower-group attrs.towerGroup)
+                                       edit-code-line=(action "editCodeLine")
+                                       enter-code-line=(action "enterCodeLine")
+                                       selectedTowerGroup=(readonly attrs.selectedTowerGroup)
+                                       towerGroup=(readonly attrs.selectedTowerGroup)}}
+    </li>
+  {{!-- {{#each}} --}}
 {{/if}}
 
 <li class="block__line block__brace-line">

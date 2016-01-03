@@ -1,11 +1,23 @@
-{{input class="block__input"
-        enter=(action "handleInputEnter")
-        key-up=(action "handleKeyUp")
-        value=(readonly inputValue)
-        viewName=(readonly inputViewName)}}
+<div>attrs.blockCodeLine: {{attrs.blockCodeLine}}</div>
+<div>attrs.blockSubmitted: {{attrs.blockSubmitted}}</div>
+<div>attrs.blockId: {{attrs.blockId}}</div>
 
-{{#if inputValid}}
-  <i class="fa fa-check-circle"></i>
+{{#if submitted}}
+  <div>
+    {{attrs.blockCodeLine}}
+    <button {{action "edit"}}>Edit</button>
+  </div>
 {{else}}
-  <i class="fa fa-times-circle"></i>
+  {{input class="block__input"
+          enter=(action "handleInputEnter")
+          key-up=(action "handleKeyUp")
+          submitted=(readonly attrs.submitted)
+          value=(readonly inputValue)
+          viewName=(readonly inputViewName)}}
+
+  {{#if inputValid}}
+    <i class="fa fa-check-circle"></i>
+  {{else}}
+    <i class="fa fa-times-circle"></i>
+  {{/if}}
 {{/if}}
