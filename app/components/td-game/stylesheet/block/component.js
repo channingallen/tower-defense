@@ -6,6 +6,8 @@ export default Ember.Component.extend({
 
   tagName: 'ol',
 
+  twrCodeLine: createUnitCodeLine(),
+
   twrGrpCodeLine: createUnitCodeLine(),
 
   selector: Ember.computed(
@@ -19,13 +21,21 @@ export default Ember.Component.extend({
   ),
 
   actions: {
-    editCodeLine(/*uid*/) {
-      this.set('twrGrpCodeLine.submitted', false);
+    editCodeLine(unitType/*, uid*/) {
+      const unitProperty = unitType === 'tower' ?
+                                        'twrCodeLine' :
+                                        'twrGrpCodeLine';
+
+      this.set(unitProperty + '.submitted', false);
     },
 
-    enterCodeLine(codeStr/*, uid*/) {
-      this.set('twrGrpCodeLine.codeLine', codeStr);
-      this.set('twrGrpCodeLine.submitted', true);
+    enterCodeLine(codeStr, unitType/*, uid*/) {
+      const unitProperty = unitType === 'tower' ?
+                                        'twrCodeLine' :
+                                        'twrGrpCodeLine';
+
+      this.set(unitProperty + '.codeLine', codeStr);
+      this.set(unitProperty + '.submitted', true);
     }
   }
 });

@@ -73,13 +73,14 @@ export default Ember.Component.extend({
 
   actions: {
     edit() {
-      this.attrs['edit-code-line'](this.attrs.blockId);
+      this.attrs['edit-code-line'](this.attrs.unitType, this.attrs.blockId);
     },
 
     handleInputEnter() {
       if (this.get('inputValid')) {
         this.attrs['enter-code-line'](
           this.get('inputValue'),
+          this.attrs.unitType,
           this.attrs.blockId
         );
       }

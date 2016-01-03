@@ -10,13 +10,20 @@
 {{/if}}
 
 {{#if attrs.tower}}
-  {{!-- <li class="block__line block__declaration">
-    {{td-game/stylesheet/block/input class="block__input-container"
-                                     click=(action attrs.select-tower attrs.tower)
-                                     enter-code-line=(action "enterCodeLine")
-                                     selectedTower=(readonly attrs.selectedTower)
-                                     tower=(readonly attrs.selectedTower)}}
-  </li> --}}
+  {{!-- {{#each twrGrpCodeLines as |twrGrpCodeLine|}} --}}
+    <li class="block__line block__declaration">
+      {{td-game/stylesheet/block/input blockCodeLine=(readonly twrCodeLine.codeLine)
+                                       blockSubmitted=(readonly twrCodeLine.submitted)
+                                       blockId=(readonly twrCodeLine.uid)
+                                       class="block__input-container"
+                                       click=(action attrs.select-tower attrs.tower)
+                                       edit-code-line=(action "editCodeLine")
+                                       enter-code-line=(action "enterCodeLine")
+                                       selectedTower=(readonly attrs.selectedTower)
+                                       tower=(readonly attrs.selectedTower)
+                                       unitType=(readonly "tower")}}
+    </li>
+  {{!-- {{/each}} --}}
 
 {{else}}
   {{!-- {{#each twrGrpCodeLines as |twrGrpCodeLine|}} --}}
@@ -29,9 +36,10 @@
                                        edit-code-line=(action "editCodeLine")
                                        enter-code-line=(action "enterCodeLine")
                                        selectedTowerGroup=(readonly attrs.selectedTowerGroup)
-                                       towerGroup=(readonly attrs.selectedTowerGroup)}}
+                                       towerGroup=(readonly attrs.selectedTowerGroup)
+                                       unitType=(readonly "tower group")}}
     </li>
-  {{!-- {{#each}} --}}
+  {{!-- {{/each}} --}}
 {{/if}}
 
 <li class="block__line block__brace-line">
