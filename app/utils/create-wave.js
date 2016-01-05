@@ -1,4 +1,6 @@
 import Board from '../objects/board';
+import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
+import Ember from 'ember';
 import Mob from '../objects/mob';
 import TowerGroup from '../objects/tower-group';
 import Tower from '../objects/tower';
@@ -26,14 +28,18 @@ function addMobsToWave(wave) {
 function addTowerGroupsToWave(wave) {
   const towerGroup = TowerGroup.create();
   const tower = Tower.create();
+
   tower.set('type', 1); // TODO THIS COMMIT: adjust this;
+  tower.set('styles', Ember.A([createUnitCodeLine()]));
+
   towerGroup.set('towers', [tower]);
+  towerGroup.set('styles', Ember.A([createUnitCodeLine()]));
 
   wave.set('towerGroups', [towerGroup]);
 }
 
 export default function createWave() {
-  const wave = Wave.create({ minimumScore: 3 });
+  const wave = Wave.create({ minimumScore: 3 }); // TODO THIS COMMIT: adjust this
 
   addBoardToWave(wave);
   addMobsToWave(wave);

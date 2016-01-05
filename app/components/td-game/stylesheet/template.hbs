@@ -3,13 +3,13 @@
     {{td-game/stylesheet/block select-tower-group=(action attrs.select-tower-group)
                                selectedTowerGroup=(readonly attrs.selectedTowerGroup)
                                towerGroup=(readonly towerGroup)
-                               update-code-lines=(action "updateTowerGroupCodeLines")}}
+                               update-unit-styles=(action "updateTowerGroupStyles")}}
 
     {{#each towerGroup.towers as |tower|}}
       {{td-game/stylesheet/block select-tower=(action attrs.select-tower)
                                  selectedTower=(readonly attrs.selectedTower)
                                  tower=(readonly tower)
-                                 update-code-lines=(action "updateTowerCodeLines")}}
+                                 update-unit-styles=(action "updateTowerStyles")}}
     {{/each}}
   {{/each}}
 {{/if}}

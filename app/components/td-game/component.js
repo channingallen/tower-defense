@@ -4,6 +4,50 @@ import createWave from 'tower-defense/utils/create-wave';
 export default Ember.Component.extend({
   classNames: ['td-game'],
 
+  // wave (default):
+  // {
+  //   board: {
+  //     imageUrl: null,
+  //     pathData: null
+  //   },
+  //   minimumScore: 3,
+  //   mobs: [
+  //     mob: {
+  //       maxHealth: 100,
+  //       points: 1,
+  //       quantity: 10,
+  //       speed: 1,
+  //       type: 'standard'
+  //     }
+  //   ],
+  //   towerGroups: [
+  //     towerGroup: {
+  //       selector: '.tower-group',
+  //       styles: [
+  //         {
+  //           codeLine: undefined,
+  //           submitted: false,
+  //           id: null,
+  //           unitType: null
+  //         }
+  //       ],
+  //       towers: [
+  //         tower: {
+  //           selector: '.tower',
+  //           styles: [
+  //             {
+  //               codeLine: undefined,
+  //               submitted: false,
+  //               id: null,
+  //               unitType: null
+  //             }
+  //           ],
+  //           type: 1
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
   currentWave: createWave(),
 
   selectedTower: null,
@@ -20,9 +64,9 @@ export default Ember.Component.extend({
   //   },
   //   {...}
   // ]
-  twrCodeLines: null,
+  twrStyles: null,
 
-  twrGrpCodeLines: null,
+  twrGrpStyles: null,
 
   waveStarted: false,
 
@@ -43,27 +87,29 @@ export default Ember.Component.extend({
       this.forceSet('selectedTowerGroup', towerGroup);
     },
 
-    setStyles(twrGrpCodeLines, twrCodeLines) {
-      this.set('twrGrpCodeLines', twrGrpCodeLines);
-      this.set('twrCodeLines', twrCodeLines);
+    setStyles(twrGrpStyles, twrStyles) {
+      let currentTowerGroup;
+      this.get('currentWave.towerGroups').forEach((towerGroup) => {
+        if (towerGroup === this.get('selectedTowerGroup')) {
+          currentTowerGroup = towerGroup;
 
-      console.log(''); // TODO THIS COMMIT: remove this
-      console.log('---'); // TODO THIS COMMIT: remove this
-      console.log('td-game/component.js:'); // TODO THIS COMMIT: remove this
-      if (this.get('twrGrpCodeLines')) {
-        this.get('twrGrpCodeLines').forEach((codeLine) => {
-          console.log('codeLine.get(\'codeLine\'): ', codeLine.get('codeLine')); // TODO THIS COMMIT: remove this
-        });
-      }
+          if (twrGrpStyles) {
+            towerGroup.forceSet('styles', twrGrpStyles);
+          }
+        }
+      });
 
-      console.log(''); // TODO THIS COMMIT: remove this
-      console.log('---'); // TODO THIS COMMIT: remove this
-      console.log('td-game/component.js:'); // TODO THIS COMMIT: remove this
-      if (this.get('twrCodeLines')) {
-        this.get('twrCodeLines').forEach((codeLine) => {
-          console.log('codeLine.get(\'codeLine\'): ', codeLine.get('codeLine')); // TODO THIS COMMIT: remove this
-        });
-      }
+      currentTowerGroup.towers.forEach((tower) => {
+        if (tower === this.get('selectedTower')) {
+          if (twrStyles) {
+            tower.forceSet('styles', twrStyles);
+          }
+        }
+      });
+
+      // TODO: potentially you will then need to update the selectedUnit prop
+      //       - if that isn't "watching" the original unit prop, whose styles
+      //       - array has been updated
     },
 
     startWave() {

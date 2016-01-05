@@ -21,4 +21,24 @@ $background-color: hsla(0, 0%, 100%, 0.25);
   box-shadow: 0 0 10px opacify($background-color, 0.6);
 }
 
+.board__tower-group--justify-left {
+  justify-content: flex-start;
+}
+
+.board__tower-group--justify-between {
+  justify-content: space-between;
+}
+
+.board__tower-group--justify-around {
+  justify-content: space-around;
+}
+
+.board__tower-group--justify-center {
+  justify-content: center;
+}
+
+.board__tower-group--justify-right {
+  justify-content: flex-end;
+}
+
 @import "tower-group/tower";

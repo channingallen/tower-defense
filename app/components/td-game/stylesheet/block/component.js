@@ -4,7 +4,9 @@ import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 export default Ember.Component.extend({
   classNames: ['stylesheet__block'],
 
-  // unitCodeLines:
+  tagName: 'ol',
+
+  // unit.styles:
   // [
   //   {
   //     codeLine: undefined,
@@ -14,11 +16,60 @@ export default Ember.Component.extend({
   //   },
   //   {...}
   // ]
-  twrCodeLines: Ember.A([createUnitCodeLine()]),
+  twrCodeLines: Ember.computed(
+    'attrs.tower',
+    function () {
+      if (this.attrs.tower) {
+        return this._copyStyles('tower');
 
-  twrGrpCodeLines: Ember.A([createUnitCodeLine()]),
+        // TODO THIS COMMIT: replace custom copy fn() with Ember.copyable
+        // return Ember.copy(this.attrs.tower.get('styles'), true);
+      }
+    }
+  ),
 
-  tagName: 'ol',
+  twrGrpCodeLines: Ember.computed(
+    'attrs.towerGroup',
+    function () {
+      if (this.attrs.towerGroup) {
+        return this._copyStyles('towerGroup');
+
+        // TODO THIS COMMIT: replace custom copy fn() with Ember.copyable
+        // return Ember.copy(this.attrs.towerGroup.get('styles'), true);
+      }
+    }
+  ),
+
+  _copyStyles(unit) { // unit === 'towerGroup' || unit === 'tower'
+    const unitStyles = Ember.A([]);
+
+    this.attrs[unit].get('styles').forEach(function (styleObj) {
+      let unitStyle = Ember.Object.extend({});
+
+      for (var prop in styleObj) {
+        switch (prop) {
+          case 'codeLine':
+            unitStyle.codeLine = styleObj.prop;
+            break;
+          case 'submitted':
+            unitStyle.submitted = styleObj.prop;
+            break;
+          case 'id':
+            unitStyle.id = styleObj.prop;
+            break;
+          case 'unitType':
+            unitStyle.unitType = styleObj.prop;
+            break;
+          default:
+            break;
+        }
+      }
+
+      unitStyles.pushObject(unitStyle.create());
+    });
+
+    return unitStyles;
+  },
 
   _deleteCodeLine(codeLinesProp, id) {
     const newCodeLinesProp = this.get(codeLinesProp).filter((unitCodeLine) => {
@@ -47,7 +98,7 @@ export default Ember.Component.extend({
       this._deleteCodeLine(codeLinesProp, id);
 
       // send updated code lines array up to stylesheet
-      this.attrs['update-code-lines'](this.get(codeLinesProp));
+      this.attrs['update-unit-styles'](this.get(codeLinesProp));
     },
 
     editCodeLine(unitType, id) {
@@ -72,7 +123,7 @@ export default Ember.Component.extend({
       }
 
       // send updated code lines array up to stylesheet
-      this.attrs['update-code-lines'](this.get(codeLinesProp));
+      this.attrs['update-unit-styles'](this.get(codeLinesProp));
     },
 
     submitCodeLine(codeStr, unitType, id) {
@@ -98,7 +149,7 @@ export default Ember.Component.extend({
       }
 
       // send updated code lines array up to stylesheet
-      this.attrs['update-code-lines'](this.get(codeLinesProp));
+      this.attrs['update-unit-styles'](this.get(codeLinesProp));
     }
   }
 });
