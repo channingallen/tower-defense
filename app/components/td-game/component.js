@@ -88,24 +88,31 @@ export default Ember.Component.extend({
     },
 
     setStyles(twrGrpStyles, twrStyles) {
-      let currentTowerGroup;
-      this.get('currentWave.towerGroups').forEach((towerGroup) => {
-        if (towerGroup === this.get('selectedTowerGroup')) {
-          currentTowerGroup = towerGroup;
+      if (this.get('selectedTowerGroup')) {
+        this.set('selectedTowerGroup.styles', twrGrpStyles);
+      }
 
-          if (twrGrpStyles) {
-            towerGroup.forceSet('styles', twrGrpStyles);
-          }
-        }
-      });
+      if (this.get('selectedTower')) {
+        this.set('selectedTower.styles', twrStyles);
+      }
 
-      currentTowerGroup.towers.forEach((tower) => {
-        if (tower === this.get('selectedTower')) {
-          if (twrStyles) {
-            tower.forceSet('styles', twrStyles);
-          }
-        }
-      });
+      // this.get('currentWave.towerGroups').forEach((towerGroup) => {
+      //   // update tower group styles
+      //   if (towerGroup === this.get('selectedTowerGroup')) {
+      //     if (twrGrpStyles) {
+      //       towerGroup.forceSet('styles', twrGrpStyles);
+      //     }
+      //   }
+      //
+      //   towerGroup.towers.forEach((tower) => {
+      //     if (tower === this.get('selectedTower')) {
+      //       if (twrStyles) {
+      //         tower.forceSet('styles', twrStyles);
+      //       }
+      //     }
+      //   });
+      // });
+
 
       // TODO: potentially you will then need to update the selectedUnit prop
       //       - if that isn't "watching" the original unit prop, whose styles
