@@ -10,6 +10,20 @@ export default Ember.Component.extend({
 
   selectedTowerGroup: null,
 
+  // unitCodeLines:
+  // [
+  //   {
+  //     codeLine: undefined,
+  //     submitted: false,
+  //     id: null,
+  //     unitType: null // tower or tower group
+  //   },
+  //   {...}
+  // ]
+  twrCodeLines: null,
+
+  twrGrpCodeLines: null,
+
   waveStarted: false,
 
   actions: {
@@ -27,6 +41,29 @@ export default Ember.Component.extend({
       }
 
       this.forceSet('selectedTowerGroup', towerGroup);
+    },
+
+    setStyles(twrGrpCodeLines, twrCodeLines) {
+      this.set('twrGrpCodeLines', twrGrpCodeLines);
+      this.set('twrCodeLines', twrCodeLines);
+
+      console.log(''); // TODO THIS COMMIT: remove this
+      console.log('---'); // TODO THIS COMMIT: remove this
+      console.log('td-game/component.js:'); // TODO THIS COMMIT: remove this
+      if (this.get('twrGrpCodeLines')) {
+        this.get('twrGrpCodeLines').forEach((codeLine) => {
+          console.log('codeLine.get(\'codeLine\'): ', codeLine.get('codeLine')); // TODO THIS COMMIT: remove this
+        });
+      }
+
+      console.log(''); // TODO THIS COMMIT: remove this
+      console.log('---'); // TODO THIS COMMIT: remove this
+      console.log('td-game/component.js:'); // TODO THIS COMMIT: remove this
+      if (this.get('twrCodeLines')) {
+        this.get('twrCodeLines').forEach((codeLine) => {
+          console.log('codeLine.get(\'codeLine\'): ', codeLine.get('codeLine')); // TODO THIS COMMIT: remove this
+        });
+      }
     },
 
     startWave() {

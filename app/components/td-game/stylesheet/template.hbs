@@ -2,14 +2,16 @@
   {{#each attrs.towerGroups as |towerGroup|}}
     {{td-game/stylesheet/block select-tower-group=(action attrs.select-tower-group)
                                selectedTowerGroup=(readonly attrs.selectedTowerGroup)
-                               towerGroup=(readonly towerGroup)}}
+                               towerGroup=(readonly towerGroup)
+                               update-code-lines=(action "updateTowerGroupCodeLines")}}
 
     {{#each towerGroup.towers as |tower|}}
       {{td-game/stylesheet/block select-tower=(action attrs.select-tower)
                                  selectedTower=(readonly attrs.selectedTower)
-                                 tower=(readonly tower)}}
+                                 tower=(readonly tower)
+                                 update-code-lines=(action "updateTowerCodeLines")}}
     {{/each}}
   {{/each}}
 {{/if}}
 
-<button {{action "submitCode"}} class="block__submit-btn">Submit code</button>
+<button {{action "submitCodeLines"}} class="block__submit-btn">Submit code</button>

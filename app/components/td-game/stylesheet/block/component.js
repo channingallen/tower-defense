@@ -4,6 +4,16 @@ import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 export default Ember.Component.extend({
   classNames: ['stylesheet__block'],
 
+  // unitCodeLines:
+  // [
+  //   {
+  //     codeLine: undefined,
+  //     submitted: false,
+  //     id: null,
+  //     unitType: null // tower or tower group
+  //   },
+  //   {...}
+  // ]
   twrCodeLines: Ember.A([createUnitCodeLine()]),
 
   twrGrpCodeLines: Ember.A([createUnitCodeLine()]),
@@ -35,6 +45,9 @@ export default Ember.Component.extend({
                                          'twrGrpCodeLines';
 
       this._deleteCodeLine(codeLinesProp, id);
+
+      // send updated code lines array up to stylesheet
+      this.attrs['update-code-lines'](this.get(codeLinesProp));
     },
 
     editCodeLine(unitType, id) {
@@ -58,6 +71,8 @@ export default Ember.Component.extend({
         this._deleteCodeLine(codeLinesProp, newCodeLineId);
       }
 
+      // send updated code lines array up to stylesheet
+      this.attrs['update-code-lines'](this.get(codeLinesProp));
     },
 
     submitCodeLine(codeStr, unitType, id) {
@@ -81,6 +96,9 @@ export default Ember.Component.extend({
       if (!newCodeLineFound) {
         this.get(codeLinesProp).pushObject(createUnitCodeLine());
       }
+
+      // send updated code lines array up to stylesheet
+      this.attrs['update-code-lines'](this.get(codeLinesProp));
     }
   }
 });
