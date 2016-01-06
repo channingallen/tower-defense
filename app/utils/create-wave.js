@@ -2,14 +2,19 @@ import Board from '../objects/board';
 import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 import Ember from 'ember';
 import Mob from '../objects/mob';
+import PathCoord from '../objects/path-coord';
 import TowerGroup from '../objects/tower-group';
 import Tower from '../objects/tower';
 import Wave from '../objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
+  const ptA = PathCoord.create({x: 1, y: 4});
+  const ptB = PathCoord.create({x: 10, y: 4});
+  board.pathData.pushObject(ptA);
+  board.pathData.pushObject(ptB);
+
   // TODO THIS COMMIT: give board `imageUrl`
-  // TODO THIS COMMIT: give board `pathData`
   wave.set('board', board);
 }
 

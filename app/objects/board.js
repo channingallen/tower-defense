@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 const Board = Ember.Object.extend({
   imageUrl: null,
-  pathData: null
+  pathData: Ember.A([])
 });
 
 export default Board;

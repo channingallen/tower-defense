@@ -18,6 +18,7 @@ export default Ember.Component.extend({
 
   actions: {
     selectTower(tower) {
+      debugger; // TODO THIS COMMIT: remove this
       if (this.get('selectedTowerGroup')) {
         this.forceSet('selectedTowerGroup', null);
       }
