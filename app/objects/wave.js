@@ -30,10 +30,9 @@ export default Wave;
 //       selector: '.tower-group',
 //       styles: [
 //         {
-//           codeLine: undefined,
-//           submitted: false,
 //           id: null,
-//           unitType: null
+//           codeLine: undefined
+//           submitted: false,
 //         }
 //       ],
 //       towers: [
@@ -41,10 +40,9 @@ export default Wave;
 //           selector: '.tower',
 //           styles: [
 //             {
-//               codeLine: undefined,
-//               submitted: false,
 //               id: null,
-//               unitType: null
+//               codeLine: undefined,
+//               submitted: false
 //             }
 //           ],
 //           type: 1

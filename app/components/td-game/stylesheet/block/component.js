@@ -9,10 +9,9 @@ export default Ember.Component.extend({
   // unit.styles:
   // [
   //   {
+  //     id: null
   //     codeLine: undefined,
-  //     submitted: false,
-  //     id: null,
-  //     unitType: null // tower or tower group
+  //     submitted: false
   //   },
   //   {...}
   // ]
@@ -56,9 +55,6 @@ export default Ember.Component.extend({
             break;
           case 'id':
             unitStyle.id = styleObj.prop;
-            break;
-          case 'unitType':
-            unitStyle.unitType = styleObj.prop;
             break;
           default:
             break;
