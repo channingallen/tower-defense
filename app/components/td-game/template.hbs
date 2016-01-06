@@ -22,6 +22,7 @@
 </div>
 
 {{td-game/board mobs=(readonly currentWave.mobs)
+                path=(readonly currentWave.board.pathData)
                 select-tower=(action "selectTower")
                 select-tower-group=(action "selectTowerGroup")
                 selectedTower=(readonly selectedTower)

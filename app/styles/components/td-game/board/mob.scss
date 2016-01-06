@@ -1,0 +1,14 @@
+.mob-container {
+  position: relative;
+}
+
+.mob {
+  font-size: 50px;
+  position: absolute;
+}
+
+.mob--position-x-1-y-1 {
+  color: white;
+  left: 50%;
+  bottom: 30%;
+}

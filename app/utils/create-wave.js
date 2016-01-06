@@ -2,15 +2,15 @@ import Board from '../objects/board';
 import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 import Ember from 'ember';
 import Mob from '../objects/mob';
-import PathCoord from '../objects/path-coord';
+import PathCoords from '../objects/path-coords';
 import TowerGroup from '../objects/tower-group';
 import Tower from '../objects/tower';
 import Wave from '../objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  const ptA = PathCoord.create({x: 1, y: 4});
-  const ptB = PathCoord.create({x: 10, y: 4});
+  const ptA = PathCoords.create({x: 0, y: 50});
+  const ptB = PathCoords.create({x: 100, y: 50});
   board.pathData.pushObject(ptA);
   board.pathData.pushObject(ptB);
 
@@ -20,14 +20,14 @@ function addBoardToWave(wave) {
 
 function addMobsToWave(wave) {
   const mob = Mob.create();
+  mob.set('frequency', 3000); // TODO THIS COMMIT: adjust this
   mob.set('maxHealth', 100); // TODO THIS COMMIT: adjust this
-  // TODO THIS COMMIT: set mob `path`
   mob.set('points', 1); // TODO THIS COMMIT: adjust this
   mob.set('quantity', 10); // TODO THIS COMMIT: adjust this
   mob.set('speed', 1); // TODO THIS COMMIT: adjust this
   mob.set('type', 'standard'); // TODO THIS COMMIT: adjust this
 
-  wave.set('mobs', [mob]);
+  wave.set('mobs', Ember.A([mob]));
 }
 
 function addTowerGroupsToWave(wave) {

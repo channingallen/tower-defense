@@ -10,7 +10,12 @@
     {{/each}}
   </div>
 
-  {{#each attrs.mobs as |mob|}}
-    {{td-game/board/mob mob=(readonly mob)}}
+  {{#each mobs as |mob|}}
+    {{td-game/board/mob maxHealth=(readonly mob.maxHealth)
+                        number=(readonly mob.number)
+                        path=(readonly attrs.path)
+                        points=(readonly mob.points)
+                        speed=(readonly mob.speed)
+                        type=(readonly mob.type)}}
   {{/each}}
 {{/if}}
