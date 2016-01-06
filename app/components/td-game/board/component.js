@@ -3,7 +3,11 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['td-game__board'],
 
+  classNameBindings: ['positionRelative:td-game__board--relative'],
+
   numMobsGenerated: 1,
+
+  positionRelative: false,
 
   mobs: Ember.A([]),
 
@@ -18,6 +22,10 @@ export default Ember.Component.extend({
       }
     }, frequency);
   },
+
+  repositionBoard: Ember.observer('attrs.waveStarted', function () {
+    this.set('positionRelative', true);
+  }),
 
   produceMobs: Ember.observer('attrs.waveStarted', function () {
     this.attrs.mobs.forEach((mob) => {

@@ -7,6 +7,10 @@
   width: calc(100% - #{$td-game__sidebar__width});
 }
 
+.td-game__board--relative {
+  position: relative;
+}
+
 @import
   "board/mob",
   "board/tower-group";
