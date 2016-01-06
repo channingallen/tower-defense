@@ -33,17 +33,19 @@ export default Ember.Component.extend({
     styleNeedle = styleNeedle.replace(/ /g,'');
     const towerStyles = this.attrs.tower.get('styles');
 
-    towerStyles.forEach((styleHaystack) => {
-      if (styleHaystack.get('codeLine')) {
-        const styleNoWhitespace = styleHaystack.get('codeLine').replace(/ /g,'');
-        styleHaystack.set('codeLine', styleNoWhitespace);
+    if (towerStyles) {
+      towerStyles.forEach((styleHaystack) => {
+        if (styleHaystack.get('codeLine')) {
+          const styleNoWhitespace = styleHaystack.get('codeLine').replace(/ /g,'');
+          styleHaystack.set('codeLine', styleNoWhitespace);
 
-        if (styleHaystack.get('codeLine') === styleNeedle) {
-          styleApplicable = true;
+          if (styleHaystack.get('codeLine') === styleNeedle) {
+            styleApplicable = true;
+          }
         }
-      }
-    });
-
+      });
+    }
+    
     return styleApplicable;
   },
 
