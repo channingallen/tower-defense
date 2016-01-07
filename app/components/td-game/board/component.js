@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Mob from 'tower-defense/objects/mob';
 
 export default Ember.Component.extend({
   classNames: ['td-game__board'],
@@ -13,8 +14,18 @@ export default Ember.Component.extend({
 
   _generateMobs(mob, quantity, frequency) {
     setTimeout(() => {
-      mob.set('number', this.get('numMobsGenerated'));
-      this.get('mobs').pushObject({mob});
+      const newMob = Mob.create({
+        frequency: mob.frequency,
+        number: this.get('numMobsGenerated'),
+        maxHealth: mob.maxHealth,
+        points: mob.points,
+        quantity: mob.quantity,
+        speed: mob.speed,
+        type: mob.type
+      });
+
+      this.get('mobs').pushObject({newMob});
+      this.get('mobs').pushObject(newMob);
       this.set('numMobsGenerated', this.get('numMobsGenerated') + 1);
 
       if (this.get('numMobsGenerated') < quantity) {

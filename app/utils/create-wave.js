@@ -9,10 +9,24 @@ import Wave from '../objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  const ptA = PathCoords.create({x: 0, y: 50});
-  const ptB = PathCoords.create({x: 100, y: 50});
+  const ptA = PathCoords.create({x: 1, y: 1});
+  const ptB = PathCoords.create({x: 1, y: 2});
+  const ptC = PathCoords.create({x: 1, y: 3});
+  const ptD = PathCoords.create({x: 1, y: 4});
+  const ptE = PathCoords.create({x: 1, y: 5});
+  const ptF = PathCoords.create({x: 1, y: 6});
+  const ptG = PathCoords.create({x: 1, y: 7});
+  const ptH = PathCoords.create({x: 1, y: 8});
+  const ptI = PathCoords.create({x: 1, y: 9});
   board.pathData.pushObject(ptA);
   board.pathData.pushObject(ptB);
+  board.pathData.pushObject(ptC);
+  board.pathData.pushObject(ptD);
+  board.pathData.pushObject(ptE);
+  board.pathData.pushObject(ptF);
+  board.pathData.pushObject(ptG);
+  board.pathData.pushObject(ptH);
+  board.pathData.pushObject(ptI);
 
   // TODO THIS COMMIT: give board `imageUrl`
   wave.set('board', board);
