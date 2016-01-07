@@ -3,9 +3,9 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['mob--container'],
 
-  position: null,
-
   pathIndex: 0,
+
+  position: null,
 
   _advancePosition() {
     setTimeout(() => {
@@ -14,17 +14,15 @@ export default Ember.Component.extend({
       const y = this.attrs.path[currentIndex].get('y');
       this.set('position', 'mob--position-x' + x + 'y' + y);
 
-      // iterate index
       this.set('pathIndex', this.get('pathIndex') + 1);
-
       if (this.get('pathIndex') < this.get('pathLength')) {
         this._advancePosition();
       }
     }, 500);
   },
 
-  updatePosition: Ember.on('init', function () {
-    this._advancePosition();
+  pathLength: Ember.computed('attrs.path.[]', function () {
+    return this.attrs.path.length;
   }),
 
   setInitialPosition: Ember.on('init', function () {
@@ -33,7 +31,7 @@ export default Ember.Component.extend({
     this.set('position', 'mob--position-x' + x + 'y' + y);
   }),
 
-  pathLength: Ember.computed('attrs.path.[]', function () {
-    return this.attrs.path.length;
+  updatePosition: Ember.on('init', function () {
+    this._advancePosition();
   })
 });
