@@ -9,24 +9,35 @@ import Wave from '../objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  const ptA = PathCoords.create({x: 1, y: 1});
-  const ptB = PathCoords.create({x: 1, y: 2});
-  const ptC = PathCoords.create({x: 1, y: 3});
-  const ptD = PathCoords.create({x: 1, y: 4});
-  const ptE = PathCoords.create({x: 1, y: 5});
-  const ptF = PathCoords.create({x: 1, y: 6});
-  const ptG = PathCoords.create({x: 1, y: 7});
-  const ptH = PathCoords.create({x: 1, y: 8});
-  const ptI = PathCoords.create({x: 1, y: 9});
-  board.pathData.pushObject(ptA);
-  board.pathData.pushObject(ptB);
-  board.pathData.pushObject(ptC);
-  board.pathData.pushObject(ptD);
-  board.pathData.pushObject(ptE);
-  board.pathData.pushObject(ptF);
-  board.pathData.pushObject(ptG);
-  board.pathData.pushObject(ptH);
-  board.pathData.pushObject(ptI);
+
+  const pathObjects = [
+    PathCoords.create({x: 10, y: 5}),
+    PathCoords.create({x: 9, y: 5}),
+    PathCoords.create({x: 8, y: 5}),
+    PathCoords.create({x: 8, y: 4}),
+    PathCoords.create({x: 8, y: 3}),
+    PathCoords.create({x: 8, y: 2}),
+    PathCoords.create({x: 7, y: 2}),
+    PathCoords.create({x: 6, y: 2}),
+    PathCoords.create({x: 5, y: 2}),
+    PathCoords.create({x: 4, y: 2}),
+    PathCoords.create({x: 4, y: 3}),
+    PathCoords.create({x: 4, y: 4}),
+    PathCoords.create({x: 4, y: 5}),
+    PathCoords.create({x: 4, y: 6}),
+    PathCoords.create({x: 4, y: 7}),
+    PathCoords.create({x: 4, y: 8}),
+    PathCoords.create({x: 4, y: 9}),
+    PathCoords.create({x: 5, y: 9}),
+    PathCoords.create({x: 6, y: 9}),
+    PathCoords.create({x: 7, y: 9}),
+    PathCoords.create({x: 8, y: 9}),
+    PathCoords.create({x: 8, y: 10})
+  ];
+
+  pathObjects.forEach((pathObject) => {
+    board.pathData.pushObject(pathObject);
+  });
 
   // TODO THIS COMMIT: give board `imageUrl`
   wave.set('board', board);
