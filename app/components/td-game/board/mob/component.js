@@ -15,13 +15,13 @@ export default Ember.Component.extend({
       this.set('position', 'mob--position-x' + x + 'y' + y);
 
       this.set('pathIndex', this.get('pathIndex') + 1);
-      if (this.get('pathIndex') < this.get('pathLength')) {
+      if (this.get('pathIndex') < this.get('numPathObjects')) {
         this._advancePosition();
       }
     }, 500);
   },
 
-  pathLength: Ember.computed('attrs.path.[]', function () {
+  numPathObjects: Ember.computed('attrs.path.[]', function () {
     return this.attrs.path.length;
   }),
 
