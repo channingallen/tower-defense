@@ -12,26 +12,35 @@ export default Ember.Component.extend({
 
   mobs: Ember.A([]),
 
-  _generateMobs(mob, quantity, frequency) {
-    setTimeout(() => {
-      const newMob = Mob.create({
-        frequency: mob.frequency,
-        number: this.get('numMobsGenerated'),
-        maxHealth: mob.maxHealth,
-        points: mob.points,
-        quantity: mob.quantity,
-        speed: mob.speed,
-        type: mob.type
-      });
+  mobSchema: null,
 
-      this.get('mobs').pushObject({newMob});
+  _generateFirstMob(newMob) {
+    this.get('mobs').pushObject(newMob);
+    this.set('numMobsGenerated', this.get('numMobsGenerated') + 1);
+  },
+
+  _generateMobs(mobSchema, newMob, quantity, frequency) {
+    setTimeout(() => {
       this.get('mobs').pushObject(newMob);
       this.set('numMobsGenerated', this.get('numMobsGenerated') + 1);
-
       if (this.get('numMobsGenerated') < quantity) {
-        this._generateMobs(mob, quantity, frequency);
+        this._generateMobs(
+          mobSchema, this._getNewMob(mobSchema), quantity, frequency
+        );
       }
     }, frequency);
+  },
+
+  _getNewMob(mobSchema) {
+    return Mob.create({
+      frequency: mobSchema.frequency,
+      number: this.get('numMobsGenerated'),
+      remainingHealth: mobSchema.maxHealth,
+      points: mobSchema.points,
+      quantity: mobSchema.quantity,
+      speed: mobSchema.speed,
+      type: mobSchema.type
+    });
   },
 
   repositionBoard: Ember.observer('attrs.waveStarted', function () {
@@ -39,11 +48,14 @@ export default Ember.Component.extend({
   }),
 
   produceMobs: Ember.observer('attrs.waveStarted', function () {
-    this.attrs.mobs.forEach((mob) => {
+    this.attrs.mobs.forEach((mobSchema) => {
+      this._generateFirstMob(this._getNewMob(mobSchema));
+
       this._generateMobs(
-        mob,
-        mob.get('quantity') + 1,
-        mob.get('frequency')
+        mobSchema,
+        this._getNewMob(mobSchema),
+        mobSchema.get('quantity') + 1,
+        mobSchema.get('frequency')
       );
     });
   })

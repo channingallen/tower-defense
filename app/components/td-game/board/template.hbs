@@ -11,7 +11,7 @@
   </div>
 
   {{#each mobs as |mob|}}
-    {{td-game/board/mob maxHealth=(readonly mob.maxHealth)
+    {{td-game/board/mob remainingHealth=(readonly mob.remainingHealth)
                         number=(readonly mob.number)
                         path=(readonly attrs.path)
                         points=(readonly mob.points)

@@ -18,7 +18,7 @@ export default Ember.Component.extend({
       if (this.get('pathIndex') < this.get('numPathObjects')) {
         this._advancePosition();
       }
-    }, 500);
+    }, this.attrs.speed);
   },
 
   numPathObjects: Ember.computed('attrs.path.[]', function () {

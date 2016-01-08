@@ -49,7 +49,7 @@ function addMobsToWave(wave) {
   mob.set('maxHealth', 100); // TODO THIS COMMIT: adjust this
   mob.set('points', 1); // TODO THIS COMMIT: adjust this
   mob.set('quantity', 10); // TODO THIS COMMIT: adjust this
-  mob.set('speed', 1); // TODO THIS COMMIT: adjust this
+  mob.set('speed', 1000); // TODO THIS COMMIT: adjust this
   mob.set('type', 'standard'); // TODO THIS COMMIT: adjust this
 
   wave.set('mobs', Ember.A([mob]));
