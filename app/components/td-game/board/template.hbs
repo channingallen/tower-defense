@@ -20,7 +20,8 @@
                                   selectedTowerGroup=(readonly selectedTowerGroup)
                                   select-tower=(action attrs.select-tower)
                                   towerGroup=(readonly towerGroup)
-                                  towers=(readonly towerGroup.towers)}}
+                                  towers=(readonly towerGroup.towers)
+                                  update-towers=(action "updateTowers")}}
     {{/each}}
   </div>
 {{/if}}

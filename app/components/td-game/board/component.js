@@ -2,6 +2,10 @@ import Ember from 'ember';
 import Mob from 'tower-defense/objects/mob';
 
 export default Ember.Component.extend({
+  towerGroups: Ember.A([]),
+
+  towers: Ember.A([]),
+
   classNames: ['td-game__board'],
 
   classNameBindings: ['positionRelative:td-game__board--relative'],
@@ -46,8 +50,14 @@ export default Ember.Component.extend({
     });
   },
 
-  repositionBoard: Ember.observer('attrs.waveStarted', function () {
-    this.set('positionRelative', true);
+  getTowers: Ember.observer('attrs.waveStarted', function () {
+    this.attrs.towerGroups.forEach((towerGroup) => {
+      this.get('towers').pushObject(towerGroup);
+      
+      towerGroup.get('towers').forEach((tower) => {
+        this.get('towers').pushObject(tower);
+      });
+    });
   }),
 
   produceMobs: Ember.observer('attrs.waveStarted', function () {
@@ -73,6 +83,10 @@ export default Ember.Component.extend({
     });
   }),
 
+  repositionBoard: Ember.observer('attrs.waveStarted', function () {
+    this.set('positionRelative', true);
+  }),
+
   actions: {
     updateMobClass(mobNumber, newClass) {
       this.get('mobs').forEach((mob) => {
@@ -88,6 +102,9 @@ export default Ember.Component.extend({
           mob.set('pos' + axis, pos);
         }
       });
+    },
+
+    updateTowers() {
     }
   }
 });
