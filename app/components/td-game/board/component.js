@@ -35,9 +35,12 @@ export default Ember.Component.extend({
     return Mob.create({
       frequency: mobSchema.frequency,
       number: this.get('numMobsGenerated'),
-      remainingHealth: mobSchema.maxHealth,
       points: mobSchema.points,
+      posClass: null,
+      posX: null,
+      posY: null,
       quantity: mobSchema.quantity,
+      remainingHealth: mobSchema.maxHealth,
       speed: mobSchema.speed,
       type: mobSchema.type
     });
@@ -49,14 +52,42 @@ export default Ember.Component.extend({
 
   produceMobs: Ember.observer('attrs.waveStarted', function () {
     this.attrs.mobs.forEach((mobSchema) => {
-      this._generateFirstMob(this._getNewMob(mobSchema));
+      switch (mobSchema.get('quantity')) {
+        case 0:
+          break;
 
-      this._generateMobs(
-        mobSchema,
-        this._getNewMob(mobSchema),
-        mobSchema.get('quantity') + 1,
-        mobSchema.get('frequency')
-      );
+        case 1:
+          this._generateFirstMob(this._getNewMob(mobSchema));
+          break;
+
+        default:
+          this._generateFirstMob(this._getNewMob(mobSchema));
+
+          this._generateMobs(
+            mobSchema,
+            this._getNewMob(mobSchema),
+            mobSchema.get('quantity') + 1,
+            mobSchema.get('frequency')
+          );
+      }
     });
-  })
+  }),
+
+  actions: {
+    updateMobClass(mobNumber, newClass) {
+      this.get('mobs').forEach((mob) => {
+        if (mobNumber === mob.get('number')) {
+          mob.set('posClass', newClass);
+        }
+      });
+    },
+
+    updateMobPosition(mobNumber, axis, pos) {
+      this.get('mobs').forEach((mob) => {
+        if (mobNumber === mob.get('number')) {
+          mob.set('pos' + axis, pos);
+        }
+      });
+    }
+  }
 });

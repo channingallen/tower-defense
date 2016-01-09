@@ -1,4 +1,18 @@
 {{#if attrs.waveStarted}}
+  {{#each mobs as |mob|}}
+    {{td-game/board/mob class=(readonly mob.posClass)
+                        number=(readonly mob.number)
+                        path=(readonly attrs.path)
+                        points=(readonly mob.points)
+                        posX=(readonly mob.posX)
+                        posY=(readonly mob.posY)
+                        remainingHealth=(readonly mob.remainingHealth)
+                        speed=(readonly mob.speed)
+                        type=(readonly mob.type)
+                        update-class=(action "updateMobClass")
+                        update-position=(action "updateMobPosition")}}
+  {{/each}}
+
   <div class="board__tower-groups">
     {{#each attrs.towerGroups as |towerGroup|}}
       {{td-game/board/tower-group click=(action attrs.select-tower-group towerGroup)
@@ -9,13 +23,4 @@
                                   towers=(readonly towerGroup.towers)}}
     {{/each}}
   </div>
-
-  {{#each mobs as |mob|}}
-    {{td-game/board/mob remainingHealth=(readonly mob.remainingHealth)
-                        number=(readonly mob.number)
-                        path=(readonly attrs.path)
-                        points=(readonly mob.points)
-                        speed=(readonly mob.speed)
-                        type=(readonly mob.type)}}
-  {{/each}}
 {{/if}}

@@ -1,6 +1,11 @@
 .mob {
-  font-size: 30px;
+  background-color: purple;
+  border-radius: 99999px;
+  font-size: 16px;
+  height: 75px;
   position: absolute;
+  width: 75px;
+
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
