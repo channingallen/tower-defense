@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 
   pathIndex: 0,
 
-  _advancePosition() {
+  _advancePositionClass() {
     setTimeout(() => {
       const currentIndex = this.get('pathIndex');
       const x = this.attrs.path[currentIndex].get('x');
@@ -18,16 +18,20 @@ export default Ember.Component.extend({
 
       this.set('pathIndex', this.get('pathIndex') + 1);
       if (this.get('pathIndex') < this.get('numPathObjects')) {
-        this._advancePosition();
+        this._advancePositionClass();
       }
     }, this.attrs.speed);
   },
+
+  initiateMotion: Ember.on('init', function () {
+    this._advancePositionClass();
+  }),
 
   numPathObjects: Ember.computed('attrs.path.[]', function () {
     return this.attrs.path.length;
   }),
 
-  updatePositionClass: Ember.on('init', function () {
+  pollDOMPosition: Ember.on('init', function () {
     const mobNumber = this.attrs.number; // TODO THIS COMMIT: change to ID
 
     const pollPosition = setInterval(() => {
@@ -45,7 +49,7 @@ export default Ember.Component.extend({
     }, 200);
   }),
 
-  setInitialPosition: Ember.on('init', function () {
+  setInitialPositionClass: Ember.on('init', function () {
     const x = this.attrs.path[0].get('x');
     const y = this.attrs.path[0].get('y');
 
@@ -53,9 +57,5 @@ export default Ember.Component.extend({
       this.attrs.number, // TODO THIS COMMIT: change to ID
       'mob--position-x' + x + 'y' + y
     );
-  }),
-
-  initiateMotion: Ember.on('init', function () {
-    this._advancePosition();
   })
 });

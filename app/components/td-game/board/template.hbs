@@ -15,13 +15,14 @@
 
   <div class="board__tower-groups">
     {{#each attrs.towerGroups as |towerGroup|}}
-      {{td-game/board/tower-group click=(action attrs.select-tower-group towerGroup)
+      {{td-game/board/tower-group allTowers=(readonly allTowers)
+                                  click=(action attrs.select-tower-group towerGroup)
                                   selectedTower=(readonly selectedTower)
                                   selectedTowerGroup=(readonly selectedTowerGroup)
                                   select-tower=(action attrs.select-tower)
                                   towerGroup=(readonly towerGroup)
-                                  towers=(readonly towerGroup.towers)
-                                  update-towers=(action "updateTowers")}}
+                                  update-tower-position=(action "updateTowerPosition")}}
+                                  {{!-- towers=(readonly towerGroup.towers) --}}
     {{/each}}
   </div>
 {{/if}}

@@ -2,9 +2,9 @@ import Ember from 'ember';
 import Mob from 'tower-defense/objects/mob';
 
 export default Ember.Component.extend({
-  towerGroups: Ember.A([]),
+  allTowers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
-  towers: Ember.A([]),
+  towerGroups: Ember.A([]),
 
   classNames: ['td-game__board'],
 
@@ -52,10 +52,10 @@ export default Ember.Component.extend({
 
   getTowers: Ember.observer('attrs.waveStarted', function () {
     this.attrs.towerGroups.forEach((towerGroup) => {
-      this.get('towers').pushObject(towerGroup);
-      
+      this.get('allTowers').pushObject(towerGroup);
+
       towerGroup.get('towers').forEach((tower) => {
-        this.get('towers').pushObject(tower);
+        this.get('allTowers').pushObject(tower);
       });
     });
   }),
@@ -104,7 +104,14 @@ export default Ember.Component.extend({
       });
     },
 
-    updateTowers() {
+    updateTowerPosition(id, axis, pos) {
+      axis = axis.toUpperCase();
+
+      this.get('allTowers').forEach((tower) => {
+        if (tower.get('id') === id) {
+          tower.set('pos' + axis, pos);
+        }
+      });
     }
   }
 });

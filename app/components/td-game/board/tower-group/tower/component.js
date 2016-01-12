@@ -201,5 +201,18 @@ export default Ember.Component.extend({
     function () {
       return this.attrs.selectedTower === this.attrs.tower ? true : false;
     }
-  )
+  ),
+
+  setInitialDOMPosition: Ember.on('init', function () {
+    setTimeout(() => {
+      const towerId = this.attrs.tower.get('id');
+      const posLeft = this.$().offset().left;
+      const posTop = this.$().offset().top;
+
+      if (posTop && posLeft) {
+        this.attrs['update-tower-position'](towerId, 'X', posLeft);
+        this.attrs['update-tower-position'](towerId, 'Y', posTop);
+      }
+    }, 200);
+  })
 });

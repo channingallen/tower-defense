@@ -368,6 +368,16 @@ export default Ember.Component.extend({
     }
   ),
 
+  groupTowers: Ember.computed('attrs.towerGroup', function () {
+    let towers = [];
+
+    this.attrs.towerGroup.get('towers').forEach((tower) => {
+      towers.push(tower);
+    });
+
+    return towers;
+  }),
+
   selected: Ember.computed(
     'attrs.selectedTowerGroup',
     'attrs.towerGroup',

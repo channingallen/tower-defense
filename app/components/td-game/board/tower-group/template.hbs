@@ -1,5 +1,6 @@
-{{#each attrs.towers as |tower|}}
+{{#each groupTowers as |tower|}}
   {{td-game/board/tower-group/tower select=(action attrs.select-tower tower)
                                     selectedTower=(readonly selectedTower)
-                                    tower=(readonly tower)}}
+                                    tower=(readonly tower)
+                                    update-tower-position=(action attrs.update-tower-position)}}
 {{/each}}
