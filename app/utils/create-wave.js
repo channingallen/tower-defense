@@ -43,6 +43,7 @@ function addBoardToWave(wave) {
   wave.set('board', board);
 }
 
+// Being used in the app more as a mob schema
 function addMobsToWave(wave) {
   const mob = Mob.create();
   mob.set('frequency', 3000); // TODO THIS COMMIT: adjust this
@@ -56,49 +57,50 @@ function addMobsToWave(wave) {
 }
 
 function addTowerGroupsToWave(wave) {
-  const towerGroupOne = TowerGroup.create();
-  const towerOne = Tower.create();
-  const towerTwo = Tower.create();
-  const towerThree = Tower.create();
+  function getNewTowerGroup(groupNum) {
+    return TowerGroup.create({
+      id: generateIdForRecord(),
+      selector: '.t-g-' + groupNum,
+      styles: Ember.A([createUnitCodeLine()])
+    });
+  }
 
-  towerOne.set('selector', '.t-1'); // TODO THIS COMMIT: adjust this;
-  towerOne.set('type', 1); // TODO THIS COMMIT: adjust this;
-  towerOne.set('styles', Ember.A([createUnitCodeLine()]));
+  const towerGroupOne = getNewTowerGroup(1);
+  const towerGroupTwo = getNewTowerGroup(2);
+  addTowersToTowerGroup(towerGroupOne, 3);
+  addTowersToTowerGroup(towerGroupTwo, 3);
 
-  towerTwo.set('selector', '.t-2'); // TODO THIS COMMIT: adjust this;
-  towerTwo.set('type', 1); // TODO THIS COMMIT: adjust this;
-  towerTwo.set('styles', Ember.A([createUnitCodeLine()]));
+  wave.set('towerGroups', Ember.A([towerGroupOne, towerGroupTwo]));
+}
 
-  towerThree.set('selector', '.t-3'); // TODO THIS COMMIT: adjust this;
-  towerThree.set('type', 1); // TODO THIS COMMIT: adjust this;
-  towerThree.set('styles', Ember.A([createUnitCodeLine()]));
+function addTowersToTowerGroup(towerGroup, numTowers) {
+  function getNewTower(towerNum) {
+    return Tower.create({
+      id: generateIdForRecord(),
+      selector: 't-' + towerNum,
+      type: 1,
+      styles: Ember.A([createUnitCodeLine()])
+    });
+  }
 
-  towerGroupOne.set('selector', '.t-g-1');
-  towerGroupOne.set('towers', [towerOne, towerTwo, towerThree]);
-  towerGroupOne.set('styles', Ember.A([createUnitCodeLine()]));
+  let newTowers = Ember.A([]);
+  for (var i = 1; i < numTowers + 1; i++) {
+    newTowers.pushObject(getNewTower(i));
+  }
 
-  const towerGroupTwo = TowerGroup.create();
-  const towerFour = Tower.create();
-  const towerFive = Tower.create();
-  const towerSix = Tower.create();
+  towerGroup.set('towers', newTowers);
+}
 
-  towerFour.set('selector', '.t-4'); // TODO THIS COMMIT: adjust this;
-  towerFour.set('type', 1); // TODO THIS COMMIT: adjust this;
-  towerFour.set('styles', Ember.A([createUnitCodeLine()]));
+function generateIdForRecord() {
+  function generate4DigitString() {
+    const baseInt = Math.floor((1 + Math.random()) * 0x10000);
+    return baseInt.toString(16).substring(1);
+  }
 
-  towerFive.set('selector', '.t-5'); // TODO THIS COMMIT: adjust this;
-  towerFive.set('type', 1); // TODO THIS COMMIT: adjust this;
-  towerFive.set('styles', Ember.A([createUnitCodeLine()]));
-
-  towerSix.set('selector', '.t-6'); // TODO THIS COMMIT: adjust this;
-  towerSix.set('type', 1); // TODO THIS COMMIT: adjust this;
-  towerSix.set('styles', Ember.A([createUnitCodeLine()]));
-
-  towerGroupTwo.set('selector', '.t-g-2');
-  towerGroupTwo.set('towers', [towerFour, towerFive, towerSix]);
-  towerGroupTwo.set('styles', Ember.A([createUnitCodeLine()]));
-
-  wave.set('towerGroups', [towerGroupOne, towerGroupTwo]);
+  return generate4DigitString() + generate4DigitString() + '-' +
+         generate4DigitString() + '-' + generate4DigitString() + '-' +
+         generate4DigitString() + '-' + generate4DigitString() +
+         generate4DigitString() + generate4DigitString();
 }
 
 export default function createWave() {

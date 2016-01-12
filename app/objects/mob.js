@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 const Mob = Ember.Object.extend({
+  id: null,
   frequency: null,
   maxHealth: null,
   points: null,

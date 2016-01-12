@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 const TowerGroup = Ember.Object.extend({
-  selector: '.tower-group',
+  id: null,
+  selector: '.t-g',
   styles: null,
   towers: null
 });
