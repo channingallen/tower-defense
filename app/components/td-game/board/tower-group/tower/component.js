@@ -195,17 +195,10 @@ export default Ember.Component.extend({
     this.attrs.select(this.attrs.tower);
   }),
 
-  selected: Ember.computed(
-    'attrs.selectedTower',
-    'attrs.tower',
-    function () {
-      return this.attrs.selectedTower === this.attrs.tower ? true : false;
-    }
-  ),
+  pollDOMPosition: Ember.on('init', function () {
+    const towerId = this.attrs.tower.get('id');
 
-  setInitialDOMPosition: Ember.on('init', function () {
-    setTimeout(() => {
-      const towerId = this.attrs.tower.get('id');
+    const pollPosition = setInterval(() => {
       const posLeft = this.$().offset().left;
       const posTop = this.$().offset().top;
 
@@ -214,5 +207,13 @@ export default Ember.Component.extend({
         this.attrs['update-tower-position'](towerId, 'Y', posTop);
       }
     }, 200);
-  })
+  }),
+
+  selected: Ember.computed(
+    'attrs.selectedTower',
+    'attrs.tower',
+    function () {
+      return this.attrs.selectedTower === this.attrs.tower ? true : false;
+    }
+  )
 });
