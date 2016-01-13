@@ -12,7 +12,7 @@ export default Ember.Component.extend({
       const y = this.attrs.path[currentIndex].get('y');
 
       this.attrs['update-class'](
-        this.attrs.number, // TODO THIS COMMIT: change to ID
+        this.attrs.mob.get('id'),
         'mob--position-x' + x + 'y' + y
       );
 
@@ -32,15 +32,15 @@ export default Ember.Component.extend({
   }),
 
   pollDOMPosition: Ember.on('init', function () {
-    const mobNumber = this.attrs.number; // TODO THIS COMMIT: change to ID
+    const mobId = this.attrs.mob.get('id'); // TODO THIS COMMIT: change to ID
 
     const pollPosition = setInterval(() => {
       const posLeft = this.$().offset().left;
       const posTop = this.$().offset().top;
 
       if (posTop && posLeft) {
-        this.attrs['update-position'](mobNumber, 'X', posLeft); // TODO THIS COMMIT: ID needed
-        this.attrs['update-position'](mobNumber, 'Y', posTop);
+        this.attrs['update-position'](mobId, 'X', posLeft); // TODO THIS COMMIT: ID needed
+        this.attrs['update-position'](mobId, 'Y', posTop);
       }
 
       if (this.get('pathIndex') === this.attrs.path.length) {
@@ -54,7 +54,7 @@ export default Ember.Component.extend({
     const y = this.attrs.path[0].get('y');
 
     this.attrs['update-class'](
-      this.attrs.number, // TODO THIS COMMIT: change to ID
+      this.attrs.mob.get('id'),
       'mob--position-x' + x + 'y' + y
     );
   })

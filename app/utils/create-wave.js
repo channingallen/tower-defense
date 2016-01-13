@@ -43,17 +43,34 @@ function addBoardToWave(wave) {
   wave.set('board', board);
 }
 
-// Being used in the app more as a mob schema
+// TODO THIS COMMIT: refactor such that mob object isn't made 3 times
+//                 - once in mob.js, twice here below
 function addMobsToWave(wave) {
-  const mob = Mob.create();
-  mob.set('frequency', 3000); // TODO THIS COMMIT: adjust this
-  mob.set('maxHealth', 100); // TODO THIS COMMIT: adjust this
-  mob.set('points', 1); // TODO THIS COMMIT: adjust this
-  mob.set('quantity', 5); // TODO THIS COMMIT: adjust this
-  mob.set('speed', 1000); // TODO THIS COMMIT: adjust this
-  mob.set('type', 'standard'); // TODO THIS COMMIT: adjust this
+  const mobs = [];
+  const mobSchemaOne = {
+    frequency: 3000,
+    health: 100,
+    points: 1,
+    quantity: 5,
+    speed: 1000,
+    type: 'standard'
+  };
 
-  wave.set('mobs', Ember.A([mob]));
+  for (var i = 0; i < mobSchemaOne.quantity; i++) {
+    const newMob = Mob.create({
+      id: generateIdForRecord(),
+      frequency: mobSchemaOne.frequency,
+      health: mobSchemaOne.health,
+      number: i + 1,
+      points: mobSchemaOne.points,
+      quantity: mobSchemaOne.quantity,
+      speed: mobSchemaOne.speed,
+      type: mobSchemaOne.type
+    });
+
+    mobs.push(newMob);
+  }
+  wave.set('mobs', Ember.A(mobs));
 }
 
 function addTowerGroupsToWave(wave) {

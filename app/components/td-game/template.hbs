@@ -21,11 +21,11 @@
                        waveStarted=(readonly waveStarted)}}
 </div>
 
-{{td-game/board mobs=(readonly currentWave.mobs)
-                path=(readonly currentWave.board.pathData)
+{{td-game/board path=(readonly currentWave.board.pathData)
                 select-tower=(action "selectTower")
                 select-tower-group=(action "selectTowerGroup")
                 selectedTower=(readonly selectedTower)
                 selectedTowerGroup=(readonly selectedTowerGroup)
                 towerGroups=(readonly currentWave.towerGroups)
+                waveMobs=(readonly currentWave.mobs)
                 waveStarted=(readonly waveStarted)}}

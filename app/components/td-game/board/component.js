@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import Mob from 'tower-defense/objects/mob';
 
 export default Ember.Component.extend({
-  allTowers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
+  towers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
   towerGroups: Ember.A([]),
 
@@ -10,44 +9,16 @@ export default Ember.Component.extend({
 
   classNameBindings: ['positionRelative:td-game__board--relative'],
 
+  mobIndex: 0,
+
+  mobs: Ember.ArrayProxy.create({ content: Ember.A([]) }),
+
   numMobsGenerated: 1,
 
   positionRelative: false,
 
-  mobs: Ember.A([]),
-
-  mobSchema: null,
-
-  _generateFirstMob(newMob) {
-    this.get('mobs').pushObject(newMob);
-    this.set('numMobsGenerated', this.get('numMobsGenerated') + 1);
-  },
-
-  _generateMobs(mobSchema, newMob, quantity, frequency) {
-    setTimeout(() => {
-      this.get('mobs').pushObject(newMob);
-      this.set('numMobsGenerated', this.get('numMobsGenerated') + 1);
-      if (this.get('numMobsGenerated') < quantity) {
-        this._generateMobs(
-          mobSchema, this._getNewMob(mobSchema), quantity, frequency
-        );
-      }
-    }, frequency);
-  },
-
-  _getNewMob(mobSchema) {
-    return Mob.create({
-      frequency: mobSchema.frequency,
-      number: this.get('numMobsGenerated'),
-      points: mobSchema.points,
-      posClass: null,
-      posX: null,
-      posY: null,
-      quantity: mobSchema.quantity,
-      remainingHealth: mobSchema.maxHealth,
-      speed: mobSchema.speed,
-      type: mobSchema.type
-    });
+  _mobCapacityReached() {
+    return this.get('mobIndex') < this.attrs.waveMobs.length ? false : true;
   },
 
   _reduceMobHealth(mobId, healthToReduce) {
@@ -57,8 +28,8 @@ export default Ember.Component.extend({
 
     this.get('mobs').forEach((mob) => {
       if (mobId === mob.get('id')) {
-        const currentHealth = mob.get('remainingHealth');
-        mob.set('remainingHealth', currentHealth - healthToReduce);
+        const currentHealth = mob.get('health');
+        mob.set('health', currentHealth - healthToReduce);
       }
     });
   },
@@ -75,56 +46,42 @@ export default Ember.Component.extend({
 
   attackMobsInTowerRange: Ember.observer('attrs.waveStarted', function () {
     setInterval(() => {
-      if (!this.get('allTowers.length') || !this.get('mobs.length')) {
+      if (!this.get('towers.length') || !this.get('mobs.length')) {
         return;
       }
 
-      this.get('allTowers').forEach((tower) => {
+      this.get('towers').forEach((tower) => {
         this.get('mobs').forEach((mob) => {
           if (this._mobInRangeOfTower(mob, tower, 100)) { // TODO: replace arg 3 with tower property for attack range, based on type?
             this._reduceMobHealth(mob.get('id'), 20); // TODO: replace arg 2 with tower property for attack power, based on type?
           }
         });
       });
-
-      // this.get('mobs').forEach((mob) => {
-      //   if (this._towersInRange(mob)) {
-      //     this._reduceMobHealth(mob.get('id'), 20);
-      //   }
-      // });
     }, 500);
+  }),
+
+  generateMobs: Ember.observer('attrs.waveStarted', function () {
+    const produceMob = setInterval(() => {
+      const mobIndex = this.get('mobIndex');
+      const waveMob = this.attrs.waveMobs[mobIndex];
+      this.get('mobs').pushObject(waveMob);
+
+      const nextMobIndex = mobIndex + 1;
+      this.set('mobIndex', nextMobIndex);
+
+      if (this._mobCapacityReached()) {
+        clearInterval(produceMob);
+      }
+    }, 5000);
   }),
 
   getTowers: Ember.observer('attrs.waveStarted', function () {
     this.attrs.towerGroups.forEach((towerGroup) => {
-      this.get('allTowers').pushObject(towerGroup);
+      this.get('towers').pushObject(towerGroup);
 
       towerGroup.get('towers').forEach((tower) => {
-        this.get('allTowers').pushObject(tower);
+        this.get('towers').pushObject(tower);
       });
-    });
-  }),
-
-  produceMobs: Ember.observer('attrs.waveStarted', function () {
-    this.attrs.mobs.forEach((mobSchema) => {
-      switch (mobSchema.get('quantity')) {
-        case 0:
-          break;
-
-        case 1:
-          this._generateFirstMob(this._getNewMob(mobSchema));
-          break;
-
-        default:
-          this._generateFirstMob(this._getNewMob(mobSchema));
-
-          this._generateMobs(
-            mobSchema,
-            this._getNewMob(mobSchema),
-            mobSchema.get('quantity') + 1,
-            mobSchema.get('frequency')
-          );
-      }
     });
   }),
 
@@ -133,17 +90,17 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    updateMobClass(mobNumber, newClass) {
+    updateMobClass(mobId, newClass) {
       this.get('mobs').forEach((mob) => {
-        if (mobNumber === mob.get('number')) {
+        if (mobId === mob.get('id')) {
           mob.set('posClass', newClass);
         }
       });
     },
 
-    updateMobPosition(mobNumber, axis, pos) {
+    updateMobPosition(mobId, axis, pos) {
       this.get('mobs').forEach((mob) => {
-        if (mobNumber === mob.get('number')) {
+        if (mobId === mob.get('id')) {
           mob.set('pos' + axis, pos);
         }
       });
@@ -152,7 +109,7 @@ export default Ember.Component.extend({
     updateTowerPosition(id, axis, pos) {
       axis = axis.toUpperCase();
 
-      this.get('allTowers').forEach((tower) => {
+      this.get('towers').forEach((tower) => {
         if (tower.get('id') === id) {
           tower.set('pos' + axis, pos);
         }
