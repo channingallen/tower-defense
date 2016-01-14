@@ -61,7 +61,6 @@ function addMobsToWave(wave) {
       id: generateIdForRecord(),
       frequency: mobSchemaOne.frequency,
       health: mobSchemaOne.health,
-      number: i + 1,
       points: mobSchemaOne.points,
       quantity: mobSchemaOne.quantity,
       speed: mobSchemaOne.speed,

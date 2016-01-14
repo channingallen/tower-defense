@@ -1,13 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  towers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
-
-  towerGroups: Ember.A([]),
+  classNameBindings: ['positionRelative:td-game__board--relative'],
 
   classNames: ['td-game__board'],
-
-  classNameBindings: ['positionRelative:td-game__board--relative'],
 
   mobIndex: 0,
 
@@ -17,8 +13,22 @@ export default Ember.Component.extend({
 
   positionRelative: false,
 
+  towerGroups: Ember.A([]),
+
+  towers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
+
   _mobCapacityReached() {
     return this.get('mobIndex') < this.attrs.waveMobs.length ? false : true;
+  },
+
+  _mobInRangeOfTower(mob, tower, range) {
+    function getDistance(mob, tower) {
+      var latDiff = Math.abs(tower.get('posX') - mob.get('posX'));
+      var lngDiff = Math.abs(tower.get('posY') - mob.get('posY'));
+      return latDiff + lngDiff;
+    }
+
+    return getDistance(mob, tower) < range ? true : false;
   },
 
   _reduceMobHealth(mobId, healthToReduce) {
@@ -32,16 +42,6 @@ export default Ember.Component.extend({
         mob.set('health', currentHealth - healthToReduce);
       }
     });
-  },
-
-  _mobInRangeOfTower(mob, tower, range) {
-    function getDistance(mob, tower) {
-      var latDiff = Math.abs(tower.get('posX') - mob.get('posX'));
-      var lngDiff = Math.abs(tower.get('posY') - mob.get('posY'));
-      return latDiff + lngDiff;
-    }
-
-    return getDistance(mob, tower) < range ? true : false;
   },
 
   attackMobsInTowerRange: Ember.observer('attrs.waveStarted', function () {
