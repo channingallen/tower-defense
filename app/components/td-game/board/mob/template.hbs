@@ -1,5 +1,7 @@
-<div class="{{attrs.number}}">
-  <div>HP: {{attrs.health}}</div>
-  <div>{{attrs.posX}},</div>
-  <div>{{attrs.posY}}</div>
-</div>
+{{#if alive}}
+  <div class="{{attrs.number}}">
+    <div>HP: {{attrs.health}}</div>
+    <div>{{attrs.posX}},</div>
+    <div>{{attrs.posY}}</div>
+  </div>
+{{/if}}

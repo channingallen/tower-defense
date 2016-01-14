@@ -1,6 +1,7 @@
 {{#if attrs.waveStarted}}
   {{#each mobs as |mob|}}
     {{td-game/board/mob class=(readonly mob.posClass)
+                        destroy-mob=(action "destroyMob")
                         mob=(readonly mob)
                         number=(readonly mob.number)
                         path=(readonly attrs.path)

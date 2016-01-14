@@ -90,6 +90,11 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    destroyMob(mob) {
+      const mobIndex = this.get('mobs').indexOf(mob);
+      this.get('mobs').removeAt(mobIndex);
+    },
+
     updateMobClass(mobId, newClass) {
       this.get('mobs').forEach((mob) => {
         if (mobId === mob.get('id')) {

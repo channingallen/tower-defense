@@ -4,13 +4,12 @@
   font-size: 16px;
   height: 75px;
   position: absolute;
+  transition: all 1.0s linear;
   width: 75px;
+}
 
-  -webkit-transition: all 1.0s ease-in-out;
-  -moz-transition: all 1.0s ease-in-out;
-  -o-transition: all 1.0s ease-in-out;
-  -ms-transition: all 1.0s ease-in-out;
-  transition: all 1.0s ease-in-out;
+.mob--dead {
+  display: none;
 }
 
 .mob--position-x1y1 {

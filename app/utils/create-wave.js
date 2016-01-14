@@ -1,11 +1,11 @@
-import Board from '../objects/board';
+import Board from 'tower-defense/objects/board';
 import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 import Ember from 'ember';
-import Mob from '../objects/mob';
-import PathCoords from '../objects/path-coords';
-import TowerGroup from '../objects/tower-group';
-import Tower from '../objects/tower';
-import Wave from '../objects/wave';
+import Mob from 'tower-defense/objects/mob';
+import PathCoords from 'tower-defense/objects/path-coords';
+import TowerGroup from 'tower-defense/objects/tower-group';
+import Tower from 'tower-defense/objects/tower';
+import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
@@ -33,6 +33,27 @@ function addBoardToWave(wave) {
     PathCoords.create({x: 7, y: 9}),
     PathCoords.create({x: 8, y: 9}),
     PathCoords.create({x: 8, y: 10})
+    //
+    // PathCoords.create({x: 10, y: 10}),
+    // PathCoords.create({x: 10, y: 10}),
+    // PathCoords.create({x: 9, y: 10}),
+    // PathCoords.create({x: 9, y: 10}),
+    // PathCoords.create({x: 8, y: 10}),
+    // PathCoords.create({x: 8, y: 10}),
+    // PathCoords.create({x: 7, y: 10}),
+    // PathCoords.create({x: 7, y: 10}),
+    // PathCoords.create({x: 6, y: 10}),
+    // PathCoords.create({x: 6, y: 10}),
+    // PathCoords.create({x: 5, y: 10}),
+    // PathCoords.create({x: 5, y: 10}),
+    // PathCoords.create({x: 4, y: 10}),
+    // PathCoords.create({x: 4, y: 10}),
+    // PathCoords.create({x: 3, y: 10}),
+    // PathCoords.create({x: 3, y: 10}),
+    // PathCoords.create({x: 2, y: 10}),
+    // PathCoords.create({x: 2, y: 10}),
+    // PathCoords.create({x: 1, y: 10}),
+    // PathCoords.create({x: 1, y: 10})
   ];
 
   pathObjects.forEach((pathObject) => {
