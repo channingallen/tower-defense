@@ -19,7 +19,7 @@ export default Ember.Component.extend({
 
       this.attrs['update-class'](
         this.attrs.mob.get('id'),
-        'mob--position-x' + x + 'y' + y
+        'mob--position-x' + x + ' mob--position-y' + y
       );
 
       this.set('pathIndex', this.get('pathIndex') + 1);
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
 
     this.attrs['update-class'](
       this.attrs.mob.get('id'),
-      'mob--position-x' + x + 'y' + y
+      'mob--position-x' + x + ' mob--position-y' + y
     );
   })
 });
