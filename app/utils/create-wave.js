@@ -73,7 +73,7 @@ function addMobsToWave(wave) {
     health: 100,
     points: 1,
     quantity: 5,
-    speed: 1000,
+    speed: 2000,
     type: 'standard'
   };
 

@@ -8,19 +8,17 @@ export default Ember.Component.extend({
   twrGrpStyles: null,
 
   actions: {
-    submitCodeLines() {
+    submitCodeLines(unitType, unitCodeLines) {
+      if (unitType === 'tower') {
+        this.set('twrStyles', unitCodeLines);
+      } else {
+        this.set('twrGrpStyles', unitCodeLines);
+      }
+
       const twrGrpStyles = this.get('twrGrpStyles');
       const twrStyles = this.get('twrStyles');
 
       this.attrs['submit-styles'](twrGrpStyles, twrStyles);
-    },
-
-    updateTowerStyles(twrCodeLines) {
-      this.set('twrStyles', twrCodeLines);
-    },
-
-    updateTowerGroupStyles(twrGrpCodeLines) {
-      this.set('twrGrpStyles', twrGrpCodeLines);
-    },
+    }
   }
 });
