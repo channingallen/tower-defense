@@ -3,8 +3,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
+  height: 50vw;
+  width: 50vw;
+  // width: calc(100% - #{$td-game__sidebar__width});
+  min-width: 300px;
+  min-height: 300px;
+  overflow: hidden;
   padding: 20px;
-  width: calc(100% - #{$td-game__sidebar__width});
 }
 
 .td-game__board--relative {
