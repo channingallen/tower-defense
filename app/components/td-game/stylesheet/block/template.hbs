@@ -10,7 +10,7 @@
 {{/if}}
 
 {{#if attrs.tower}}
-  {{#each twrCodeLines as |twrCodeLine|}}
+  {{#each codeLines as |twrCodeLine|}}
     <li class="block__line block__declaration">
       {{td-game/stylesheet/block/input blockCodeLine=(readonly twrCodeLine.codeLine)
                                        blockSubmitted=(readonly twrCodeLine.submitted)
@@ -28,7 +28,7 @@
     </li>
   {{/each}}
 {{else}}
-  {{#each twrGrpCodeLines as |twrGrpCodeLine|}}
+  {{#each codeLines as |twrGrpCodeLine|}}
     <li class="block__line block__declaration">
       {{td-game/stylesheet/block/input blockCodeLine=(readonly twrGrpCodeLine.codeLine)
                                        blockSubmitted=(readonly twrGrpCodeLine.submitted)

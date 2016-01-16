@@ -6,27 +6,11 @@ export default Ember.Component.extend({
 
   tagName: 'ol',
 
-  twrCodeLines: Ember.computed(
+  codeLines: Ember.computed(
     'attrs.tower',
-    function () {
-      if (this.attrs.tower) {
-        return this._copyStyles('tower');
-
-        // TODO THIS COMMIT: replace custom copy fn() with Ember.copyable
-        // return Ember.copy(this.attrs.tower.get('styles'), true);
-      }
-    }
-  ),
-
-  twrGrpCodeLines: Ember.computed(
     'attrs.towerGroup',
     function () {
-      if (this.attrs.towerGroup) {
-        return this._copyStyles('towerGroup');
-
-        // TODO THIS COMMIT: replace custom copy fn() with Ember.copyable
-        // return Ember.copy(this.attrs.towerGroup.get('styles'), true);
-      }
+      return this._copyStyles(this.attrs.tower ? 'tower' : 'towerGroup');
     }
   ),
 
@@ -58,12 +42,12 @@ export default Ember.Component.extend({
     return unitStyles;
   },
 
-  _deleteCodeLine(codeLinesProp, id) {
-    const newCodeLinesProp = this.get(codeLinesProp).filter((unitCodeLine) => {
+  _deleteCodeLine(id) {
+    const newCodeLines = this.get('codeLines').filter((unitCodeLine) => {
       return unitCodeLine.get('id') === id ? false : true;
     });
 
-    this.set(codeLinesProp, newCodeLinesProp);
+    this.set('codeLines', newCodeLines);
   },
 
   selector: Ember.computed(
@@ -78,23 +62,15 @@ export default Ember.Component.extend({
 
   actions: {
     deleteCodeLine(unitType, id) {
-      const codeLinesProp = unitType === 'tower' ?
-                                         'twrCodeLines' :
-                                         'twrGrpCodeLines';
+      this._deleteCodeLine(id);
 
-      this._deleteCodeLine(codeLinesProp, id);
-
-      this.attrs['update-unit-styles'](this.get(codeLinesProp));
+      this.attrs['update-unit-styles'](this.get('codeLines'));
     },
 
     editCodeLine(unitType, id) {
-      const codeLinesProp = unitType === 'tower' ?
-                                         'twrCodeLines' :
-                                         'twrGrpCodeLines';
-
       let newCodeLineId;
 
-      this.get(codeLinesProp).forEach((unitCodeLine) => {
+      this.get('codeLines').forEach((unitCodeLine) => {
         if (unitCodeLine.get('id') === id) {
           unitCodeLine.set('submitted', false);
         }
@@ -105,20 +81,16 @@ export default Ember.Component.extend({
       });
 
       if (newCodeLineId) {
-        this._deleteCodeLine(codeLinesProp, newCodeLineId);
+        this._deleteCodeLine(newCodeLineId);
       }
 
-      this.attrs['update-unit-styles'](this.get(codeLinesProp));
+      this.attrs['update-unit-styles'](this.get('codeLines'));
     },
 
     submitCodeLine(codeStr, unitType, id) {
-      const codeLinesProp = unitType === 'tower' ?
-                                         'twrCodeLines' :
-                                         'twrGrpCodeLines';
-
       let newCodeLineFound = false;
 
-      this.get(codeLinesProp).forEach((unitCodeLine) => {
+      this.get('codeLines').forEach((unitCodeLine) => {
         if (unitCodeLine.get('id') === id) {
           unitCodeLine.set('codeLine', codeStr);
           unitCodeLine.set('submitted', true);
@@ -130,10 +102,10 @@ export default Ember.Component.extend({
       });
 
       if (!newCodeLineFound) {
-        this.get(codeLinesProp).pushObject(createUnitCodeLine());
+        this.get('codeLines').pushObject(createUnitCodeLine());
       }
 
-      this.attrs['update-unit-styles'](unitType, this.get(codeLinesProp));
+      this.attrs['update-unit-styles'](unitType, this.get('codeLines'));
     }
   }
 });
