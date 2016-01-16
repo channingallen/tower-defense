@@ -52,24 +52,17 @@ export default Ember.Component.extend({
     'attrs.tower',
     'attrs.towerGroup',
     function () {
-      // TODO THIS COMMIT: flag below needs to account for both
-      // newly inserted inputs and to-be-edited (formerly submitted) inserts
-      if (this.get('submitted')) {
+      if (this.get('submitted') || this.attrs.clickedStylesheet) {
         return;
       }
 
-      if (true === this.attrs.clickedStylesheet) {
-        return;
-      }
+      const towerSelected = this.attrs.selectedTower &&
+        this.attrs.selectedTower === this.attrs.tower;
 
-      if (this.attrs.selectedTower &&
-          this.attrs.selectedTower === this.attrs.tower) {
-        const inputViewName = this.get('inputViewName');
-        const inputComponent = this.get(inputViewName);
-        const inputEl = inputComponent.get('element');
-        inputEl.focus();
-      } else if (this.attrs.selectedTowerGroup &&
-                 this.attrs.selectedTowerGroup === this.attrs.towerGroup) {
+      const towerGroupSelected = this.attrs.selectedTowerGroup &&
+        this.attrs.selectedTowerGroup === this.attrs.towerGroup;
+
+      if (towerSelected || towerGroupSelected) {
         const inputViewName = this.get('inputViewName');
         const inputComponent = this.get(inputViewName);
         const inputEl = inputComponent.get('element');
@@ -79,11 +72,11 @@ export default Ember.Component.extend({
   ),
 
   focusNewInput: Ember.computed('attrs.blockSubmitted', function () {
-    return !this.attrs.blockSubmitted ? true : false;
+    return !this.attrs.blockSubmitted;
   }),
 
   submitted: Ember.computed('attrs.blockSubmitted', function () {
-    return this.attrs.blockSubmitted ? true : false;
+    return !!this.attrs.blockSubmitted;
   }),
 
   actions: {
