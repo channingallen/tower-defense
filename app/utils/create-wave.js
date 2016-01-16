@@ -11,39 +11,24 @@ function addBoardToWave(wave) {
   const board = Board.create();
 
   const pathObjects = [
-    // PathCoords.create({x: 100, y: 50}),
-    // PathCoords.create({x: 90, y: 50}),
-    // PathCoords.create({x: 80, y: 50}),
-    // PathCoords.create({x: 80, y: 40}),
-    // PathCoords.create({x: 80, y: 30}),
-    // PathCoords.create({x: 80, y: 20}),
-    // PathCoords.create({x: 70, y: 20}),
-    // PathCoords.create({x: 60, y: 20}),
-    // PathCoords.create({x: 50, y: 20}),
-    // PathCoords.create({x: 40, y: 20}),
-    // PathCoords.create({x: 40, y: 30}),
-    // PathCoords.create({x: 40, y: 40}),
-    // PathCoords.create({x: 40, y: 50}),
-    // PathCoords.create({x: 40, y: 60}),
-    // PathCoords.create({x: 40, y: 70}),
-    // PathCoords.create({x: 40, y: 80}),
-    // PathCoords.create({x: 40, y: 90}),
-    // PathCoords.create({x: 50, y: 90}),
-    // PathCoords.create({x: 60, y: 90}),
-    // PathCoords.create({x: 70, y: 90}),
-    // PathCoords.create({x: 80, y: 90}),
-    // PathCoords.create({x: 80, y: 100})
-    //
-    PathCoords.create({x: 100, y: 10}),
-    PathCoords.create({x: 90, y: 10}),
-    PathCoords.create({x: 80, y: 10}),
-    PathCoords.create({x: 70, y: 10}),
-    PathCoords.create({x: 60, y: 10}),
-    PathCoords.create({x: 50, y: 10}),
+    PathCoords.create({x: 0, y: 30}),
+    PathCoords.create({x: 10, y: 30}),
+    PathCoords.create({x: 20, y: 30}),
+    PathCoords.create({x: 30, y: 30}),
+    PathCoords.create({x: 40, y: 30}),
+    PathCoords.create({x: 40, y: 20}),
     PathCoords.create({x: 40, y: 10}),
-    PathCoords.create({x: 30, y: 10}),
-    PathCoords.create({x: 20, y: 10}),
-    PathCoords.create({x: 10, y: 10})
+    PathCoords.create({x: 55, y: 10}),
+    PathCoords.create({x: 55, y: 20}),
+    PathCoords.create({x: 55, y: 30}),
+    PathCoords.create({x: 55, y: 40}),
+    PathCoords.create({x: 55, y: 50}),
+    PathCoords.create({x: 55, y: 60}),
+    PathCoords.create({x: 65, y: 60}),
+    PathCoords.create({x: 75, y: 60}),
+    PathCoords.create({x: 85, y: 60}),
+    PathCoords.create({x: 95, y: 60}),
+    PathCoords.create({x: 100, y: 60})
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -60,7 +45,7 @@ function addMobsToWave(wave) {
   const mobs = [];
   const mobSchemaOne = {
     frequency: 3000,
-    health: 100,
+    health: 300,
     points: 1,
     quantity: 5,
     speed: 2000,
@@ -94,12 +79,15 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroupOne = getNewTowerGroup(1, 0);
-  const towerGroupTwo = getNewTowerGroup(2, 50);
-  addTowersToTowerGroup(towerGroupOne, 3);
-  addTowersToTowerGroup(towerGroupTwo, 3);
+  const towerGroupOne = getNewTowerGroup(1, 15);
+  const towerGroupTwo = getNewTowerGroup(2, 65);
+  addTowersToTowerGroup(towerGroupOne, 1);
+  addTowersToTowerGroup(towerGroupTwo, 2);
 
-  wave.set('towerGroups', Ember.A([towerGroupOne, towerGroupTwo]));
+  wave.set('towerGroups', Ember.A([
+    towerGroupOne,
+    towerGroupTwo
+  ]));
 }
 
 function addTowersToTowerGroup(towerGroup, numTowers) {
