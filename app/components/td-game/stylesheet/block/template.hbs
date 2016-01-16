@@ -16,6 +16,7 @@
                                        blockSubmitted=(readonly twrCodeLine.submitted)
                                        blockId=(readonly twrCodeLine.id)
                                        class="block__input-container"
+                                       clickedStylesheet=(readonly attrs.clickedStylesheet)
                                        click=(action attrs.select-tower attrs.tower)
                                        delete-code-line=(action "deleteCodeLine")
                                        edit-code-line=(action "editCodeLine")
@@ -33,6 +34,7 @@
                                        blockSubmitted=(readonly twrGrpCodeLine.submitted)
                                        blockId=(readonly twrGrpCodeLine.id)
                                        class="block__input-container"
+                                       clickedStylesheet=(readonly attrs.clickedStylesheet)
                                        click=(action attrs.select-tower-group attrs.towerGroup)
                                        delete-code-line=(action "deleteCodeLine")
                                        edit-code-line=(action "editCodeLine")

@@ -4,6 +4,8 @@ import createWave from 'tower-defense/utils/create-wave';
 export default Ember.Component.extend({
   classNames: ['td-game'],
 
+  clickedStylesheet: false,
+
   currentWave: createWave(),
 
   selectedTower: null,
@@ -17,20 +19,32 @@ export default Ember.Component.extend({
   waveStarted: false,
 
   actions: {
-    selectTower(tower) {
-      if (this.get('selectedTowerGroup')) {
-        this.forceSet('selectedTowerGroup', null);
-      }
+    clickBoard() {
+      this.set('clickedStylesheet', false);
+    },
 
-      this.forceSet('selectedTower', tower);
+    clickStylesheet() {
+      this.set('clickedStylesheet', true);
+    },
+
+    selectTower(tower) {
+      Ember.run.later(this, () => {
+        if (this.get('selectedTowerGroup')) {
+          this.forceSet('selectedTowerGroup', null);
+        }
+
+        this.forceSet('selectedTower', tower);
+      }, 50);
     },
 
     selectTowerGroup(towerGroup) {
-      if (this.get('selectedTower')) {
-        this.forceSet('selectedTower', null);
-      }
+      Ember.run.later(this, () => {
+        if (this.get('selectedTower')) {
+          this.forceSet('selectedTower', null);
+        }
 
-      this.forceSet('selectedTowerGroup', towerGroup);
+        this.forceSet('selectedTowerGroup', towerGroup);
+      }, 50);
     },
 
     setStyles(twrGrpStyles, twrStyles) {

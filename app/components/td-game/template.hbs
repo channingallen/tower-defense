@@ -3,7 +3,9 @@
     Instructions
   </div>
 
-  {{td-game/stylesheet select-tower=(action "selectTower")
+  {{td-game/stylesheet click=(action "clickStylesheet")
+                       clickedStylesheet=(readonly clickedStylesheet)
+                       select-tower=(action "selectTower")
                        select-tower-group=(action "selectTowerGroup")
                        selectedTower=(readonly selectedTower)
                        selectedTowerGroup=(readonly selectedTowerGroup)
@@ -14,6 +16,7 @@
 </div>
 
 {{td-game/board backgroundImage=(readonly currentWave.board.imageUrl)
+                click=(action "clickBoard")
                 path=(readonly currentWave.board.pathData)
                 select-tower=(action "selectTower")
                 select-tower-group=(action "selectTowerGroup")

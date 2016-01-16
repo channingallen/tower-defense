@@ -133,7 +133,6 @@ export default Ember.Component.extend({
         this.get(codeLinesProp).pushObject(createUnitCodeLine());
       }
 
-      // send updated code lines array up to stylesheet
       this.attrs['update-unit-styles'](unitType, this.get(codeLinesProp));
     }
   }

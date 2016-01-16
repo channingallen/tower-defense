@@ -46,6 +46,7 @@ export default Ember.Component.extend({
   },
 
   _autoFocusInput: Ember.observer(
+    'attrs.clickedStylesheet',
     'attrs.selectedTower',
     'attrs.selectedTowerGroup',
     'attrs.tower',
@@ -54,6 +55,10 @@ export default Ember.Component.extend({
       // TODO THIS COMMIT: flag below needs to account for both
       // newly inserted inputs and to-be-edited (formerly submitted) inserts
       if (this.get('submitted')) {
+        return;
+      }
+
+      if (true === this.attrs.clickedStylesheet) {
         return;
       }
 
