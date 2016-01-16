@@ -18,25 +18,25 @@ export default Ember.Component.extend({
     const unitStyles = Ember.A([]);
 
     this.attrs[unit].get('styles').forEach(function (styleObj) {
-      let unitStyle = Ember.Object.extend({});
+      let unitStyle = Ember.Object.create({});
 
       for (var prop in styleObj) {
         switch (prop) {
           case 'codeLine':
-            unitStyle.codeLine = styleObj.prop;
+            unitStyle.set('codeLine', styleObj.prop);
             break;
           case 'submitted':
-            unitStyle.submitted = styleObj.prop;
+            unitStyle.set('submitted', styleObj.prop);
             break;
           case 'id':
-            unitStyle.id = styleObj.prop;
+            unitStyle.set('id', styleObj.prop);
             break;
           default:
             break;
         }
       }
 
-      unitStyles.pushObject(unitStyle.create());
+      unitStyles.pushObject(unitStyle);
     });
 
     return unitStyles;
@@ -84,7 +84,7 @@ export default Ember.Component.extend({
         this._deleteCodeLine(newCodeLineId);
       }
 
-      this.attrs['update-unit-styles'](this.get('codeLines'));
+      this.attrs['update-unit-styles'](unitType, this.get('codeLines'));
     },
 
     submitCodeLine(codeStr, unitType, id) {
