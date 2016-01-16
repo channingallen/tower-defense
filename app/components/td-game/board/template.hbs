@@ -14,6 +14,7 @@
                         update-class=(action "updateMobClass")
                         update-position=(action "updateMobPosition")}}
   {{/each}}
+{{/if}}
 
   <div class="board__tower-groups">
     {{#each attrs.towerGroups as |towerGroup|}}
@@ -28,4 +29,3 @@
                                   {{!-- towers=(readonly towerGroup.towers) --}}
     {{/each}}
   </div>
-{{/if}}

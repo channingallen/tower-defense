@@ -8,6 +8,10 @@ export default Ember.Component.extend({
   twrGrpStyles: null,
 
   actions: {
+    startWave() {
+      this.attrs['start-wave']();
+    },
+
     submitCodeLines(unitType, unitCodeLines) {
       if (unitType === 'tower') {
         this.set('twrStyles', unitCodeLines);

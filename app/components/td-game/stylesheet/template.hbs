@@ -1,15 +1,15 @@
-{{#if attrs.waveStarted}}
-  {{#each attrs.towerGroups as |towerGroup|}}
-    {{td-game/stylesheet/block select-tower-group=(action attrs.select-tower-group)
-                               selectedTowerGroup=(readonly attrs.selectedTowerGroup)
-                               towerGroup=(readonly towerGroup)
-                               update-unit-styles=(action "submitCodeLines")}}
+{{#each attrs.towerGroups as |towerGroup|}}
+  {{td-game/stylesheet/block select-tower-group=(action attrs.select-tower-group)
+                             selectedTowerGroup=(readonly attrs.selectedTowerGroup)
+                             towerGroup=(readonly towerGroup)
+                             update-unit-styles=(action "submitCodeLines")}}
 
-    {{#each towerGroup.towers as |tower|}}
-      {{td-game/stylesheet/block select-tower=(action attrs.select-tower)
-                                 selectedTower=(readonly attrs.selectedTower)
-                                 tower=(readonly tower)
-                                 update-unit-styles=(action "submitCodeLines")}}
-    {{/each}}
+  {{#each towerGroup.towers as |tower|}}
+    {{td-game/stylesheet/block select-tower=(action attrs.select-tower)
+                               selectedTower=(readonly attrs.selectedTower)
+                               tower=(readonly tower)
+                               update-unit-styles=(action "submitCodeLines")}}
   {{/each}}
-{{/if}}
+{{/each}}
+
+<button class="stylesheet__start-wave-button" {{action "startWave"}}>Start Wave</button>

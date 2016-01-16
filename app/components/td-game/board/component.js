@@ -48,7 +48,7 @@ export default Ember.Component.extend({
     this.$().css('background-image', `url(${this.attrs.backgroundImage})`);
   })),
 
-  attackMobsInTowerRange: Ember.observer('attrs.waveStarted', function () {
+  attackMobsInTowerRange: Ember.on('didInsertElement', function () {
     setInterval(() => {
       if (!this.get('towers.length') || !this.get('mobs.length')) {
         return;
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
     }, 5000);
   }),
 
-  getTowers: Ember.observer('attrs.waveStarted', function () {
+  getTowers: Ember.on('didInsertElement', function () {
     this.attrs.towerGroups.forEach((towerGroup) => {
       this.get('towers').pushObject(towerGroup);
 
@@ -87,10 +87,6 @@ export default Ember.Component.extend({
         this.get('towers').pushObject(tower);
       });
     });
-  }),
-
-  repositionBoard: Ember.observer('attrs.waveStarted', function () {
-    this.set('positionRelative', true);
   }),
 
   actions: {

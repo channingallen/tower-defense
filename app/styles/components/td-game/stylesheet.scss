@@ -4,4 +4,14 @@
   padding: 15px 10px;
 }
 
+.stylesheet__start-wave-button {
+  background-color: hsl(5, 94%, 42%);
+  border-radius: 4px;
+  color: hsl(0, 100%, 100%);
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'PT Sans', sans-serif;
+  padding: 0.4em 0.8em;
+}
+
 @import "stylesheet/block";

@@ -1,12 +1,3 @@
-{{#unless waveStarted}}
-  <div class="td-game__start-btn-overlay">
-    <button class="td-game__start-btn"
-            onclick={{action (action "startWave")}}>
-      Start Wave
-    </button>
-  </div>
-{{/unless}}
-
 <div class="td-game__sidebar">
   <div class="sidebar__instructions">
     Instructions
@@ -16,6 +7,7 @@
                        select-tower-group=(action "selectTowerGroup")
                        selectedTower=(readonly selectedTower)
                        selectedTowerGroup=(readonly selectedTowerGroup)
+                       start-wave=(action "startWave")
                        submit-styles=(action "setStyles")
                        towerGroups=(readonly currentWave.towerGroups)
                        waveStarted=(readonly waveStarted)}}

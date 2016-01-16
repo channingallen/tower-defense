@@ -12,6 +12,7 @@ $board--padding: 20px;
   min-height: 300px;
   overflow: hidden;
   padding: $board--padding;
+  position: relative;
 }
 
 .td-game__board--relative {
