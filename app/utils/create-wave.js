@@ -27,8 +27,11 @@ function addBoardToWave(wave) {
     PathCoords.create({x: 65, y: 60}),
     PathCoords.create({x: 75, y: 60}),
     PathCoords.create({x: 85, y: 60}),
-    PathCoords.create({x: 95, y: 60}),
-    PathCoords.create({x: 100, y: 60})
+    PathCoords.create({x: 90, y: 60}),
+    PathCoords.create({x: 89, y: 60}),
+    PathCoords.create({x: 90, y: 60}),
+    PathCoords.create({x: 89, y: 60}),
+    PathCoords.create({x: 90, y: 60})
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -36,7 +39,7 @@ function addBoardToWave(wave) {
   });
 
   // TODO THIS COMMIT: give board `imageUrl`
-  board.set('imageUrl', '/images/map-1.1-50x50.png');
+  board.set('imageUrl', '/images/map-1.2-50x50.png');
 
   wave.set('board', board);
 }
