@@ -1,12 +1,3 @@
-{{!-- <div>
-  {{attrs.blockCodeLine}}
-  <button {{action "edit"}}>Edit</button>
-  <button {{action "delete"}}>Delete</button>
-</div> --}}
-
-<div class="input__line-number">
-
-</div>
 <div class="">
   {{input class="block__input"
           enter=(action "handleInputEnter")
@@ -15,10 +6,4 @@
           submitted=(readonly attrs.submitted)
           value=(readonly inputValue)
           viewName=(readonly inputViewName)}}
-
-  {{#if inputValid}}
-    <i class="fa fa-check-circle"></i>
-  {{else}}
-    <i class="fa fa-times-circle"></i>
-  {{/if}}
 </div>
