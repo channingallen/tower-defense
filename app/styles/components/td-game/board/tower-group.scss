@@ -1,5 +1,5 @@
-$board__tower-group__height: 60px;
-$board__tower-group__padding: 6px;
+$board__tower-group--height: 60px;
+$board__tower-group--padding: 6px;
 $background-color: hsla(0, 0%, 100%, 0.25);
 
 .board__tower-group {
@@ -7,8 +7,10 @@ $background-color: hsla(0, 0%, 100%, 0.25);
   border-radius: 4px;
   cursor: pointer;
   display: flex;
-  height: $board__tower-group__height;
-  padding: $board__tower-group__padding;
+  height: $board__tower-group--height;
+  padding: $board__tower-group--padding;
+  position: absolute;
+  width: calc(100% - #{$board--padding * 2});
 
   &:hover {
     background-color: opacify($background-color, 0.25);
@@ -20,6 +22,417 @@ $background-color: hsla(0, 0%, 100%, 0.25);
   background-color: opacify($background-color, 0.25);
   box-shadow: 0 0 10px opacify($background-color, 0.6);
 }
+
+///////////////////////////////
+//                           //
+//   Tower Group Locations   //
+//                           //
+///////////////////////////////
+
+.board__tower-group--position-y0 {
+  top: 0%;
+}
+
+.board__tower-group--position-y1 {
+  top: 1%;
+}
+
+.board__tower-group--position-y2 {
+  top: 2%;
+}
+
+.board__tower-group--position-y3 {
+  top: 3%;
+}
+
+.board__tower-group--position-y4 {
+  top: 4%;
+}
+
+.board__tower-group--position-y5 {
+  top: 5%;
+}
+
+.board__tower-group--position-y6 {
+  top: 6%;
+}
+
+.board__tower-group--position-y7 {
+  top: 7%;
+}
+
+.board__tower-group--position-y8 {
+  top: 8%;
+}
+
+.board__tower-group--position-y9 {
+  top: 9%;
+}
+
+.board__tower-group--position-y10 {
+  top: 10%;
+}
+
+.board__tower-group--position-y11 {
+  top: 11%;
+}
+
+.board__tower-group--position-y12 {
+  top: 12%;
+}
+
+.board__tower-group--position-y13 {
+  top: 13%;
+}
+
+.board__tower-group--position-y14 {
+  top: 14%;
+}
+
+.board__tower-group--position-y15 {
+  top: 15%;
+}
+
+.board__tower-group--position-y16 {
+  top: 16%;
+}
+
+.board__tower-group--position-y17 {
+  top: 17%;
+}
+
+.board__tower-group--position-y18 {
+  top: 18%;
+}
+
+.board__tower-group--position-y19 {
+  top: 19%;
+}
+
+.board__tower-group--position-y20 {
+  top: 20%;
+}
+
+.board__tower-group--position-y21 {
+  top: 21%;
+}
+
+.board__tower-group--position-y22 {
+  top: 22%;
+}
+
+.board__tower-group--position-y23 {
+  top: 23%;
+}
+
+.board__tower-group--position-y24 {
+  top: 24%;
+}
+
+.board__tower-group--position-y25 {
+  top: 25%;
+}
+
+.board__tower-group--position-y26 {
+  top: 26%;
+}
+
+.board__tower-group--position-y27 {
+  top: 27%;
+}
+
+.board__tower-group--position-y28 {
+  top: 28%;
+}
+
+.board__tower-group--position-y29 {
+  top: 29%;
+}
+
+.board__tower-group--position-y30 {
+  top: 30%;
+}
+
+.board__tower-group--position-y31 {
+  top: 31%;
+}
+
+.board__tower-group--position-y32 {
+  top: 32%;
+}
+
+.board__tower-group--position-y33 {
+  top: 33%;
+}
+
+.board__tower-group--position-y34 {
+  top: 34%;
+}
+
+.board__tower-group--position-y35 {
+  top: 35%;
+}
+
+.board__tower-group--position-y36 {
+  top: 36%;
+}
+
+.board__tower-group--position-y37 {
+  top: 37%;
+}
+
+.board__tower-group--position-y38 {
+  top: 38%;
+}
+
+.board__tower-group--position-y39 {
+  top: 39%;
+}
+
+.board__tower-group--position-y40 {
+  top: 40%;
+}
+
+.board__tower-group--position-y41 {
+  top: 41%;
+}
+
+.board__tower-group--position-y42 {
+  top: 42%;
+}
+
+.board__tower-group--position-y43 {
+  top: 43%;
+}
+
+.board__tower-group--position-y44 {
+  top: 44%;
+}
+
+.board__tower-group--position-y45 {
+  top: 45%;
+}
+
+.board__tower-group--position-y46 {
+  top: 46%;
+}
+
+.board__tower-group--position-y47 {
+  top: 47%;
+}
+
+.board__tower-group--position-y48 {
+  top: 48%;
+}
+
+.board__tower-group--position-y49 {
+  top: 49%;
+}
+
+.board__tower-group--position-y50 {
+  top: 50%;
+}
+
+.board__tower-group--position-y51 {
+  top: 51%;
+}
+
+.board__tower-group--position-y52 {
+  top: 52%;
+}
+
+.board__tower-group--position-y53 {
+  top: 53%;
+}
+
+.board__tower-group--position-y54 {
+  top: 54%;
+}
+
+.board__tower-group--position-y55 {
+  top: 55%;
+}
+
+.board__tower-group--position-y56 {
+  top: 56%;
+}
+
+.board__tower-group--position-y57 {
+  top: 57%;
+}
+
+.board__tower-group--position-y58 {
+  top: 58%;
+}
+
+.board__tower-group--position-y59 {
+  top: 59%;
+}
+
+.board__tower-group--position-y60 {
+  top: 60%;
+}
+
+.board__tower-group--position-y61 {
+  top: 61%;
+}
+
+.board__tower-group--position-y62 {
+  top: 62%;
+}
+
+.board__tower-group--position-y63 {
+  top: 63%;
+}
+
+.board__tower-group--position-y64 {
+  top: 64%;
+}
+
+.board__tower-group--position-y65 {
+  top: 65%;
+}
+
+.board__tower-group--position-y66 {
+  top: 66%;
+}
+
+.board__tower-group--position-y67 {
+  top: 67%;
+}
+
+.board__tower-group--position-y68 {
+  top: 68%;
+}
+
+.board__tower-group--position-y69 {
+  top: 69%;
+}
+
+.board__tower-group--position-y70 {
+  top: 70%;
+}
+
+.board__tower-group--position-y71 {
+  top: 71%;
+}
+
+.board__tower-group--position-y72 {
+  top: 72%;
+}
+
+.board__tower-group--position-y73 {
+  top: 73%;
+}
+
+.board__tower-group--position-y74 {
+  top: 74%;
+}
+
+.board__tower-group--position-y75 {
+  top: 75%;
+}
+
+.board__tower-group--position-y76 {
+  top: 76%;
+}
+
+.board__tower-group--position-y77 {
+  top: 77%;
+}
+
+.board__tower-group--position-y78 {
+  top: 78%;
+}
+
+.board__tower-group--position-y79 {
+  top: 79%;
+}
+
+.board__tower-group--position-y80 {
+  top: 80%;
+}
+
+.board__tower-group--position-y81 {
+  top: 81%;
+}
+
+.board__tower-group--position-y82 {
+  top: 82%;
+}
+
+.board__tower-group--position-y83 {
+  top: 83%;
+}
+
+.board__tower-group--position-y84 {
+  top: 84%;
+}
+
+.board__tower-group--position-y85 {
+  top: 85%;
+}
+
+.board__tower-group--position-y86 {
+  top: 86%;
+}
+
+.board__tower-group--position-y87 {
+  top: 87%;
+}
+
+.board__tower-group--position-y88 {
+  top: 88%;
+}
+
+.board__tower-group--position-y89 {
+  top: 89%;
+}
+
+.board__tower-group--position-y90 {
+  top: 90%;
+}
+
+.board__tower-group--position-y91 {
+  top: 91%;
+}
+
+.board__tower-group--position-y92 {
+  top: 92%;
+}
+
+.board__tower-group--position-y93 {
+  top: 93%;
+}
+
+.board__tower-group--position-y94 {
+  top: 94%;
+}
+
+.board__tower-group--position-y95 {
+  top: 95%;
+}
+
+.board__tower-group--position-y96 {
+  top: 96%;
+}
+
+.board__tower-group--position-y97 {
+  top: 97%;
+}
+
+.board__tower-group--position-y98 {
+  top: 98%;
+}
+
+.board__tower-group--position-y99 {
+  top: 99%;
+}
+
+.board__tower-group--position-y100 {
+  top: 100%;
+}
+
 
 ////////////////////////
 //                    //

@@ -1,3 +1,5 @@
+$board--padding: 20px;
+
 .td-game__board {
   background-image: url("http://3.bp.blogspot.com/-K3i3bFLCu6Y/U1165_R88ZI/AAAAAAAA1Oc/TuIoUdj4grs/s1600/Capture.png");
   background-repeat: no-repeat;
@@ -9,7 +11,7 @@
   min-width: 300px;
   min-height: 300px;
   overflow: hidden;
-  padding: 20px;
+  padding: $board--padding;
 }
 
 .td-game__board--relative {
