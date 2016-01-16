@@ -21,7 +21,8 @@
                        waveStarted=(readonly waveStarted)}}
 </div>
 
-{{td-game/board path=(readonly currentWave.board.pathData)
+{{td-game/board backgroundImage=(readonly currentWave.board.imageUrl)
+                path=(readonly currentWave.board.pathData)
                 select-tower=(action "selectTower")
                 select-tower-group=(action "selectTowerGroup")
                 selectedTower=(readonly selectedTower)

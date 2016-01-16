@@ -32,10 +32,12 @@ function addBoardToWave(wave) {
   ];
 
   pathObjects.forEach((pathObject) => {
-    board.pathData.pushObject(pathObject);
+    board.get('pathData').pushObject(pathObject);
   });
 
   // TODO THIS COMMIT: give board `imageUrl`
+  board.set('imageUrl', '/images/map-1.1-50x50.png');
+
   wave.set('board', board);
 }
 

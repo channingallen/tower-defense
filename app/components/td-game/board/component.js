@@ -44,6 +44,10 @@ export default Ember.Component.extend({
     });
   },
 
+  applyBackgroundImage: Ember.on('didInsertElement', Ember.observer('attrs.backgroundImage', function () {
+    this.$().css('background-image', `url(${this.attrs.backgroundImage})`);
+  })),
+
   attackMobsInTowerRange: Ember.observer('attrs.waveStarted', function () {
     setInterval(() => {
       if (!this.get('towers.length') || !this.get('mobs.length')) {
