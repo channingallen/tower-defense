@@ -1,12 +1,14 @@
 {{#each attrs.towerGroups as |towerGroup|}}
   {{td-game/stylesheet/block select-tower-group=(action attrs.select-tower-group)
                              selectedTowerGroup=(readonly attrs.selectedTowerGroup)
+                             shake-stylesheet=(action "shake")
                              towerGroup=(readonly towerGroup)
                              update-unit-styles=(action "submitCodeLines")}}
 
   {{#each towerGroup.towers as |tower|}}
     {{td-game/stylesheet/block select-tower=(action attrs.select-tower)
                                selectedTower=(readonly attrs.selectedTower)
+                               shake-stylesheet=(action "shake")
                                tower=(readonly tower)
                                update-unit-styles=(action "submitCodeLines")}}
   {{/each}}

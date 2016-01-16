@@ -97,6 +97,8 @@ export default Ember.Component.extend({
           this.attrs.unitType,
           this.attrs.blockId
         );
+      } else {
+        this.attrs['shake-stylesheet']();
       }
     },
 
