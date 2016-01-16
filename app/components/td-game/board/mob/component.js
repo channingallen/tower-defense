@@ -7,26 +7,60 @@ export default Ember.Component.extend({
 
   pathIndex: 0,
 
-  _advancePositionClass() {
-    setTimeout(() => {
+  _advanceOnePositionClass() {
+    const currentIndex = this.get('pathIndex');
+    const x = this.attrs.path[currentIndex].get('x');
+    const y = this.attrs.path[currentIndex].get('y');
+
+    this.attrs['update-class'](
+      this.attrs.mob.get('id'),
+      'mob--position-x' + x + ' mob--position-y' + y
+    );
+
+    this.set('pathIndex', this.get('pathIndex') + 1);
+  },
+
+  _advancePositionClasses() {
+    Ember.run.later(this, () => {
       if (!this.get('alive')) {
         return;
       }
 
-      const currentIndex = this.get('pathIndex');
-      const x = this.attrs.path[currentIndex].get('x');
-      const y = this.attrs.path[currentIndex].get('y');
-
-      this.attrs['update-class'](
-        this.attrs.mob.get('id'),
-        'mob--position-x' + x + ' mob--position-y' + y
-      );
-
-      this.set('pathIndex', this.get('pathIndex') + 1);
+      this._advanceOnePositionClass();
       if (this.get('pathIndex') < this.get('numPathObjects')) {
-        this._advancePositionClass();
+        this._advancePositionClasses();
       }
     }, this.attrs.speed);
+  },
+
+  _getPosLeft() {
+    const $board = Ember.$('.td-game__board');
+    const $mob = this.$();
+
+    const $boardDistanceFromLeft = $board.offset().left;
+    const $mobDistanceFromLeft = $mob.offset().left;
+
+    const $mobDistanceFromBoardLeft = Math.abs(
+      $boardDistanceFromLeft - $mobDistanceFromLeft
+    );
+
+    const $boardLength = $board.innerHeight(); // height & width
+    return Math.floor(100 * ($mobDistanceFromBoardLeft / $boardLength));
+  },
+
+  _getPosTop() {
+    const $board = Ember.$('.td-game__board');
+    const $mob = this.$();
+
+    const $boardDistanceFromTop = $board.offset().top;
+    const $mobDistanceFromTop = $mob.offset().top;
+
+    const $mobDistanceFromBoardTop = Math.abs(
+      $boardDistanceFromTop - $mobDistanceFromTop
+    );
+
+    const $boardLength = $board.innerHeight(); // height & width
+    return Math.floor(100 * ($mobDistanceFromBoardTop / $boardLength));
   },
 
   destroyMob: Ember.observer('attrs.health', function () {
@@ -42,15 +76,23 @@ export default Ember.Component.extend({
     }
   }),
 
-  initiateMotion: Ember.on('init', function () {
-    this._advancePositionClass();
+  initiateMotion: Ember.on('didInsertElement', function () {
+    this._advanceOnePositionClass();
+
+    if (this.get('pathIndex') < this.get('numPathObjects')) {
+      Ember.run.later(this, () => {
+        this._advanceOnePositionClass();
+      }, 200);
+
+      this._advancePositionClasses();
+    }
   }),
 
   numPathObjects: Ember.computed('attrs.path.[]', function () {
     return this.attrs.path.length;
   }),
 
-  pollDOMPosition: Ember.on('init', function () {
+  pollDOMPosition: Ember.on('didInsertElement', function () {
     const mobId = this.attrs.mob.get('id');
 
     const pollPosition = setInterval(() => {
@@ -59,9 +101,8 @@ export default Ember.Component.extend({
         return;
       }
 
-      const posLeft = this.$().offset().left;
-      const posTop = this.$().offset().top;
-
+      const posLeft = this._getPosLeft();
+      const posTop = this._getPosTop();
       if (posTop && posLeft) {
         this.attrs['update-position'](mobId, 'X', posLeft);
         this.attrs['update-position'](mobId, 'Y', posTop);
@@ -71,15 +112,5 @@ export default Ember.Component.extend({
         clearInterval(pollPosition);
       }
     }, 200);
-  }),
-
-  setInitialPositionClass: Ember.on('init', function () {
-    const x = this.attrs.path[0].get('x');
-    const y = this.attrs.path[0].get('y');
-
-    this.attrs['update-class'](
-      this.attrs.mob.get('id'),
-      'mob--position-x' + x + ' mob--position-y' + y
-    );
   })
 });

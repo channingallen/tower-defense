@@ -1,7 +1,6 @@
 $board--padding: 20px;
 
 .td-game__board {
-  // background-image: url("/images/map-1.1-50x50.png");
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
@@ -12,10 +11,6 @@ $board--padding: 20px;
   min-height: 300px;
   overflow: hidden;
   padding: $board--padding;
-  position: relative;
-}
-
-.td-game__board--relative {
   position: relative;
 }
 

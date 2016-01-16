@@ -6,15 +6,6 @@ export default Ember.Component.extend({
 
   tagName: 'ol',
 
-  // unit.styles:
-  // [
-  //   {
-  //     id: null
-  //     codeLine: undefined,
-  //     submitted: false
-  //   },
-  //   {...}
-  // ]
   twrCodeLines: Ember.computed(
     'attrs.tower',
     function () {
@@ -93,7 +84,6 @@ export default Ember.Component.extend({
 
       this._deleteCodeLine(codeLinesProp, id);
 
-      // send updated code lines array up to stylesheet
       this.attrs['update-unit-styles'](this.get(codeLinesProp));
     },
 
@@ -118,7 +108,6 @@ export default Ember.Component.extend({
         this._deleteCodeLine(codeLinesProp, newCodeLineId);
       }
 
-      // send updated code lines array up to stylesheet
       this.attrs['update-unit-styles'](this.get(codeLinesProp));
     },
 

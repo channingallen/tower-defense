@@ -1,10 +1,13 @@
-{{#if submitted}}
-  <div>
-    {{attrs.blockCodeLine}}
-    <button {{action "edit"}}>Edit</button>
-    <button {{action "delete"}}>Delete</button>
-  </div>
-{{else}}
+{{!-- <div>
+  {{attrs.blockCodeLine}}
+  <button {{action "edit"}}>Edit</button>
+  <button {{action "delete"}}>Delete</button>
+</div> --}}
+
+<div class="input__line-number">
+
+</div>
+<div class="">
   {{input class="block__input"
           enter=(action "handleInputEnter")
           focusOnInsert=(readonly focusNewInput)
@@ -18,4 +21,4 @@
   {{else}}
     <i class="fa fa-times-circle"></i>
   {{/if}}
-{{/if}}
+</div>

@@ -1,21 +1,24 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: ['positionRelative:td-game__board--relative'],
-
   classNames: ['td-game__board'],
 
   mobIndex: 0,
 
   mobs: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
-  numMobsGenerated: 1,
-
-  positionRelative: false,
-
   towerGroups: Ember.A([]),
 
   towers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
+
+  _generateMob() {
+    const mobIndex = this.get('mobIndex');
+    const waveMob = this.attrs.waveMobs[mobIndex];
+    this.get('mobs').pushObject(waveMob);
+
+    const nextMobIndex = mobIndex + 1;
+    this.set('mobIndex', nextMobIndex);
+  },
 
   _mobCapacityReached() {
     return this.get('mobIndex') < this.attrs.waveMobs.length ? false : true;
@@ -56,7 +59,7 @@ export default Ember.Component.extend({
 
       this.get('towers').forEach((tower) => {
         this.get('mobs').forEach((mob) => {
-          if (this._mobInRangeOfTower(mob, tower, 100)) { // TODO: replace arg 3 with tower property for attack range, based on type?
+          if (this._mobInRangeOfTower(mob, tower, 10)) { // TODO: replace arg 3 with tower property for attack range, based on type?
             this._reduceMobHealth(mob.get('id'), 20); // TODO: replace arg 2 with tower property for attack power, based on type?
           }
         });
@@ -64,19 +67,24 @@ export default Ember.Component.extend({
     }, 500);
   }),
 
+  mobFrequency: Ember.computed('mobIndex', function () {
+    const mobIndex = this.get('mobIndex');
+    const waveMob = this.attrs.waveMobs[mobIndex];
+    return waveMob.get('frequency');
+  }),
+
   generateMobs: Ember.observer('attrs.waveStarted', function () {
-    const produceMob = setInterval(() => {
-      const mobIndex = this.get('mobIndex');
-      const waveMob = this.attrs.waveMobs[mobIndex];
-      this.get('mobs').pushObject(waveMob);
+    this._generateMob();
 
-      const nextMobIndex = mobIndex + 1;
-      this.set('mobIndex', nextMobIndex);
+    if (!this._mobCapacityReached()) {
+      const produceNextMob = setInterval(() => {
+        this._generateMob();
 
-      if (this._mobCapacityReached()) {
-        clearInterval(produceMob);
-      }
-    }, 5000);
+        if (this._mobCapacityReached()) {
+          clearInterval(produceNextMob);
+        }
+      }, this.get('mobFrequency'));
+    }
   }),
 
   getTowers: Ember.on('didInsertElement', function () {

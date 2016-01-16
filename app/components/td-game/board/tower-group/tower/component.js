@@ -28,6 +28,36 @@ export default Ember.Component.extend({
     'selected:tower-group__tower--selected'
   ],
 
+  _getPosLeft() {
+    const $board = Ember.$('.td-game__board');
+    const $tower = this.$();
+
+    const $boardDistanceFromLeft = $board.offset().left;
+    const $towerDistanceFromLeft = $tower.offset().left;
+
+    const $towerDistanceFromBoardLeft = Math.abs(
+      $boardDistanceFromLeft - $towerDistanceFromLeft
+    );
+
+    const $boardLength = $board.innerHeight(); // height & width
+    return Math.floor(100 * ($towerDistanceFromBoardLeft / $boardLength));
+  },
+
+  _getPosTop() {
+    const $board = Ember.$('.td-game__board');
+    const $tower = this.$();
+
+    const $boardDistanceFromTop = $board.offset().top;
+    const $towerDistanceFromTop = $tower.offset().top;
+
+    const $towerDistanceFromBoardTop = Math.abs(
+      $boardDistanceFromTop - $towerDistanceFromTop
+    );
+
+    const $boardLength = $board.innerHeight(); // height & width
+    return Math.floor(100 * ($towerDistanceFromBoardTop / $boardLength));
+  },
+
   _styleFound(styleNeedle) {
     let styleApplicable = false;
     styleNeedle = styleNeedle.replace(/ /g,'');
@@ -195,12 +225,21 @@ export default Ember.Component.extend({
     this.attrs.select(this.attrs.tower);
   }),
 
-  pollDOMPosition: Ember.on('init', function () {
+  selected: Ember.computed(
+    'attrs.selectedTower',
+    'attrs.tower',
+    function () {
+      return this.attrs.selectedTower === this.attrs.tower ? true : false;
+    }
+  ),
+
+  updatePosition: Ember.on('didInsertElement', function () {
     const towerId = this.attrs.tower.get('id');
 
-    const pollPosition = setInterval(() => {
-      const posLeft = this.$().offset().left;
-      const posTop = this.$().offset().top;
+    // const pollPosition = setInterval(() => {
+    setInterval(() => {
+      const posLeft = this._getPosLeft();
+      const posTop = this._getPosTop();
 
       if (posTop && posLeft) {
         this.attrs['update-tower-position'](towerId, 'X', posLeft);
@@ -208,12 +247,4 @@ export default Ember.Component.extend({
       }
     }, 200);
   }),
-
-  selected: Ember.computed(
-    'attrs.selectedTower',
-    'attrs.tower',
-    function () {
-      return this.attrs.selectedTower === this.attrs.tower ? true : false;
-    }
-  )
 });
