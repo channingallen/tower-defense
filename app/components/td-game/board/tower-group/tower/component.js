@@ -80,140 +80,140 @@ export default Ember.Component.extend({
   },
 
   cssAlignSelfAuto: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('align-self:auto');
     }
   ),
 
   cssAlignSelfStretch: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('align-self:stretch');
     }
   ),
 
   cssAlignSelfCenter: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('align-self:center');
     }
   ),
 
   cssAlignSelfStart: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('align-self:flex-start');
     }
   ),
 
   cssAlignSelfEnd: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('align-self:flex-end');
     }
   ),
 
   cssAlignSelfBaseline: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('align-self:baseline');
     }
   ),
 
   cssAlignSelfInitial: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('align-self:initial');
     }
   ),
 
   cssAlignSelfInherit: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('align-self:inherit');
     }
   ),
 
   cssOrder0: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:0');
     }
   ),
 
   cssOrder1: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:1');
     }
   ),
 
   cssOrder2: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:2');
     }
   ),
 
   cssOrder3: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:3');
     }
   ),
 
   cssOrder4: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:4');
     }
   ),
 
   cssOrder5: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:5');
     }
   ),
 
   cssOrder6: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:6');
     }
   ),
 
   cssOrder7: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:7');
     }
   ),
 
   cssOrder8: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:8');
     }
   ),
 
   cssOrder9: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:9');
     }
   ),
 
   cssOrderInitial: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:initial');
     }
   ),
 
   cssOrderInherit: Ember.computed(
-    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
     function () {
       return this._styleFound('order:inherit');
     }

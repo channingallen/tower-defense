@@ -61,308 +61,308 @@ export default Ember.Component.extend({
   },
 
   cssAlignContentStretch: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-content:stretch');
     }
   ),
 
   cssAlignContentCenter: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-content:center');
     }
   ),
 
   cssAlignContentStart: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-content:flex-start');
     }
   ),
 
   cssAlignContentEnd: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-content:flex-end');
     }
   ),
 
   cssAlignContentBetween: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-content:space-between');
     }
   ),
 
   cssAlignContentAround: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-content:space-around');
     }
   ),
 
   cssAlignContentInitial: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-content:initial');
     }
   ),
 
   cssAlignContentInherit: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-content:inherit');
     }
   ),
 
   cssAlignItemsStretch: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-items:stretch');
     }
   ),
 
   cssAlignItemsCenter: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-items:center');
     }
   ),
 
   cssAlignItemsStart: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-items:flex-start');
     }
   ),
 
   cssAlignItemsEnd: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-items:flex-end');
     }
   ),
 
   cssAlignItemsBaseline: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-items:baseline');
     }
   ),
 
   cssAlignItemsInitial: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-items:initial');
     }
   ),
 
   cssAlignItemsInherit: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('align-items:inherit');
     }
   ),
 
   cssFlexDirectionRow: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-direction:row');
     }
   ),
 
   cssFlexDirectionRowReverse: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-direction:row-reverse');
     }
   ),
 
   cssFlexDirectionColumn: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-direction:column');
     }
   ),
 
   cssFlexDirectionColumnReverse: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-direction:column-reverse');
     }
   ),
 
   cssFlexDirectionInitial: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-direction:initial');
     }
   ),
 
   cssFlexDirectionInherit: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-direction:inherit');
     }
   ),
 
   cssFlexWrapNowrap: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-wrap:nowrap');
     }
   ),
 
   cssFlexWrapWrap: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-wrap:wrap');
     }
   ),
 
   cssFlexWrapWrapReverse: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-wrap:wrap-reverse');
     }
   ),
 
   cssFlexWrapInitial: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-wrap:initial');
     }
   ),
 
   cssFlexWrapInherit: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-wrap:inherit');
     }
   ),
 
   cssFlowDirectionRow: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-direction row');
     }
   ),
 
   cssFlowDirectionRowReverse: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-direction row-reverse');
     }
   ),
 
   cssFlowDirectionColumn: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-direction column');
     }
   ),
 
   cssFlowDirectionColumnReverse: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-direction column-reverse');
     }
   ),
 
   cssFlowDirectionInitial: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-direction initial');
     }
   ),
 
   cssFlowDirectionInherit: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-direction inherit');
     }
   ),
 
   cssFlowWrapNowrap: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-wrap nowrap');
     }
   ),
 
   cssFlowWrapWrap: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-wrap wrap');
     }
   ),
 
   cssFlowWrapWrapReverse: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-wrap wrap-reverse');
     }
   ),
 
   cssFlowWrapInitial: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-wrap initial');
     }
   ),
 
   cssFlowWrapInherit: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:flex-wrap inherit');
     }
   ),
 
   cssFlowInitial: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:initial');
     }
   ),
 
   cssFlowInherit: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('flex-flow:inherit');
     }
   ),
 
   cssJustifyStart: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('justify-content:flex-start');
     }
   ),
 
   cssJustifyBetween: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('justify-content:space-between');
     }
   ),
 
   cssJustifyAround: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('justify-content:space-around');
     }
   ),
 
   cssJustifyCenter: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('justify-content:center');
     }
   ),
 
   cssJustifyEnd: Ember.computed(
-    'attrs.towerGroup.styles.[]',
+    'attrs.towerGroup.styles.@each.codeLine',
     function () {
       return this._styleFound('justify-content:flex-end');
     }
