@@ -4,7 +4,7 @@
                              selectedTowerGroup=(readonly attrs.selectedTowerGroup)
                              shake-stylesheet=(action "shake")
                              towerGroup=(readonly towerGroup)
-                             update-unit-styles=(action "submitCodeLines")}}
+                             update-unit-styles=(action attrs.submit-styles)}}
 
   {{#each towerGroup.towers as |tower|}}
     {{td-game/stylesheet/block clickedStylesheet=(readonly attrs.clickedStylesheet)
@@ -12,8 +12,8 @@
                                selectedTower=(readonly attrs.selectedTower)
                                shake-stylesheet=(action "shake")
                                tower=(readonly tower)
-                               update-unit-styles=(action "submitCodeLines")}}
+                               update-unit-styles=(action attrs.submit-styles)}}
   {{/each}}
 {{/each}}
 
-<button class="stylesheet__start-wave-button" {{action "startWave"}}>Start Wave</button>
+<button class="stylesheet__start-wave-button" {{action attrs.start-wave}}>Start Wave</button>

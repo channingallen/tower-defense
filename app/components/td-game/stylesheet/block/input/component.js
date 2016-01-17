@@ -85,6 +85,7 @@ export default Ember.Component.extend({
     },
 
     edit() {
+      // TODO THIS COMMIT: is this function ever called?
       this.attrs['edit-code-line'](this.attrs.unitType, this.attrs.blockId);
     },
 

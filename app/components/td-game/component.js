@@ -47,13 +47,13 @@ export default Ember.Component.extend({
       }, 50);
     },
 
-    setStyles(twrGrpStyles, twrStyles) {
+    setStyles(blockCodeLines) {
       if (this.get('selectedTowerGroup')) {
-        this.set('selectedTowerGroup.styles', twrGrpStyles);
+        this.set('selectedTowerGroup.styles', blockCodeLines);
       }
 
       if (this.get('selectedTower')) {
-        this.set('selectedTower.styles', twrStyles);
+        this.set('selectedTower.styles', blockCodeLines);
       }
     },
 

@@ -67,6 +67,7 @@ export default Ember.Component.extend({
       this.attrs['update-unit-styles'](this.get('codeLines'));
     },
 
+    // TODO THIS COMMIT: is this ever called?
     editCodeLine(unitType, id) {
       let newCodeLineId;
 
@@ -84,7 +85,7 @@ export default Ember.Component.extend({
         this._deleteCodeLine(newCodeLineId);
       }
 
-      this.attrs['update-unit-styles'](unitType, this.get('codeLines'));
+      this.attrs['update-unit-styles'](this.get('codeLines'));
     },
 
     submitCodeLine(codeStr, unitType, id) {
@@ -105,7 +106,7 @@ export default Ember.Component.extend({
         this.get('codeLines').pushObject(createUnitCodeLine());
       }
 
-      this.attrs['update-unit-styles'](unitType, this.get('codeLines'));
+      this.attrs['update-unit-styles'](this.get('codeLines'));
     }
   }
 });
