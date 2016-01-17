@@ -67,27 +67,6 @@ export default Ember.Component.extend({
       this.attrs['update-unit-styles'](this.get('codeLines'));
     },
 
-    // TODO THIS COMMIT: is this ever called?
-    editCodeLine(unitType, id) {
-      let newCodeLineId;
-
-      this.get('codeLines').forEach((unitCodeLine) => {
-        if (unitCodeLine.get('id') === id) {
-          unitCodeLine.set('submitted', false);
-        }
-
-        if (!unitCodeLine.get('codeLine')) {
-          newCodeLineId = unitCodeLine.get('id');
-        }
-      });
-
-      if (newCodeLineId) {
-        this._deleteCodeLine(newCodeLineId);
-      }
-
-      this.attrs['update-unit-styles'](this.get('codeLines'));
-    },
-
     submitCodeLine(codeStr, unitType, id) {
       let newCodeLineFound = false;
 

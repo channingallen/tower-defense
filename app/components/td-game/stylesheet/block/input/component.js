@@ -84,11 +84,6 @@ export default Ember.Component.extend({
       this.attrs['delete-code-line'](this.attrs.unitType, this.attrs.blockId);
     },
 
-    edit() {
-      // TODO THIS COMMIT: is this function ever called?
-      this.attrs['edit-code-line'](this.attrs.unitType, this.attrs.blockId);
-    },
-
     handleInputEnter() {
       if (this.get('inputValid')) {
         this.attrs['submit-code-line'](
