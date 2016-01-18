@@ -124,7 +124,6 @@ export default Ember.Component.extend({
 
     destroyMob(mob) {
       const mobIndex = this.get('mobs').indexOf(mob);
-      // this._addMobPoints(mob.get('id'));
 
       this.get('mobs').removeAt(mobIndex);
     },
