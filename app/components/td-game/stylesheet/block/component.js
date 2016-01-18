@@ -6,35 +6,6 @@ export default Ember.Component.extend({
 
   tagName: 'ol',
 
-  // TODO THIS COMMIT: is this called?
-  _copyStyles(unit) { // unit === 'towerGroup' || unit === 'tower'
-    const unitStyles = Ember.A([]);
-
-    this.attrs[unit].get('styles').forEach(function (styleObj) {
-      let unitStyle = Ember.Object.create({});
-
-      for (var prop in styleObj) {
-        switch (prop) {
-          case 'codeLine':
-            unitStyle.set('codeLine', styleObj.prop);
-            break;
-          case 'submitted':
-            unitStyle.set('submitted', styleObj.prop);
-            break;
-          case 'id':
-            unitStyle.set('id', styleObj.prop);
-            break;
-          default:
-            break;
-        }
-      }
-
-      unitStyles.pushObject(unitStyle);
-    });
-
-    return unitStyles;
-  },
-
   _deleteCodeLine(id) {
     let index;
     this.get('codeLines').forEach((codeLine) => {
