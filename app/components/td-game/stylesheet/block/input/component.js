@@ -75,7 +75,9 @@ export default Ember.Component.extend({
     'attrs.tower',
     'attrs.towerGroup',
     function () {
-      if (this.get('submitted') || this.attrs.clickedStylesheet) {
+      const waveStarted = this.attrs.waveStarted;
+      const clickedStylesheet = this.attrs.clickedStylesheet;
+      if (this.get('submitted') || clickedStylesheet || waveStarted) {
         return;
       }
 

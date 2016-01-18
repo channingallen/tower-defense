@@ -28,6 +28,10 @@ export default Ember.Component.extend({
     },
 
     selectTower(tower) {
+      if (this.get('waveStarted')) {
+        return;
+      }
+
       Ember.run.later(this, () => {
         if (this.get('selectedTowerGroup')) {
           this.forceSet('selectedTowerGroup', null);
@@ -38,6 +42,10 @@ export default Ember.Component.extend({
     },
 
     selectTowerGroup(towerGroup) {
+      if (this.get('waveStarted')) {
+        return;
+      }
+
       Ember.run.later(this, () => {
         if (this.get('selectedTower')) {
           this.forceSet('selectedTower', null);
