@@ -1,8 +1,3 @@
-<li class="block__line block__brace-line">
-  <span class="block__selector">{{selector}}</span>
-  <span class="block__brace">{</span>
-</li>
-
 {{#if attrs.towerGroup}}
   <li class="block__line block__declaration">
     display: flex;
@@ -23,7 +18,8 @@
                                        submit-code-line=(action "submitCodeLine")
                                        selectedTower=(readonly attrs.selectedTower)
                                        tower=(readonly attrs.tower)
-                                       unitType=(readonly "tower")}}
+                                       unitType=(readonly "tower")
+                                       waveStarted=(readonly attrs.waveStarted)}}
     </li>
   {{/each}}
 {{else}}
@@ -40,11 +36,8 @@
                                        submit-code-line=(action "submitCodeLine")
                                        selectedTowerGroup=(readonly attrs.selectedTowerGroup)
                                        towerGroup=(readonly attrs.towerGroup)
-                                       unitType=(readonly "tower group")}}
+                                       unitType=(readonly "tower group")
+                                       waveStarted=(readonly attrs.waveStarted)}}
     </li>
   {{/each}}
 {{/if}}
-
-<li class="block__line block__brace-line">
-  <span class="block__brace">}</span>
-</li>

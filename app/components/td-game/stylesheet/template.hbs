@@ -1,18 +1,36 @@
 {{#each attrs.towerGroups as |towerGroup|}}
+  <li class="block__line block__brace-line">
+    <span class="block__selector">{{towerGroup.selector}}</span>
+    <span class="block__brace">{</span>
+  </li>
+
   {{td-game/stylesheet/block clickedStylesheet=(readonly attrs.clickedStylesheet)
                              select-tower-group=(action attrs.select-tower-group)
                              selectedTowerGroup=(readonly attrs.selectedTowerGroup)
                              shake-stylesheet=(action "shake")
                              towerGroup=(readonly towerGroup)
-                             update-unit-styles=(action attrs.submit-styles)}}
+                             update-unit-styles=(action attrs.submit-styles)
+                             waveStarted=(readonly attrs.waveStarted)}}
+
+  <li class="block__line block__brace-line">
+    <span class="block__brace">}</span>
+  </li>
 
   {{#each towerGroup.towers as |tower|}}
+    <li class="block__line block__brace-line">
+      <span class="block__selector">{{tower.selector}}</span>
+      <span class="block__brace">{</span>
+    </li>
     {{td-game/stylesheet/block clickedStylesheet=(readonly attrs.clickedStylesheet)
                                select-tower=(action attrs.select-tower)
                                selectedTower=(readonly attrs.selectedTower)
                                shake-stylesheet=(action "shake")
                                tower=(readonly tower)
-                               update-unit-styles=(action attrs.submit-styles)}}
+                               update-unit-styles=(action attrs.submit-styles)
+                               waveStarted=(readonly attrs.waveStarted)}}
+    <li class="block__line block__brace-line">
+      <span class="block__brace">}</span>
+    </li>
   {{/each}}
 {{/each}}
 

@@ -1,6 +1,12 @@
-{{input class="block__input"
-        enter=(action "handleInputEnter")
-        focusOnInsert=(readonly focusNewInput)
-        key-up=(action "handleKeyUp")
-        value=(readonly inputValue)
-        viewName=(readonly inputViewName)}}
+{{#if attrs.waveStarted}}
+  <div>
+    {{inputValue}}
+  </div>
+{{else}}
+  {{input class="block__input"
+          enter=(action "handleInputEnter")
+          focusOnInsert=(readonly focusNewInput)
+          key-up=(action "handleKeyUp")
+          value=(readonly inputValue)
+          viewName=(readonly inputViewName)}}
+{{/if}}
