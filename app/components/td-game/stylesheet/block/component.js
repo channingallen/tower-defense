@@ -35,29 +35,23 @@ export default Ember.Component.extend({
     return unitStyles;
   },
 
-  _deleteCodeLine(/*id*/) {
-    // if (this._unsubmittedCodeLineFound(this.get('codeLines'))) {
-    //   this.get('codeLines').forEach((codeLine) => {
-    //     if (codeLine.get('id') === id) {
-    //       codeLine.destroy();
-    //     }
-    //   });
-    // } else {
-    //   this.get('codeLines').forEach((codeLine) => {
-    //     if (codeLine.get('id') === id) {
-    //       codeLine.set('submitted', false);
-    //       codeLine.set('codeLine', null);
-    //     }
-    //   });
-    // }
+  _deleteCodeLine(id) {
+    let index;
+    this.get('codeLines').forEach((codeLine) => {
+      if (id === codeLine.get('id')) {
+        index = this.get('codeLines').indexOf(codeLine);
+      }
+    });
+
+    this.get('codeLines').removeAt(index);
   },
 
   _unsubmittedCodeLineFound(codeLines) {
-    let unsubmittedCodeLineFound = false;
-
     if (!codeLines) {
-      unsubmittedCodeLineFound = true;
+      return false;
     }
+
+    let unsubmittedCodeLineFound = false;
     codeLines.forEach((codeLine) => {
       if (!codeLine.get('submitted')) {
         unsubmittedCodeLineFound = true;
@@ -67,9 +61,14 @@ export default Ember.Component.extend({
     return unsubmittedCodeLineFound;
   },
 
+  // TODO THIS COMMIT: refine observed values
   codeLines: Ember.computed(
-    'attrs.tower.styles.@each.codeLine',
-    'attrs.towerGroup.styles.@each.codeLine',
+    'attrs.towerGroup.styles',
+    'attrs.tower.styles',
+    'attrs.towerGroup.styles.length',
+    'attrs.tower.styles.length',
+    'attrs.towerGroup.styles.@each.submitted',
+    'attrs.tower.styles.@each.submitted',
     function () {
       const codeLines = this.attrs.tower ?
                         this.attrs.tower.get('styles') :

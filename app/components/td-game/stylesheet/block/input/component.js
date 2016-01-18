@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   }),
 
   inputValid: Ember.computed('inputValue', function () {
-    return this._validPropertyFound() && this._validValueFound() ? true : false;
+    return this._validPropertyFound() && this._validValueFound();
   }),
 
   _getProperty() {
