@@ -4,45 +4,68 @@ import createFlexboxRef from 'tower-defense/utils/create-flexbox-ref';
 export default Ember.Component.extend({
   flexboxRef: createFlexboxRef(),
 
-  inputValid: false,
-
   inputValue: null,
 
   inputViewName: 'input', // This can be called anything.
 
-  _getValidProperty(keyUpVal) {
-    keyUpVal = keyUpVal.toLowerCase();
-    let property;
-
-    const colonLocation = keyUpVal.indexOf(':');
-    if (colonLocation > 0) {
-      property = keyUpVal.substring(0, colonLocation);
-    } else {
-      return undefined;
+  inputEmpty: Ember.computed('inputValue', function () {
+    if (!this.get('inputValue')) {
+      return true;
     }
 
-    let propertyFoundInFlexboxRef = false;
-    if (this.get('flexboxRef')[property]) {
-      propertyFoundInFlexboxRef = true;
-    }
+    return this.get('inputValue') === '' ? true : false;
+  }),
 
-    return propertyFoundInFlexboxRef ? property : undefined;
+  inputValid: Ember.computed('inputValue', function () {
+    return this._validPropertyFound() && this._validValueFound() ? true : false;
+  }),
+
+  _getProperty() {
+    const inputValueLowerCase = this.get('inputValue').toLowerCase();
+    const colonLocation = inputValueLowerCase.indexOf(':');
+
+    return inputValueLowerCase.substring(0, colonLocation);
   },
 
-  _getValidValue(keyUpVal, propertyString) {
-    keyUpVal = keyUpVal.toLowerCase();
-    const startIndex = propertyString.length + 1;
-    const endIndex = keyUpVal.length;
+  _propertyFound() {
+    if (this.get('inputEmpty')) {
+      return false;
+    }
 
-    let value = keyUpVal.substring(startIndex, endIndex).trim();
-    let valueFoundInFlexboxProp = false;
-    this.get('flexboxRef')[propertyString].forEach(function (validValue) {
+    const colonLocation = this.get('inputValue').indexOf(':');
+    return colonLocation < 1 ? false : true;
+  },
+
+  _validPropertyFound() {
+    if (!this._propertyFound()) {
+      return false;
+    }
+
+    const property = this._getProperty();
+    if (!this.get('flexboxRef')[property]) {
+      return false;
+    }
+
+    return true;
+  },
+
+  _validValueFound() {
+    if (!this._propertyFound()) {
+      return false;
+    }
+    const property = this._getProperty();
+    const startIndex = property.length + 1;
+    const endIndex = this.get('inputValue.length');
+    let value = this.get('inputValue').substring(startIndex, endIndex).trim();
+
+    let valueFound = false;
+    this.get('flexboxRef')[property].forEach(function (validValue) {
       if (value === validValue.toString()) {
-        valueFoundInFlexboxProp = true;
+        valueFound = true;
       }
     });
 
-    return valueFoundInFlexboxProp ? value : undefined;
+    return valueFound ? true : false;
   },
 
   _autoFocusInput: Ember.observer(
@@ -80,17 +103,19 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    // TODO THIS COMMIT: is this called?
     delete() {
-      this.attrs['delete-code-line'](this.attrs.unitType, this.attrs.blockId);
+      this.attrs['delete-code-line'](this.attrs.blockId);
     },
 
     handleInputEnter() {
       if (this.get('inputValid')) {
         this.attrs['submit-code-line'](
           this.get('inputValue'),
-          this.attrs.unitType,
           this.attrs.blockId
         );
+      } else if (this.get('inputEmpty')) {
+        this.attrs['delete-code-line'](this.attrs.blockId);
       } else {
         this.attrs['shake-stylesheet']();
       }
@@ -98,21 +123,6 @@ export default Ember.Component.extend({
 
     handleKeyUp(keyUpVal) {
       this.set('inputValue', keyUpVal);
-
-      const validProperty = this._getValidProperty(keyUpVal);
-      let validValue;
-
-      if (validProperty !== undefined) {
-        validValue = this._getValidValue(keyUpVal, validProperty);
-      } else {
-        return;
-      }
-
-      if (validValue !== undefined) {
-        this.set('inputValid', true);
-      } else {
-        this.set('inputValid', false);
-      }
     }
   }
 });

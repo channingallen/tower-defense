@@ -6,14 +6,7 @@ export default Ember.Component.extend({
 
   tagName: 'ol',
 
-  codeLines: Ember.computed(
-    'attrs.tower',
-    'attrs.towerGroup',
-    function () {
-      return this._copyStyles(this.attrs.tower ? 'tower' : 'towerGroup');
-    }
-  ),
-
+  // TODO THIS COMMIT: is this called?
   _copyStyles(unit) { // unit === 'towerGroup' || unit === 'tower'
     const unitStyles = Ember.A([]);
 
@@ -42,13 +35,53 @@ export default Ember.Component.extend({
     return unitStyles;
   },
 
-  _deleteCodeLine(id) {
-    const newCodeLines = this.get('codeLines').filter((unitCodeLine) => {
-      return unitCodeLine.get('id') === id ? false : true;
+  _deleteCodeLine(/*id*/) {
+    // if (this._unsubmittedCodeLineFound(this.get('codeLines'))) {
+    //   this.get('codeLines').forEach((codeLine) => {
+    //     if (codeLine.get('id') === id) {
+    //       codeLine.destroy();
+    //     }
+    //   });
+    // } else {
+    //   this.get('codeLines').forEach((codeLine) => {
+    //     if (codeLine.get('id') === id) {
+    //       codeLine.set('submitted', false);
+    //       codeLine.set('codeLine', null);
+    //     }
+    //   });
+    // }
+  },
+
+  _unsubmittedCodeLineFound(codeLines) {
+    let unsubmittedCodeLineFound = false;
+
+    if (!codeLines) {
+      unsubmittedCodeLineFound = true;
+    }
+    codeLines.forEach((codeLine) => {
+      if (!codeLine.get('submitted')) {
+        unsubmittedCodeLineFound = true;
+      }
     });
 
-    this.set('codeLines', newCodeLines);
+    return unsubmittedCodeLineFound;
   },
+
+  codeLines: Ember.computed(
+    'attrs.tower.styles.@each.codeLine',
+    'attrs.towerGroup.styles.@each.codeLine',
+    function () {
+      const codeLines = this.attrs.tower ?
+                        this.attrs.tower.get('styles') :
+                        this.attrs.towerGroup.get('styles');
+
+      if (!this._unsubmittedCodeLineFound(codeLines)) {
+        codeLines.pushObject(createUnitCodeLine());
+      }
+
+      return codeLines;
+    }
+  ),
 
   selector: Ember.computed(
     'attrs.tower.selector',
@@ -61,29 +94,19 @@ export default Ember.Component.extend({
   ),
 
   actions: {
-    deleteCodeLine(unitType, id) {
+    deleteCodeLine(id) {
       this._deleteCodeLine(id);
 
       this.attrs['update-unit-styles'](this.get('codeLines'));
     },
 
-    submitCodeLine(codeStr, unitType, id) {
-      let newCodeLineFound = false;
-
+    submitCodeLine(codeStr, id) {
       this.get('codeLines').forEach((unitCodeLine) => {
         if (unitCodeLine.get('id') === id) {
           unitCodeLine.set('codeLine', codeStr);
           unitCodeLine.set('submitted', true);
         }
-
-        if (!unitCodeLine.get('codeLine')) {
-          newCodeLineFound = true;
-        }
       });
-
-      if (!newCodeLineFound) {
-        this.get('codeLines').pushObject(createUnitCodeLine());
-      }
 
       this.attrs['update-unit-styles'](this.get('codeLines'));
     }
