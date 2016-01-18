@@ -34,4 +34,6 @@
   {{/each}}
 {{/each}}
 
-<button class="stylesheet__start-wave-button" {{action attrs.start-wave}}>Start Wave</button>
+{{#unless attrs.waveStarted}}
+  <button class="stylesheet__start-wave-button" {{action attrs.start-wave}}>Start Wave</button>
+{{/unless}}
