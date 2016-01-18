@@ -1,4 +1,8 @@
 {{#if attrs.waveStarted}}
+  <div class="board__points">
+    Points: {{wavePoints}}
+  </div>
+
   {{#each mobs as |mob|}}
     {{td-game/board/mob class=(readonly mob.posClass)
                         destroy-mob=(action "destroyMob")

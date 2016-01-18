@@ -51,7 +51,7 @@ function addMobsToWave(wave) {
   const mobSchemaOne = {
     frequency: 3000,
     health: 300,
-    points: 1,
+    points: 20,
     quantity: 5,
     speed: 2000,
     type: 'standard'
