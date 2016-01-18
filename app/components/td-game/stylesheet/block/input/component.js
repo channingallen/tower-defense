@@ -103,11 +103,6 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    // TODO THIS COMMIT: is this called?
-    delete() {
-      this.attrs['delete-code-line'](this.attrs.blockId);
-    },
-
     handleInputEnter() {
       if (this.get('inputValid')) {
         this.attrs['submit-code-line'](
