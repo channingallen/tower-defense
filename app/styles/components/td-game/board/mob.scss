@@ -9,6 +9,35 @@
   width: 30px;
 }
 
+.mob--points-added {
+  color: hsl(135, 100%, 50%);
+  background-color: transparent;
+  font-size: 25px;
+  font-weight: bold;
+  height: auto;
+  position: absolute;
+  transition: initial;
+  width: auto;
+}
+
+.mob--points-removed {
+  color: hsl(0, 100%, 50%);
+  background-color: transparent;
+  font-size: 25px;
+  font-weight: bold;
+  height: auto;
+  position: absolute;
+  transition: initial;
+  width: auto;
+}
+
+// .mob--points-removed {
+//   color: red;
+//   background-color: transparent;
+//   font-size: 15px;
+//   position: absolute;
+// }
+
 .mob--dead {
   display: none;
 }

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  alive: true,
+  advancing: true,
 
   classNames: ['mob'],
 
@@ -22,7 +22,7 @@ export default Ember.Component.extend({
 
   _advancePositionClasses() {
     Ember.run.later(this, () => {
-      if (!this.get('alive')) {
+      if (!this.get('advancing')) {
         return;
       }
 
@@ -63,17 +63,38 @@ export default Ember.Component.extend({
     return Math.floor(100 * ($mobDistanceFromBoardTop / $boardLength));
   },
 
-  destroyMob: Ember.observer('attrs.health', function () {
-    if (this.attrs.health < 1) {
-      this.set('alive', false);
+  destroyMob: Ember.observer('attrs.health', 'pathIndex', function () {
+    if (!this.get('advancing')) {
+      return;
+    }
 
+    const endPointReached = this.get('pathIndex') === this.attrs.path.length;
+    if (this.attrs.health < 1 || endPointReached) {
+      this.set('advancing', false);
+
+      const styleToAdd = this.attrs.health < 1 ?
+                         ' mob--points-added' : ' mob--points-removed';
       this.attrs['update-class'](
         this.attrs.mob.get('id'),
-        'mob--dead'
+        this.attrs.class + styleToAdd
       );
 
-      this.attrs['destroy-mob'](this.attrs.mob);
+      const pointAction = endPointReached ? 'subtract-points' : 'add-points';
+      this.attrs[pointAction](this.attrs.points);
+
+      Ember.run.later(this, () => {
+        this.attrs['update-class'](
+          this.attrs.mob.get('id'),
+          'mob--dead'
+        );
+
+        this.attrs['destroy-mob'](this.attrs.mob);
+      }, 2000);
     }
+  }),
+
+  endPointReached: Ember.computed('pathIndex', function () {
+    return this.get('pathIndex') === this.attrs.path.length;
   }),
 
   initiateMotion: Ember.on('didInsertElement', function () {
@@ -96,7 +117,7 @@ export default Ember.Component.extend({
     const mobId = this.attrs.mob.get('id');
 
     const pollPosition = setInterval(() => {
-      if (!this.get('alive')) {
+      if (!this.get('advancing')) {
         clearInterval(pollPosition);
         return;
       }
@@ -108,7 +129,7 @@ export default Ember.Component.extend({
         this.attrs['update-position'](mobId, 'Y', posTop);
       }
 
-      if (!this.get('alive') || this.get('pathIndex') === this.attrs.path.length) {
+      if (!this.get('advancing') || this.get('pathIndex') === this.attrs.path.length) {
         clearInterval(pollPosition);
       }
     }, 200);

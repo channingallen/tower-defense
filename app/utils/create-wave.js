@@ -27,10 +27,6 @@ function addBoardToWave(wave) {
     PathCoords.create({x: 65, y: 60}),
     PathCoords.create({x: 75, y: 60}),
     PathCoords.create({x: 85, y: 60}),
-    PathCoords.create({x: 90, y: 60}),
-    PathCoords.create({x: 89, y: 60}),
-    PathCoords.create({x: 90, y: 60}),
-    PathCoords.create({x: 89, y: 60}),
     PathCoords.create({x: 90, y: 60})
   ];
 
@@ -50,7 +46,7 @@ function addMobsToWave(wave) {
   const mobs = [];
   const mobSchemaOne = {
     frequency: 3000,
-    health: 300,
+    health: 100,
     points: 20,
     quantity: 5,
     speed: 2000,

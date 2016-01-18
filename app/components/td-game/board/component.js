@@ -14,7 +14,6 @@ export default Ember.Component.extend({
   wavePoints: 0,
 
   _addMobPoints(mobId) {
-    // const pointsToAdd = this.get('mobs')[mobIndex].get('points');
     let pointsToAdd;
     this.get('mobs').forEach((mob) => {
       if (mobId === mob.get('id')) {
@@ -74,7 +73,7 @@ export default Ember.Component.extend({
 
       this.get('towers').forEach((tower) => {
         this.get('mobs').forEach((mob) => {
-          if (this._mobInRangeOfTower(mob, tower, 15)) { // TODO: replace arg 3 with tower property for attack range, based on type?
+          if (this._mobInRangeOfTower(mob, tower, 12)) { // TODO: replace arg 3 with tower property for attack range, based on type?
             this._reduceMobHealth(mob.get('id'), 20); // TODO: replace arg 2 with tower property for attack power, based on type?
           }
         });
@@ -113,9 +112,19 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    addPoints(points) {
+      const currentWavePoints = this.get('wavePoints');
+      this.set('wavePoints', currentWavePoints + points);
+    },
+
+    subtractPoints(points) {
+      const currentWavePoints = this.get('wavePoints');
+      this.set('wavePoints', currentWavePoints - points);
+    },
+
     destroyMob(mob) {
       const mobIndex = this.get('mobs').indexOf(mob);
-      this._addMobPoints(mob.get('id'));
+      // this._addMobPoints(mob.get('id'));
 
       this.get('mobs').removeAt(mobIndex);
     },

@@ -1,5 +1,11 @@
-{{#if alive}}
+{{#if advancing}}
   <div>HP: {{attrs.health}}</div>
   <div>{{attrs.posX}},</div>
   <div>{{attrs.posY}}</div>
+{{else}}
+  {{#if endPointReached}}
+    <div>- {{attrs.points}}</div>
+  {{else}}
+    <div>+ {{attrs.points}}</div>
+  {{/if}}
 {{/if}}

@@ -4,7 +4,8 @@
   </div>
 
   {{#each mobs as |mob|}}
-    {{td-game/board/mob class=(readonly mob.posClass)
+    {{td-game/board/mob add-points=(action "addPoints")
+                        class=(readonly mob.posClass)
                         destroy-mob=(action "destroyMob")
                         mob=(readonly mob)
                         number=(readonly mob.number)
@@ -14,6 +15,7 @@
                         posY=(readonly mob.posY)
                         health=(readonly mob.health)
                         speed=(readonly mob.speed)
+                        subtract-points=(action "subtractPoints")
                         type=(readonly mob.type)
                         update-class=(action "updateMobClass")
                         update-position=(action "updateMobPosition")}}
