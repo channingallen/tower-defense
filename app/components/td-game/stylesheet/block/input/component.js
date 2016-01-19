@@ -137,6 +137,12 @@ export default Ember.Component.extend({
       }
     },
 
+    handleKeyDown(keyDownVal, event) {
+      if (event.which === 9) {
+        this.attrs['click-stylesheet']();
+      }
+    },
+
     handleKeyUp(keyUpVal) {
       this.set('inputValue', keyUpVal);
     },

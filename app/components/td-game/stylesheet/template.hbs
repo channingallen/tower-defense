@@ -5,6 +5,7 @@
   </li>
 
   {{td-game/stylesheet/block clickedStylesheet=(readonly attrs.clickedStylesheet)
+                             click-stylesheet=(action attrs.click)
                              finalTowerId=(readonly finalTowerId)
                              firstTowerGroupId=(readonly firstTowerGroupId)
                              select-tower-group=(action attrs.select-tower-group)
@@ -24,6 +25,7 @@
       <span class="block__brace">{</span>
     </li>
     {{td-game/stylesheet/block clickedStylesheet=(readonly attrs.clickedStylesheet)
+                               click-stylesheet=(action attrs.click)
                                finalTowerId=(readonly finalTowerId)
                                firstTowerGroupId=(readonly firstTowerGroupId)
                                select-tower=(action attrs.select-tower)
