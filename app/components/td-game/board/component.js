@@ -76,21 +76,24 @@ export default Ember.Component.extend({
       }
 
       this.get('towers').forEach((tower) => {
+        const power = tower.get('attackPower');
+        const range = tower.get('attackRange');
+
         this.get('mobs').forEach((mob) => {
-          if (this._mobInRangeOfTower(mob, tower, 20)) { // TODO: replace arg 3 with tower property for attack range, based on type?
+          if (this._mobInRangeOfTower(mob, tower, range)) {
             const mobId = mob.get('id');
             const towerAlreadyHasTarget = !!tower.get('targetedMobId');
 
             if (!towerAlreadyHasTarget) {
               tower.set('targetedMobId', mobId);
-              this._reduceMobHealth(mobId, 20); // TODO: replace arg 2 with tower property for attack power, based on type?
+              this._reduceMobHealth(mobId, power);
             } else {
               const mobIsTargetedMob = mobId === tower.get('targetedMobId');
 
               if (mobIsTargetedMob) {
                 const mobAlive = mob.get('health') > 0;
                 if (mobAlive) {
-                  this._reduceMobHealth(mobId, 20); // TODO: replace arg 2 with tower property for attack power, based on type?
+                  this._reduceMobHealth(mobId, power);
                 } else {
                   tower.set('targetedMobId', null);
                 }
@@ -100,11 +103,11 @@ export default Ember.Component.extend({
                 });
 
                 const targetedMobInRange = this._mobInRangeOfTower(
-                  targetedMob, tower, 20
+                  targetedMob, tower, range
                 );
                 if (!targetedMobInRange) {
                   tower.set('targetedMobId', mobId);
-                  this._reduceMobHealth(mobId, 20); // TODO: replace arg 2 with tower property for attack power, based on type?
+                  this._reduceMobHealth(mobId, power);
                 }
               }
             }

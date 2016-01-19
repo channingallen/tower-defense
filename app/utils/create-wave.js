@@ -98,6 +98,8 @@ function addTowersToTowerGroup(towerGroup, numTowers) {
   function getNewTower(towerNum) {
     return Tower.create({
       id: generateIdForRecord(),
+      attackPower: 20,
+      attackRange: 20,
       selector: 't-' + towerNum,
       type: 1,
       styles: Ember.ArrayProxy.create({ content: Ember.A([createUnitCodeLine()]) })
