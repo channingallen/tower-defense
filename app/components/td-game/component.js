@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   selectedTowerGroup: null,
 
   twrStyles: null,
-
+  
   twrGrpStyles: null,
 
   waveStarted: false,

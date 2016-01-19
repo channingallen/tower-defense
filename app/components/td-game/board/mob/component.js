@@ -5,6 +5,8 @@ export default Ember.Component.extend({
 
   classNames: ['mob'],
 
+  healthBarClass: 'mob__health-bar--100',
+
   pathIndex: 0,
 
   _advanceOnePositionClass() {
@@ -133,5 +135,24 @@ export default Ember.Component.extend({
         clearInterval(pollPosition);
       }
     }, 200);
+  }),
+
+  updateHealth: Ember.observer('attrs.health', function () {
+    if (!this.get('advancing')) {
+      return;
+    }
+
+    const maxHealth = this.attrs.mob.get('maxHealth');
+    if (this.attrs.health > Math.floor(maxHealth * 0.80)) {
+      this.set('healthBarClass', 'mob__health-bar--100');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.60)) {
+      this.set('healthBarClass', 'mob__health-bar--80');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.40)) {
+      this.set('healthBarClass', 'mob__health-bar--60');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.20)) {
+      this.set('healthBarClass', 'mob__health-bar--40');
+    } else {
+      this.set('healthBarClass', 'mob__health-bar--20');
+    }
   })
 });

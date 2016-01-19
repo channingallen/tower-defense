@@ -4,6 +4,7 @@ const Mob = Ember.Object.extend({
   id: null,
   frequency: null,
   health: null,
+  maxHealth: null,
   pointClass: null,
   points: null,
   posClass: null,

@@ -1,12 +1,14 @@
+$mob-width: 4%;
+
 .mob {
   background-color: purple;
   border-radius: 99999px;
   font-size: 10px;
-  height: 30px;
+  height: $mob-width;
   // overflow: hidden;
   position: absolute;
   transition: all 2.0s linear;
-  width: 30px;
+  width: $mob-width;
 }
 
 .mob--points-added {
@@ -31,12 +33,42 @@
   width: auto;
 }
 
-// .mob--points-removed {
-//   color: red;
-//   background-color: transparent;
-//   font-size: 15px;
-//   position: absolute;
-// }
+.mob__health-bar-container {
+  height: 150%;
+  width: 100%;
+  padding-top: 115%;
+}
+
+.mob__health-bar {
+  background-color: hsl(120, 100%, 50%);
+  height: 25%;
+  width: 100%;
+}
+
+.mob__health-bar--100 {
+  background-color: hsl(120, 100%, 50%);
+  width: 100%;
+}
+
+.mob__health-bar--80 {
+  background-color: hsl(90, 100%, 50%);
+  width: 80%;
+}
+
+.mob__health-bar--60 {
+  background-color: hsl(60, 100%, 50%);
+  width: 60%;
+}
+
+.mob__health-bar--40 {
+  background-color: hsl(30, 100%, 50%);
+  width: 40%;
+}
+
+.mob__health-bar--20 {
+  background-color: hsl(0, 100%, 50%);
+  width: 20%;
+}
 
 .mob--dead {
   display: none;

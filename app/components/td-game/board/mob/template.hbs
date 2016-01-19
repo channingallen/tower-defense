@@ -1,7 +1,7 @@
 {{#if advancing}}
-  <div>HP: {{attrs.health}}</div>
-  <div>{{attrs.posX}},</div>
-  <div>{{attrs.posY}}</div>
+  <div class="mob__health-bar-container">
+    <div class="mob__health-bar {{healthBarClass}}"></div>
+  </div>
 {{else}}
   {{#if endPointReached}}
     <div>- {{attrs.points}}</div>
