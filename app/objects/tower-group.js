@@ -5,7 +5,8 @@ const TowerGroup = Ember.Object.extend({
   posY: 'board__tower-group--position-y0',
   selector: '.t-g',
   styles: null,
-  towers: null
+  towers: null,
+  type: 1
 });
 
 export default TowerGroup;

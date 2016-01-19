@@ -74,23 +74,27 @@ function addMobsToWave(wave) {
 
 // TODO: refactor such that tower groups don't need to be individually defined
 function addTowerGroupsToWave(wave) {
-  function getNewTowerGroup(groupNum, posY) {
+  function getNewTowerGroup(groupNum, towerType, posY) {
     return TowerGroup.create({
       id: generateIdForRecord(),
       posY: 'board__tower-group--position-y' + posY,
       selector: '.t-g-' + groupNum,
-      styles: Ember.ArrayProxy.create({ content: Ember.A([createUnitCodeLine()]) })
+      styles: Ember.ArrayProxy.create({ content: Ember.A([createUnitCodeLine()]) }),
+      type: towerType
     });
   }
 
-  const towerGroupOne = getNewTowerGroup(1, 15);
-  const towerGroupTwo = getNewTowerGroup(2, 65);
+  const towerGroupOne = getNewTowerGroup(1, 1, 15);
+  const towerGroupTwo = getNewTowerGroup(2, 1, 50);
+  const towerGroupThree = getNewTowerGroup(2, 3, 65);
   addTowersToTowerGroup(towerGroupOne, 1);
   addTowersToTowerGroup(towerGroupTwo, 3);
+  addTowersToTowerGroup(towerGroupThree, 3);
 
   wave.set('towerGroups', Ember.A([
     towerGroupOne,
-    towerGroupTwo
+    towerGroupTwo,
+    towerGroupThree
   ]));
 }
 
