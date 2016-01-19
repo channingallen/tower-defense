@@ -46,7 +46,7 @@ function addMobsToWave(wave) {
   const mobs = [];
   const mobSchemaOne = {
     frequency: 3000,
-    health: 100,
+    health: 260,
     points: 20,
     quantity: 5,
     speed: 2000,
@@ -83,7 +83,7 @@ function addTowerGroupsToWave(wave) {
   const towerGroupOne = getNewTowerGroup(1, 15);
   const towerGroupTwo = getNewTowerGroup(2, 65);
   addTowersToTowerGroup(towerGroupOne, 1);
-  addTowersToTowerGroup(towerGroupTwo, 2);
+  addTowersToTowerGroup(towerGroupTwo, 3);
 
   wave.set('towerGroups', Ember.A([
     towerGroupOne,

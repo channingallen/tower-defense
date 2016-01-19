@@ -39,6 +39,10 @@ export default Ember.Component.extend({
   },
 
   _mobInRangeOfTower(mob, tower, range) {
+    if (!mob || !tower) {
+      return false;
+    }
+
     function getDistance(mob, tower) {
       var latDiff = Math.abs(tower.get('posX') - mob.get('posX'));
       var lngDiff = Math.abs(tower.get('posY') - mob.get('posY'));
@@ -73,8 +77,37 @@ export default Ember.Component.extend({
 
       this.get('towers').forEach((tower) => {
         this.get('mobs').forEach((mob) => {
-          if (this._mobInRangeOfTower(mob, tower, 12)) { // TODO: replace arg 3 with tower property for attack range, based on type?
-            this._reduceMobHealth(mob.get('id'), 20); // TODO: replace arg 2 with tower property for attack power, based on type?
+          if (this._mobInRangeOfTower(mob, tower, 20)) { // TODO: replace arg 3 with tower property for attack range, based on type?
+            const mobId = mob.get('id');
+            const towerAlreadyHasTarget = !!tower.get('targetedMobId');
+
+            if (!towerAlreadyHasTarget) {
+              tower.set('targetedMobId', mobId);
+              this._reduceMobHealth(mobId, 20); // TODO: replace arg 2 with tower property for attack power, based on type?
+            } else {
+              const mobIsTargetedMob = mobId === tower.get('targetedMobId');
+
+              if (mobIsTargetedMob) {
+                const mobAlive = mob.get('health') > 0;
+                if (mobAlive) {
+                  this._reduceMobHealth(mobId, 20); // TODO: replace arg 2 with tower property for attack power, based on type?
+                } else {
+                  tower.set('targetedMobId', null);
+                }
+              } else {
+                const targetedMob = this.get('mobs').find((mob) => {
+                  return tower.get('targetedMobId') === mob.get('id');
+                });
+
+                const targetedMobInRange = this._mobInRangeOfTower(
+                  targetedMob, tower, 20
+                );
+                if (!targetedMobInRange) {
+                  tower.set('targetedMobId', mobId);
+                  this._reduceMobHealth(mobId, 20); // TODO: replace arg 2 with tower property for attack power, based on type?
+                }
+              }
+            }
           }
         });
       });
