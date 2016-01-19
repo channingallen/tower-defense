@@ -73,7 +73,6 @@ export default Ember.Component.extend({
     'attrs.towerGroup.styles.@each.submitted',
     function () {
       const styles = this.attrs.towerGroup.get('styles');
-      // const noStyleFound = !styles || styles.length < 1;
       const styleFound = !!styles;
 
       let codeLineEmpty = true;
