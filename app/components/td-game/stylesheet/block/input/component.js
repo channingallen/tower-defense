@@ -105,6 +105,12 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    handleFocusIn() {
+      this.attrs.click(
+        this.attrs.tower ? this.attrs.tower : this.attrs.towerGroup
+      );
+    },
+
     handleInputEnter() {
       if (this.get('inputValid')) {
         this.attrs['submit-code-line'](

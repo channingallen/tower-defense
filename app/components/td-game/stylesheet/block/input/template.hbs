@@ -5,6 +5,7 @@
 {{else}}
   {{input class="block__input"
           enter=(action "handleInputEnter")
+          focusIn=(action "handleFocusIn")
           focusOnInsert=(readonly focusNewInput)
           key-up=(action "handleKeyUp")
           value=(readonly inputValue)
