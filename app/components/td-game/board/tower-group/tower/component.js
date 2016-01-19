@@ -88,7 +88,6 @@ export default Ember.Component.extend({
   updatePosition: Ember.on('didInsertElement', function () {
     const towerId = this.attrs.tower.get('id');
 
-    // const pollPosition = setInterval(() => {
     setInterval(() => {
       const posLeft = this._getPosLeft();
       const posTop = this._getPosTop();
