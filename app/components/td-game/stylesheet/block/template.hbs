@@ -14,10 +14,15 @@
                                        clickedStylesheet=(readonly attrs.clickedStylesheet)
                                        click=(action attrs.select-tower attrs.tower)
                                        delete-code-line=(action "deleteCodeLine")
+                                       finalInputFound=(readonly finalInputFound)
+                                       finalTowerId=(readonly attrs.finalTowerId)
+                                       firstTowerGroupId=(readonly attrs.firstTowerGroupId)
+                                       notify-final-input=(action "notifyFinalInput")
                                        shake-stylesheet=(action attrs.shake-stylesheet)
                                        submit-code-line=(action "submitCodeLine")
                                        selectedTower=(readonly attrs.selectedTower)
                                        tower=(readonly attrs.tower)
+                                       unitId=(readonly attrs.tower.id)
                                        unitType=(readonly "tower")
                                        waveStarted=(readonly attrs.waveStarted)}}
     </li>
@@ -32,10 +37,14 @@
                                        clickedStylesheet=(readonly attrs.clickedStylesheet)
                                        click=(action attrs.select-tower-group attrs.towerGroup)
                                        delete-code-line=(action "deleteCodeLine")
+                                       finalInputFound=(readonly finalInputFound)
+                                       finalTowerId=(readonly attrs.finalTowerId)
+                                       firstTowerGroupId=(readonly attrs.firstTowerGroupId)
                                        shake-stylesheet=(action attrs.shake-stylesheet)
                                        submit-code-line=(action "submitCodeLine")
                                        selectedTowerGroup=(readonly attrs.selectedTowerGroup)
                                        towerGroup=(readonly attrs.towerGroup)
+                                       unitId=(readonly attrs.towerGroup.id)
                                        unitType=(readonly "tower group")
                                        waveStarted=(readonly attrs.waveStarted)}}
     </li>

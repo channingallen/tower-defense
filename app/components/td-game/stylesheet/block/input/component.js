@@ -27,6 +27,13 @@ export default Ember.Component.extend({
     return inputValueLowerCase.substring(0, colonLocation);
   },
 
+  _focusInput() {
+    const inputViewName = this.get('inputViewName');
+    const inputComponent = this.get(inputViewName);
+    const inputEl = inputComponent.get('element');
+    inputEl.focus();
+  },
+
   _propertyFound() {
     if (this.get('inputEmpty')) {
       return false;
@@ -88,29 +95,35 @@ export default Ember.Component.extend({
         this.attrs.selectedTowerGroup === this.attrs.towerGroup;
 
       if (towerSelected || towerGroupSelected) {
-        const inputViewName = this.get('inputViewName');
-        const inputComponent = this.get(inputViewName);
-        const inputEl = inputComponent.get('element');
-        inputEl.focus();
+        this._focusInput();
       }
     }
   ),
 
   focusNewInput: Ember.computed('attrs.blockSubmitted', function () {
+    if (!this.attrs.finalInputFound) {
+      return false;
+    }
     return !this.attrs.blockSubmitted;
+  }),
+
+  focusIfFirstInput: Ember.on('didInsertElement', function () {
+    if (this.attrs.unitId === this.attrs.firstTowerGroupId) {
+      this._focusInput();
+    }
   }),
 
   submitted: Ember.computed('attrs.blockSubmitted', function () {
     return !!this.attrs.blockSubmitted;
   }),
 
-  actions: {
-    handleFocusIn() {
-      this.attrs.click(
-        this.attrs.tower ? this.attrs.tower : this.attrs.towerGroup
-      );
-    },
+  notifyOnFinalInput: Ember.on('didInsertElement', function () {
+    if (this.attrs.unitId === this.attrs.finalTowerId) {
+      this.attrs['notify-final-input']();
+    }
+  }),
 
+  actions: {
     handleInputEnter() {
       if (this.get('inputValid')) {
         this.attrs['submit-code-line'](
@@ -126,6 +139,12 @@ export default Ember.Component.extend({
 
     handleKeyUp(keyUpVal) {
       this.set('inputValue', keyUpVal);
-    }
+    },
+
+    selectUnit() {
+      this.attrs.click(
+        this.attrs.tower ? this.attrs.tower : this.attrs.towerGroup
+      );
+    },
   }
 });

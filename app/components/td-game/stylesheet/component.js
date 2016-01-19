@@ -5,6 +5,21 @@ export default Ember.Component.extend({
 
   shakeActive: false,
 
+  finalTowerId: null,
+
+  firstTowerGroupId: null,
+
+  setFirstAndFinalUnitIds: Ember.on('init', function () {
+    const firstTowerGroup = this.attrs.towerGroups.get('firstObject');
+    const firstTowerGroupId = firstTowerGroup.get('id');
+    this.set('firstTowerGroupId', firstTowerGroupId);
+
+    const finalTowerGroup = this.attrs.towerGroups.get('lastObject');
+    const finalTower = finalTowerGroup.get('towers').get('lastObject');
+    const finalTowerId = finalTower.get('id');
+    this.set('finalTowerId', finalTowerId);
+  }),
+
   _delayNextShake() {
     this.set('shakeActive', true);
 

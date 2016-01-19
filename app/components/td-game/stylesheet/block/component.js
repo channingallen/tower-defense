@@ -4,6 +4,8 @@ import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 export default Ember.Component.extend({
   classNames: ['stylesheet__block'],
 
+  finalInputFound: false,
+
   tagName: 'ol',
 
   _deleteCodeLine(id) {
@@ -68,6 +70,10 @@ export default Ember.Component.extend({
       this._deleteCodeLine(id);
 
       this.attrs['update-unit-styles'](this.get('codeLines'));
+    },
+
+    notifyFinalInput() {
+      this.set('finalInputFound', true);
     },
 
     submitCodeLine(codeStr, id) {
