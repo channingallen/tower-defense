@@ -4,7 +4,10 @@ export default Ember.Component.extend({
   classNames: ['board__tower-group'],
 
   classNameBindings: [
-    'selected:board__tower-group--selected'
+    'selected:board__tower-group--selected',
+    'groupType1:board__tower-group--type-1',
+    'groupType2:board__tower-group--type-2',
+    'groupType3:board__tower-group--type-3'
   ],
 
   _getProperty(codeLine) {
@@ -54,6 +57,27 @@ export default Ember.Component.extend({
 
     return towers;
   }),
+
+  groupType1: Ember.computed(
+    'attrs.type',
+    function () {
+      return this.attrs.type === 1;
+    }
+  ),
+
+  groupType2: Ember.computed(
+    'attrs.type',
+    function () {
+      return this.attrs.type === 2;
+    }
+  ),
+
+  groupType3: Ember.computed(
+    'attrs.type',
+    function () {
+      return this.attrs.type === 3;
+    }
+  ),
 
   selected: Ember.computed(
     'attrs.selectedTowerGroup',

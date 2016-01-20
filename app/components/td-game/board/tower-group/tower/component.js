@@ -85,6 +85,19 @@ export default Ember.Component.extend({
     }
   ),
 
+  setTowerDimensions: Ember.on('didInsertElement', function () {
+    const $board = Ember.$('.td-game__board');
+    const $newWidth = $board.width() / 27;
+    this.$().css('width', $newWidth);
+    this.$().css('height', $newWidth);
+
+    Ember.$(window).resize(() => {
+      const $newWidth = $board.width() / 27;
+      this.$().css('width', $newWidth);
+      this.$().css('height', $newWidth);
+    });
+  }),
+
   updatePosition: Ember.on('didInsertElement', function () {
     const towerId = this.attrs.tower.get('id');
 
@@ -99,7 +112,7 @@ export default Ember.Component.extend({
     }, 200);
   }),
 
-  updateStyle: Ember.observer(
+  updateCodeLines: Ember.observer(
     'attrs.tower.styles',
     'attrs.tower.styles.[]',
     'attrs.tower.styles.length',

@@ -1,5 +1,9 @@
-$board__tower-group--height: 40px;
-$board__tower-group--padding: 6px;
+$board__tower-group--padding: 1%;
+$board__tower-group--width: 100% - ($board--padding * 4);
+// $board__tower-group--height: 40px;
+$board__tower-group--height-1: ($board__tower-group--width / 18);
+$board__tower-group--height-2: ($board__tower-group--width / 12);
+$board__tower-group--height-3: ($board__tower-group--width / 6);
 $background-color: hsla(0, 0%, 100%, 0.25);
 
 .board__tower-group {
@@ -7,16 +11,30 @@ $background-color: hsla(0, 0%, 100%, 0.25);
   border-radius: 4px;
   cursor: pointer;
   display: flex;
-  height: $board__tower-group--height;
+  height: $board__tower-group--height-1;
   padding: $board__tower-group--padding;
   position: absolute;
-  width: calc(100% - #{$board--padding * 2});
+  width: $board__tower-group--width;
+  // width: calc(100% - #{$board--padding * 2});
 
   &:hover {
     background-color: opacify($background-color, 0.25);
     box-shadow: 0 0 10px opacify($background-color, 0.6);
   }
 }
+
+.board__tower-group--type-1 {
+  height: $board__tower-group--height-1;
+}
+
+.board__tower-group--type-2 {
+  height: $board__tower-group--height-2;
+}
+
+.board__tower-group--type-3 {
+  height: $board__tower-group--height-3;
+}
+
 
 .board__tower-group--selected {
   background-color: opacify($background-color, 0.25);

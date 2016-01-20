@@ -1,11 +1,13 @@
 .tower-group__tower {
   $background-color: hsl(0, 100%, 50%);
-  $dimensions: $board__tower-group__height - ($board__tower-group__padding * 2);
+  // $tower-width: $board__tower-group__height-1 - ($board__tower-group__padding * 100);
+  // $tower-height: $board__tower-group__height-1 - ($board__tower-group__padding * 100);
+  $tower-height: $board__tower-group__height-1;
 
   background-color: $background-color;
   border-radius: 9999px;
-  height: $dimensions;
-  width: $dimensions;
+  height: 100%;
+  width: 5px;
 
   &:hover {
     box-shadow: 0 0 10px transparentize($background-color, 0.15);
