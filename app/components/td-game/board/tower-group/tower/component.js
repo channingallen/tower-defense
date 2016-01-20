@@ -51,6 +51,10 @@ export default Ember.Component.extend({
   },
 
   _styleFound(styleNeedle) {
+    if (!styleNeedle) {
+      return;
+    }
+    
     let styleApplicable = false;
     styleNeedle = styleNeedle.replace(/ /g,'');
     const towerStyles = this.attrs.tower.get('styles');
