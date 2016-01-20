@@ -76,15 +76,15 @@ export default Ember.Component.extend({
   },
 
   _autoFocusInput: Ember.observer(
-    'attrs.clickedStylesheet',
+    // 'attrs.clickedStylesheet',
     'attrs.selectedTower',
     'attrs.selectedTowerGroup',
     'attrs.tower',
     'attrs.towerGroup',
     function () {
       const waveStarted = this.attrs.waveStarted;
-      const clickedStylesheet = this.attrs.clickedStylesheet;
-      if (this.get('submitted') || clickedStylesheet || waveStarted) {
+      // const clickedStylesheet = this.attrs.clickedStylesheet;
+      if (this.get('submitted') /*|| clickedStylesheet */|| waveStarted) {
         return;
       }
 
@@ -137,20 +137,29 @@ export default Ember.Component.extend({
       }
     },
 
-    handleKeyDown(keyDownVal, event) {
-      if (event.which === 9) {
-        this.attrs['click-stylesheet']();
-      }
-    },
+    // handleKeyDown(keyDownVal, event) {
+    //   if (event.which === 9) {
+    //     this.attrs['click-stylesheet']();
+    //   }
+    // },
 
     handleKeyUp(keyUpVal) {
       this.set('inputValue', keyUpVal);
     },
 
-    // selectUnit() {
-    //   this.attrs.click(
-    //     this.attrs.tower ? this.attrs.tower : this.attrs.towerGroup
-    //   );
-    // },
+    selectUnit() {
+      let unit;
+      let attribute;
+
+      if (this.attrs.tower) {
+        unit = this.attrs.tower;
+        attribute = 'tower';
+      } else {
+        unit = this.attrs.towerGroup;
+        attribute = 'tower-group';
+      }
+
+      this.attrs['select-' + attribute](unit);
+    },
   }
 });

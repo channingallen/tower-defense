@@ -24,7 +24,7 @@ export default Ember.Component.extend({
     },
 
     clickStylesheet() {
-      this.set('clickedStylesheet', true);
+      // this.set('clickedStylesheet', true);
     },
 
     selectTower(tower) {
@@ -32,13 +32,11 @@ export default Ember.Component.extend({
         return;
       }
 
-      Ember.run.later(this, () => {
-        if (this.get('selectedTowerGroup')) {
-          this.forceSet('selectedTowerGroup', null);
-        }
+      if (this.get('selectedTowerGroup')) {
+        this.forceSet('selectedTowerGroup', null);
+      }
 
-        this.forceSet('selectedTower', tower);
-      }, 50);
+      this.forceSet('selectedTower', tower);
     },
 
     selectTowerGroup(towerGroup) {
@@ -46,13 +44,11 @@ export default Ember.Component.extend({
         return;
       }
 
-      Ember.run.later(this, () => {
-        if (this.get('selectedTower')) {
-          this.forceSet('selectedTower', null);
-        }
+      if (this.get('selectedTower')) {
+        this.forceSet('selectedTower', null);
+      }
 
-        this.forceSet('selectedTowerGroup', towerGroup);
-      }, 50);
+      this.forceSet('selectedTowerGroup', towerGroup);
     },
 
     setStyles(blockCodeLines) {

@@ -11,9 +11,6 @@
                                        blockSubmitted=(readonly twrCodeLine.submitted)
                                        blockId=(readonly twrCodeLine.id)
                                        class="block__input-container"
-                                       clickedStylesheet=(readonly attrs.clickedStylesheet)
-                                       click=(action attrs.select-tower attrs.tower)
-                                       click-stylesheet=(action attrs.click-stylesheet)
                                        delete-code-line=(action "deleteCodeLine")
                                        finalInputFound=(readonly finalInputFound)
                                        finalTowerId=(readonly attrs.finalTowerId)
@@ -21,11 +18,14 @@
                                        notify-final-input=(action "notifyFinalInput")
                                        shake-stylesheet=(action attrs.shake-stylesheet)
                                        submit-code-line=(action "submitCodeLine")
+                                       select-tower=(action attrs.select-tower)
                                        selectedTower=(readonly attrs.selectedTower)
                                        tower=(readonly attrs.tower)
                                        unitId=(readonly attrs.tower.id)
                                        unitType=(readonly "tower")
                                        waveStarted=(readonly attrs.waveStarted)}}
+                                       {{!-- clickedStylesheet=(readonly attrs.clickedStylesheet)
+                                       click-stylesheet=(action attrs.click-stylesheet) --}}
     </li>
   {{/each}}
 {{else}}
@@ -35,20 +35,20 @@
                                        blockSubmitted=(readonly twrGrpCodeLine.submitted)
                                        blockId=(readonly twrGrpCodeLine.id)
                                        class="block__input-container"
-                                       clickedStylesheet=(readonly attrs.clickedStylesheet)
-                                       click=(action attrs.select-tower-group attrs.towerGroup)
-                                       click-stylesheet=(action attrs.click-stylesheet)
                                        delete-code-line=(action "deleteCodeLine")
                                        finalInputFound=(readonly finalInputFound)
                                        finalTowerId=(readonly attrs.finalTowerId)
                                        firstTowerGroupId=(readonly attrs.firstTowerGroupId)
                                        shake-stylesheet=(action attrs.shake-stylesheet)
                                        submit-code-line=(action "submitCodeLine")
+                                       select-tower-group=(action attrs.select-tower-group)
                                        selectedTowerGroup=(readonly attrs.selectedTowerGroup)
                                        towerGroup=(readonly attrs.towerGroup)
                                        unitId=(readonly attrs.towerGroup.id)
                                        unitType=(readonly "tower group")
                                        waveStarted=(readonly attrs.waveStarted)}}
+                                       {{!-- clickedStylesheet=(readonly attrs.clickedStylesheet)
+                                       click-stylesheet=(action attrs.click-stylesheet) --}}
     </li>
   {{/each}}
 {{/if}}

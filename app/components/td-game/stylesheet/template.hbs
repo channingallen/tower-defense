@@ -4,9 +4,7 @@
     <span class="block__brace">{</span>
   </li>
 
-  {{td-game/stylesheet/block clickedStylesheet=(readonly attrs.clickedStylesheet)
-                             click-stylesheet=(action attrs.click)
-                             finalTowerId=(readonly finalTowerId)
+  {{td-game/stylesheet/block finalTowerId=(readonly finalTowerId)
                              firstTowerGroupId=(readonly firstTowerGroupId)
                              select-tower-group=(action attrs.select-tower-group)
                              selectedTowerGroup=(readonly attrs.selectedTowerGroup)
@@ -14,6 +12,8 @@
                              towerGroup=(readonly towerGroup)
                              update-unit-styles=(action attrs.submit-styles)
                              waveStarted=(readonly attrs.waveStarted)}}
+                             {{!-- clickedStylesheet=(readonly attrs.clickedStylesheet) --}}
+                             {{!-- click-stylesheet=(action attrs.click) --}}
 
   <li class="block__line block__brace-line">
     <span class="block__brace">}</span>
@@ -24,9 +24,7 @@
       <span class="block__selector">{{tower.selector}}</span>
       <span class="block__brace">{</span>
     </li>
-    {{td-game/stylesheet/block clickedStylesheet=(readonly attrs.clickedStylesheet)
-                               click-stylesheet=(action attrs.click)
-                               finalTowerId=(readonly finalTowerId)
+    {{td-game/stylesheet/block finalTowerId=(readonly finalTowerId)
                                firstTowerGroupId=(readonly firstTowerGroupId)
                                select-tower=(action attrs.select-tower)
                                selectedTower=(readonly attrs.selectedTower)
@@ -34,6 +32,8 @@
                                tower=(readonly tower)
                                update-unit-styles=(action attrs.submit-styles)
                                waveStarted=(readonly attrs.waveStarted)}}
+                               {{!-- clickedStylesheet=(readonly attrs.clickedStylesheet) --}}
+                               {{!-- click-stylesheet=(action attrs.click) --}}
     <li class="block__line block__brace-line">
       <span class="block__brace">}</span>
     </li>

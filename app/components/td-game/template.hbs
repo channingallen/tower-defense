@@ -4,7 +4,6 @@
   </div>
 
   {{td-game/stylesheet click=(action "clickStylesheet")
-                       clickedStylesheet=(readonly clickedStylesheet)
                        select-tower=(action "selectTower")
                        select-tower-group=(action "selectTowerGroup")
                        selectedTower=(readonly selectedTower)
@@ -13,10 +12,10 @@
                        submit-styles=(action "setStyles")
                        towerGroups=(readonly currentWave.towerGroups)
                        waveStarted=(readonly waveStarted)}}
+                       {{!-- clickedStylesheet=(readonly clickedStylesheet) --}}
 </div>
 
 {{td-game/board backgroundImage=(readonly currentWave.board.imageUrl)
-                click=(action "clickBoard")
                 path=(readonly currentWave.board.pathData)
                 select-tower=(action "selectTower")
                 select-tower-group=(action "selectTowerGroup")
@@ -25,3 +24,4 @@
                 towerGroups=(readonly currentWave.towerGroups)
                 waveMobs=(readonly currentWave.mobs)
                 waveStarted=(readonly waveStarted)}}
+                {{!-- click=(action "clickBoard") --}}
