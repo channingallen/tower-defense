@@ -147,10 +147,10 @@ export default Ember.Component.extend({
       this.set('inputValue', keyUpVal);
     },
 
-    selectUnit() {
-      this.attrs.click(
-        this.attrs.tower ? this.attrs.tower : this.attrs.towerGroup
-      );
-    },
+    // selectUnit() {
+    //   this.attrs.click(
+    //     this.attrs.tower ? this.attrs.tower : this.attrs.towerGroup
+    //   );
+    // },
   }
 });
