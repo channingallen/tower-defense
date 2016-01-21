@@ -2,8 +2,6 @@ import Ember from 'ember';
 import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 
 export default Ember.Component.extend({
-  autoFocusOn: true,
-
   classNames: ['stylesheet__block'],
 
   finalInputFound: false,
@@ -101,8 +99,8 @@ export default Ember.Component.extend({
         this.attrs.selectedTowerGroup === this.attrs.towerGroup;
 
       if (towerSelected || towerGroupSelected) {
-        const autoFocusOn = this.get('autoFocusOn');
-        if (autoFocusOn) {
+        const inputAutoSelected = !this.get('inputIdSelectedManually');
+        if (inputAutoSelected) {
           const unsubmittedInputId = this._getUnsubmittedId();
           this.forceSet('inputIdToFocus', unsubmittedInputId);
         } else {
@@ -120,14 +118,10 @@ export default Ember.Component.extend({
     },
 
     disableAutoFocus(id) {
-      this.set('autoFocusOn', false);
-
       this.set('inputIdSelectedManually', id);
     },
 
     enableAutoFocus() {
-      this.set('autoFocusOn', true);
-
       this.set('inputIdSelectedManually', null);
     },
 
