@@ -2,9 +2,15 @@ import Ember from 'ember';
 import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 
 export default Ember.Component.extend({
+  autoFocusOn: true,
+
   classNames: ['stylesheet__block'],
 
   finalInputFound: false,
+
+  inputIdSelectedManually: null,
+
+  inputIdToFocus: null,
 
   tagName: 'ol',
 
@@ -17,6 +23,18 @@ export default Ember.Component.extend({
     });
 
     this.get('codeLines').removeAt(index);
+  },
+
+  _getUnsubmittedId() {
+    let unsubmittedId;
+
+    this.get('codeLines').forEach((codeLine) => {
+      if (!codeLine.submitted) {
+        unsubmittedId = codeLine.get('id');
+      }
+    });
+
+    return unsubmittedId;
   },
 
   _unsubmittedCodeLineFound(codeLines) {
@@ -65,11 +83,52 @@ export default Ember.Component.extend({
     }
   ),
 
+  _focusProperInput: Ember.observer(
+    'attrs.selectedTower',
+    'attrs.selectedTowerGroup',
+    'attrs.tower',
+    'attrs.towerGroup',
+    function () {
+      const waveStarted = this.attrs.waveStarted;
+      if (waveStarted) {
+        return;
+      }
+
+      const towerSelected = this.attrs.selectedTower &&
+        this.attrs.selectedTower === this.attrs.tower;
+
+      const towerGroupSelected = this.attrs.selectedTowerGroup &&
+        this.attrs.selectedTowerGroup === this.attrs.towerGroup;
+
+      if (towerSelected || towerGroupSelected) {
+        const autoFocusOn = this.get('autoFocusOn');
+        if (autoFocusOn) {
+          const unsubmittedInputId = this._getUnsubmittedId();
+          this.forceSet('inputIdToFocus', unsubmittedInputId);
+        } else {
+          this.forceSet('inputIdToFocus', this.get('inputIdSelectedManually'));
+        }
+      }
+    }
+  ),
+
   actions: {
     deleteCodeLine(id) {
       this._deleteCodeLine(id);
 
       this.attrs['update-unit-styles'](this.get('codeLines'));
+    },
+
+    disableAutoFocus(id) {
+      this.set('autoFocusOn', false);
+
+      this.set('inputIdSelectedManually', id);
+    },
+
+    enableAutoFocus() {
+      this.set('autoFocusOn', true);
+
+      this.set('inputIdSelectedManually', null);
     },
 
     notifyFinalInput() {

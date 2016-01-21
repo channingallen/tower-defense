@@ -5,10 +5,10 @@
 {{else}}
   {{input class="block__input"
           enter=(action "handleInputEnter")
-          focusIn=(action "selectUnit")
+          focusIn=(action "handleFocusIn")
+          focusOut=(action "handleFocusOut")
           focusOnInsert=(readonly focusNewInput)
           key-up=(action "handleKeyUp")
           value=(readonly inputValue)
           viewName=(readonly inputViewName)}}
-          {{!-- key-down=(action "handleKeyDown") --}}
 {{/if}}

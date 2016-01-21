@@ -4,34 +4,26 @@ import createFlexboxRef from 'tower-defense/utils/create-flexbox-ref';
 export default Ember.Component.extend({
   flexboxRef: createFlexboxRef(),
 
+  focusInCount: 0,
+
+  focusOutCount: 0,
+
   inputValue: null,
 
   inputViewName: 'input', // This can be called anything.
-
-  inputEmpty: Ember.computed('inputValue', function () {
-    if (!this.get('inputValue')) {
-      return true;
-    }
-
-    return this.get('inputValue') === '' ? true : false;
-  }),
-
-  inputValid: Ember.computed('inputValue', function () {
-    return this._validPropertyFound() && this._validValueFound();
-  }),
-
-  _getProperty() {
-    const inputValueLowerCase = this.get('inputValue').toLowerCase();
-    const colonLocation = inputValueLowerCase.indexOf(':');
-
-    return inputValueLowerCase.substring(0, colonLocation);
-  },
 
   _focusInput() {
     const inputViewName = this.get('inputViewName');
     const inputComponent = this.get(inputViewName);
     const inputEl = inputComponent.get('element');
     inputEl.focus();
+  },
+
+  _getProperty() {
+    const inputValueLowerCase = this.get('inputValue').toLowerCase();
+    const colonLocation = inputValueLowerCase.indexOf(':');
+
+    return inputValueLowerCase.substring(0, colonLocation);
   },
 
   _propertyFound() {
@@ -75,31 +67,6 @@ export default Ember.Component.extend({
     return valueFound ? true : false;
   },
 
-  _autoFocusInput: Ember.observer(
-    // 'attrs.clickedStylesheet',
-    'attrs.selectedTower',
-    'attrs.selectedTowerGroup',
-    'attrs.tower',
-    'attrs.towerGroup',
-    function () {
-      const waveStarted = this.attrs.waveStarted;
-      // const clickedStylesheet = this.attrs.clickedStylesheet;
-      if (this.get('submitted') /*|| clickedStylesheet */|| waveStarted) {
-        return;
-      }
-
-      const towerSelected = this.attrs.selectedTower &&
-        this.attrs.selectedTower === this.attrs.tower;
-
-      const towerGroupSelected = this.attrs.selectedTowerGroup &&
-        this.attrs.selectedTowerGroup === this.attrs.towerGroup;
-
-      if (towerSelected || towerGroupSelected) {
-        this._focusInput();
-      }
-    }
-  ),
-
   focusNewInput: Ember.computed('attrs.blockSubmitted', function () {
     if (!this.attrs.finalInputFound) {
       return false;
@@ -107,19 +74,51 @@ export default Ember.Component.extend({
     return !this.attrs.blockSubmitted;
   }),
 
-  focusIfFirstInput: Ember.on('didInsertElement', function () {
-    if (this.attrs.unitId === this.attrs.firstTowerGroupId) {
-      this._focusInput();
+  inputEmpty: Ember.computed('inputValue', function () {
+    if (!this.get('inputValue')) {
+      return true;
     }
+
+    return this.get('inputValue') === '' ? true : false;
+  }),
+
+  inputValid: Ember.computed('inputValue', function () {
+    return this._validPropertyFound() && this._validValueFound();
   }),
 
   submitted: Ember.computed('attrs.blockSubmitted', function () {
     return !!this.attrs.blockSubmitted;
   }),
 
-  notifyOnFinalInput: Ember.on('didInsertElement', function () {
+  _focusIfFirstInput: Ember.on('didInsertElement', function () {
+    if (this.attrs.unitId === this.attrs.firstTowerGroupId) {
+      this._focusInput();
+    }
+  }),
+
+  _focusMatchedInput: Ember.observer(
+    'attrs.inputIdToFocus',
+    function () {
+      if (this.attrs.inputIdToFocus === this.attrs.codeLineId) {
+        this._focusInput();
+      }
+    }
+  ),
+
+  _notifyOnFinalInput: Ember.on('didInsertElement', function () {
     if (this.attrs.unitId === this.attrs.finalTowerId) {
       this.attrs['notify-final-input']();
+    }
+  }),
+
+  _sendFocusedState: Ember.observer('focusInCount', 'focusOutCount', function () {
+    const focusInCount = this.get('focusInCount');
+    const focusOutCount = this.get('focusOutCount');
+
+    if (focusInCount > focusOutCount) {
+      this.attrs['disable-autofocus'](this.attrs.codeLineId);
+    } else {
+      this.attrs['enable-autofocus'](this.attrs.codeLineId);
     }
   }),
 
@@ -128,26 +127,23 @@ export default Ember.Component.extend({
       if (this.get('inputValid')) {
         this.attrs['submit-code-line'](
           this.get('inputValue'),
-          this.attrs.blockId
+          this.attrs.codeLineId
         );
       } else if (this.get('inputEmpty')) {
-        this.attrs['delete-code-line'](this.attrs.blockId);
+        this.attrs['delete-code-line'](this.attrs.codeLineId);
       } else {
         this.attrs['shake-stylesheet']();
       }
     },
 
-    // handleKeyDown(keyDownVal, event) {
-    //   if (event.which === 9) {
-    //     this.attrs['click-stylesheet']();
-    //   }
-    // },
-
     handleKeyUp(keyUpVal) {
       this.set('inputValue', keyUpVal);
     },
 
-    selectUnit() {
+    handleFocusIn() {
+      const focusInCount = this.get('focusInCount');
+      this.set('focusInCount', focusInCount + 1);
+
       let unit;
       let attribute;
 
@@ -160,6 +156,11 @@ export default Ember.Component.extend({
       }
 
       this.attrs['select-' + attribute](unit);
+    },
+
+    handleFocusOut() {
+      const focusOutCount = this.get('focusOutCount');
+      this.set('focusOutCount', focusOutCount + 1);
     },
   }
 });
