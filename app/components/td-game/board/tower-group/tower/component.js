@@ -7,6 +7,11 @@ export default Ember.Component.extend({
     'selected:tower-group__tower--selected'
   ],
 
+  _clearPreviousStyles() {
+    this.$().css('justify-content', 'flex-start');
+    this.$().css('align-items', 'flex-start');
+  },
+
   _getPosLeft() {
     const $board = Ember.$('.td-game__board');
     const $tower = this.$();
@@ -134,9 +139,8 @@ export default Ember.Component.extend({
         codeLineEmpty = isNaN(codeLineLength) || codeLineLength < 1;
       }
 
+      this._clearPreviousStyles();
       if (!styleFound || codeLineEmpty) {
-        this.$().css('justify-content', 'flex-start');
-        this.$().css('align-items', 'flex-start');
         return;
       }
 

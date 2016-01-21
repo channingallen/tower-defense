@@ -10,6 +10,11 @@ export default Ember.Component.extend({
     'groupType3:board__tower-group--type-3'
   ],
 
+  _clearPreviousStyles() {
+    this.$().css('justify-content', 'flex-start');
+    this.$().css('align-items', 'flex-start');
+  },
+
   _getProperty(codeLine) {
     const codeLineLowerCase = codeLine.toLowerCase();
     const colonLocation = codeLineLowerCase.indexOf(':');
@@ -89,7 +94,7 @@ export default Ember.Component.extend({
     }
   ),
 
-  _updateStyle: Ember.observer(
+  _updateCodeLines: Ember.observer(
     'attrs.towerGroup.styles',
     'attrs.towerGroup.styles.[]',
     'attrs.towerGroup.styles.length',
@@ -106,9 +111,8 @@ export default Ember.Component.extend({
         codeLineEmpty = isNaN(codeLineLength) || codeLineLength < 1;
       }
 
+      this._clearPreviousStyles();
       if (!styleFound || codeLineEmpty) {
-        this.$().css('justify-content', 'flex-start');
-        this.$().css('align-items', 'flex-start');
         return;
       }
 
