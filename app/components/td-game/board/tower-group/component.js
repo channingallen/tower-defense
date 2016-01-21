@@ -89,7 +89,7 @@ export default Ember.Component.extend({
     }
   ),
 
-  updateStyle: Ember.observer(
+  _updateStyle: Ember.observer(
     'attrs.towerGroup.styles',
     'attrs.towerGroup.styles.[]',
     'attrs.towerGroup.styles.length',

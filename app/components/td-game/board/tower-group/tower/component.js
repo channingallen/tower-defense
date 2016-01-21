@@ -54,7 +54,7 @@ export default Ember.Component.extend({
     if (!styleNeedle) {
       return;
     }
-    
+
     let styleApplicable = false;
     styleNeedle = styleNeedle.replace(/ /g,'');
     const towerStyles = this.attrs.tower.get('styles');
@@ -75,12 +75,6 @@ export default Ember.Component.extend({
     return styleApplicable;
   },
 
-  _sendSelectAction: Ember.on('click', function (clickEvent) {
-    clickEvent.stopPropagation();
-
-    this.attrs.select(this.attrs.tower);
-  }),
-
   selected: Ember.computed(
     'attrs.selectedTower',
     'attrs.tower',
@@ -89,7 +83,14 @@ export default Ember.Component.extend({
     }
   ),
 
-  setTowerDimensions: Ember.on('didInsertElement', function () {
+  _sendSelectAction: Ember.on('click', function (clickEvent) {
+    clickEvent.stopPropagation();
+
+    this.attrs.select(this.attrs.tower);
+  }),
+
+
+  _setTowerDimensions: Ember.on('didInsertElement', function () {
     const $board = Ember.$('.td-game__board');
     const $newWidth = $board.width() / 27;
     this.$().css('width', $newWidth);
@@ -102,7 +103,7 @@ export default Ember.Component.extend({
     });
   }),
 
-  updatePosition: Ember.on('didInsertElement', function () {
+  _updatePosition: Ember.on('didInsertElement', function () {
     const towerId = this.attrs.tower.get('id');
 
     setInterval(() => {
@@ -116,7 +117,7 @@ export default Ember.Component.extend({
     }, 200);
   }),
 
-  updateCodeLines: Ember.observer(
+  _updateCodeLines: Ember.observer(
     'attrs.tower.styles',
     'attrs.tower.styles.[]',
     'attrs.tower.styles.length',

@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     }, 1300);
   },
 
-  setFirstAndFinalUnitIds: Ember.on('init', function () {
+  _setFirstAndFinalUnitIds: Ember.on('init', function () {
     const firstTowerGroup = this.attrs.towerGroups.get('firstObject');
     const firstTowerGroupId = firstTowerGroup.get('id');
     this.set('firstTowerGroupId', firstTowerGroupId);

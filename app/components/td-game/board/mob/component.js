@@ -65,7 +65,15 @@ export default Ember.Component.extend({
     return Math.floor(100 * ($mobDistanceFromBoardTop / $boardLength));
   },
 
-  destroyMob: Ember.observer('attrs.health', 'pathIndex', function () {
+  endPointReached: Ember.computed('pathIndex', function () {
+    return this.get('pathIndex') === this.attrs.path.length;
+  }),
+
+  numPathObjects: Ember.computed('attrs.path.[]', function () {
+    return this.attrs.path.length;
+  }),
+
+  _destroyMob: Ember.observer('attrs.health', 'pathIndex', function () {
     if (!this.get('advancing')) {
       return;
     }
@@ -95,11 +103,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  endPointReached: Ember.computed('pathIndex', function () {
-    return this.get('pathIndex') === this.attrs.path.length;
-  }),
-
-  initiateMotion: Ember.on('didInsertElement', function () {
+  _initiateMotion: Ember.on('didInsertElement', function () {
     this._advanceOnePositionClass();
 
     if (this.get('pathIndex') < this.get('numPathObjects')) {
@@ -111,11 +115,26 @@ export default Ember.Component.extend({
     }
   }),
 
-  numPathObjects: Ember.computed('attrs.path.[]', function () {
-    return this.attrs.path.length;
+  _updateHealth: Ember.observer('attrs.health', function () {
+    if (!this.get('advancing')) {
+      return;
+    }
+
+    const maxHealth = this.attrs.mob.get('maxHealth');
+    if (this.attrs.health > Math.floor(maxHealth * 0.80)) {
+      this.set('healthBarClass', 'mob__health-bar--100');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.60)) {
+      this.set('healthBarClass', 'mob__health-bar--80');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.40)) {
+      this.set('healthBarClass', 'mob__health-bar--60');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.20)) {
+      this.set('healthBarClass', 'mob__health-bar--40');
+    } else {
+      this.set('healthBarClass', 'mob__health-bar--20');
+    }
   }),
 
-  pollDOMPosition: Ember.on('didInsertElement', function () {
+  _updatePosition: Ember.on('didInsertElement', function () {
     const mobId = this.attrs.mob.get('id');
 
     const pollPosition = setInterval(() => {
@@ -136,23 +155,4 @@ export default Ember.Component.extend({
       }
     }, 200);
   }),
-
-  updateHealth: Ember.observer('attrs.health', function () {
-    if (!this.get('advancing')) {
-      return;
-    }
-
-    const maxHealth = this.attrs.mob.get('maxHealth');
-    if (this.attrs.health > Math.floor(maxHealth * 0.80)) {
-      this.set('healthBarClass', 'mob__health-bar--100');
-    } else if (this.attrs.health > Math.floor(maxHealth * 0.60)) {
-      this.set('healthBarClass', 'mob__health-bar--80');
-    } else if (this.attrs.health > Math.floor(maxHealth * 0.40)) {
-      this.set('healthBarClass', 'mob__health-bar--60');
-    } else if (this.attrs.health > Math.floor(maxHealth * 0.20)) {
-      this.set('healthBarClass', 'mob__health-bar--40');
-    } else {
-      this.set('healthBarClass', 'mob__health-bar--20');
-    }
-  })
 });

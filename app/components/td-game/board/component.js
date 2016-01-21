@@ -65,11 +65,17 @@ export default Ember.Component.extend({
     });
   },
 
-  applyBackgroundImage: Ember.on('didInsertElement', Ember.observer('attrs.backgroundImage', function () {
+  mobFrequency: Ember.computed('mobIndex', function () {
+    const mobIndex = this.get('mobIndex');
+    const waveMob = this.attrs.waveMobs[mobIndex];
+    return waveMob.get('frequency');
+  }),
+
+  _applyBackgroundImage: Ember.on('didInsertElement', Ember.observer('attrs.backgroundImage', function () {
     this.$().css('background-image', `url(${this.attrs.backgroundImage})`);
   })),
 
-  attackMobsInTowerRange: Ember.on('didInsertElement', function () {
+  _attackMobsInTowerRange: Ember.on('didInsertElement', function () {
     setInterval(() => {
       if (!this.get('towers.length') || !this.get('mobs.length')) {
         return;
@@ -117,13 +123,7 @@ export default Ember.Component.extend({
     }, 500);
   }),
 
-  mobFrequency: Ember.computed('mobIndex', function () {
-    const mobIndex = this.get('mobIndex');
-    const waveMob = this.attrs.waveMobs[mobIndex];
-    return waveMob.get('frequency');
-  }),
-
-  generateMobs: Ember.observer('attrs.waveStarted', function () {
+  _generateMobs: Ember.observer('attrs.waveStarted', function () {
     this._generateMob();
 
     if (!this._mobCapacityReached()) {
@@ -137,7 +137,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  getTowers: Ember.on('didInsertElement', function () {
+  _getTowers: Ember.on('didInsertElement', function () {
     this.attrs.towerGroups.forEach((towerGroup) => {
       this.get('towers').pushObject(towerGroup);
 
