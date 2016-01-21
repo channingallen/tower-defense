@@ -10,26 +10,41 @@ import Wave from 'tower-defense/objects/wave';
 function addBoardToWave(wave) {
   const board = Board.create();
 
+  // const pathObjects = [
+  //   PathCoords.create({x: 0, y: 30}),
+  //   PathCoords.create({x: 10, y: 30}),
+  //   PathCoords.create({x: 20, y: 30}),
+  //   PathCoords.create({x: 30, y: 30}),
+  //   PathCoords.create({x: 40, y: 30}),
+  //   PathCoords.create({x: 40, y: 20}),
+  //   PathCoords.create({x: 40, y: 10}),
+  //   PathCoords.create({x: 55, y: 10}),
+  //   PathCoords.create({x: 55, y: 20}),
+  //   PathCoords.create({x: 55, y: 30}),
+  //   PathCoords.create({x: 55, y: 40}),
+  //   PathCoords.create({x: 55, y: 50}),
+  //   PathCoords.create({x: 55, y: 60}),
+  //   PathCoords.create({x: 65, y: 60}),
+  //   PathCoords.create({x: 75, y: 60}),
+  //   PathCoords.create({x: 85, y: 60}),
+  //   PathCoords.create({x: 95, y: 60}),
+  //   PathCoords.create({x: 100, y: 60})
+  // ];
+
   const pathObjects = [
     PathCoords.create({x: 0, y: 30}),
-    PathCoords.create({x: 10, y: 30}),
-    PathCoords.create({x: 20, y: 30}),
-    PathCoords.create({x: 30, y: 30}),
     PathCoords.create({x: 40, y: 30}),
-    PathCoords.create({x: 40, y: 20}),
     PathCoords.create({x: 40, y: 10}),
-    PathCoords.create({x: 55, y: 10}),
-    PathCoords.create({x: 55, y: 20}),
-    PathCoords.create({x: 55, y: 30}),
-    PathCoords.create({x: 55, y: 40}),
-    PathCoords.create({x: 55, y: 50}),
-    PathCoords.create({x: 55, y: 60}),
-    PathCoords.create({x: 65, y: 60}),
-    PathCoords.create({x: 75, y: 60}),
-    PathCoords.create({x: 85, y: 60}),
-    PathCoords.create({x: 95, y: 60}),
+    PathCoords.create({x: 54, y: 10}),
+    PathCoords.create({x: 54, y: 60}),
     PathCoords.create({x: 100, y: 60})
   ];
+
+  // const pathObjects = [
+  //   PathCoords.create({x: 0, y: 30}),
+  //   PathCoords.create({x: 50, y: 30}),
+  //   PathCoords.create({x: 100, y: 30})
+  // ];
 
   pathObjects.forEach((pathObject) => {
     board.get('pathData').pushObject(pathObject);
@@ -51,7 +66,7 @@ function addMobsToWave(wave) {
     maxHealth: 300,
     points: 20,
     quantity: 5,
-    speed: 2000,
+    speed: 10,
     type: 'standard'
   };
 

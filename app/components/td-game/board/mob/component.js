@@ -1,68 +1,55 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  advancing: true,
-
   classNames: ['mob'],
 
   healthBarClass: 'mob__health-bar--100',
 
-  pathIndex: 0,
+  mobPathPosition: null,
 
-  _advanceOnePositionClass() {
-    const currentIndex = this.get('pathIndex');
-    const x = this.attrs.path[currentIndex].get('x');
-    const y = this.attrs.path[currentIndex].get('y');
+  nextMobPathPosition: null,
 
-    this.attrs['update-class'](
-      this.attrs.mob.get('id'),
-      'mob--position-x' + x + ' mob--position-y' + y
-    );
-
-    this.set('pathIndex', this.get('pathIndex') + 1);
+  _getFormattedTransitionSeconds(transitionSeconds) {
+    return transitionSeconds.toString() + 's';
   },
 
-  _advancePositionClasses() {
+  _getPercentageLeft(crudeLeft) {
+    const left = this._getNumFromPx(crudeLeft);
+    const boardWidth = this.$().parent().width();
+    return (left / boardWidth) * 100;
+  },
+
+  _getPercentageTop(crudeTop) {
+    const top = this._getNumFromPx(crudeTop);
+    const boardHeight = this.$().parent().height();
+    return (top / boardHeight) * 100;
+  },
+
+  _getNumFromPx(pixels) {
+    const valWithoutPx = pixels.split('px')[0];
+    return parseInt(valWithoutPx, 10);
+  },
+
+  _getTransitionSeconds(nextLeftPctOfTotalWidth, nextTopPctOfTotalHeight) {
+    const crudeLeft = this.$().css('left');
+    const crudeTop = this.$().css('top');
+    if (crudeLeft === 'auto' || crudeTop === 'auto') {
+      return 0;
+    }
+
+    const leftPctOfTotalWidth = this._getPercentageLeft(crudeLeft);
+    const topPctOfTotalHeight = this._getPercentageTop(crudeTop);
+
+    const pctDiff = Math.abs(leftPctOfTotalWidth - nextLeftPctOfTotalWidth) +
+                    Math.abs(topPctOfTotalHeight - nextTopPctOfTotalHeight);
+
+    return this.attrs.speed * (pctDiff / 100);
+  },
+
+  _incrementNextMobPathPosition(transitionMilliseconds) {
     Ember.run.later(this, () => {
-      if (!this.get('advancing')) {
-        return;
-      }
-
-      this._advanceOnePositionClass();
-      if (this.get('pathIndex') < this.get('numPathObjects')) {
-        this._advancePositionClasses();
-      }
-    }, this.attrs.speed);
-  },
-
-  _getPosLeft() {
-    const $board = Ember.$('.td-game__board');
-    const $mob = this.$();
-
-    const $boardDistanceFromLeft = $board.offset().left;
-    const $mobDistanceFromLeft = $mob.offset().left;
-
-    const $mobDistanceFromBoardLeft = Math.abs(
-      $boardDistanceFromLeft - $mobDistanceFromLeft
-    );
-
-    const $boardLength = $board.innerHeight(); // height & width
-    return Math.floor(100 * ($mobDistanceFromBoardLeft / $boardLength));
-  },
-
-  _getPosTop() {
-    const $board = Ember.$('.td-game__board');
-    const $mob = this.$();
-
-    const $boardDistanceFromTop = $board.offset().top;
-    const $mobDistanceFromTop = $mob.offset().top;
-
-    const $mobDistanceFromBoardTop = Math.abs(
-      $boardDistanceFromTop - $mobDistanceFromTop
-    );
-
-    const $boardLength = $board.innerHeight(); // height & width
-    return Math.floor(100 * ($mobDistanceFromBoardTop / $boardLength));
+      this.set('nextMobPathPosition', this.get('nextMobPathPosition') + 1);
+    }, transitionMilliseconds);
   },
 
   endPointReached: Ember.computed('pathIndex', function () {
@@ -73,45 +60,37 @@ export default Ember.Component.extend({
     return this.attrs.path.length;
   }),
 
-  _destroyMob: Ember.observer('attrs.health', 'pathIndex', function () {
-    if (!this.get('advancing')) {
-      return;
-    }
+  _advanceMob: Ember.observer(
+    'nextMobPathPosition',
+    function() {
+      const nextMobPathPosition = this.get('nextMobPathPosition');
+      this.set('mobPathPosition', nextMobPathPosition);
+      const mobPathPosition = this.get('mobPathPosition');
 
-    const endPointReached = this.get('pathIndex') === this.attrs.path.length;
-    if (this.attrs.health < 1 || endPointReached) {
-      this.set('advancing', false);
+      const path = this.attrs.path;
+      const pathLastIndex = path.get('length') - 1;
+      const nextPathCoords = path.get(mobPathPosition);
+      const nextLeft = nextPathCoords.get('x');
+      const nextTop = nextPathCoords.get('y');
 
-      const styleToAdd = this.attrs.health < 1 ?
-                         ' mob--points-added' : ' mob--points-removed';
-      this.attrs['update-class'](
-        this.attrs.mob.get('id'),
-        this.attrs.class + styleToAdd
+      const transitionSeconds = this._getTransitionSeconds(nextLeft, nextTop);
+      const formattedTransitionSeconds = this._getFormattedTransitionSeconds(
+        transitionSeconds
       );
+      this.$().css('transition', 'all ' + formattedTransitionSeconds + ' linear');
+      this.$().css('left', nextLeft + '%');
+      this.$().css('top', nextTop + '%');
 
-      const pointAction = endPointReached ? 'subtract-points' : 'add-points';
-      this.attrs[pointAction](this.attrs.points);
-
-      Ember.run.later(this, () => {
-        this.attrs['update-class'](
-          this.attrs.mob.get('id'),
-          'mob--dead'
-        );
-
-        this.attrs['destroy-mob'](this.attrs.mob);
-      }, 2000);
+      if (pathLastIndex >= this.get('nextMobPathPosition') + 1) {
+        const transitionMilliseconds = transitionSeconds * 1000;
+        this._incrementNextMobPathPosition(transitionMilliseconds);
+      }
     }
-  }),
+  ),
 
-  _initiateMotion: Ember.on('didInsertElement', function () {
-    this._advanceOnePositionClass();
-
-    if (this.get('pathIndex') < this.get('numPathObjects')) {
-      Ember.run.later(this, () => {
-        this._advanceOnePositionClass();
-      }, 200);
-
-      this._advancePositionClasses();
+  _placeMob: Ember.on('didInsertElement', function () {
+    if (this.attrs.path.get('firstObject').get('x') >= 0) {
+      this.set('nextMobPathPosition', 0);
     }
   }),
 
@@ -132,27 +111,5 @@ export default Ember.Component.extend({
     } else {
       this.set('healthBarClass', 'mob__health-bar--20');
     }
-  }),
-
-  _updatePosition: Ember.on('didInsertElement', function () {
-    const mobId = this.attrs.mob.get('id');
-
-    const pollPosition = setInterval(() => {
-      if (!this.get('advancing')) {
-        clearInterval(pollPosition);
-        return;
-      }
-
-      const posLeft = this._getPosLeft();
-      const posTop = this._getPosTop();
-      if (posTop && posLeft) {
-        this.attrs['update-position'](mobId, 'X', posLeft);
-        this.attrs['update-position'](mobId, 'Y', posTop);
-      }
-
-      if (!this.get('advancing') || this.get('pathIndex') === this.attrs.path.length) {
-        clearInterval(pollPosition);
-      }
-    }, 200);
-  }),
+  })
 });
