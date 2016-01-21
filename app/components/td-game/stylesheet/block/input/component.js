@@ -35,6 +35,13 @@ export default Ember.Component.extend({
     return colonLocation < 1 ? false : true;
   },
 
+  _getValWithoutSemiColon(val) {
+    const lastIndex = val.length - 1;
+    if (val[lastIndex] === ';') {
+      return val.substring(0, lastIndex);
+    }
+  },
+
   _validPropertyFound() {
     if (!this._propertyFound()) {
       return false;
@@ -52,10 +59,17 @@ export default Ember.Component.extend({
     if (!this._propertyFound()) {
       return false;
     }
+
     const property = this._getProperty();
     const startIndex = property.length + 1;
     const endIndex = this.get('inputValue.length');
-    let value = this.get('inputValue').substring(startIndex, endIndex).trim();
+
+    let fullValue = this.get('inputValue').substring(startIndex, endIndex).trim();
+    if (fullValue[fullValue.length - 1] !== ';') {
+      return false;
+    }
+
+    let value = this._getValWithoutSemiColon(fullValue);
 
     let valueFound = false;
     this.get('flexboxRef')[property].forEach(function (validValue) {
@@ -158,7 +172,7 @@ export default Ember.Component.extend({
       this.attrs['select-' + attribute](unit);
     },
 
-    handleFocusOut() {
+    handleFocusOut(e) {
       const focusOutCount = this.get('focusOutCount');
       this.set('focusOutCount', focusOutCount + 1);
     },
