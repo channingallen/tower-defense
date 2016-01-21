@@ -55,6 +55,13 @@ export default Ember.Component.extend({
     return codeLine.substring(startIndex, endIndex).trim();
   },
 
+  _getValueWithoutSemiColon(val) {
+    const lastIndex = val.length - 1;
+    if (val[lastIndex] === ';') {
+      return val.substring(0, lastIndex);
+    }
+  },
+
   _styleFound(styleNeedle) {
     if (!styleNeedle) {
       return;
@@ -152,7 +159,7 @@ export default Ember.Component.extend({
           const value = this._getValue(codeLine, property);
 
           if (property && value) {
-            this.$().css(property, value);
+            this.$().css(property, this._getValueWithoutSemiColon(value));
           }
         }
       });
