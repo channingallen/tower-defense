@@ -39,7 +39,7 @@ function addMobsToWave(wave) {
     maxHealth: 300,
     points: 20,
     quantity: 5,
-    speed: 15, // seconds to cross one axis of the board
+    speed: 8, // seconds to cross one axis of the board
     type: 'standard'
   };
 

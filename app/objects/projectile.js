@@ -4,8 +4,8 @@ const Projectile = Ember.Object.extend({
   id: null,
   endX: null,
   endY: null,
-  startX: null,
-  startY: null
+  towerX: null,
+  towerY: null
 });
 
 export default Projectile;

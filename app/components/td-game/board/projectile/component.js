@@ -26,7 +26,7 @@ export default Ember.Component.extend({
   },
 
   _placeProjectile: Ember.on('didInsertElement', function () {
-    this._setPosition(this.attrs.startX + 1, this.attrs.startY + 1);
+    this._setPosition(this.attrs.towerX + 1, this.attrs.towerY + 1);
     this.forceSet('inFlight', true);
 
     Ember.run.later(this, () => {
