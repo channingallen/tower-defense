@@ -33,7 +33,6 @@ export default Ember.Component.extend({
     if (projectileTower && targetedMob) {
       const newProjectile = Projectile.create({
         id: this._generateIdForProjectile(),
-        class: 'projectile',
         endX: targetedMob.get('posX'),
         endY: targetedMob.get('posY'),
         startX: projectileTower.get('posX'),
@@ -70,6 +69,16 @@ export default Ember.Component.extend({
     this.get('mobs').forEach((mob) => {
       if (mob.get('id') === mobId) {
         needle = mob;
+      }
+    });
+    return needle;
+  },
+
+  _getProjectileById(projectileId) {
+    let needle;
+    this.get('projectiles').forEach((projectile) => {
+      if (projectile.get('id') === projectileId) {
+        needle = projectile;
       }
     });
     return needle;
@@ -203,13 +212,12 @@ export default Ember.Component.extend({
 
     destroyMob(mob) {
       const mobIndex = this.get('mobs').indexOf(mob);
-
       this.get('mobs').removeAt(mobIndex);
     },
 
-    destroyProjectile(projectile) {
+    destroyProjectile(projectileId) {
+      const projectile = this._getProjectileById(projectileId);
       const projectileIndex = this.get('projectiles').indexOf(projectile);
-
       this.get('projectiles').removeAt(projectileIndex);
     },
 
