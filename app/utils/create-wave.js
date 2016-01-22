@@ -37,7 +37,7 @@ function addBoardToWave(wave) {
     PathCoords.create({x: 40, y: 10}),
     PathCoords.create({x: 54, y: 10}),
     PathCoords.create({x: 54, y: 60}),
-    PathCoords.create({x: 100, y: 60})
+    PathCoords.create({x: 92, y: 60})
   ];
 
   // const pathObjects = [
@@ -66,7 +66,7 @@ function addMobsToWave(wave) {
     maxHealth: 300,
     points: 20,
     quantity: 5,
-    speed: 10,
+    speed: 5, // seconds to cross one axis of the board
     type: 'standard'
   };
 
