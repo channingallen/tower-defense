@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   inFlight: false,
 
   _destroy() {
-    this.forceSet('inFlight', false);
+    this.set('inFlight', false);
 
     this.attrs.destroy(this.attrs.id);
   },
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
 
     Ember.run.later(this, () => {
       this._destroy();
-    }, 20);
+    }, 100);
   },
 
   _setPosition(left, top) {
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
 
   _placeProjectile: Ember.on('didInsertElement', function () {
     this._setPosition(this.attrs.towerX + 1, this.attrs.towerY + 1);
-    this.forceSet('inFlight', true);
+    this.set('inFlight', true);
 
     Ember.run.later(this, () => {
       this._moveToTarget();
