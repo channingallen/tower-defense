@@ -7,8 +7,6 @@ export default Ember.Component.extend({
 
   mobs: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
-  towerGroups: Ember.A([]),
-
   towers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
   wavePoints: 0,
@@ -139,8 +137,6 @@ export default Ember.Component.extend({
 
   _getTowers: Ember.on('didInsertElement', function () {
     this.attrs.towerGroups.forEach((towerGroup) => {
-      this.get('towers').pushObject(towerGroup);
-
       towerGroup.get('towers').forEach((tower) => {
         this.get('towers').pushObject(tower);
       });
