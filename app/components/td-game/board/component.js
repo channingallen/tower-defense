@@ -149,17 +149,17 @@ export default Ember.Component.extend({
       this.set('wavePoints', currentWavePoints + points);
     },
 
-    subtractPoints(points) {
-      const currentWavePoints = this.get('wavePoints');
-      this.set('wavePoints', currentWavePoints - points);
-    },
-
     destroyMob(mob) {
       const mobIndex = this.get('mobs').indexOf(mob);
 
       this.get('mobs').removeAt(mobIndex);
     },
 
+    subtractPoints(points) {
+      const currentWavePoints = this.get('wavePoints');
+      this.set('wavePoints', currentWavePoints - points);
+    },
+    
     updateMobClass(mobId, newClass) {
       this.get('mobs').forEach((mob) => {
         if (mobId === mob.get('id')) {

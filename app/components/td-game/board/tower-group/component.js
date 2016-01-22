@@ -1,14 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['board__tower-group'],
-
   classNameBindings: [
     'selected:board__tower-group--selected',
     'groupType1:board__tower-group--type-1',
     'groupType2:board__tower-group--type-2',
     'groupType3:board__tower-group--type-3'
   ],
+  
+  classNames: ['board__tower-group'],
 
   _clearPreviousStyles() {
     this.$().css('justify-content', 'flex-start');

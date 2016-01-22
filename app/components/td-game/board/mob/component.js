@@ -3,8 +3,6 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   advancing: true,
 
-  // classNames: ['mob'],
-
   classNameBindings: [
     'advancing:mob'
   ],
@@ -21,6 +19,11 @@ export default Ember.Component.extend({
     return transitionSeconds.toString() + 's';
   },
 
+  _getNumFromPx(pixels) {
+    const valWithoutPx = pixels.split('px')[0];
+    return parseInt(valWithoutPx, 10);
+  },
+
   _getPercentageLeft(crudeLeft) {
     const left = this._getNumFromPx(crudeLeft);
     const boardWidth = this.$().parent().width();
@@ -31,11 +34,6 @@ export default Ember.Component.extend({
     const top = this._getNumFromPx(crudeTop);
     const boardHeight = this.$().parent().height();
     return (top / boardHeight) * 100;
-  },
-
-  _getNumFromPx(pixels) {
-    const valWithoutPx = pixels.split('px')[0];
-    return parseInt(valWithoutPx, 10);
   },
 
   _getTransitionSeconds(nextLeftPctOfTotalWidth, nextTopPctOfTotalHeight) {

@@ -1,11 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['tower-group__tower'],
-
   classNameBindings: [
     'selected:tower-group__tower--selected'
   ],
+
+  classNames: ['tower-group__tower'],
 
   _clearPreviousStyles() {
     this.$().css('justify-content', 'flex-start');
@@ -101,7 +101,6 @@ export default Ember.Component.extend({
     this.attrs.select(this.attrs.tower);
   }),
 
-
   _setTowerDimensions: Ember.on('didInsertElement', function () {
     const $board = Ember.$('.td-game__board');
     const $newWidth = $board.width() / 27;
@@ -113,20 +112,6 @@ export default Ember.Component.extend({
       this.$().css('width', $newWidth);
       this.$().css('height', $newWidth);
     });
-  }),
-
-  _updatePosition: Ember.on('didInsertElement', function () {
-    const towerId = this.attrs.tower.get('id');
-
-    setInterval(() => {
-      const posLeft = this._getPosLeft();
-      const posTop = this._getPosTop();
-
-      if (posTop && posLeft) {
-        this.attrs['update-tower-position'](towerId, 'X', posLeft);
-        this.attrs['update-tower-position'](towerId, 'Y', posTop);
-      }
-    }, 200);
   }),
 
   _updateCodeLines: Ember.observer(
@@ -164,5 +149,19 @@ export default Ember.Component.extend({
         }
       });
     }
-  )
+  ),
+
+  _updatePosition: Ember.on('didInsertElement', function () {
+    const towerId = this.attrs.tower.get('id');
+
+    setInterval(() => {
+      const posLeft = this._getPosLeft();
+      const posTop = this._getPosTop();
+
+      if (posTop && posLeft) {
+        this.attrs['update-tower-position'](towerId, 'X', posLeft);
+        this.attrs['update-tower-position'](towerId, 'Y', posTop);
+      }
+    }, 200);
+  })
 });

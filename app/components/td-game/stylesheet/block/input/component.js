@@ -137,23 +137,6 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    handleInputEnter() {
-      if (this.get('inputValid')) {
-        this.attrs['submit-code-line'](
-          this.get('inputValue'),
-          this.attrs.codeLineId
-        );
-      } else if (this.get('inputEmpty')) {
-        this.attrs['delete-code-line'](this.attrs.codeLineId);
-      } else {
-        this.attrs['shake-stylesheet']();
-      }
-    },
-
-    handleKeyUp(keyUpVal) {
-      this.set('inputValue', keyUpVal);
-    },
-
     handleFocusIn() {
       const focusInCount = this.get('focusInCount');
       this.set('focusInCount', focusInCount + 1);
@@ -172,9 +155,26 @@ export default Ember.Component.extend({
       this.attrs['select-' + attribute](unit);
     },
 
-    handleFocusOut(e) {
+    handleFocusOut() {
       const focusOutCount = this.get('focusOutCount');
       this.set('focusOutCount', focusOutCount + 1);
     },
+
+    handleInputEnter() {
+      if (this.get('inputValid')) {
+        this.attrs['submit-code-line'](
+          this.get('inputValue'),
+          this.attrs.codeLineId
+        );
+      } else if (this.get('inputEmpty')) {
+        this.attrs['delete-code-line'](this.attrs.codeLineId);
+      } else {
+        this.attrs['shake-stylesheet']();
+      }
+    },
+
+    handleKeyUp(keyUpVal) {
+      this.set('inputValue', keyUpVal);
+    }
   }
 });

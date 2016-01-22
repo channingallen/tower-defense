@@ -3,11 +3,11 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['sidebar__stylesheet'],
 
-  shakeActive: false,
-
   finalTowerId: null,
 
   firstTowerGroupId: null,
+
+  shakeActive: false,
 
   _delayNextShake() {
     this.set('shakeActive', true);
