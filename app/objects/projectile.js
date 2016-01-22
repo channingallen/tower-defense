@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 const Projectile = Ember.Object.extend({
   id: null,
-  endX: null,
-  endY: null,
+  mobX1: null,
+  mobY1: null,
   towerX: null,
   towerY: null
 });

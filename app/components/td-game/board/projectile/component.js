@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   },
 
   _moveToTarget() {
-    this._setPosition(this.attrs.endX, this.attrs.endY);
+    this._setPosition(this.attrs.mobX1, this.attrs.mobY1);
 
     Ember.run.later(this, () => {
       this._destroy();

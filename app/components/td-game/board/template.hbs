@@ -24,8 +24,8 @@
 
 {{#each projectiles as |projectile|}}
   {{td-game/board/projectile destroy=(action "destroyProjectile")
-                             endX=(readonly projectile.endX)
-                             endY=(readonly projectile.endY)
+                             mobX1=(readonly projectile.mobX1)
+                             mobY1=(readonly projectile.mobY1)
                              id=(readonly projectile.id)
                              towerX=(readonly projectile.towerX)
                              towerY=(readonly projectile.towerY)}}

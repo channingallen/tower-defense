@@ -33,8 +33,8 @@ export default Ember.Component.extend({
     if (projectileTower && targetedMob) {
       const newProjectile = Projectile.create({
         id: this._generateIdForProjectile(),
-        endX: targetedMob.get('posX'),
-        endY: targetedMob.get('posY'),
+        mobX1: targetedMob.get('posX'),
+        mobY1: targetedMob.get('posY'),
         towerX: projectileTower.get('posX'),
         towerY: projectileTower.get('posY')
       });
