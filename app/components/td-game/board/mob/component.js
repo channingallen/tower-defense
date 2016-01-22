@@ -1,7 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['mob'],
+  advancing: true,
+
+  // classNames: ['mob'],
+
+  classNameBindings: [
+    'advancing:mob'
+  ],
+
+  endPointReached: false,
 
   healthBarClass: 'mob__health-bar--100',
 
@@ -52,9 +60,37 @@ export default Ember.Component.extend({
     }, transitionMilliseconds);
   },
 
-  endPointReached: Ember.computed('pathIndex', function () {
-    return this.get('pathIndex') === this.attrs.path.length;
-  }),
+  _sendMobToEndPoint(transitionMilliseconds) {
+    Ember.run.later(this, () => {
+      if (!this.get('advancing')) {
+        return;
+      }
+
+      this.set('endPointReached', true);
+    }, transitionMilliseconds);
+  },
+
+  _updatePosition() {
+    const pollPosition = setInterval(() => {
+      if (!this.get('advancing')) {
+        clearInterval(pollPosition);
+        return;
+      }
+
+      const mobId = this.attrs.mob.get('id');
+      const posLeftPct = this._getPercentageLeft(this.$().css('left'));
+      const posTopPct = this._getPercentageTop(this.$().css('top'));
+
+      if (posLeftPct && posTopPct) {
+        this.attrs['update-position'](mobId, 'X', posLeftPct);
+        this.attrs['update-position'](mobId, 'Y', posTopPct);
+      }
+
+      if (!this.get('advancing') || this.get('endPointReached')) {
+        clearInterval(pollPosition);
+      }
+    }, 200);
+  },
 
   numPathObjects: Ember.computed('attrs.path.[]', function () {
     return this.attrs.path.length;
@@ -63,15 +99,14 @@ export default Ember.Component.extend({
   _advanceMob: Ember.observer(
     'nextMobPathPosition',
     function() {
-      const nextMobPathPosition = this.get('nextMobPathPosition');
-      this.set('mobPathPosition', nextMobPathPosition);
-      const mobPathPosition = this.get('mobPathPosition');
+      const mobPathPosition = this.get('nextMobPathPosition');
+      this.set('mobPathPosition', mobPathPosition);
 
       const path = this.attrs.path;
       const pathLastIndex = path.get('length') - 1;
       const nextPathCoords = path.get(mobPathPosition);
-      const nextLeft = nextPathCoords.get('x');
-      const nextTop = nextPathCoords.get('y');
+      const nextLeft = nextPathCoords.get('x'); // % of total width
+      const nextTop = nextPathCoords.get('y'); // % of total height
 
       const transitionSeconds = this._getTransitionSeconds(nextLeft, nextTop);
       const formattedTransitionSeconds = this._getFormattedTransitionSeconds(
@@ -81,17 +116,49 @@ export default Ember.Component.extend({
       this.$().css('left', nextLeft + '%');
       this.$().css('top', nextTop + '%');
 
+      const transitionMilliseconds = transitionSeconds * 1000;
       if (pathLastIndex >= this.get('nextMobPathPosition') + 1) {
-        const transitionMilliseconds = transitionSeconds * 1000;
         this._incrementNextMobPathPosition(transitionMilliseconds);
+      } else {
+        this._sendMobToEndPoint(transitionMilliseconds);
       }
     }
   ),
+
+  _destroyMob: Ember.observer('attrs.health', 'endPointReached', function () {
+    if (!this.get('advancing')) {
+      return;
+    }
+
+    if (this.attrs.health < 1 || this.get('endPointReached')) {
+      this.set('advancing', false);
+
+      const mobId = this.attrs.mob.get('id');
+      const died = this.attrs.health < 1;
+      const styleToAdd = died ? ' mob--points-added' : ' mob--points-removed';
+      this.attrs['update-class'](mobId, this.attrs.class + styleToAdd); // TODO THIS COMMIT: is this attrs.class prefix still necessary?
+
+      const pointAction = this.get('endPointReached') ?
+                          'subtract-points' : 'add-points';
+      this.attrs[pointAction](this.attrs.points);
+
+      Ember.run.later(this, () => {
+        this.attrs['update-class'](
+          this.attrs.mob.get('id'),
+          'mob--dead'
+        );
+
+        this.attrs['destroy-mob'](this.attrs.mob);
+      }, 2000);
+    }
+  }),
 
   _placeMob: Ember.on('didInsertElement', function () {
     if (this.attrs.path.get('firstObject').get('x') >= 0) {
       this.set('nextMobPathPosition', 0);
     }
+
+    this._updatePosition();
   }),
 
   _updateHealth: Ember.observer('attrs.health', function () {
