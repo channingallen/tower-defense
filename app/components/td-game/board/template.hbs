@@ -33,3 +33,13 @@
                               type=(readonly towerGroup.type)
                               update-tower-position=(action "updateTowerPosition")}}
 {{/each}}
+
+{{#each projectiles as |projectile|}}
+  {{td-game/board/projectile class=(readonly projectile.class)
+                             destroy=(action "destroyProjectile")
+                             endX=(readonly projectile.endX)
+                             endY=(readonly projectile.endY)
+                             id=(readonly projectile.id)
+                             startX=(readonly projectile.startX)
+                             startY=(readonly projectile.startY)}}
+{{/each}}

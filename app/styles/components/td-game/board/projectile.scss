@@ -1,0 +1,11 @@
+$projectile-width: 1.5%;
+
+.projectile {
+  background-color: yellow;
+  border-radius: 99999px;
+  height: $projectile-width;
+  // overflow: hidden;
+  position: absolute;
+  transition: all 0.1s linear;
+  width: $projectile-width;
+}

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Projectile from 'tower-defense/objects/projectile';
 
 export default Ember.Component.extend({
   classNames: ['td-game__board'],
@@ -6,6 +7,8 @@ export default Ember.Component.extend({
   mobIndex: 0,
 
   mobs: Ember.ArrayProxy.create({ content: Ember.A([]) }),
+
+  projectiles: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
   towers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
@@ -23,6 +26,36 @@ export default Ember.Component.extend({
     this.set('wavePoints', currentWavePoints + pointsToAdd);
   },
 
+  _buildProjectile(towerId, mobId) {
+    const projectileTower = this._getTowerById(towerId);
+    const targetedMob = this._getMobById(mobId);
+
+    if (projectileTower && targetedMob) {
+      const newProjectile = Projectile.create({
+        id: this._generateIdForProjectile(),
+        class: 'projectile',
+        endX: targetedMob.get('posX'),
+        endY: targetedMob.get('posY'),
+        startX: projectileTower.get('posX'),
+        startY: projectileTower.get('posY')
+      });
+
+      this.get('projectiles').pushObject(newProjectile);
+    }
+  },
+
+  _generateIdForProjectile() {
+    function generate4DigitString() {
+      const baseInt = Math.floor((1 + Math.random()) * 0x10000);
+      return baseInt.toString(16).substring(1);
+    }
+
+    return generate4DigitString() + generate4DigitString() + '-' +
+           generate4DigitString() + '-' + generate4DigitString() + '-' +
+           generate4DigitString() + '-' + generate4DigitString() +
+           generate4DigitString() + generate4DigitString();
+  },
+
   _generateMob() {
     const mobIndex = this.get('mobIndex');
     const waveMob = this.attrs.waveMobs[mobIndex];
@@ -30,6 +63,26 @@ export default Ember.Component.extend({
 
     const nextMobIndex = mobIndex + 1;
     this.set('mobIndex', nextMobIndex);
+  },
+
+  _getMobById(mobId) {
+    let needle;
+    this.get('mobs').forEach((mob) => {
+      if (mob.get('id') === mobId) {
+        needle = mob;
+      }
+    });
+    return needle;
+  },
+
+  _getTowerById(towerId) {
+    let needle;
+    this.get('towers').forEach((tower) => {
+      if (tower.get('id') === towerId) {
+        needle = tower;
+      }
+    });
+    return needle;
   },
 
   _mobCapacityReached() {
@@ -80,6 +133,7 @@ export default Ember.Component.extend({
       }
 
       this.get('towers').forEach((tower) => {
+        const towerId = tower.get('id');
         const power = tower.get('attackPower');
         const range = tower.get('attackRange');
 
@@ -87,29 +141,27 @@ export default Ember.Component.extend({
           if (this._mobInRangeOfTower(mob, tower, range)) {
             const mobId = mob.get('id');
             const towerAlreadyHasTarget = !!tower.get('targetedMobId');
-
             if (!towerAlreadyHasTarget) {
+              this._buildProjectile(towerId, mobId);
               tower.set('targetedMobId', mobId);
               this._reduceMobHealth(mobId, power);
             } else {
               const mobIsTargetedMob = mobId === tower.get('targetedMobId');
-
               if (mobIsTargetedMob) {
                 const mobAlive = mob.get('health') > 0;
                 if (mobAlive) {
+                  this._buildProjectile(towerId, mobId);
                   this._reduceMobHealth(mobId, power);
                 } else {
                   tower.set('targetedMobId', null);
                 }
               } else {
-                const targetedMob = this.get('mobs').find((mob) => {
-                  return tower.get('targetedMobId') === mob.get('id');
-                });
-
+                const targetedMob = this._getMobById(tower.get('targetedMobId'));
                 const targetedMobInRange = this._mobInRangeOfTower(
                   targetedMob, tower, range
                 );
                 if (!targetedMobInRange) {
+                  this._buildProjectile(towerId, mobId);
                   tower.set('targetedMobId', mobId);
                   this._reduceMobHealth(mobId, power);
                 }
@@ -155,11 +207,17 @@ export default Ember.Component.extend({
       this.get('mobs').removeAt(mobIndex);
     },
 
+    destroyProjectile(projectile) {
+      const projectileIndex = this.get('projectiles').indexOf(projectile);
+
+      this.get('projectiles').removeAt(projectileIndex);
+    },
+
     subtractPoints(points) {
       const currentWavePoints = this.get('wavePoints');
       this.set('wavePoints', currentWavePoints - points);
     },
-    
+
     updateMobClass(mobId, newClass) {
       this.get('mobs').forEach((mob) => {
         if (mobId === mob.get('id')) {
