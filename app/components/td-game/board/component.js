@@ -217,8 +217,13 @@ export default Ember.Component.extend({
 
     destroyProjectile(projectileId) {
       const projectile = this._getProjectileById(projectileId);
-      const projectileIndex = this.get('projectiles').indexOf(projectile);
-      this.get('projectiles').removeAt(projectileIndex);
+
+      const projectileFound = !!projectile;
+      const projectilesFound = this.get('projectiles.length');
+      if (projectileFound && projectilesFound) {
+        const projectileIndex = this.get('projectiles').indexOf(projectile);
+        this.get('projectiles').removeAt(projectileIndex);
+      }
     },
 
     subtractPoints(points) {
