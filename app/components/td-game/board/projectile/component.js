@@ -11,8 +11,13 @@ export default Ember.Component.extend({
     this.attrs.destroy(this.attrs.id);
   },
 
+  _fetchNewTargetCoords() {
+    this.attrs['update-target-coords'](this.attrs.id, this.attrs.mobId);
+  },
+
   _moveToTarget() {
-    this._setPosition(this.attrs.mobX1, this.attrs.mobY1);
+    this._fetchNewTargetCoords();
+    this._setPosition(this.attrs.mobX, this.attrs.mobY);
 
     Ember.run.later(this, () => {
       this._destroy();

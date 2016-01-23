@@ -33,8 +33,9 @@ export default Ember.Component.extend({
     if (projectileTower && targetedMob) {
       const newProjectile = Projectile.create({
         id: this._generateIdForProjectile(),
-        mobX1: targetedMob.get('posX'),
-        mobY1: targetedMob.get('posY'),
+        mobId: targetedMob.get('id'),
+        mobX: targetedMob.get('posX'),
+        mobY: targetedMob.get('posY'),
         towerX: projectileTower.get('posX'),
         towerY: projectileTower.get('posY')
       });
@@ -217,7 +218,6 @@ export default Ember.Component.extend({
 
     destroyProjectile(projectileId) {
       const projectile = this._getProjectileById(projectileId);
-
       const projectileFound = !!projectile;
       const projectilesFound = this.get('projectiles.length');
       if (projectileFound && projectilesFound) {
@@ -245,6 +245,18 @@ export default Ember.Component.extend({
           mob.set('pos' + axis, pos);
         }
       });
+    },
+
+    updateProjectileTargetCoords(projectileId, mobId) {
+      const projectile = this._getProjectileById(projectileId);
+      const target = this._getMobById(mobId);
+
+      if (!!projectile && !!target) {
+        projectile.set('mobX', target.get('posX'));
+        projectile.set('mobX', target.get('posY'));
+      } else {
+        console.error('Projectile or target not found.');
+      }
     },
 
     updateTowerPosition(id, axis, pos) {
