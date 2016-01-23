@@ -1,24 +1,30 @@
-<div class="td-game__sidebar">
-  <div class="sidebar__instructions">
-    Instructions
+{{#if currentWave}}
+  <div class="td-game__sidebar">
+    <div class="sidebar__instructions">
+      Instructions
+    </div>
+
+    {{td-game/stylesheet select-tower=(action "selectTower")
+                         select-tower-group=(action "selectTowerGroup")
+                         selectedTower=(readonly selectedTower)
+                         selectedTowerGroup=(readonly selectedTowerGroup)
+                         start-wave=(action "startWave")
+                         submit-styles=(action "setStyles")
+                         towerGroups=(readonly currentWave.towerGroups)
+                         waveStarted=(readonly waveStarted)}}
   </div>
 
-  {{td-game/stylesheet select-tower=(action "selectTower")
-                       select-tower-group=(action "selectTowerGroup")
-                       selectedTower=(readonly selectedTower)
-                       selectedTowerGroup=(readonly selectedTowerGroup)
-                       start-wave=(action "startWave")
-                       submit-styles=(action "setStyles")
-                       towerGroups=(readonly currentWave.towerGroups)
-                       waveStarted=(readonly waveStarted)}}
-</div>
-
-{{td-game/board backgroundImage=(readonly currentWave.board.imageUrl)
-                path=(readonly currentWave.board.pathData)
-                select-tower=(action "selectTower")
-                select-tower-group=(action "selectTowerGroup")
-                selectedTower=(readonly selectedTower)
-                selectedTowerGroup=(readonly selectedTowerGroup)
-                towerGroups=(readonly currentWave.towerGroups)
-                waveMobs=(readonly currentWave.mobs)
-                waveStarted=(readonly waveStarted)}}
+  {{td-game/board backgroundImage=(readonly currentWave.board.imageUrl)
+                  path=(readonly currentWave.board.pathData)
+                  select-tower=(action "selectTower")
+                  select-tower-group=(action "selectTowerGroup")
+                  selectedTower=(readonly selectedTower)
+                  selectedTowerGroup=(readonly selectedTowerGroup)
+                  towerGroups=(readonly currentWave.towerGroups)
+                  waveMobs=(readonly currentWave.mobs)
+                  waveStarted=(readonly waveStarted)}}
+{{else}}
+  <div class="td-game__loading-container">
+    <i class="fa fa-5x fa-spinner fa-spin"></i>
+  </div>
+{{/if}}

@@ -1,16 +1,12 @@
 import Ember from 'ember';
-import createWave1 from 'tower-defense/utils/create-wave-1';
 import createGame from 'tower-defense/utils/create-game';
 
 export default Ember.Component.extend({
   classNames: ['td-game'],
 
-  currentWave: createWave1(),
+  currentWave: null,
 
   game: createGame(),
-
-  // gameWaves: Ember.ArrayProxy.create({ content: Ember.A([]) }),
-  gameWaves: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
   selectedTower: null,
 
@@ -22,16 +18,18 @@ export default Ember.Component.extend({
 
   waveStarted: false,
 
-  // thisWave: Ember.computed('gameWaves', function () {
-  //   if (!!this.get('gameWaves')) {
-  //     return this.get('gameWaves').get('firstObject');
-  //   }
-  // }),
+  _setWave(waveNumber) {
+    const waves = this.get('game').get('waves');
 
-  _startGame: Ember.observer('gameWaves', function () {
-    this.get('game.waves').forEach((wave) => {
-      this.get('gameWaves').pushObject(wave);
-    });
+    if (!!waves.get(waveNumber)) {
+      this.set('currentWave', waves.get(waveNumber));
+    }
+  },
+
+  _startGame: Ember.on('didInsertElement', function () {
+    if (!!this.get('game')) {
+      this._setWave('firstObject');
+    }
   }),
 
   actions: {

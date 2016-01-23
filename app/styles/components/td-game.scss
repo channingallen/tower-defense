@@ -8,34 +8,6 @@ $td-game__sidebar__width: 300px; // TODO THIS COMMIT: remove this
   position: relative;
 }
 
-.td-game__start-btn-overlay {
-  align-items: center;
-  background-color: hsla(0, 0%, 0%, 0.6);
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-.td-game__start-btn {
-  $background-color: hsl(130, 50%, 50%);
-
-  background-color: $background-color;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-  font-size: 20px;
-  padding: 20px 30px;
-  top: 40px;
-
-  &:hover {
-    box-shadow: 0 0 20px $background-color;
-  }
-}
-
 .td-game__sidebar {
   background-color: hsl(0, 0%, 65%);
   // border-right: 1px solid black;
@@ -49,6 +21,12 @@ $td-game__sidebar__width: 300px; // TODO THIS COMMIT: remove this
   background: gray;
   color: white;
   flex: none;
+}
+
+.td-game__loading-container {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
 }
 
 @import
