@@ -37,10 +37,10 @@
   {{td-game/board/tower-group allTowers=(readonly towers)
                               class=(readonly towerGroup.posY)
                               click=(action attrs.select-tower-group towerGroup)
+                              numRows=(readonly towerGroup.numRows)
                               selectedTower=(readonly selectedTower)
                               selectedTowerGroup=(readonly selectedTowerGroup)
                               select-tower=(action attrs.select-tower)
                               towerGroup=(readonly towerGroup)
-                              type=(readonly towerGroup.type)
                               update-tower-position=(action "updateTowerPosition")}}
 {{/each}}

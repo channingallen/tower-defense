@@ -52,25 +52,25 @@ function addMobsToWave(wave) {
 
 // TODO: refactor such that tower groups don't need to be individually defined
 function addTowerGroupsToWave(wave) {
-  function getNewTowerGroup(groupNum, towerType, posY) {
+  let groupNum = 1;
+
+  function getNewTowerGroup(numRows, posY) {
     return TowerGroup.create({
       id: generateIdForRecord(),
+      numRows: numRows,
       posY: 'board__tower-group--position-y' + posY,
-      selector: '.tg' + groupNum,
-      styles: Ember.ArrayProxy.create({ content: Ember.A([createUnitCodeLine()]) }),
-      type: towerType
+      selector: '.tg' + groupNum++,
+      styles: Ember.A([createUnitCodeLine()])
     });
   }
 
-  const towerGroupOne = getNewTowerGroup(1, 1, 15);
-  const towerGroupTwo = getNewTowerGroup(2, 3, 65);
-  addTowersToTowerGroup(towerGroupOne, 1);
-  addTowersToTowerGroup(towerGroupTwo, 3);
+  const towerGroup1 = getNewTowerGroup(1, 15);
+  const towerGroup2 = getNewTowerGroup(3, 65);
 
-  wave.set('towerGroups', Ember.A([
-    towerGroupOne,
-    towerGroupTwo
-  ]));
+  addTowersToTowerGroup(towerGroup1, 1);
+  addTowersToTowerGroup(towerGroup2, 3);
+
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
 }
 
 function addTowersToTowerGroup(towerGroup, numTowers) {
@@ -81,7 +81,7 @@ function addTowersToTowerGroup(towerGroup, numTowers) {
       attackRange: 20,
       selector: 't' + towerNum,
       type: 1,
-      styles: Ember.ArrayProxy.create({ content: Ember.A([createUnitCodeLine()]) })
+      styles: Ember.A([createUnitCodeLine()])
     });
   }
 
