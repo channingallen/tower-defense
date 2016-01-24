@@ -1,5 +1,11 @@
 {{#if currentWave}}
   <div class="td-game__sidebar">
+    <div>
+      <i class="fa fa-chevron-left" {{action "changeWavePrevious"}}></i>
+      <span>Wave {{currentWaveNumber}} of {{game.waves.length}}</span>
+      <i class="fa fa-chevron-right" {{action "changeWaveNext"}}></i>
+    </div>
+
     <div class="sidebar__instructions">
       Instructions
     </div>
@@ -15,6 +21,7 @@
   </div>
 
   {{td-game/board backgroundImage=(readonly currentWave.board.imageUrl)
+                  minimumPoints=(readonly currentWave.minimumPoints)
                   path=(readonly currentWave.board.pathData)
                   select-tower=(action "selectTower")
                   select-tower-group=(action "selectTowerGroup")

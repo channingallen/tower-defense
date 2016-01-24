@@ -4,7 +4,7 @@ import createGame from 'tower-defense/utils/create-game';
 export default Ember.Component.extend({
   classNames: ['td-game'],
 
-  currentWave: null,
+  currentWaveNumber: null,
 
   game: createGame(),
 
@@ -18,22 +18,55 @@ export default Ember.Component.extend({
 
   waveStarted: false,
 
-  // TODO THIS COMMIT: Ember arrays cannot be accessed via get.('num')
-  _setWave(waveNumber) {
+  currentWave: Ember.computed('currentWaveNumber', function () {
+    let activeWave;
+    this.get('game.waves').forEach((wave) => {
+      if (wave.get('number') === this.get('currentWaveNumber')) {
+        activeWave = wave;
+      }
+    });
+
+    return activeWave;
+  }),
+
+  _setWave(targetWaveNumber) {
     const waves = this.get('game').get('waves');
 
-    if (!!waves.get(waveNumber)) {
-      this.set('currentWave', waves.get(waveNumber));
+    if (waves.get('length')) {
+      waves.forEach((wave) => {
+        if (wave.get('number') === targetWaveNumber) {
+          this.set('currentWaveNumber', wave.get('number'));
+        }
+      });
     }
   },
 
   _startGame: Ember.on('didInsertElement', function () {
     if (!!this.get('game')) {
-      this._setWave('firstObject');
+      this._setWave(1);
     }
   }),
 
   actions: {
+    changeWaveNext() {
+      const currentWaveNum = this.get('currentWaveNumber');
+      if (currentWaveNum < this.get('game.waves.length')) {
+        this.incrementProperty('currentWaveNumber');
+      }
+    },
+
+    changeWavePrevious() {
+      const currentWaveNum = this.get('currentWaveNumber');
+      if (currentWaveNum > 1) {
+        this.decrementProperty('currentWaveNumber');
+      }
+    },
+
+    // TODO THIS COMMIT: this is never currently called
+    changeWaveSelect(waveNum) {
+      this.set('currentWaveNumber', waveNum);
+    },
+
     selectTower(tower) {
       if (this.get('waveStarted')) {
         return;
