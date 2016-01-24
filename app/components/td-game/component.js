@@ -49,6 +49,12 @@ export default Ember.Component.extend({
 
   actions: {
     changeWaveNext() {
+      if (this.get('waveStarted')) {
+        console.error('You cannot start a new wave until this wave ends.');
+
+        return;
+      }
+
       const currentWaveNum = this.get('currentWaveNumber');
       if (currentWaveNum < this.get('game.waves.length')) {
         this.incrementProperty('currentWaveNumber');
@@ -56,6 +62,12 @@ export default Ember.Component.extend({
     },
 
     changeWavePrevious() {
+      if (this.get('waveStarted')) {
+        console.error('You cannot start a new wave until this wave ends.');
+
+        return;
+      }
+
       const currentWaveNum = this.get('currentWaveNumber');
       if (currentWaveNum > 1) {
         this.decrementProperty('currentWaveNumber');
@@ -64,14 +76,24 @@ export default Ember.Component.extend({
 
     // TODO THIS COMMIT: this is never currently called
     changeWaveSelect(waveNum) {
+      if (this.get('waveStarted')) {
+        console.error('You cannot start a new wave until this wave ends.');
+
+        return;
+      }
+
       this.set('currentWaveNumber', waveNum);
     },
 
     scoreWave(wavePoints) {
       if (wavePoints >= this.get('currentWave.minimumScore')) {
-        alert('Congratulations! You hit the minimum score!');
+        console.log('Congratulations! You hit the minimum score!');
+
+        this.set('waveStarted', false);
       } else {
-        alert('Oh no! You did not reach the minimum score!');
+        console.log('Oh no! You did not reach the minimum score!');
+
+        this.set('waveStarted', false);
       }
     },
 
