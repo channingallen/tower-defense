@@ -15,6 +15,9 @@ export default Ember.Component.extend({
   _getPosLeft() {
     const $board = Ember.$('.td-game__board');
     const $tower = this.$();
+    if (!$board || !$tower) {
+      return;
+    }
 
     const $boardDistanceFromLeft = $board.offset().left;
     const $towerDistanceFromLeft = $tower.offset().left;
@@ -30,6 +33,9 @@ export default Ember.Component.extend({
   _getPosTop() {
     const $board = Ember.$('.td-game__board');
     const $tower = this.$();
+    if (!$board || !$tower) {
+      return;
+    }
 
     const $boardDistanceFromTop = $board.offset().top;
     const $towerDistanceFromTop = $tower.offset().top;
