@@ -244,7 +244,12 @@ export default Ember.Component.extend({
 
     subtractPoints(points) {
       const currentWavePoints = this.get('wavePoints');
-      this.set('wavePoints', currentWavePoints - points);
+
+      if ((currentWavePoints - points) >= 0) {
+        this.set('wavePoints', currentWavePoints - points);
+      } else {
+        this.set('wavePoints', 0);
+      }
     },
 
     updateMobClass(mobId, newClass) {
