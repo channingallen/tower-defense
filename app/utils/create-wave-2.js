@@ -9,15 +9,11 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/map-1.2-50x50.png');
+  board.set('imageUrl', '/images/map-2.0.png');
 
   const pathObjects = [
-    PathCoords.create({x: 0, y: 30}),
-    PathCoords.create({x: 40, y: 30}),
-    PathCoords.create({x: 40, y: 10}),
-    PathCoords.create({x: 54, y: 10}),
-    PathCoords.create({x: 54, y: 60}),
-    PathCoords.create({x: 92, y: 60})
+    PathCoords.create({x: 0, y: 50}),
+    PathCoords.create({x: 92, y: 50})
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -102,7 +98,7 @@ function generateIdForRecord() {
          generate4DigitString() + generate4DigitString();
 }
 
-export default function createWave1() {
+export default function createWave2() {
   const wave = Wave.create({ minimumScore: 3 }); // TODO THIS COMMIT: adjust this
 
   addBoardToWave(wave);

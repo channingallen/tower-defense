@@ -18,6 +18,7 @@ export default Ember.Component.extend({
 
   waveStarted: false,
 
+  // TODO THIS COMMIT: Ember arrays cannot be accessed via get.('num')
   _setWave(waveNumber) {
     const waves = this.get('game').get('waves');
 
