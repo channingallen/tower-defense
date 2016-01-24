@@ -9,6 +9,7 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
+  board.set('imageUrl', '/images/map-1.2-50x50.png');
 
   const pathObjects = [
     PathCoords.create({x: 0, y: 30}),
@@ -23,9 +24,6 @@ function addBoardToWave(wave) {
     board.get('pathData').pushObject(pathObject);
   });
 
-  // TODO THIS COMMIT: give board `imageUrl`
-  board.set('imageUrl', '/images/map-1.2-50x50.png');
-
   wave.set('board', board);
 }
 
@@ -33,26 +31,18 @@ function addBoardToWave(wave) {
 //                 - once in mob.js, twice here below
 function addMobsToWave(wave) {
   const mobs = [];
-  const mobSchemaOne = {
-    frequency: 2000,
-    health: 300,
-    maxHealth: 300,
-    points: 20,
-    quantity: 1,
-    speed: 10, // seconds to cross one axis of the board
-    type: 'standard'
-  };
 
-  for (var i = 0; i < mobSchemaOne.quantity; i++) {
+  const mobQuantity = 5;
+  for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: mobSchemaOne.frequency,
-      maxHealth: mobSchemaOne.maxHealth,
-      health: mobSchemaOne.health,
-      points: mobSchemaOne.points,
-      quantity: mobSchemaOne.quantity,
-      speed: mobSchemaOne.speed,
-      type: mobSchemaOne.type
+      frequency: 2000,
+      health: 300,
+      maxHealth: 300,
+      points: 20,
+      quantity: mobQuantity,
+      speed: 10, // seconds to cross one axis of the board
+      type: 'standard'
     });
 
     mobs.push(newMob);
