@@ -67,6 +67,14 @@ export default Ember.Component.extend({
       this.set('currentWaveNumber', waveNum);
     },
 
+    scoreWave(wavePoints) {
+      if (wavePoints >= this.get('currentWave.minimumScore')) {
+        alert('Congratulations! You hit the minimum score!');
+      } else {
+        alert('Oh no! You did not reach the minimum score!');
+      }
+    },
+
     selectTower(tower) {
       if (this.get('waveStarted')) {
         return;

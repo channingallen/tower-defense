@@ -183,6 +183,20 @@ export default Ember.Component.extend({
     }, 500);
   }),
 
+  _getFinalScore: Ember.observer('mobs.@each.active', function () {
+    let waveEnded = true;
+
+    this.get('mobs').forEach((mob) => {
+      if (mob.get('active')) {
+        waveEnded = false;
+      }
+    });
+
+    if (waveEnded) {
+      this.attrs['score-wave'](this.get('wavePoints'));
+    }
+  }),
+
   _generateMobs: Ember.observer('attrs.waveStarted', function () {
     this._generateMob();
 
@@ -214,6 +228,8 @@ export default Ember.Component.extend({
     destroyMob(mob) {
       const mobIndex = this.get('mobs').indexOf(mob);
       this.get('mobs').removeAt(mobIndex);
+
+      mob.set('active', false);
     },
 
     destroyProjectile(projectileId) {

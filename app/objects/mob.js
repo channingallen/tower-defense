@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 const Mob = Ember.Object.extend({
   id: null,
+  active: true,
   frequency: null,
   health: null,
   maxHealth: null,

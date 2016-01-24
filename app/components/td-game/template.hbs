@@ -23,6 +23,7 @@
   {{td-game/board backgroundImage=(readonly currentWave.board.imageUrl)
                   minimumPoints=(readonly currentWave.minimumPoints)
                   path=(readonly currentWave.board.pathData)
+                  score-wave=(action "scoreWave")
                   select-tower=(action "selectTower")
                   select-tower-group=(action "selectTowerGroup")
                   selectedTower=(readonly selectedTower)
