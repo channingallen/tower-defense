@@ -37,5 +37,11 @@ export default Ember.Component.extend({
     Ember.run.later(this, () => {
       this._moveToTarget();
     }, 20);
+  }),
+
+  _resetProjectile: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      this.set('inFlight', false);
+    }
   })
 });

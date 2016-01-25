@@ -136,8 +136,15 @@ export default Ember.Component.extend({
     this.$().css('background-image', `url(${this.attrs.backgroundImage})`);
   })),
 
-  _attackMobsInTowerRange: Ember.on('didInsertElement', function () {
-    setInterval(() => {
+  _attackMobsInTowerRange: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
+    const attackNextMov = setInterval(() => {
+      const waveActive = this.attrs.waveStarted;
+      if (!waveActive) {
+
+        clearInterval(attackNextMov);
+        return;
+      }
+
       if (!this.get('towers.length') || !this.get('mobs.length')) {
         return;
       }
@@ -181,12 +188,16 @@ export default Ember.Component.extend({
         });
       });
     }, 500);
-  }),
+  })),
 
   _getFinalScore: Ember.observer('mobs.@each.active', function () {
     let waveEnded = true;
 
     this.get('mobs').forEach((mob) => {
+      if (!mob) {
+        return;
+      }
+
       if (mob.get('active')) {
         waveEnded = false;
       }
@@ -211,12 +222,22 @@ export default Ember.Component.extend({
     }
   }),
 
-  _getTowers: Ember.on('didInsertElement', function () {
+  _getTowers: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
     this.attrs.towerGroups.forEach((towerGroup) => {
       towerGroup.get('towers').forEach((tower) => {
         this.get('towers').pushObject(tower);
       });
     });
+  })),
+
+  _resetBoard: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      this.set('mobIndex', 0);
+      this.set('mobs', Ember.ArrayProxy.create({ content: Ember.A([]) }));
+      this.set('projectiles', Ember.ArrayProxy.create({ content: Ember.A([]) }));
+      this.set('towers', Ember.ArrayProxy.create({ content: Ember.A([]) }));
+      this.set('wavePoints', 0);
+    }
   }),
 
   actions: {

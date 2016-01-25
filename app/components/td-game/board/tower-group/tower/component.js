@@ -107,18 +107,21 @@ export default Ember.Component.extend({
     this.attrs.select(this.attrs.tower);
   }),
 
-  _setTowerDimensions: Ember.on('didInsertElement', function () {
-    const $board = Ember.$('.td-game__board');
-    const $newWidth = $board.width() / 27;
-    this.$().css('width', $newWidth);
-    this.$().css('height', $newWidth);
-
-    Ember.$(window).resize(() => {
+  // TODO: confirm that this needs to be done every time new wave starts
+  _setTowerDimensions: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      const $board = Ember.$('.td-game__board');
       const $newWidth = $board.width() / 27;
       this.$().css('width', $newWidth);
       this.$().css('height', $newWidth);
-    });
-  }),
+
+      Ember.$(window).resize(() => {
+        const $newWidth = $board.width() / 27;
+        this.$().css('width', $newWidth);
+        this.$().css('height', $newWidth);
+      });
+    }
+  })),
 
   _updateCodeLines: Ember.observer(
     'attrs.tower.styles',
@@ -157,10 +160,19 @@ export default Ember.Component.extend({
     }
   ),
 
-  _updatePosition: Ember.on('didInsertElement', function () {
+  _updatePosition: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      return;
+    }
+
     const towerId = this.attrs.tower.get('id');
 
-    setInterval(() => {
+    const findNextPosition = setInterval(() => {
+      if (!this.attrs.waveStarted) {
+
+        clearInterval(findNextPosition);
+      }
+
       const posLeft = this._getPosLeft();
       const posTop = this._getPosTop();
 
@@ -169,5 +181,5 @@ export default Ember.Component.extend({
         this.attrs['update-tower-position'](towerId, 'Y', posTop);
       }
     }, 200);
-  })
+  }))
 });

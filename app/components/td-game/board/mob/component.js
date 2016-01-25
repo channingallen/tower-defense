@@ -159,6 +159,16 @@ export default Ember.Component.extend({
     this._updatePosition();
   }),
 
+  _resetMob: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      this.set('advancing', true);
+      this.set('endPointReached', false);
+      this.set('healthBarClass', 'mob__health-bar--100');
+      this.set('mobPathPosition', null);
+      this.set('nextMobPathPosition', null);
+    }
+  }),
+
   _updateHealth: Ember.observer('attrs.health', function () {
     if (!this.get('advancing')) {
       return;

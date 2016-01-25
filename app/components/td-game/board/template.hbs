@@ -18,7 +18,8 @@
                         subtract-points=(action "subtractPoints")
                         type=(readonly mob.type)
                         update-class=(action "updateMobClass")
-                        update-position=(action "updateMobPosition")}}
+                        update-position=(action "updateMobPosition")
+                        waveStarted=(readonly attrs.waveStarted)}}
   {{/each}}
 {{/if}}
 
@@ -30,7 +31,8 @@
                              id=(readonly projectile.id)
                              towerX=(readonly projectile.towerX)
                              towerY=(readonly projectile.towerY)
-                             update-target-coords=(action "updateProjectileTargetCoords")}}
+                             update-target-coords=(action "updateProjectileTargetCoords")
+                             waveStarted=(readonly attrs.waveStarted)}}
 {{/each}}
 
 {{#each attrs.towerGroups as |towerGroup|}}
@@ -42,5 +44,6 @@
                               selectedTowerGroup=(readonly selectedTowerGroup)
                               select-tower=(action attrs.select-tower)
                               towerGroup=(readonly towerGroup)
-                              update-tower-position=(action "updateTowerPosition")}}
+                              update-tower-position=(action "updateTowerPosition")
+                              waveStarted=(readonly attrs.waveStarted)}}
 {{/each}}
