@@ -44,11 +44,11 @@ function addMobsToWave(wave) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
       frequency: 2000,
-      health: 300,
-      maxHealth: 300,
+      health: 250,
+      maxHealth: 250,
       points: 20,
       quantity: mobQuantity,
-      speed: 10, // seconds to cross one axis of the board
+      speed: 8, // seconds to cross one axis of the board
       type: 'standard'
     });
 
@@ -70,13 +70,15 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 15);
-  const towerGroup2 = getNewTowerGroup(3, 65);
+  const towerGroup1 = getNewTowerGroup(1, 27);
+  const towerGroup2 = getNewTowerGroup(1, 52);
+  const towerGroup3 = getNewTowerGroup(1, 80);
 
   addTowersToTowerGroup(towerGroup1, 1);
-  addTowersToTowerGroup(towerGroup2, 3);
+  addTowersToTowerGroup(towerGroup2, 1);
+  addTowersToTowerGroup(towerGroup3, 1);
 
-  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2, towerGroup3]));
 }
 
 function addTowersToTowerGroup(towerGroup, numTowers) {
