@@ -110,6 +110,14 @@ export default Ember.Component.extend({
     }
   ),
 
+  _resetBlock: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      this.set('finalInputFound', false);
+      this.set('inputIdSelectedManually', null);
+      this.set('inputIdToFocus', null);
+    }
+  }),
+
   actions: {
     deleteCodeLine(id) {
       this._deleteCodeLine(id);

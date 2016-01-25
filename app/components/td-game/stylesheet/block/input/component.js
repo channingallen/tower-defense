@@ -125,6 +125,15 @@ export default Ember.Component.extend({
     }
   }),
 
+  _resetInput: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      this.set('flexboxRef', createFlexboxRef());
+      this.set('focusInCount', 0);
+      this.set('focusOutCount', 0);
+      this.set('inputValue', null);
+    }
+  }),
+
   _sendFocusedState: Ember.observer('focusInCount', 'focusOutCount', function () {
     const focusInCount = this.get('focusInCount');
     const focusOutCount = this.get('focusOutCount');
