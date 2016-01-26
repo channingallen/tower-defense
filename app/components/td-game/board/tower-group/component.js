@@ -101,6 +101,12 @@ export default Ember.Component.extend({
     }
   ),
 
+  _resetTowerGroupStyles: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      this._clearPreviousStyles();
+    }
+  }),
+
   _updateCodeLines: Ember.observer(
     'attrs.towerGroup.styles',
     'attrs.towerGroup.styles.[]',
