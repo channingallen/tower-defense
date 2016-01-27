@@ -108,6 +108,7 @@ export default Ember.Component.extend({
   }),
 
   // TODO: confirm that this needs to be done every time new wave starts
+  //     - function proportionally resizes tower relative to the board
   _setTowerDimensions: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
       const $board = Ember.$('.td-game__board');

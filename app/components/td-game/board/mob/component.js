@@ -69,9 +69,9 @@ export default Ember.Component.extend({
   },
 
   _updatePosition() {
-    const pollPosition = setInterval(() => {
+    const getNextPosition = setInterval(() => {
       if (!this.get('advancing')) {
-        clearInterval(pollPosition);
+        clearInterval(getNextPosition);
         return;
       }
 
@@ -85,7 +85,7 @@ export default Ember.Component.extend({
       }
 
       if (!this.get('advancing') || this.get('endPointReached')) {
-        clearInterval(pollPosition);
+        clearInterval(getNextPosition);
       }
     }, 200);
   },
