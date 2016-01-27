@@ -8,6 +8,7 @@ $projectile-width: 1.5%;
   background-color: yellow;
   border-radius: 99999px;
   height: $projectile-width;
+  position: absolute;
   transition: all 0.3s linear;
   width: $projectile-width;
 }
