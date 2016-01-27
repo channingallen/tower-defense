@@ -295,7 +295,7 @@ export default Ember.Component.extend({
 
       if (!!projectile && !!target) {
         projectile.set('mobX', target.get('posX'));
-        projectile.set('mobX', target.get('posY'));
+        projectile.set('mobY', target.get('posY'));
       } else {
         console.error('Projectile or target not found.');
       }
