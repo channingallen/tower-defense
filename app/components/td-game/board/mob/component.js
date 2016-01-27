@@ -87,7 +87,7 @@ export default Ember.Component.extend({
       if (!this.get('advancing') || this.get('endPointReached')) {
         clearInterval(getNextPosition);
       }
-    }, 200);
+    }, 20);
   },
 
   numPathObjects: Ember.computed('attrs.path.[]', function () {
