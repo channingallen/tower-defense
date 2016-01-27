@@ -54,6 +54,10 @@ export default Ember.Component.extend({
 
   _incrementNextMobPathPosition(transitionMilliseconds) {
     Ember.run.later(this, () => {
+      if (!this.get('advancing')) {
+        return;
+      }
+
       this.set('nextMobPathPosition', this.get('nextMobPathPosition') + 1);
     }, transitionMilliseconds);
   },
@@ -68,10 +72,17 @@ export default Ember.Component.extend({
     }, transitionMilliseconds);
   },
 
+  _updateIdSelector() {
+    if (!this.get('advancing')) {
+      return;
+    }
+
+    this.$().attr('id', this.attrs.mob.get('id'));
+  },
+
   _updatePosition() {
-    const getNextPosition = setInterval(() => {
+    Ember.run.later(this, () => {
       if (!this.get('advancing')) {
-        clearInterval(getNextPosition);
         return;
       }
 
@@ -85,8 +96,11 @@ export default Ember.Component.extend({
       }
 
       if (!this.get('advancing') || this.get('endPointReached')) {
-        clearInterval(getNextPosition);
+
+        return;
       }
+
+      this._updatePosition();
     }, 20);
   },
 
@@ -131,23 +145,7 @@ export default Ember.Component.extend({
     if (this.attrs.health < 1 || this.get('endPointReached')) {
       this.set('advancing', false);
 
-      const mobId = this.attrs.mob.get('id');
-      const died = this.attrs.health < 1;
-      const styleToAdd = died ? ' mob--points-added' : ' mob--points-removed';
-      this.attrs['update-class'](mobId, this.attrs.class + styleToAdd); // TODO THIS COMMIT: is this attrs.class prefix still necessary?
-
-      const pointAction = this.get('endPointReached') ?
-                          'subtract-points' : 'add-points';
-      this.attrs[pointAction](this.attrs.points);
-
-      Ember.run.later(this, () => {
-        this.attrs['update-class'](
-          this.attrs.mob.get('id'),
-          'mob--dead'
-        );
-
-        this.attrs['destroy-mob'](this.attrs.mob);
-      }, 2000);
+      this.attrs['destroy-mob'](this.attrs.mob);
     }
   }),
 
@@ -186,5 +184,9 @@ export default Ember.Component.extend({
     } else {
       this.set('healthBarClass', 'mob__health-bar--20');
     }
+  }),
+
+  _updateIdOnInsertElement: Ember.on('didInsertElement', function () {
+    this._updateIdSelector();
   })
 });
