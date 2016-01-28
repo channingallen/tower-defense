@@ -10,8 +10,6 @@ export default Ember.Component.extend({
 
   projectiles: Ember.ArrayProxy.create({ content: Ember.A([]) }),
 
-  towers: Ember.ArrayProxy.create({ content: Ember.A([]) }),
-
   wavePoints: 0,
 
   _addMobPoints(mobId) {
@@ -161,6 +159,25 @@ export default Ember.Component.extend({
     return waveMob.get('frequency');
   }),
 
+
+  towers: Ember.computed('towerGroupTowers.@each.[]', function () {
+    function flatten(arrays) {
+      let items = Ember.A([]);
+
+      arrays.forEach((array) => {
+        array.forEach((item) => {
+          items.addObject(item);
+        });
+      });
+
+      return items;
+    }
+
+    return flatten(this.get('towerGroupTowers'));
+  }),
+
+  towerGroupTowers: Ember.computed.mapBy('attrs.towerGroups', 'towers'),
+
   _applyBackgroundImage: Ember.on('didInsertElement', Ember.observer('attrs.backgroundImage', function () {
     this.$().css('background-image', `url(${this.attrs.backgroundImage})`);
   })),
@@ -201,16 +218,16 @@ export default Ember.Component.extend({
     }
   }),
 
-  _getTowers: Ember.on(
-    'didInsertElement',
-    Ember.observer('attrs.waveStarted', function () {
-      this.attrs.towerGroups.forEach((towerGroup) => {
-        towerGroup.get('towers').forEach((tower) => {
-          this.get('towers').addObject(tower);
-        });
-      });
-    })
-  ),
+  // _getTowers: Ember.on(
+  //   'didInsertElement',
+  //   Ember.observer('attrs.waveStarted', function () {
+  //     this.attrs.towerGroups.forEach((towerGroup) => {
+  //       towerGroup.get('towers').forEach((tower) => {
+  //         this.get('towers').addObject(tower);
+  //       });
+  //     });
+  //   })
+  // ),
 
   _resetBoard: Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
