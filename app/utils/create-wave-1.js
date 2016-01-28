@@ -114,7 +114,7 @@ function generateIdForRecord() {
 }
 
 export default function createWave1() {
-  const wave = Wave.create({ minimumScore: 60, number: 1 }); // TODO THIS COMMIT: adjust this
+  const wave = Wave.create({ minimumScore: 20, number: 1 }); // TODO THIS COMMIT: adjust this
 
   addBoardToWave(wave);
   addMobsToWave(wave);

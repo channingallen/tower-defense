@@ -15,6 +15,12 @@ export default Ember.Component.extend({
 
   nextMobPathPosition: null,
 
+  _destroyMob() {
+    this.set('advancing', false);
+
+    this.attrs['destroy-mob'](this.attrs.mob);
+  },
+
   _getFormattedTransitionSeconds(transitionSeconds) {
     return transitionSeconds.toString() + 's';
   },
@@ -137,15 +143,19 @@ export default Ember.Component.extend({
     }
   ),
 
-  _destroyMob: Ember.observer('attrs.health', 'endPointReached', function () {
+  _checkMobStatus: Ember.observer('attrs.health', 'endPointReached', function () {
     if (!this.get('advancing')) {
       return;
     }
 
-    if (this.attrs.health < 1 || this.get('endPointReached')) {
-      this.set('advancing', false);
+    if (this.attrs.health < 1) {
+      this.attrs['add-points'](this.attrs.mob.get('points'));
 
-      this.attrs['destroy-mob'](this.attrs.mob);
+      this._destroyMob();
+    } else if (this.get('endPointReached')) {
+      this.attrs['subtract-points'](this.attrs.mob.get('points'));
+
+      this._destroyMob();
     }
   }),
 
