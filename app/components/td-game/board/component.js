@@ -27,59 +27,32 @@ export default Ember.Component.extend({
   },
 
   _attackMobsInTowerRange() {
-    Ember.run.later(this, () => {
-      if (!this.attrs.waveStarted) {
-        return;
-      }
+    if (!this.attrs.waveStarted ||
+        !this.get('towers.length') ||
+        !this.get('mobs.length')) {
+      return;
+    }
 
-      if (!this.get('towers.length') || !this.get('mobs.length')) {
-        return;
-      }
+    this.get('towers').forEach((tower) => {
+      const towerId = tower.get('id');
+      const power = tower.get('attackPower');
+      const range = tower.get('attackRange');
+      let towerHasShot = false;
 
-      this.get('towers').forEach((tower) => {
-        const towerId = tower.get('id');
-        const power = tower.get('attackPower');
-        const range = tower.get('attackRange');
+      this.get('mobs').forEach((mob) => {
+        if (this._mobInRangeOfTower(mob, tower, range) &&
+            mob.get('health') > 0 &&
+            !towerHasShot) {
+          towerHasShot = true;
 
-        this.get('mobs').forEach((mob) => {
-          if (this._mobInRangeOfTower(mob, tower, range)) {
-            const mobId = mob.get('id');
-            const towerAlreadyHasTarget = !!tower.get('targetedMobId');
-            if (!towerAlreadyHasTarget) {
-              // console.log(`- a -`); // TODO THIS COMMIT: remove this
-              this._buildProjectile(towerId, mobId);
-              tower.set('targetedMobId', mobId);
-              this._reduceMobHealth(mobId, power);
-            } else {
-              const mobIsTargetedMob = mobId === tower.get('targetedMobId');
-              if (mobIsTargetedMob) {
-                const mobAlive = mob.get('health') > 0;
-                if (mobAlive) {
-                  // console.log(`- b -`); // TODO THIS COMMIT: remove this
-                  this._buildProjectile(towerId, mobId);
-                  this._reduceMobHealth(mobId, power);
-                } else {
-                  tower.set('targetedMobId', null);
-                }
-              } else {
-                const targetedMob = this._getMobById(tower.get('targetedMobId'));
-                const targetedMobInRange = this._mobInRangeOfTower(
-                  targetedMob, tower, range
-                );
-                if (!targetedMobInRange) {
-                  // console.log(`- c -`); // TODO THIS COMMIT: remove this
-                  this._buildProjectile(towerId, mobId);
-                  tower.set('targetedMobId', mobId);
-                  this._reduceMobHealth(mobId, power);
-                }
-              }
-            }
-          }
-        });
+          const mobId = mob.get('id');
+          this._buildProjectile(towerId, mobId);
+          this._reduceMobHealth(mobId, power);
+        }
       });
+    });
 
-      this._attackMobsInTowerRange();
-    }, 500);
+    Ember.run.later(this, '_attackMobsInTowerRange', 500);
   },
 
   _buildProjectile(towerId, mobId) {
@@ -192,9 +165,9 @@ export default Ember.Component.extend({
     this.$().css('background-image', `url(${this.attrs.backgroundImage})`);
   })),
 
-  _attackMobsInTowerRangeOnWaveStart: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
-    this._attackMobsInTowerRange();
-  })),
+  _attackMobsInTowerRangeOnWaveStart: Ember.observer('attrs.waveStarted', function () {
+    Ember.run.later(this, '_attackMobsInTowerRange', 500);
+  }),
 
   _getFinalScore: Ember.observer('mobs.@each.active', function () {
     let waveEnded = true;
@@ -228,13 +201,16 @@ export default Ember.Component.extend({
     }
   }),
 
-  _getTowers: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
-    this.attrs.towerGroups.forEach((towerGroup) => {
-      towerGroup.get('towers').forEach((tower) => {
-        this.get('towers').pushObject(tower);
+  _getTowers: Ember.on(
+    'didInsertElement',
+    Ember.observer('attrs.waveStarted', function () {
+      this.attrs.towerGroups.forEach((towerGroup) => {
+        towerGroup.get('towers').forEach((tower) => {
+          this.get('towers').addObject(tower);
+        });
       });
-    });
-  })),
+    })
+  ),
 
   _resetBoard: Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
@@ -253,7 +229,6 @@ export default Ember.Component.extend({
     },
 
     destroyMob(mob) {
-      console.log(`destroying mob`); // TODO THIS COMMIT: remove this
       const mobIndex = this.get('mobs').indexOf(mob);
       this.get('mobs').removeAt(mobIndex);
 

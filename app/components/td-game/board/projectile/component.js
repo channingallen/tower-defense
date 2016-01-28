@@ -131,7 +131,6 @@ export default Ember.Component.extend({
   },
 
   _placeProjectile: Ember.on('didInsertElement', function () {
-    console.log(`PROJECTILE ID: ${this.attrs.id}`); // TODO THIS COMMIT: remove this
     this._setPosition(this.attrs.towerX + 1, this.attrs.towerY + 1);
 
     this.set('inFlight', true);
