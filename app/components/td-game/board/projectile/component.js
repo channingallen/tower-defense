@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 
   targetTopA: null,
 
-  _closeInOnTarget2() {
+  _closeInOnTarget() {
     const targetLeftB = this._getPercentageLeft(this._getTargetLeftPosition());
     const targetTopB = this._getPercentageTop(this._getTargetTopPosition());
     const targetFound = !!targetLeftB && !!targetTopB;
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
       this._setTargetPosA();
 
       Ember.run.later(this, () => {
-        this._closeInOnTarget2();
+        this._closeInOnTarget();
       }, 21);
     } else {
       this.set('inFlight', false);
@@ -138,7 +138,7 @@ export default Ember.Component.extend({
     this._setTargetPosA();
 
     Ember.run.later(this, () => {
-      this._closeInOnTarget2();
+      this._closeInOnTarget();
     }, 20);
   }),
 
@@ -150,19 +150,5 @@ export default Ember.Component.extend({
         this._destroy();
       }
     }, 400); // determined with respect to 0.3s CSS transition
-  }),
-
-  // _updateTargetCoords: Ember.observer(
-  //   'inFlight',
-  //   'attrs.mobX',
-  //   'attrs.mobY',
-  //   function () {
-  //     if (this.get('inFlight')) {
-  //
-  //       Ember.run.later(this, () => {
-  //         this._closeInOnTarget();
-  //       }, 10);
-  //     }
-  //   }
-  // )
+  })
 });
