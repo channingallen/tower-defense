@@ -218,17 +218,6 @@ export default Ember.Component.extend({
     }
   }),
 
-  // _getTowers: Ember.on(
-  //   'didInsertElement',
-  //   Ember.observer('attrs.waveStarted', function () {
-  //     this.attrs.towerGroups.forEach((towerGroup) => {
-  //       towerGroup.get('towers').forEach((tower) => {
-  //         this.get('towers').addObject(tower);
-  //       });
-  //     });
-  //   })
-  // ),
-
   _resetBoard: Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
       this.set('mobIndex', 0);

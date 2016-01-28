@@ -18,17 +18,6 @@ export default Ember.Component.extend({
 
   waveStarted: false,
 
-  currentWave: Ember.computed('currentWaveNumber', function () {
-    let activeWave;
-    this.get('game.waves').forEach((wave) => {
-      if (wave.get('number') === this.get('currentWaveNumber')) {
-        activeWave = wave;
-      }
-    });
-
-    return activeWave;
-  }),
-
   _setWave(targetWaveNumber) {
     const waves = this.get('game').get('waves');
 
@@ -40,6 +29,25 @@ export default Ember.Component.extend({
       });
     }
   },
+
+  currentWave: Ember.computed('currentWaveNumber', function () {
+    let activeWave;
+    this.get('game.waves').forEach((wave) => {
+      if (wave.get('number') === this.get('currentWaveNumber')) {
+        activeWave = wave;
+      }
+    });
+
+    return activeWave;
+  }),
+
+  _resetGame: Ember.observer('waveStarted', function () {
+    if (!this.get('waveStarted')) {
+      this.set('game', createGame());
+
+      this.forceSet('currentWaveNumber', this.get('currentWaveNumber'));
+    }
+  }),
 
   _startGame: Ember.on('didInsertElement', function () {
     if (!!this.get('game')) {
