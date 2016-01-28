@@ -9,15 +9,24 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/map-1.2-50x50.png');
+  board.set('imageUrl', '/images/map-3.0.png');
 
   const pathObjects = [
-    PathCoords.create({x: 0, y: 30}),
-    PathCoords.create({x: 40, y: 30}),
-    PathCoords.create({x: 40, y: 10}),
-    PathCoords.create({x: 54, y: 10}),
-    PathCoords.create({x: 54, y: 60}),
-    PathCoords.create({x: 92, y: 60})
+    PathCoords.create({x: 53, y: -2}),
+    PathCoords.create({x: 53, y: 9}),
+    PathCoords.create({x: 86, y: 9}),
+    PathCoords.create({x: 86, y: 36}),
+    PathCoords.create({x: 61, y: 36}),
+    PathCoords.create({x: 61, y: 60}),
+    PathCoords.create({x: 86, y: 60}),
+    PathCoords.create({x: 86, y: 88}),
+    PathCoords.create({x: 9, y: 88}),
+    PathCoords.create({x: 9, y: 71}),
+    PathCoords.create({x: 42, y: 71}),
+    PathCoords.create({x: 42, y: 18}),
+    PathCoords.create({x: 18, y: 18}),
+    PathCoords.create({x: 18, y: 45}),
+    PathCoords.create({x: -2, y: 45})
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -30,13 +39,13 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 5;
+  const mobQuantity = 1;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
       frequency: 2000,
-      health: 300,
-      maxHealth: 300,
+      health: 35,
+      maxHealth: 35,
       points: 20,
       quantity: mobQuantity,
       speed: 8, // seconds to cross one axis of the board
@@ -61,13 +70,15 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 15);
-  const towerGroup2 = getNewTowerGroup(3, 65);
+  const towerGroup1 = getNewTowerGroup(1, 27);
+  const towerGroup2 = getNewTowerGroup(1, 52);
+  const towerGroup3 = getNewTowerGroup(1, 80);
 
   addTowersToTowerGroup(towerGroup1, 1);
-  addTowersToTowerGroup(towerGroup2, 3);
+  addTowersToTowerGroup(towerGroup2, 1);
+  addTowersToTowerGroup(towerGroup3, 1);
 
-  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2, towerGroup3]));
 }
 
 function addTowersToTowerGroup(towerGroup, numTowers) {
@@ -103,7 +114,7 @@ function generateIdForRecord() {
 }
 
 export default function createWave1() {
-  const wave = Wave.create({ minimumScore: 40, number: 1 }); // TODO THIS COMMIT: adjust this
+  const wave = Wave.create({ minimumScore: 60, number: 1 }); // TODO THIS COMMIT: adjust this
 
   addBoardToWave(wave);
   addMobsToWave(wave);
