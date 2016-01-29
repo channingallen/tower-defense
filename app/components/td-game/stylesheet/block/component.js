@@ -35,39 +35,16 @@ export default Ember.Component.extend({
     return unsubmittedId;
   },
 
-  _unsubmittedCodeLineFound(codeLines) {
-    if (!codeLines) {
-      return false;
-    }
-
-    let unsubmittedCodeLineFound = false;
-    codeLines.forEach((codeLine) => {
-      if (!codeLine.get('submitted')) {
-        unsubmittedCodeLineFound = true;
-      }
-    });
-
-    return unsubmittedCodeLineFound;
-  },
-
   // TODO THIS COMMIT: refine observed values
   codeLines: Ember.computed(
-    'attrs.towerGroup.styles',
-    'attrs.tower.styles',
-    'attrs.towerGroup.styles.length',
-    'attrs.tower.styles.length',
-    'attrs.towerGroup.styles.@each.submitted',
-    'attrs.tower.styles.@each.submitted',
+    'attrs.towerGroup.styles.[]',
+    'attrs.tower.styles.[]',
+    // 'attrs.towerGroup.styles.@each.submitted',
+    // 'attrs.tower.styles.@each.submitted',
     function () {
-      const codeLines = this.attrs.tower ?
-                        this.attrs.tower.get('styles') :
-                        this.attrs.towerGroup.get('styles');
-
-      if (!this._unsubmittedCodeLineFound(codeLines)) {
-        codeLines.pushObject(createUnitCodeLine());
-      }
-
-      return codeLines;
+      return this.attrs.tower ?
+             this.attrs.tower.get('styles') :
+             this.attrs.towerGroup.get('styles');
     }
   ),
 
@@ -78,6 +55,16 @@ export default Ember.Component.extend({
       return this.attrs.tower ?
              this.attrs.tower.get('selector') :
              this.attrs.towerGroup.get('selector');
+    }
+  ),
+
+  _ensureUnsubmittedCodeLinesExist: Ember.observer(
+    'codeLines.@each.submitted',
+    function () {
+      const codeLines = this.get('codeLines');
+      if (codeLines.isEvery('submitted')) {
+        codeLines.pushObject(createUnitCodeLine());
+      }
     }
   ),
 

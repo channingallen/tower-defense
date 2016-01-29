@@ -251,7 +251,6 @@ export default Ember.Component.extend({
       const projectileFound = !!projectile;
       const projectilesFound = this.get('projectiles.length');
       if (projectileFound && projectilesFound) {
-        console.log(`BOARD destroyProjectile ${projectileId}`); // TODO THIS COMMIT: remove this
         const projectileIndex = this.get('projectiles').indexOf(projectile);
         this.get('projectiles').removeAt(projectileIndex);
       }
