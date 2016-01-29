@@ -10,6 +10,10 @@ export default Ember.Component.extend({
   targetTopA: null,
 
   _closeInOnTarget() {
+    if (!this.get('inFlight')) {
+      return;
+    }
+
     const targetLeftB = this._getPercentageLeft(this._getTargetLeftPosition());
     const targetTopB = this._getPercentageTop(this._getTargetTopPosition());
     const targetFound = !!targetLeftB && !!targetTopB;
@@ -26,9 +30,14 @@ export default Ember.Component.extend({
       this._setTargetPosA();
 
       Ember.run.later(this, () => {
+        // this._setPosition(targetLeftC, targetTopC);
+
         this._closeInOnTarget();
       }, 21);
     } else {
+      // TODO: move mob damage here after improving targetReached() logic
+      // this.attrs['damage-mob'](this.attrs.mobId, this.attrs.towerId);
+
       this.set('inFlight', false);
 
       this._destroy();
@@ -36,7 +45,9 @@ export default Ember.Component.extend({
   },
 
   _destroy() {
-    this.set('newTargetCoordsEventCount', 0);
+    // TODO: after improving targetReached() logic,
+    //       only call damage-mob on targetReached()
+    this.attrs['damage-mob'](this.attrs.mobId, this.attrs.towerId);
 
     this.set('inFlight', false);
 
@@ -92,9 +103,19 @@ export default Ember.Component.extend({
 
   _getTargetTopC(targetTopA, targetTopB) {
     if (targetTopA > targetTopB) {
-      return targetTopB - (this._getDiff(targetTopA, targetTopB) * 10);
+      const targetTopC = targetTopB -
+                         (this._getDiff(targetTopA, targetTopB) * 10);
+
+      this.set('targetTopC', targetTopC);
+
+      return targetTopC;
     } else {
-      return targetTopB + (this._getDiff(targetTopA, targetTopB) * 10);
+      const targetTopC = targetTopB +
+                         (this._getDiff(targetTopA, targetTopB) * 10);
+
+      this.set('targetTopC', targetTopC);
+
+      return targetTopC;
     }
   },
 
@@ -146,9 +167,8 @@ export default Ember.Component.extend({
     Ember.run.later(this, () => {
       if (this.get('inFlight')) {
         this.set('inFlight', false);
-
         this._destroy();
       }
-    }, 400); // determined with respect to 0.3s CSS transition
+    }, 350); // determined with respect to 0.3s CSS transition
   })
 });

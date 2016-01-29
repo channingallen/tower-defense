@@ -24,11 +24,13 @@
 {{/if}}
 
 {{#each projectiles as |projectile|}}
-  {{td-game/board/projectile destroy=(action "destroyProjectile")
+  {{td-game/board/projectile damage-mob=(action "damageMob")
+                             destroy=(action "destroyProjectile")
                              mobId=(readonly projectile.mobId)
                              mobX=(readonly projectile.mobX)
                              mobY=(readonly projectile.mobY)
                              id=(readonly projectile.id)
+                             towerId=(readonly projectile.towerId)
                              towerX=(readonly projectile.towerX)
                              towerY=(readonly projectile.towerY)
                              update-target-coords=(action "updateProjectileTargetCoords")

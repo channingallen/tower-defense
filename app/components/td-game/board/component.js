@@ -33,7 +33,6 @@ export default Ember.Component.extend({
 
     this.get('towers').forEach((tower) => {
       const towerId = tower.get('id');
-      const power = tower.get('attackPower');
       const range = tower.get('attackRange');
       let towerHasShot = false;
 
@@ -45,7 +44,6 @@ export default Ember.Component.extend({
 
           const mobId = mob.get('id');
           this._buildProjectile(towerId, mobId);
-          this._reduceMobHealth(mobId, power);
         }
       });
     });
@@ -60,9 +58,10 @@ export default Ember.Component.extend({
     if (projectileTower && targetedMob) {
       const newProjectile = Projectile.create({
         id: this._generateIdForProjectile(),
-        mobId: targetedMob.get('id'),
+        mobId: mobId,
         mobX: targetedMob.get('posX'),
         mobY: targetedMob.get('posY'),
+        towerId: towerId,
         towerX: projectileTower.get('posX'),
         towerY: projectileTower.get('posY')
       });
@@ -234,6 +233,12 @@ export default Ember.Component.extend({
       this.set('wavePoints', currentWavePoints + points);
     },
 
+    damageMob(mobId, towerId) {
+      const tower = this._getTowerById(towerId);
+
+      this._reduceMobHealth(mobId, tower.get('attackPower'));
+    },
+
     destroyMob(mob) {
       const mobIndex = this.get('mobs').indexOf(mob);
       this.get('mobs').removeAt(mobIndex);
@@ -246,6 +251,7 @@ export default Ember.Component.extend({
       const projectileFound = !!projectile;
       const projectilesFound = this.get('projectiles.length');
       if (projectileFound && projectilesFound) {
+        console.log(`BOARD destroyProjectile ${projectileId}`); // TODO THIS COMMIT: remove this
         const projectileIndex = this.get('projectiles').indexOf(projectile);
         this.get('projectiles').removeAt(projectileIndex);
       }

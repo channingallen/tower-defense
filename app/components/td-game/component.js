@@ -41,7 +41,7 @@ export default Ember.Component.extend({
     return activeWave;
   }),
 
-  _resetGame: Ember.observer('waveStarted', function () {
+  _resetGame: Ember.on('waveStarted', function () {
     if (!this.get('waveStarted')) {
       this.set('game', createGame());
 
