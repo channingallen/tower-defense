@@ -4,7 +4,6 @@ const Wave = Ember.Object.extend({
   board: null,
   minimumScore: null,
   mobs: null,
-  number: null,
   towerGroups: null
 });
 

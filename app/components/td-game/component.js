@@ -4,7 +4,7 @@ import createGame from 'tower-defense/utils/create-game';
 export default Ember.Component.extend({
   classNames: ['td-game'],
 
-  currentWaveNumber: null,
+  currentWaveNumber: 1,
 
   game: createGame(),
 
@@ -18,40 +18,17 @@ export default Ember.Component.extend({
 
   waveStarted: false,
 
-  _setWave(targetWaveNumber) {
-    const waves = this.get('game').get('waves');
-
-    if (waves.get('length')) {
-      waves.forEach((wave) => {
-        if (wave.get('number') === targetWaveNumber) {
-          this.set('currentWaveNumber', wave.get('number'));
-        }
-      });
+  currentWave: Ember.computed(
+    'currentWaveNumber',
+    'game.waves.[]',
+    function () {
+      return this.get('game.waves').objectAt(this.get('currentWaveNumber') - 1);
     }
-  },
+  ),
 
-  currentWave: Ember.computed('currentWaveNumber', function () {
-    let activeWave;
-    this.get('game.waves').forEach((wave) => {
-      if (wave.get('number') === this.get('currentWaveNumber')) {
-        activeWave = wave;
-      }
-    });
-
-    return activeWave;
-  }),
-
-  _resetGame: Ember.on('waveStarted', function () {
+  _resetGame: Ember.observer('waveStarted', function () {
     if (!this.get('waveStarted')) {
       this.set('game', createGame());
-
-      this.forceSet('currentWaveNumber', this.get('currentWaveNumber'));
-    }
-  }),
-
-  _startGame: Ember.on('didInsertElement', function () {
-    if (!!this.get('game')) {
-      this._setWave(1);
     }
   }),
 
@@ -59,7 +36,6 @@ export default Ember.Component.extend({
     changeWaveNext() {
       if (this.get('waveStarted')) {
         console.error('You cannot start a new wave until this wave ends.');
-
         return;
       }
 
@@ -72,7 +48,6 @@ export default Ember.Component.extend({
     changeWavePrevious() {
       if (this.get('waveStarted')) {
         console.error('You cannot start a new wave until this wave ends.');
-
         return;
       }
 
@@ -86,7 +61,6 @@ export default Ember.Component.extend({
     changeWaveSelect(waveNum) {
       if (this.get('waveStarted')) {
         console.error('You cannot start a new wave until this wave ends.');
-
         return;
       }
 
@@ -96,11 +70,9 @@ export default Ember.Component.extend({
     scoreWave(wavePoints) {
       if (wavePoints >= this.get('currentWave.minimumScore')) {
         console.log('Congratulations! You hit the minimum score!');
-
         this.set('waveStarted', false);
       } else {
         console.log('Oh no! You did not reach the minimum score!');
-
         this.set('waveStarted', false);
       }
     },
