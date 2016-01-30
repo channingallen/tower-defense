@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import { mobDimensions } from 'tower-defense/objects/mob';
+
+export const towerDimensions = mobDimensions;
 
 const Tower = Ember.Object.extend({
   id: null,

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { pathWidth } from 'tower-defense/objects/board';
+import { towerDimensions } from 'tower-defense/objects/tower';
 
 ////////////////
 //            //
@@ -114,22 +115,6 @@ const TowerComponent = Ember.Component.extend({
     this.attrs.select(this.attrs.tower);
   }),
 
-  // TODO: confirm that this needs to be done every time new wave starts
-  //     - function proportionally resizes tower relative to the board
-  _setTowerDimensions: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
-    if (!this.attrs.waveStarted) {
-      const $board = Ember.$('.td-game__board');
-      const $newWidth = $board.width() / 27;
-      this.$().css('width', $newWidth);
-      this.$().css('height', $newWidth);
-
-      Ember.$(window).resize(() => {
-        const $newWidth = $board.width() / 27;
-        this.$().css('width', $newWidth);
-        this.$().css('height', $newWidth);
-      });
-    }
-  })),
 
   _updateCodeLines: Ember.observer(
     'attrs.tower.styles',
@@ -264,7 +249,6 @@ TowerComponent.reopen({
 
   collidesWithPath: Ember.computed(
     'attrs.path.[]',
-    'elementInserted',
     'posX',
     'posY',
     function () {
@@ -304,6 +288,26 @@ TowerComponent.reopen({
       });
     }
   )
+});
+
+//////////////////////
+//                  //
+//   Tower Sizing   //
+//                  //
+//////////////////////
+
+TowerComponent.reopen({
+  _setTowerDimensions: Ember.on('didInsertElement', function () {
+    const $board = Ember.$('.td-game__board');
+    const boardDimensions = $board.width(); // width === height
+    const towerDimensionsPx = (towerDimensions / 100) * boardDimensions;
+    this.$().css('width', towerDimensionsPx);
+    this.$().css('height', towerDimensionsPx);
+  }),
+
+  _updateDimensionsOnWindowResize: Ember.on('didInsertElement', function () {
+    Ember.$(window).on('resize', Ember.run.bind(this, '_setTowerDimensions'));
+  })
 });
 
 export default TowerComponent;
