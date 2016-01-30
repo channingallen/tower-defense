@@ -1,5 +1,8 @@
 import Ember from 'ember';
 
+// mobs are 4% the width/height of the board
+export const mobDimensions = 4;
+
 const Mob = Ember.Object.extend({
   id: null,
   active: null,

@@ -1,6 +1,13 @@
 import Ember from 'ember';
+import { pathWidth } from 'tower-defense/objects/board';
 
-export default Ember.Component.extend({
+////////////////
+//            //
+//   Basics   //
+//            //
+////////////////
+
+const TowerComponent = Ember.Component.extend({
   classNameBindings: [
     'selected:tower-group__tower--selected'
   ],
@@ -183,3 +190,120 @@ export default Ember.Component.extend({
     }, 200);
   })
 });
+
+/////////////////////////////
+//                         //
+//   Position Management   //
+//                         //
+/////////////////////////////
+
+TowerComponent.reopen({
+  posX: Ember.computed(
+    'attrs.towerGroupStyles.[]',
+    'attrs.towerGroupStyles.@each.codeLine',
+    'attrs.towerGroupStyles.@each.submitted',
+    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
+    'attrs.tower.styles.@each.submitted',
+    'elementInserted',
+    function () {
+      if (!this.get('elementInserted')) {
+        return null;
+      }
+
+      const $board = Ember.$('.td-game__board');
+      const boardDistanceFromLeft = $board.offset().left;
+      const $tower = this.$();
+      const towerDistanceFromLeft = $tower.offset().left;
+
+      const towerDistanceFromBoardLeft = Math.abs(
+        boardDistanceFromLeft - towerDistanceFromLeft
+      );
+
+      const boardDimensions = $board.innerHeight(); // height === width
+      return Math.floor(100 * (towerDistanceFromBoardLeft / boardDimensions));
+    }
+  ),
+
+  posY: Ember.computed(
+    'attrs.towerGroupStyles.[]',
+    'attrs.towerGroupStyles.@each.codeLine',
+    'attrs.towerGroupStyles.@each.submitted',
+    'attrs.tower.styles.[]',
+    'attrs.tower.styles.@each.codeLine',
+    'attrs.tower.styles.@each.submitted',
+    'elementInserted',
+    function () {
+      if (!this.get('elementInserted')) {
+        return null;
+      }
+
+      const $board = Ember.$('.td-game__board');
+      const boardDistanceFromTop = $board.offset().top;
+      const $tower = this.$();
+      const towerDistanceFromTop = $tower.offset().top;
+
+      const towerDistanceFromBoardTop = Math.abs(
+        boardDistanceFromTop - towerDistanceFromTop
+      );
+
+      const boardDimensions = $board.innerHeight(); // height === width
+      return Math.floor(100 * (towerDistanceFromBoardTop / boardDimensions));
+    }
+  )
+});
+
+//////////////////////////////////
+//                              //
+//   Path Collision Detection   //
+//                              //
+//////////////////////////////////
+
+TowerComponent.reopen({
+  classNameBindings: ['collidesWithPath:tower--colliding'],
+
+  collidesWithPath: Ember.computed(
+    'attrs.path.[]',
+    'elementInserted',
+    'posX',
+    'posY',
+    function () {
+      if (!this.get('elementInserted')) {
+        return false;
+      }
+
+      const towerX = this.get('posX');
+      const towerY = this.get('posY');
+      const pathRadius = pathWidth / 2;
+
+      // The path is an array of points, and if you draw a line from one point
+      // to the next, you have created a "segment". This function loops through
+      // each of the points, creates a segment, and checks to see if tower
+      // intersects the segment.
+      return this.attrs.path.any((pathCoords, index) => {
+        const nextCoords = this.attrs.path.objectAt(index + 1);
+        if (!nextCoords) {
+          return false;
+        }
+
+        const pathCoordsX = pathCoords.get('x');
+        const nextCoordsX = nextCoords.get('x');
+        const lowestX = Math.min(pathCoordsX, nextCoordsX) - pathRadius;
+        const highestX = Math.max(pathCoordsX, nextCoordsX) + pathRadius;
+        const xIntersects = towerX >= lowestX && towerX <= highestX;
+        if (!xIntersects) {
+          return false;
+        }
+
+        const pathCoordsY = pathCoords.get('y');
+        const nextCoordsY = nextCoords.get('y');
+        const lowestY = Math.min(pathCoordsY, nextCoordsY) - pathRadius;
+        const highestY = Math.max(pathCoordsY, nextCoordsY) + pathRadius;
+        const yIntersects = towerY >= lowestY && towerY <= highestY;
+        return yIntersects;
+      });
+    }
+  )
+});
+
+export default TowerComponent;
