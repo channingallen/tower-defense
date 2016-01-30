@@ -161,14 +161,12 @@ export default Ember.Component.extend({
     }
   ),
 
-  _updatePosition: Ember.on('didInsertElement', Ember.observer('attrs.waveStarted', function () {
+  _updatePosition: Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
       return;
     }
 
     const towerId = this.attrs.tower.get('id');
-
-    // Ember.run.later(this, () => {}, 200);
 
     Ember.run.later(this, () => {
       if (!this.attrs.waveStarted) {
@@ -183,5 +181,5 @@ export default Ember.Component.extend({
         this.attrs['update-tower-position'](towerId, 'Y', posTop);
       }
     }, 200);
-  }))
+  })
 });

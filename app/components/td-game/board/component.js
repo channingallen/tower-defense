@@ -6,9 +6,9 @@ export default Ember.Component.extend({
 
   mobIndex: 0,
 
-  mobs: Ember.ArrayProxy.create({ content: Ember.A([]) }),
+  mobs: Ember.A([]),
 
-  projectiles: Ember.ArrayProxy.create({ content: Ember.A([]) }),
+  projectiles: Ember.A([]),
 
   wavePoints: 0,
 
@@ -186,19 +186,7 @@ export default Ember.Component.extend({
   }),
 
   _getFinalScore: Ember.observer('mobs.@each.active', function () {
-    let waveEnded = true;
-
-    this.get('mobs').forEach((mob) => {
-      if (!mob) {
-        return;
-      }
-
-      if (mob.get('active')) {
-        waveEnded = false;
-      }
-    });
-
-    if (waveEnded) {
+    if (!this.get('mobs.length')) {
       this.attrs['score-wave'](this.get('wavePoints'));
     }
   }),
@@ -220,9 +208,8 @@ export default Ember.Component.extend({
   _resetBoard: Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
       this.set('mobIndex', 0);
-      this.set('mobs', Ember.ArrayProxy.create({ content: Ember.A([]) }));
-      this.set('projectiles', Ember.ArrayProxy.create({ content: Ember.A([]) }));
-      this.set('towers', Ember.ArrayProxy.create({ content: Ember.A([]) }));
+      this.set('mobs', Ember.A([]));
+      this.set('projectiles', Ember.A([]));
       this.set('wavePoints', 0);
     }
   }),
