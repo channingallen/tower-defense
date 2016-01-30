@@ -168,10 +168,11 @@ export default Ember.Component.extend({
 
     const towerId = this.attrs.tower.get('id');
 
-    const findNextPosition = setInterval(() => {
-      if (!this.attrs.waveStarted) {
+    // Ember.run.later(this, () => {}, 200);
 
-        clearInterval(findNextPosition);
+    Ember.run.later(this, () => {
+      if (!this.attrs.waveStarted) {
+        return;
       }
 
       const posLeft = this._getPosLeft();

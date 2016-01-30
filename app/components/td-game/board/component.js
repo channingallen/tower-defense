@@ -207,11 +207,11 @@ export default Ember.Component.extend({
     this._generateMob();
 
     if (!this._mobCapacityReached()) {
-      const produceNextMob = setInterval(() => {
+      Ember.run.later(this, () => {
         this._generateMob();
 
         if (this._mobCapacityReached()) {
-          clearInterval(produceNextMob);
+          return;
         }
       }, this.get('mobFrequency'));
     }
