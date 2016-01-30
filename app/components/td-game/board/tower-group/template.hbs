@@ -1,5 +1,6 @@
 {{#each groupTowers as |tower|}}
-  {{td-game/board/tower-group/tower select=(action attrs.select-tower tower)
+  {{td-game/board/tower-group/tower path=(readonly attrs.path)
+                                    select=(action attrs.select-tower tower)
                                     selectedTower=(readonly selectedTower)
                                     tower=(readonly tower)
                                     update-tower-position=(action attrs.update-tower-position)
