@@ -192,6 +192,10 @@ export default Ember.Component.extend({
   }),
 
   _generateMobs: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      return;
+    }
+
     this._generateMob();
 
     if (!this._mobCapacityReached()) {
