@@ -249,6 +249,7 @@ TowerComponent.reopen({
 
   collidesWithPath: Ember.computed(
     'attrs.path.[]',
+    'elementInserted',
     'posX',
     'posY',
     function () {
@@ -258,6 +259,7 @@ TowerComponent.reopen({
 
       const towerX = this.get('posX');
       const towerY = this.get('posY');
+      const towerRadius = towerDimensions / 2;
       const pathRadius = pathWidth / 2;
 
       // The path is an array of points, and if you draw a line from one point
@@ -274,7 +276,8 @@ TowerComponent.reopen({
         const nextCoordsX = nextCoords.get('x');
         const lowestX = Math.min(pathCoordsX, nextCoordsX) - pathRadius;
         const highestX = Math.max(pathCoordsX, nextCoordsX) + pathRadius;
-        const xIntersects = towerX >= lowestX && towerX <= highestX;
+        const xIntersects = towerX + towerRadius >= lowestX &&
+                            towerX - towerRadius <= highestX;
         if (!xIntersects) {
           return false;
         }
@@ -283,7 +286,8 @@ TowerComponent.reopen({
         const nextCoordsY = nextCoords.get('y');
         const lowestY = Math.min(pathCoordsY, nextCoordsY) - pathRadius;
         const highestY = Math.max(pathCoordsY, nextCoordsY) + pathRadius;
-        const yIntersects = towerY >= lowestY && towerY <= highestY;
+        const yIntersects = towerY + towerRadius >= lowestY &&
+                            towerY - towerRadius <= highestY;
         return yIntersects;
       });
     }

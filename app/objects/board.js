@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { mobDimensions } from 'tower-defense/objects/mob';
 
-export const pathWidth = mobDimensions * 2;
+export const pathWidth = mobDimensions * 2.42142476633251;
 
 const Board = Ember.Object.extend({
   imageUrl: null,
