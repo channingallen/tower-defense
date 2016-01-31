@@ -1,8 +1,15 @@
 import Ember from 'ember';
+import { boardPaddingPct } from 'tower-defense/objects/board';
 import { spaceBetweenTowersPct } from 'tower-defense/objects/tower-group';
 import { towerDimensions } from 'tower-defense/objects/tower';
 
-export default Ember.Component.extend({
+////////////////
+//            //
+//   Basics   //
+//            //
+////////////////
+
+const TowerGroupComponent = Ember.Component.extend({
   classNameBindings: [
     'selected:board__tower-group--selected'
   ],
@@ -85,18 +92,6 @@ export default Ember.Component.extend({
     }
   }),
 
-  _setHeight: Ember.on('didInsertElement', function () {
-    const numRows = this.attrs.towerGroup.get('numRows');
-    const heightPct = (towerDimensions * numRows) +
-                      (spaceBetweenTowersPct * 2) +
-                      (spaceBetweenTowersPct * (numRows - 1));
-    this.$().css('height', `${heightPct}%`);
-  }),
-
-  _setPadding: Ember.on('didInsertElement', function () {
-    this.$().css('padding', `${spaceBetweenTowersPct}%`);
-  }),
-
   _updateCodeLines: Ember.observer(
     'attrs.towerGroup.styles',
     'attrs.towerGroup.styles.[]',
@@ -134,3 +129,41 @@ export default Ember.Component.extend({
     }
   )
 });
+
+////////////////
+//            //
+//   Sizing   //
+//            //
+////////////////
+
+TowerGroupComponent.reopen({
+  _setHeight() {
+    const numRows = this.attrs.towerGroup.get('numRows');
+    const heightPct = (towerDimensions * numRows) +
+                      (spaceBetweenTowersPct * 2) +
+                      (spaceBetweenTowersPct * (numRows - 1));
+    this.$().css('height', `${heightPct}%`);
+  },
+
+  _setPadding() {
+    this.$().css('padding', `${spaceBetweenTowersPct}%`);
+  },
+
+  _setPosition() {
+    this.$().css('left', `${boardPaddingPct}%`);
+  },
+
+  _setWidth() {
+    const width = 100 - (boardPaddingPct * 2);
+    this.$().css('width', `${width}%`);
+  },
+
+  _initializeStyles: Ember.on('didInsertElement', function () {
+    this._setHeight();
+    this._setPadding();
+    this._setWidth();
+    this._setPosition();
+  })
+});
+
+export default TowerGroupComponent;

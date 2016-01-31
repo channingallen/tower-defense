@@ -1,4 +1,3 @@
-$board__tower-group--width: 100% - ($board--padding * 4);
 $background-color: hsla(0, 0%, 100%, 0.25);
 
 .board__tower-group {
@@ -7,7 +6,7 @@ $background-color: hsla(0, 0%, 100%, 0.25);
   cursor: pointer;
   display: flex;
   position: absolute;
-  width: $board__tower-group--width;
+  width: 100%;
 
   &:hover {
     background-color: opacify($background-color, 0.25);

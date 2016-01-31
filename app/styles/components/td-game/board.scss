@@ -1,17 +1,12 @@
-$board--padding: 1.5%; // roughly 20px, depending on screen
-// $board--padding: 20px;
-
 .td-game__board {
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
   height: 50vw;
   width: 50vw;
-  // width: calc(100% - #{$td-game__sidebar__width});
   min-width: 300px;
   min-height: 300px;
   overflow: hidden;
-  padding: $board--padding;
   position: relative;
 }
 

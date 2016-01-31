@@ -294,11 +294,11 @@ TowerComponent.reopen({
   )
 });
 
-//////////////////////
-//                  //
-//   Tower Sizing   //
-//                  //
-//////////////////////
+////////////////
+//            //
+//   Sizing   //
+//            //
+////////////////
 
 TowerComponent.reopen({
   _setTowerDimensions: Ember.on('didInsertElement', function () {
