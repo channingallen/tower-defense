@@ -291,7 +291,14 @@ TowerComponent.reopen({
         return yIntersects;
       });
     }
-  )
+  ),
+
+  _updateTowersColliding: Ember.observer('collidesWithPath', function () {
+    const collisionAction = this.get('collidesWithPath') ?
+                            'add-colliding-tower' :
+                            'remove-colliding-tower';
+    this.attrs[collisionAction](this.attrs.tower.get('id'));
+  })
 });
 
 ////////////////

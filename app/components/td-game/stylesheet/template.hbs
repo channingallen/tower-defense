@@ -37,5 +37,9 @@
 {{/each}}
 
 {{#unless attrs.waveStarted}}
-  <button class="stylesheet__start-wave-button" {{action attrs.start-wave}}>Start Wave</button>
+  {{#if attrs.towersColliding}}
+    <button>Start Wave</button>
+  {{else}}
+    <button class="stylesheet__start-wave-button" {{action attrs.start-wave}}>Start Wave</button>
+  {{/if}}
 {{/unless}}

@@ -1,5 +1,7 @@
 {{#each groupTowers as |tower|}}
-  {{td-game/board/tower-group/tower path=(readonly attrs.path)
+  {{td-game/board/tower-group/tower add-colliding-tower=(action attrs.add-colliding-tower)
+                                    path=(readonly attrs.path)
+                                    remove-colliding-tower=(action attrs.remove-colliding-tower)
                                     select=(action attrs.select-tower tower)
                                     selectedTower=(readonly selectedTower)
                                     towerGroupStyles=(readonly attrs.towerGroup.styles)

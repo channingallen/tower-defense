@@ -38,11 +38,13 @@
 {{/each}}
 
 {{#each attrs.towerGroups as |towerGroup|}}
-  {{td-game/board/tower-group allTowers=(readonly towers)
+  {{td-game/board/tower-group add-colliding-tower=(action attrs.add-colliding-tower)
+                              allTowers=(readonly towers)
                               class=(readonly towerGroup.posY)
                               click=(action attrs.select-tower-group towerGroup)
                               numRows=(readonly towerGroup.numRows)
                               path=(readonly attrs.path)
+                              remove-colliding-tower=(action attrs.remove-colliding-tower)
                               selectedTower=(readonly selectedTower)
                               selectedTowerGroup=(readonly selectedTowerGroup)
                               select-tower=(action attrs.select-tower)

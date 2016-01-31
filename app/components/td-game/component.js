@@ -1,7 +1,13 @@
 import Ember from 'ember';
 import createGame from 'tower-defense/utils/create-game';
 
-export default Ember.Component.extend({
+////////////////
+//            //
+//   Basics   //
+//            //
+////////////////
+
+const GameComponent = Ember.Component.extend({
   classNames: ['td-game'],
 
   currentWaveNumber: 1,
@@ -9,8 +15,10 @@ export default Ember.Component.extend({
   game: createGame(),
 
   selectedTower: null,
-
+  
   selectedTowerGroup: null,
+
+  towerPositionsValid: false,
 
   twrStyles: null,
 
@@ -116,3 +124,29 @@ export default Ember.Component.extend({
     }
   }
 });
+
+//////////////////////////
+//                      //
+//   Tower Collisions   //
+//                      //
+//////////////////////////
+
+GameComponent.reopen({
+  collidingTowers: [],
+
+  towersColliding: Ember.computed('collidingTowers.[]', function () {
+    return !!this.get('collidingTowers.length');
+  }),
+
+  actions: {
+    addCollidingTower(towerId) {
+      this.get('collidingTowers').addObject(towerId);
+    },
+
+    removeCollidingTower(towerId) {
+      this.get('collidingTowers').removeObject(towerId);
+    }
+  }
+});
+
+export default GameComponent;
