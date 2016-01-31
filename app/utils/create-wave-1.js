@@ -63,7 +63,7 @@ function addTowerGroupsToWave(wave) {
   function getNewTowerGroup(numRows, posY) {
     return TowerGroup.create({
       id: generateIdForRecord(),
-      numRows: numRows,
+      numRows,
       posY: 'board__tower-group--position-y' + posY,
       selector: '.tg' + groupNum++,
       styles: Ember.A([createUnitCodeLine()])

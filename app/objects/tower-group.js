@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+export const spaceBetweenTowersPct = 1;
+
 const TowerGroup = Ember.Object.extend({
   id: null,
   numRows: 1,

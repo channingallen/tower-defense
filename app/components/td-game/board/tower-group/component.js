@@ -1,11 +1,10 @@
 import Ember from 'ember';
+import { spaceBetweenTowersPct } from 'tower-defense/objects/tower-group';
+import { towerDimensions } from 'tower-defense/objects/tower';
 
 export default Ember.Component.extend({
   classNameBindings: [
-    'selected:board__tower-group--selected',
-    'groupRows1:board__tower-group--type-1',
-    'groupRows2:board__tower-group--type-2',
-    'groupRows3:board__tower-group--type-3'
+    'selected:board__tower-group--selected'
   ],
 
   classNames: ['board__tower-group'],
@@ -70,27 +69,6 @@ export default Ember.Component.extend({
     return towers;
   }),
 
-  groupRows1: Ember.computed(
-    'attrs.numRows',
-    function () {
-      return this.attrs.numRows === 1;
-    }
-  ),
-
-  groupRows2: Ember.computed(
-    'attrs.numRows',
-    function () {
-      return this.attrs.numRows === 2;
-    }
-  ),
-
-  groupRows3: Ember.computed(
-    'attrs.numRows',
-    function () {
-      return this.attrs.numRows === 3;
-    }
-  ),
-
   selected: Ember.computed(
     'attrs.selectedTowerGroup',
     'attrs.towerGroup',
@@ -105,6 +83,18 @@ export default Ember.Component.extend({
     if (!this.attrs.waveStarted) {
       this._clearPreviousStyles();
     }
+  }),
+
+  _setHeight: Ember.on('didInsertElement', function () {
+    const numRows = this.attrs.towerGroup.get('numRows');
+    const heightPct = (towerDimensions * numRows) +
+                      (spaceBetweenTowersPct * 2) +
+                      (spaceBetweenTowersPct * (numRows - 1));
+    this.$().css('height', `${heightPct}%`);
+  }),
+
+  _setPadding: Ember.on('didInsertElement', function () {
+    this.$().css('padding', `${spaceBetweenTowersPct}%`);
   }),
 
   _updateCodeLines: Ember.observer(
