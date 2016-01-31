@@ -1,14 +1,10 @@
-$mob-width: 4%;
-
 .mob {
   background-color: purple;
   border-radius: 99999px;
   font-size: 10px;
-  height: $mob-width;
   // overflow: hidden;
   position: absolute;
   // transition: all 5.0s linear;
-  width: $mob-width;
 }
 
 .mob--points-added {

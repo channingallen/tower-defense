@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { mobDimensions } from 'tower-defense/objects/mob';
 
 export default Ember.Component.extend({
   advancing: true,
@@ -175,6 +176,11 @@ export default Ember.Component.extend({
       this.set('mobPathPosition', null);
       this.set('nextMobPathPosition', null);
     }
+  }),
+
+  _setMobDimensions: Ember.on('didInsertElement', function () {
+    this.$().css('width', `${mobDimensions}%`);
+    this.$().css('height', `${mobDimensions}%`);
   }),
 
   _updateHealth: Ember.observer('attrs.health', function () {
