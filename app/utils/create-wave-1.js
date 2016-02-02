@@ -12,21 +12,12 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '');
 
   const pathObjects = [
-    PathCoords.create({x: 53, y: -2}),
-    PathCoords.create({x: 53, y: 9}),
-    PathCoords.create({x: 86, y: 9}),
-    PathCoords.create({x: 86, y: 36}),
-    PathCoords.create({x: 61, y: 36}),
-    PathCoords.create({x: 61, y: 60}),
-    PathCoords.create({x: 86, y: 60}),
-    PathCoords.create({x: 86, y: 88}),
-    PathCoords.create({x: 9, y: 88}),
-    PathCoords.create({x: 9, y: 71}),
-    PathCoords.create({x: 42, y: 71}),
-    PathCoords.create({x: 42, y: 18}),
-    PathCoords.create({x: 18, y: 18}),
-    PathCoords.create({x: 18, y: 45}),
-    PathCoords.create({x: -2, y: 45})
+    PathCoords.create({x: 85, y: -5}),
+    PathCoords.create({x: 85, y: 40}),
+    PathCoords.create({x: 35, y: 40}),
+    PathCoords.create({x: 35, y: 60}),
+    PathCoords.create({x: 85, y: 60}),
+    PathCoords.create({x: 85, y: 105})
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -44,8 +35,8 @@ function addMobsToWave(wave) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
       frequency: 2000,
-      health: 35,
-      maxHealth: 35,
+      health: 300,
+      maxHealth: 300,
       points: 20,
       quantity: mobQuantity,
       speed: 8, // seconds to cross one axis of the board
@@ -70,8 +61,8 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 27);
-  const towerGroup2 = getNewTowerGroup(1, 52);
+  const towerGroup1 = getNewTowerGroup(1, 20);
+  const towerGroup2 = getNewTowerGroup(1, 50);
   const towerGroup3 = getNewTowerGroup(1, 80);
 
   addTowersToTowerGroup(towerGroup1, 1);
