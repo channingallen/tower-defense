@@ -9,15 +9,15 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '');
+  board.set('imageUrl', '/images/path-1.png');
 
   const pathObjects = [
-    PathCoords.create({x: 85, y: -5}),
-    PathCoords.create({x: 85, y: 40}),
-    PathCoords.create({x: 35, y: 40}),
-    PathCoords.create({x: 35, y: 60}),
-    PathCoords.create({x: 85, y: 60}),
-    PathCoords.create({x: 85, y: 105})
+    PathCoords.create({ x: 85, y: -5 }),
+    PathCoords.create({ x: 85, y: 40 }),
+    PathCoords.create({ x: 35, y: 40 }),
+    PathCoords.create({ x: 35, y: 60 }),
+    PathCoords.create({ x: 85, y: 60 }),
+    PathCoords.create({ x: 85, y: 105 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -62,7 +62,7 @@ function addTowerGroupsToWave(wave) {
   }
 
   const towerGroup1 = getNewTowerGroup(1, 20);
-  const towerGroup2 = getNewTowerGroup(1, 50);
+  const towerGroup2 = getNewTowerGroup(1, 48);
   const towerGroup3 = getNewTowerGroup(1, 80);
 
   addTowersToTowerGroup(towerGroup1, 1);
