@@ -9,19 +9,22 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/path-4.png');
+  board.set('imageUrl', '/images/path-5.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 5, y: -5 }),
-    PathCoords.create({ x: 5, y: 25 }),
-    PathCoords.create({ x: 35, y: 25 }),
-    PathCoords.create({ x: 35, y: 40 }),
-    PathCoords.create({ x: 65, y: 40 }),
-    PathCoords.create({ x: 65, y: 25 }),
-    PathCoords.create({ x: 90, y: 25 }),
-    PathCoords.create({ x: 90, y: 75 }),
-    PathCoords.create({ x: 35, y: 75 }),
-    PathCoords.create({ x: 35, y: 105 })
+    PathCoords.create({ x: 90, y: -5 }),
+    PathCoords.create({ x: 90, y: 10 }),
+    PathCoords.create({ x: 71, y: 10 }),
+    PathCoords.create({ x: 71, y: 35 }),
+    PathCoords.create({ x: 90, y: 35 }),
+    PathCoords.create({ x: 90, y: 50 }),
+    PathCoords.create({ x: 40, y: 50 }),
+    PathCoords.create({ x: 40, y: 10 }),
+    PathCoords.create({ x: 10, y: 10 }),
+    PathCoords.create({ x: 10, y: 95 }),
+    PathCoords.create({ x: 30, y: 95 }),
+    PathCoords.create({ x: 30, y: 70 }),
+    PathCoords.create({ x: 105, y: 70 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -65,11 +68,13 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(3, 4);
+  const towerGroup1 = getNewTowerGroup(1, 20);
+  const towerGroup2 = getNewTowerGroup(5, 70);
 
-  addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 2 }]);
+  addTowersToTowerGroup(towerGroup1, [{ type: 2 }, { type: 1 }, { type: 1 }]);
+  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 1 }, { type: 2 }]);
 
-  wave.set('towerGroups', Ember.A([towerGroup1]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
 }
 
 function addTowersToTowerGroup(towerGroup, specsForTowers) {
