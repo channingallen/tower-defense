@@ -9,7 +9,7 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '');
+  board.set('imageUrl', '/images/path-4.png');
 
   const pathObjects = [
     PathCoords.create({ x: 5, y: -5 }),
@@ -65,13 +65,15 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(3, 5);
-  const towerGroup2 = getNewTowerGroup(3, 60);
+  const towerGroup1 = getNewTowerGroup(3, 4);
+  const towerGroup2 = getNewTowerGroup(1, 46);
+  const towerGroup3 = getNewTowerGroup(3, 60);
 
   addTowersToTowerGroup(towerGroup1, 2);
-  addTowersToTowerGroup(towerGroup2, 2);
+  addTowersToTowerGroup(towerGroup2, 1);
+  addTowersToTowerGroup(towerGroup3, 2);
 
-  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2, towerGroup3]));
 }
 
 function addTowersToTowerGroup(towerGroup, numTowers) {
