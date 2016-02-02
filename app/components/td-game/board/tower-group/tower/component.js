@@ -12,7 +12,35 @@ const TowerComponent = Ember.Component.extend({
   classNameBindings: ['selected:tower-group__tower--selected'],
 
   classNames: ['tower-group__tower'],
+});
 
+////////////////////////////
+//                        //
+//   Upgrade Management   //
+//                        //
+////////////////////////////
+
+TowerComponent.reopen({
+  applyTowerType: Ember.on('didInsertElement', function () {
+    Ember.run.schedule('afterRender', this, () => {
+      if (this.attrs.type === 2) {
+        this.$().css('background-color', 'black');
+        const attackPower = this.attrs.tower.get('attackPower');
+        const attackRange = this.attrs.tower.get('attackRange');
+        this.attrs.tower.set('attackPower', attackPower + 5);
+        // this.attrs.tower.set('attackRange', attackRange + 5);
+      }
+    });
+  })
+});
+
+//////////////////////////////
+//                          //
+//   Code Line Management   //
+//                          //
+//////////////////////////////
+
+TowerComponent.reopen({
   _clearPreviousStyles() {
     this.$().css('justify-content', 'flex-start');
     this.$().css('align-items', 'flex-start');
