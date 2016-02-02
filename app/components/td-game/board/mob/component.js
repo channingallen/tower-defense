@@ -14,9 +14,9 @@ const MobComponent = Ember.Component.extend({
 
   healthBarClass: 'mob__health-bar--100',
 
-  pathCoordsIndex: 0,
-
   nextPathCoordsIndex: 1,
+
+  pathCoordsIndex: 0,
 
   _destroyMob() {
     this.attrs['destroy-mob'](this.attrs.mob);
