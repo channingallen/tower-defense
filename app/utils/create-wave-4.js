@@ -12,10 +12,16 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '');
 
   const pathObjects = [
-    PathCoords.create({ x: 12, y: 105 }),
-    PathCoords.create({ x: 12, y: 20 }),
-    PathCoords.create({ x: 85, y: 20 }),
-    PathCoords.create({ x: 85, y: 105 })
+    PathCoords.create({ x: 5, y: -5 }),
+    PathCoords.create({ x: 5, y: 25 }),
+    PathCoords.create({ x: 35, y: 25 }),
+    PathCoords.create({ x: 35, y: 40 }),
+    PathCoords.create({ x: 65, y: 40 }),
+    PathCoords.create({ x: 65, y: 25 }),
+    PathCoords.create({ x: 90, y: 25 }),
+    PathCoords.create({ x: 90, y: 75 }),
+    PathCoords.create({ x: 35, y: 75 }),
+    PathCoords.create({ x: 35, y: 105 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -33,8 +39,8 @@ function addMobsToWave(wave) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
       frequency: 2000,
-      health: 200,
-      maxHealth: 200,
+      health: 350,
+      maxHealth: 350,
       points: 20,
       quantity: mobQuantity,
       speed: 8, // seconds to cross one axis of the board
@@ -59,10 +65,10 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 10);
-  const towerGroup2 = getNewTowerGroup(1, 60);
+  const towerGroup1 = getNewTowerGroup(3, 5);
+  const towerGroup2 = getNewTowerGroup(3, 60);
 
-  addTowersToTowerGroup(towerGroup1, 1);
+  addTowersToTowerGroup(towerGroup1, 2);
   addTowersToTowerGroup(towerGroup2, 2);
 
   wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
