@@ -9,50 +9,13 @@ import { towerDimensions } from 'tower-defense/objects/tower';
 ////////////////
 
 const TowerComponent = Ember.Component.extend({
-  classNameBindings: [
-    'selected:tower-group__tower--selected'
-  ],
+  classNameBindings: ['selected:tower-group__tower--selected'],
 
   classNames: ['tower-group__tower'],
 
   _clearPreviousStyles() {
     this.$().css('justify-content', 'flex-start');
     this.$().css('align-items', 'flex-start');
-  },
-
-  _getPosLeft() {
-    const $board = Ember.$('.td-game__board');
-    const $tower = this.$();
-    if (!$board || !$tower) {
-      return;
-    }
-
-    const boardLeftEdgePxFromPage = $board.offset().left;
-    const towerLeftEdgePxFromPage = $tower.offset().left;
-
-    const towerLeftEdgePxFromBoard = Math.abs(boardLeftEdgePxFromPage -
-                                              towerLeftEdgePxFromPage);
-
-    const boardDimensionsPx = $board.innerHeight(); // height & width
-    return Math.floor(100 * (towerLeftEdgePxFromBoard / boardDimensionsPx));
-  },
-
-  _getPosTop() {
-    const $board = Ember.$('.td-game__board');
-    const $tower = this.$();
-    if (!$board || !$tower) {
-      return;
-    }
-
-    const $boardDistanceFromTop = $board.offset().top;
-    const $towerDistanceFromTop = $tower.offset().top;
-
-    const $towerDistanceFromBoardTop = Math.abs(
-      $boardDistanceFromTop - $towerDistanceFromTop
-    );
-
-    const $boardLength = $board.innerHeight(); // height & width
-    return Math.floor(100 * ($towerDistanceFromBoardTop / $boardLength));
   },
 
   _getProperty(codeLine) {
@@ -108,34 +71,11 @@ const TowerComponent = Ember.Component.extend({
     }
   ),
 
-  _reportPosition: Ember.observer('attrs.waveStarted', function () {
-    if (!this.attrs.waveStarted) {
-      return;
-    }
-
-    const towerId = this.attrs.tower.get('id');
-
-    Ember.run.later(this, () => {
-      if (!this.attrs.waveStarted) {
-        return;
-      }
-
-      const posLeft = this._getPosLeft();
-      const posTop = this._getPosTop();
-
-      if (posTop && posLeft) {
-        this.attrs['report-tower-position'](towerId, 'X', posLeft);
-        this.attrs['report-tower-position'](towerId, 'Y', posTop);
-      }
-    }, 200);
-  }),
-
   _sendSelectAction: Ember.on('click', function (clickEvent) {
     clickEvent.stopPropagation();
 
     this.attrs.select(this.attrs.tower);
   }),
-
 
   _updateCodeLines: Ember.observer(
     'attrs.tower.styles',
@@ -240,7 +180,17 @@ TowerComponent.reopen({
       const boardDimensionsPx = $board.innerHeight(); // height === width
       return Math.floor(100 * (towerCenterPxFromBoard / boardDimensionsPx));
     }
-  )
+  ),
+
+  _reportPosition: Ember.observer('centerLeftPct', 'centerTopPct', function () {
+    const towerId = this.attrs.tower.get('id');
+
+    const centerLeftPct = this.get('centerLeftPct');
+    const centerTopPct = this.get('centerTopPct');
+
+    this.attrs['report-tower-position'](towerId, 'X', centerLeftPct);
+    this.attrs['report-tower-position'](towerId, 'Y', centerTopPct);
+  })
 });
 
 //////////////////////////////////
