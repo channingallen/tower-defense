@@ -98,16 +98,6 @@ const MobComponent = Ember.Component.extend({
     }
   }),
 
-  // TODO THIS COMMIT: can I get rid of this now that we're using computed properties?
-  _resetMob: Ember.observer('attrs.waveStarted', function () {
-    if (!this.attrs.waveStarted) {
-      this.set('endPointReached', false);
-      this.set('healthBarClass', 'mob__health-bar--100');
-      this.set('pathCoordsIndex', 0);
-      this.set('nextPathCoordsIndex', 1);
-    }
-  }),
-
   _setMobDimensions: Ember.on('didInsertElement', function () {
     this.$().css('width', `${mobDimensions}%`);
     this.$().css('height', `${mobDimensions}%`);
