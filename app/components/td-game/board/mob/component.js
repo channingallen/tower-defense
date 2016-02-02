@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import { mobDimensions } from 'tower-defense/objects/mob';
 
-// TODO THIS COMMIT: refactor `mobDestroyed` into `isDestroying`
-
 ////////////////
 //            //
 //   Basics   //
@@ -10,21 +8,17 @@ import { mobDimensions } from 'tower-defense/objects/mob';
 ////////////////
 
 const MobComponent = Ember.Component.extend({
-  classNameBindings: ['mobDestroyed::mob'],
+  classNames: ['mob'],
 
   endPointReached: false,
 
   healthBarClass: 'mob__health-bar--100',
-
-  mobDestroyed: false,
 
   pathCoordsIndex: 0,
 
   nextPathCoordsIndex: 1,
 
   _destroyMob() {
-    this.set('mobDestroyed', true);
-
     this.attrs['destroy-mob'](this.attrs.mob);
   },
 
@@ -61,18 +55,7 @@ const MobComponent = Ember.Component.extend({
     return this.attrs.speed * (pctDiff / 100);
   },
 
-  _updateIdSelector() {
-    if (!this.get('mobDestroyed')) {
-      this.$().attr('id', this.attrs.mob.get('id'));
-    }
-  },
-
   _updatePosition() {
-    // TODO THIS COMMIT: sometimes the mob is destroyed (or, at least, `this.$()` returns undefined) and yet `mobDestroyed` isn't set to true
-    if (this.get('mobDestroyed')) {
-      return;
-    }
-
     const mobRadiusPct = mobDimensions / 2;
 
     const mobLeftPx = this.$().css('left');
@@ -92,9 +75,11 @@ const MobComponent = Ember.Component.extend({
       this.attrs['update-position'](mobId, 'Y', pathTopPct);
     }
 
-    if (!this.get('endPointReached')) {
-      Ember.run.later(this, this._updatePosition, 20);
-    }
+    Ember.run.later(this, () => {
+      if (!this.get('isDestroying') && !this.get('endPointReached')) {
+        this._updatePosition();
+      }
+    }, 20);
   },
 
   numPathObjects: Ember.computed('attrs.path.[]', function () {
@@ -102,10 +87,6 @@ const MobComponent = Ember.Component.extend({
   }),
 
   _checkMobStatus: Ember.observer('attrs.health', 'endPointReached', function () {
-    if (this.get('mobDestroyed')) {
-      return;
-    }
-
     if (this.attrs.health < 1) {
       this.attrs['add-points'](this.attrs.mob.get('points'));
 
@@ -120,7 +101,6 @@ const MobComponent = Ember.Component.extend({
   // TODO THIS COMMIT: can I get rid of this now that we're using computed properties?
   _resetMob: Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
-      this.set('mobDestroyed', false);
       this.set('endPointReached', false);
       this.set('healthBarClass', 'mob__health-bar--100');
       this.set('pathCoordsIndex', null);
@@ -134,10 +114,6 @@ const MobComponent = Ember.Component.extend({
   }),
 
   _updateHealth: Ember.observer('attrs.health', function () {
-    if (this.get('mobDestroyed')) {
-      return;
-    }
-
     const maxHealth = this.attrs.mob.get('maxHealth');
     if (this.attrs.health > Math.floor(maxHealth * 0.80)) {
       this.set('healthBarClass', 'mob__health-bar--100');
@@ -152,8 +128,8 @@ const MobComponent = Ember.Component.extend({
     }
   }),
 
-  _updateIdOnInsertElement: Ember.on('didInsertElement', function () {
-    this._updateIdSelector();
+  _updateIdSelector: Ember.on('didInsertElement', function () {
+    this.$().attr('id', this.attrs.mob.get('id'));
   })
 });
 
@@ -175,10 +151,6 @@ MobComponent.reopen({
   },
 
   _moveMobAlongPath() {
-    if (this.get('mobDestroyed')) {
-      throw new Error('Can\'t advance mob if mob destroyed');
-    }
-
     const nextPathCoordsIndex = this.get('nextPathCoordsIndex');
     this.set('pathCoordsIndex', nextPathCoordsIndex);
     this.incrementProperty('nextPathCoordsIndex');
@@ -189,18 +161,19 @@ MobComponent.reopen({
     const transitionSecs = this._getTransitionSecs(mobXPct, mobYPct);
     this._moveMobToCoordinates(mobXPct, mobYPct, transitionSecs);
 
-    const transitionMs = transitionSecs * 1000;
-    const pathLastIndex = path.get('length') - 1;
-    const morePathCoordsExist = pathLastIndex >= nextPathCoordsIndex + 1;
-    if (morePathCoordsExist) {
-      Ember.run.later(this, this._moveMobAlongPath, transitionMs);
-    } else {
-      Ember.run.later(this, () => {
-        if (!this.get('mobDestroyed')) {
-          this.set('endPointReached', true);
-        }
-      }, transitionMs);
-    }
+    Ember.run.later(this, () => {
+      if (this.get('isDestroying')) {
+        return;
+      }
+
+      const pathLastIndex = path.get('length') - 1;
+      const morePathCoordsExist = pathLastIndex >= nextPathCoordsIndex + 1;
+      if (morePathCoordsExist) {
+        this._moveMobAlongPath();
+      } else {
+        this.set('endPointReached', true);
+      }
+    }, transitionSecs * 1000);
   },
 
   _moveMobToCoordinates(mobXPct, mobYPct, secs = 0) {

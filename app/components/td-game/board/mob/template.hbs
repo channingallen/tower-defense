@@ -1,11 +1,3 @@
-{{#if advancing}}
-  <div class="mob__health-bar-container">
-    <div class="mob__health-bar {{healthBarClass}}"></div>
-  </div>
-{{else}}
-  {{#if endPointReached}}
-    <div>- {{attrs.points}}</div>
-  {{else}}
-    <div>+ {{attrs.points}}</div>
-  {{/if}}
-{{/if}}
+<div class="mob__health-bar-container">
+  <div class="mob__health-bar {{healthBarClass}}"></div>
+</div>
