@@ -27,15 +27,14 @@ const TowerComponent = Ember.Component.extend({
       return;
     }
 
-    const $boardDistanceFromLeft = $board.offset().left;
-    const $towerDistanceFromLeft = $tower.offset().left;
+    const boardLeftEdgePxFromPage = $board.offset().left;
+    const towerLeftEdgePxFromPage = $tower.offset().left;
 
-    const $towerDistanceFromBoardLeft = Math.abs(
-      $boardDistanceFromLeft - $towerDistanceFromLeft
-    );
+    const towerLeftEdgePxFromBoard = Math.abs(boardLeftEdgePxFromPage -
+                                              towerLeftEdgePxFromPage);
 
-    const $boardLength = $board.innerHeight(); // height & width
-    return Math.floor(100 * ($towerDistanceFromBoardLeft / $boardLength));
+    const boardDimensionsPx = $board.innerHeight(); // height & width
+    return Math.floor(100 * (towerLeftEdgePxFromBoard / boardDimensionsPx));
   },
 
   _getPosTop() {
@@ -183,7 +182,8 @@ const TowerComponent = Ember.Component.extend({
 /////////////////////////////
 
 TowerComponent.reopen({
-  posX: Ember.computed(
+  // the % distance the center of the tower is from the left of the board
+  centerLeftPct: Ember.computed(
     'attrs.towerGroupStyles.[]',
     'attrs.towerGroupStyles.@each.codeLine',
     'attrs.towerGroupStyles.@each.submitted',
@@ -197,20 +197,23 @@ TowerComponent.reopen({
       }
 
       const $board = Ember.$('.td-game__board');
-      const boardDistanceFromLeft = $board.offset().left;
+      const boardLeftEdgePxFromPage = $board.offset().left;
+
       const $tower = this.$();
-      const towerDistanceFromLeft = $tower.offset().left;
+      const towerLeftEdgePxFromPage = $tower.offset().left;
 
-      const towerDistanceFromBoardLeft = Math.abs(
-        boardDistanceFromLeft - towerDistanceFromLeft
-      );
+      const towerRadius = towerDimensions / 2;
+      const towerLeftEdgePxFromBoard = towerLeftEdgePxFromPage -
+                                       boardLeftEdgePxFromPage;
+      const towerCenterPxFromBoard = towerLeftEdgePxFromBoard + towerRadius;
 
-      const boardDimensions = $board.innerHeight(); // height === width
-      return Math.floor(100 * (towerDistanceFromBoardLeft / boardDimensions));
+      const boardDimensionsPx = $board.innerHeight(); // height === width
+      return Math.floor(100 * (towerCenterPxFromBoard / boardDimensionsPx));
     }
   ),
 
-  posY: Ember.computed(
+  // the % distance the center of the tower is from the top of the board
+  centerTopPct: Ember.computed(
     'attrs.towerGroupStyles.[]',
     'attrs.towerGroupStyles.@each.codeLine',
     'attrs.towerGroupStyles.@each.submitted',
@@ -224,16 +227,18 @@ TowerComponent.reopen({
       }
 
       const $board = Ember.$('.td-game__board');
-      const boardDistanceFromTop = $board.offset().top;
+      const boardTopEdgePxFromPage = $board.offset().top;
+
       const $tower = this.$();
-      const towerDistanceFromTop = $tower.offset().top;
+      const towerTopEdgePxFromPage = $tower.offset().top;
 
-      const towerDistanceFromBoardTop = Math.abs(
-        boardDistanceFromTop - towerDistanceFromTop
-      );
+      const towerRadius = towerDimensions / 2;
+      const towerTopEdgePxFromBoard = towerTopEdgePxFromPage -
+                                     boardTopEdgePxFromPage;
+      const towerCenterPxFromBoard = towerTopEdgePxFromBoard + towerRadius;
 
-      const boardDimensions = $board.innerHeight(); // height === width
-      return Math.floor(100 * (towerDistanceFromBoardTop / boardDimensions));
+      const boardDimensionsPx = $board.innerHeight(); // height === width
+      return Math.floor(100 * (towerCenterPxFromBoard / boardDimensionsPx));
     }
   )
 });
@@ -250,15 +255,15 @@ TowerComponent.reopen({
   collidesWithPath: Ember.computed(
     'attrs.path.[]',
     'elementInserted',
-    'posX',
-    'posY',
+    'centerLeftPct',
+    'centerTopPct',
     function () {
       if (!this.get('elementInserted')) {
         return false;
       }
 
-      const towerX = this.get('posX');
-      const towerY = this.get('posY');
+      const towerLeftPct = this.get('centerLeftPct');
+      const towerTopPct = this.get('centerTopPct');
       const towerRadius = towerDimensions / 2;
       const pathRadius = pathWidth / 2;
 
@@ -274,21 +279,21 @@ TowerComponent.reopen({
 
         const pathCoordsX = pathCoords.get('x');
         const nextCoordsX = nextCoords.get('x');
-        const lowestX = Math.min(pathCoordsX, nextCoordsX) - pathRadius;
-        const highestX = Math.max(pathCoordsX, nextCoordsX) + pathRadius;
-        const xIntersects = towerX + towerRadius >= lowestX &&
-                            towerX - towerRadius <= highestX;
-        if (!xIntersects) {
+        const lowestTopPct = Math.min(pathCoordsX, nextCoordsX) - pathRadius;
+        const highestTopPct = Math.max(pathCoordsX, nextCoordsX) + pathRadius;
+        const topIntersects = towerLeftPct + towerRadius >= lowestTopPct &&
+                            towerLeftPct - towerRadius <= highestTopPct;
+        if (!topIntersects) {
           return false;
         }
 
         const pathCoordsY = pathCoords.get('y');
         const nextCoordsY = nextCoords.get('y');
-        const lowestY = Math.min(pathCoordsY, nextCoordsY) - pathRadius;
-        const highestY = Math.max(pathCoordsY, nextCoordsY) + pathRadius;
-        const yIntersects = towerY + towerRadius >= lowestY &&
-                            towerY - towerRadius <= highestY;
-        return yIntersects;
+        const lowestTop = Math.min(pathCoordsY, nextCoordsY) - pathRadius;
+        const highestTop = Math.max(pathCoordsY, nextCoordsY) + pathRadius;
+        const leftIntersects = towerTopPct + towerRadius >= lowestTop &&
+                            towerTopPct - towerRadius <= highestTop;
+        return leftIntersects;
       });
     }
   ),
