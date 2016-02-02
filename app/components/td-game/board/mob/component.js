@@ -103,8 +103,8 @@ const MobComponent = Ember.Component.extend({
     if (!this.attrs.waveStarted) {
       this.set('endPointReached', false);
       this.set('healthBarClass', 'mob__health-bar--100');
-      this.set('pathCoordsIndex', null);
-      this.set('nextPathCoordsIndex', null);
+      this.set('pathCoordsIndex', 0);
+      this.set('nextPathCoordsIndex', 1);
     }
   }),
 
