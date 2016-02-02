@@ -9,7 +9,7 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '');
+  board.set('imageUrl', '/images/map-3.0.png');
 
   const pathObjects = [
     PathCoords.create({x: 53, y: -2}),
@@ -113,7 +113,7 @@ function generateIdForRecord() {
          generate4DigitString() + generate4DigitString();
 }
 
-export default function createWave1() {
+export default function createWave3() {
   const wave = Wave.create({ minimumScore: 20 });
 
   addBoardToWave(wave);
