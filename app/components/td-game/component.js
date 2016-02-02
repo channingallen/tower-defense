@@ -15,7 +15,7 @@ const GameComponent = Ember.Component.extend({
   game: createGame(),
 
   selectedTower: null,
-  
+
   selectedTowerGroup: null,
 
   towerPositionsValid: false,
@@ -132,7 +132,9 @@ const GameComponent = Ember.Component.extend({
 //////////////////////////
 
 GameComponent.reopen({
-  collidingTowers: [],
+  collidingTowers: Ember.computed('currentWaveNumber', function () {
+    return [];
+  }),
 
   towersColliding: Ember.computed('collidingTowers.[]', function () {
     return !!this.get('collidingTowers.length');
