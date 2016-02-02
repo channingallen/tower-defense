@@ -142,13 +142,14 @@ TowerComponent.reopen({
       const $tower = this.$();
       const towerLeftEdgePxFromPage = $tower.offset().left;
 
-      const towerRadius = towerDimensions / 2;
       const towerLeftEdgePxFromBoard = towerLeftEdgePxFromPage -
                                        boardLeftEdgePxFromPage;
-      const towerCenterPxFromBoard = towerLeftEdgePxFromBoard + towerRadius;
+      const towerCenterPxFromBoard = towerLeftEdgePxFromBoard;
 
+      const towerRadiusPct = towerDimensions / 2;
       const boardDimensionsPx = $board.innerHeight(); // height === width
-      return Math.floor(100 * (towerCenterPxFromBoard / boardDimensionsPx));
+      return Math.floor(100 * (towerCenterPxFromBoard / boardDimensionsPx)) +
+             towerRadiusPct;
     }
   ),
 
@@ -172,13 +173,14 @@ TowerComponent.reopen({
       const $tower = this.$();
       const towerTopEdgePxFromPage = $tower.offset().top;
 
-      const towerRadius = towerDimensions / 2;
       const towerTopEdgePxFromBoard = towerTopEdgePxFromPage -
                                      boardTopEdgePxFromPage;
-      const towerCenterPxFromBoard = towerTopEdgePxFromBoard + towerRadius;
+      const towerCenterPxFromBoard = towerTopEdgePxFromBoard;
 
+      const towerRadiusPct = towerDimensions / 2;
       const boardDimensionsPx = $board.innerHeight(); // height === width
-      return Math.floor(100 * (towerCenterPxFromBoard / boardDimensionsPx));
+      return Math.floor(100 * (towerCenterPxFromBoard / boardDimensionsPx)) +
+             towerRadiusPct;
     }
   ),
 
@@ -229,21 +231,21 @@ TowerComponent.reopen({
 
         const pathCoordsX = pathCoords.get('x');
         const nextCoordsX = nextCoords.get('x');
-        const lowestTopPct = Math.min(pathCoordsX, nextCoordsX) - pathRadius;
-        const highestTopPct = Math.max(pathCoordsX, nextCoordsX) + pathRadius;
-        const topIntersects = towerLeftPct + towerRadius >= lowestTopPct &&
-                            towerLeftPct - towerRadius <= highestTopPct;
-        if (!topIntersects) {
+        const lowestPathLeftPct = Math.min(pathCoordsX, nextCoordsX) - pathRadius;
+        const highestPathLeftPct = Math.max(pathCoordsX, nextCoordsX) + pathRadius;
+        const xIntersects = towerLeftPct + towerRadius >= lowestPathLeftPct &&
+                            towerLeftPct - towerRadius <= highestPathLeftPct;
+        if (!xIntersects) {
           return false;
         }
 
         const pathCoordsY = pathCoords.get('y');
         const nextCoordsY = nextCoords.get('y');
-        const lowestTop = Math.min(pathCoordsY, nextCoordsY) - pathRadius;
-        const highestTop = Math.max(pathCoordsY, nextCoordsY) + pathRadius;
-        const leftIntersects = towerTopPct + towerRadius >= lowestTop &&
-                            towerTopPct - towerRadius <= highestTop;
-        return leftIntersects;
+        const lowestPathTopPct = Math.min(pathCoordsY, nextCoordsY) - pathRadius;
+        const highestPathTopPct = Math.max(pathCoordsY, nextCoordsY) + pathRadius;
+        const yIntersects = towerTopPct + towerRadius >= lowestPathTopPct &&
+                            towerTopPct - towerRadius <= highestPathTopPct;
+        return yIntersects;
       });
     }
   ),
