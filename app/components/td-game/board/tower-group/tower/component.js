@@ -108,6 +108,28 @@ const TowerComponent = Ember.Component.extend({
     }
   ),
 
+  _reportPosition: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted) {
+      return;
+    }
+
+    const towerId = this.attrs.tower.get('id');
+
+    Ember.run.later(this, () => {
+      if (!this.attrs.waveStarted) {
+        return;
+      }
+
+      const posLeft = this._getPosLeft();
+      const posTop = this._getPosTop();
+
+      if (posTop && posLeft) {
+        this.attrs['report-tower-position'](towerId, 'X', posLeft);
+        this.attrs['report-tower-position'](towerId, 'Y', posTop);
+      }
+    }, 200);
+  }),
+
   _sendSelectAction: Ember.on('click', function (clickEvent) {
     clickEvent.stopPropagation();
 
@@ -150,29 +172,7 @@ const TowerComponent = Ember.Component.extend({
         }
       });
     }
-  ),
-
-  _updatePosition: Ember.observer('attrs.waveStarted', function () {
-    if (!this.attrs.waveStarted) {
-      return;
-    }
-
-    const towerId = this.attrs.tower.get('id');
-
-    Ember.run.later(this, () => {
-      if (!this.attrs.waveStarted) {
-        return;
-      }
-
-      const posLeft = this._getPosLeft();
-      const posTop = this._getPosTop();
-
-      if (posTop && posLeft) {
-        this.attrs['update-tower-position'](towerId, 'X', posLeft);
-        this.attrs['update-tower-position'](towerId, 'Y', posTop);
-      }
-    }, 200);
-  })
+  )
 });
 
 /////////////////////////////

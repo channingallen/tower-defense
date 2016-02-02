@@ -285,7 +285,7 @@ export default Ember.Component.extend({
       }
     },
 
-    updateTowerPosition(id, axis, pos) {
+    reportTowerPosition(id, axis, pos) {
       axis = axis.toUpperCase();
 
       this.get('towers').forEach((tower) => {
