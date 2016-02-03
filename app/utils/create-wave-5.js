@@ -13,10 +13,11 @@ function addBoardToWave(wave) {
 
   const pathObjects = [
     PathCoords.create({ x: 90, y: -5 }),
-    PathCoords.create({ x: 90, y: 10 }),
-    PathCoords.create({ x: 71, y: 10 }),
-    PathCoords.create({ x: 71, y: 35 }),
     PathCoords.create({ x: 90, y: 35 }),
+    PathCoords.create({ x: 71, y: 35 }),
+    PathCoords.create({ x: 71, y: 10 }),
+    PathCoords.create({ x: 90, y: 10 }),
+    PathCoords.create({ x: 90, y: 10 }),
     PathCoords.create({ x: 90, y: 50 }),
     PathCoords.create({ x: 40, y: 50 }),
     PathCoords.create({ x: 40, y: 10 }),
@@ -37,16 +38,16 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 5;
+  const mobQuantity = 10;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 2000,
-      health: 350,
-      maxHealth: 350,
+      frequency: 900,
+      health: 300,
+      maxHealth: 300,
       points: 20,
       quantity: mobQuantity,
-      speed: 8, // seconds to cross one axis of the board
+      speed: 10, // seconds to cross one axis of the board
       type: 'standard'
     });
 
