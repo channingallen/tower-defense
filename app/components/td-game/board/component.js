@@ -82,17 +82,7 @@ const BoardComponent = Ember.Component.extend({
            generate4DigitString() + generate4DigitString();
   },
 
-  _generateMob() {
-    const mobIndex = this.get('mobIndex');
-    const waveMob = this.attrs.waveMobs[mobIndex];
-    this.get('mobs').pushObject(waveMob);
-
-    const nextMobIndex = mobIndex + 1;
-    this.set('mobIndex', nextMobIndex);
-  },
-
   _generateMobs() {
-    // this._generateMob();
     const mobIndex = this.get('mobIndex');
     const currentMob = this.attrs.waveMobs.objectAt(mobIndex);
     this.get('mobs').pushObject(currentMob);
