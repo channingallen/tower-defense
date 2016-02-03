@@ -152,15 +152,17 @@ export default Ember.Component.extend({
   },
 
   _placeProjectile: Ember.on('didInsertElement', function () {
-    this._setPosition(this.attrs.towerX + 1, this.attrs.towerY + 1);
+    Ember.run.schedule('afterRender', this, () => {
+      this._setPosition(this.attrs.towerX + 1, this.attrs.towerY + 1);
 
-    this.set('inFlight', true);
+      this.set('inFlight', true);
 
-    this._setTargetPosA();
+      this._setTargetPosA();
 
-    Ember.run.later(this, () => {
-      this._closeInOnTarget();
-    }, 20);
+      Ember.run.later(this, () => {
+        this._closeInOnTarget();
+      }, 20);
+    });
   }),
 
   _selfDestructAfterTimeout: Ember.on('didInsertElement', function () {

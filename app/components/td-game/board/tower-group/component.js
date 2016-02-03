@@ -159,10 +159,12 @@ TowerGroupComponent.reopen({
   },
 
   _initializeStyles: Ember.on('didInsertElement', function () {
-    this._setHeight();
-    this._setPadding();
-    this._setWidth();
-    this._setPosition();
+    Ember.run.schedule('afterRender', this, () => {
+      this._setHeight();
+      this._setPadding();
+      this._setWidth();
+      this._setPosition();
+    });
   })
 });
 

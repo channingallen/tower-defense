@@ -105,9 +105,11 @@ export default Ember.Component.extend({
   }),
 
   _focusIfFirstInput: Ember.on('didInsertElement', function () {
-    if (this.attrs.unitId === this.attrs.firstTowerGroupId) {
-      this._focusInput();
-    }
+    Ember.run.schedule('afterRender', this, () => {
+      if (this.attrs.unitId === this.attrs.firstTowerGroupId) {
+        this._focusInput();
+      }
+    });
   }),
 
   _focusMatchedInput: Ember.observer(
@@ -120,9 +122,11 @@ export default Ember.Component.extend({
   ),
 
   _notifyOnFinalInput: Ember.on('didInsertElement', function () {
-    if (this.attrs.unitId === this.attrs.finalTowerId) {
-      this.attrs['notify-final-input']();
-    }
+    Ember.run.schedule('afterRender', this, () => {
+      if (this.attrs.unitId === this.attrs.finalTowerId) {
+        this.attrs['notify-final-input']();
+      }
+    });
   }),
 
   _resetInput: Ember.observer('attrs.waveStarted', function () {
