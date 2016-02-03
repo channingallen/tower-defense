@@ -34,16 +34,16 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 5;
+  const mobQuantity = 10;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 2000,
-      health: 350,
-      maxHealth: 350,
+      frequency: 1500,
+      health: 220,
+      maxHealth: 220,
       points: 20,
       quantity: mobQuantity,
-      speed: 8, // seconds to cross one axis of the board
+      speed: 10, // seconds to cross one axis of the board
       type: 'standard'
     });
 
