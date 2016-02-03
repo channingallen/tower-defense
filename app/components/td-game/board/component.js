@@ -1,12 +1,12 @@
 import Ember from 'ember';
 import Projectile from 'tower-defense/objects/projectile';
 
-export default Ember.Component.extend({
+const BoardComponent = Ember.Component.extend({
   classNames: ['td-game__board'],
 
   mobIndex: 0,
 
-  mobs: Ember.A([]),
+  mobs: [],
 
   projectiles: Ember.A([]),
 
@@ -91,6 +91,21 @@ export default Ember.Component.extend({
     this.set('mobIndex', nextMobIndex);
   },
 
+  _generateMobs() {
+    // this._generateMob();
+    const mobIndex = this.get('mobIndex');
+    const currentMob = this.attrs.waveMobs.objectAt(mobIndex);
+    this.get('mobs').pushObject(currentMob);
+
+    const anotherMobExists = !!this.attrs.waveMobs.objectAt(mobIndex + 1);
+    if (anotherMobExists) {
+      this.incrementProperty('mobIndex');
+
+      const mobFrequency = currentMob.get('frequency');
+      Ember.run.later(this, this._generateMobs, mobFrequency);
+    }
+  },
+
   _getMobById(mobId) {
     let needle;
     this.get('mobs').forEach((mob) => {
@@ -119,10 +134,6 @@ export default Ember.Component.extend({
       }
     });
     return needle;
-  },
-
-  _mobCapacityReached() {
-    return this.get('mobIndex') < this.attrs.waveMobs.length ? false : true;
   },
 
   _mobInRangeOfTower(mob, tower, range) {
@@ -158,6 +169,15 @@ export default Ember.Component.extend({
     return waveMob.get('frequency');
   }),
 
+  kickOffMobGeneration: Ember.observer('attrs.waveStarted', function () {
+    if (!this.attrs.waveStarted || !this.attrs.waveMobs.get('length')) {
+      this.set('mobIndex', 0);
+      this.set('mobs', []);
+      return;
+    }
+
+    this._generateMobs();
+  }),
 
   towers: Ember.computed('towerGroupTowers.@each.[]', function () {
     function flatten(arrays) {
@@ -191,28 +211,10 @@ export default Ember.Component.extend({
     }
   }),
 
-  _generateMobs: Ember.observer('attrs.waveStarted', function () {
-    if (!this.attrs.waveStarted) {
-      return;
-    }
-
-    this._generateMob();
-
-    if (!this._mobCapacityReached()) {
-      Ember.run.later(this, () => {
-        this._generateMob();
-
-        if (this._mobCapacityReached()) {
-          return;
-        }
-      }, this.get('mobFrequency'));
-    }
-  }),
-
   _resetBoard: Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
-      this.set('mobIndex', 0);
-      this.set('mobs', Ember.A([]));
+      // this.set('mobIndex', 0);
+      // this.set('mobs', Ember.A([]));
       this.set('projectiles', Ember.A([]));
       this.set('wavePoints', 0);
     }
@@ -296,3 +298,5 @@ export default Ember.Component.extend({
     }
   }
 });
+
+export default BoardComponent;
