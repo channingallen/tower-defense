@@ -21,8 +21,8 @@ function addBoardToWave(wave) {
     PathCoords.create({ x: 40, y: 50 }),
     PathCoords.create({ x: 40, y: 10 }),
     PathCoords.create({ x: 10, y: 10 }),
-    PathCoords.create({ x: 10, y: 95 }),
-    PathCoords.create({ x: 30, y: 95 }),
+    PathCoords.create({ x: 10, y: 90 }),
+    PathCoords.create({ x: 30, y: 90 }),
     PathCoords.create({ x: 30, y: 70 }),
     PathCoords.create({ x: 105, y: 70 })
   ];
