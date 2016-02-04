@@ -137,6 +137,8 @@ const TowerGroupComponent = Ember.Component.extend({
 ////////////////
 
 TowerGroupComponent.reopen({
+  stylesInitialized: false,
+
   _setHeight() {
     const numRows = this.attrs.towerGroup.get('numRows');
     const heightPct = (towerDimensions * numRows) +
@@ -164,6 +166,8 @@ TowerGroupComponent.reopen({
       this._setPadding();
       this._setWidth();
       this._setPosition();
+
+      this.set('stylesInitialized', true);
     });
   })
 });

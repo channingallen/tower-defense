@@ -152,6 +152,7 @@ TowerComponent.reopen({
 TowerComponent.reopen({
   // the % distance the center of the tower is from the left of the board
   centerLeftPct: Ember.computed(
+    'attrs.stylesInitialized',
     'attrs.towerGroupStyles.[]',
     'attrs.towerGroupStyles.@each.codeLine',
     'attrs.towerGroupStyles.@each.submitted',
@@ -183,6 +184,7 @@ TowerComponent.reopen({
 
   // the % distance the center of the tower is from the top of the board
   centerTopPct: Ember.computed(
+    'attrs.stylesInitialized',
     'attrs.towerGroupStyles.[]',
     'attrs.towerGroupStyles.@each.codeLine',
     'attrs.towerGroupStyles.@each.submitted',
