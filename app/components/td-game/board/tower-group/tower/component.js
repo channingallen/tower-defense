@@ -293,6 +293,8 @@ TowerComponent.reopen({
 ////////////////
 
 TowerComponent.reopen({
+  resizeFn: null, // will be set to a function that we call on window resize
+
   _setTowerDimensions: Ember.on('didInsertElement', function () {
     const $board = Ember.$('.td-game__board');
     const boardDimensions = $board.width(); // width === height
@@ -301,8 +303,15 @@ TowerComponent.reopen({
     this.$().css('height', towerDimensionsPx);
   }),
 
+  _stopWatchingWindowResize: Ember.on('willDestroyElement', function () {
+    Ember.$(window).off('resize', this.get('resizeFn'));
+  }),
+
   _updateDimensionsOnWindowResize: Ember.on('didInsertElement', function () {
-    Ember.$(window).on('resize', Ember.run.bind(this, '_setTowerDimensions'));
+    const resizeFn = Ember.run.bind(this, '_setTowerDimensions');
+    Ember.$(window).on('resize', resizeFn);
+
+    this.set('resizeFn', resizeFn);
   })
 });
 
