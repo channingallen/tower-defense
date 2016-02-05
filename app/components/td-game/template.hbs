@@ -10,7 +10,8 @@
       Instructions
     </div>
 
-    {{td-game/stylesheet select-tower=(action "selectTower")
+    {{td-game/stylesheet currentWaveNumber=(readonly currentWaveNumber)
+                         select-tower=(action "selectTower")
                          select-tower-group=(action "selectTowerGroup")
                          selectedTower=(readonly selectedTower)
                          selectedTowerGroup=(readonly selectedTowerGroup)

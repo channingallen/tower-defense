@@ -4,7 +4,8 @@
     <span class="block__brace">{</span>
   </li>
 
-  {{td-game/stylesheet/block finalTowerId=(readonly finalTowerId)
+  {{td-game/stylesheet/block currentWaveNumber=(readonly attrs.currentWaveNumber)
+                             finalTowerId=(readonly finalTowerId)
                              firstTowerGroupId=(readonly firstTowerGroupId)
                              select-tower-group=(action attrs.select-tower-group)
                              selectedTowerGroup=(readonly attrs.selectedTowerGroup)
