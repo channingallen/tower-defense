@@ -1,12 +1,22 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-  classNames: ['sidebar__stylesheet'],
+////////////////
+//            //
+//   Basics   //
+//            //
+////////////////
 
-  finalTowerId: null,
+const StylesheetComponent = Ember.Component.extend({
+  classNames: ['sidebar__stylesheet']
+});
 
-  firstTowerGroupId: null,
+/////////////////////
+//                 //
+//   Shake Error   //
+//                 //
+/////////////////////
 
+StylesheetComponent.reopen({
   shakeActive: false,
 
   _delayNextShake() {
@@ -16,23 +26,6 @@ export default Ember.Component.extend({
       this.set('shakeActive', false);
     }, 1300);
   },
-
-  _setFirstAndFinalUnitIds: Ember.on('init', Ember.observer(
-    'attrs.currentWaveNumber',
-    'attrs.waveStarted',
-    function () {
-      if (!this.attrs.waveStarted) {
-        const firstTowerGroup = this.attrs.towerGroups.get('firstObject');
-        const firstTowerGroupId = firstTowerGroup.get('id');
-        this.set('firstTowerGroupId', firstTowerGroupId);
-
-        const finalTowerGroup = this.attrs.towerGroups.get('lastObject');
-        const finalTower = finalTowerGroup.get('towers').get('lastObject');
-        const finalTowerId = finalTower.get('id');
-        this.set('finalTowerId', finalTowerId);
-      }
-    }
-  )),
 
   actions: {
     shake() {
@@ -52,3 +45,34 @@ export default Ember.Component.extend({
     }
   }
 });
+
+/////////////////////////
+//                     //
+//   Input Reporting   //
+//                     //
+/////////////////////////
+
+StylesheetComponent.reopen({
+  finalTowerId: null,
+
+  firstTowerGroupId: null,
+
+  _setFirstAndFinalUnitIds: Ember.on('init', Ember.observer(
+    'attrs.currentWaveNumber',
+    'attrs.waveStarted',
+    function () {
+      if (!this.attrs.waveStarted) {
+        const firstTowerGroup = this.attrs.towerGroups.get('firstObject');
+        const firstTowerGroupId = firstTowerGroup.get('id');
+        this.set('firstTowerGroupId', firstTowerGroupId);
+
+        const finalTowerGroup = this.attrs.towerGroups.get('lastObject');
+        const finalTower = finalTowerGroup.get('towers').get('lastObject');
+        const finalTowerId = finalTower.get('id');
+        this.set('finalTowerId', finalTowerId);
+      }
+    }
+  ))
+});
+
+export default StylesheetComponent;
