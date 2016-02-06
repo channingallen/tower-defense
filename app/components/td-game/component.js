@@ -8,21 +8,19 @@ import createGame from 'tower-defense/utils/create-game';
 ////////////////
 
 const GameComponent = Ember.Component.extend({
-  classNames: ['td-game'],
+  classNames: ['td-game']
+});
 
+/////////////////////////
+//                     //
+//   Wave Management   //
+//                     //
+/////////////////////////
+
+GameComponent.reopen({
   currentWaveNumber: 1,
 
   game: createGame(),
-
-  selectedTower: null,
-
-  selectedTowerGroup: null,
-
-  towerPositionsValid: false,
-
-  twrStyles: null,
-
-  twrGrpStyles: null,
 
   waveStarted: false,
 
@@ -85,6 +83,48 @@ const GameComponent = Ember.Component.extend({
       }
     },
 
+    startWave() {
+      this.set('waveStarted', true);
+    }
+  }
+});
+
+////////////////////////
+//                    //
+//   Flexbox Styles   //
+//                    //
+////////////////////////
+
+GameComponent.reopen({
+  twrStyles: null,
+
+  twrGrpStyles: null,
+
+  actions: {
+    setStyles(blockCodeLines) {
+      if (this.get('selectedTowerGroup')) {
+        this.set('selectedTowerGroup.styles', blockCodeLines);
+      }
+
+      if (this.get('selectedTower')) {
+        this.set('selectedTower.styles', blockCodeLines);
+      }
+    }
+  }
+});
+
+/////////////////////////
+//                     //
+//   Tower Selection   //
+//                     //
+/////////////////////////
+
+GameComponent.reopen({
+  selectedTower: null,
+
+  selectedTowerGroup: null,
+
+  actions: {
     selectTower(tower) {
       if (this.get('waveStarted')) {
         return;
@@ -107,20 +147,6 @@ const GameComponent = Ember.Component.extend({
       }
 
       this.forceSet('selectedTowerGroup', towerGroup);
-    },
-
-    setStyles(blockCodeLines) {
-      if (this.get('selectedTowerGroup')) {
-        this.set('selectedTowerGroup.styles', blockCodeLines);
-      }
-
-      if (this.get('selectedTower')) {
-        this.set('selectedTower.styles', blockCodeLines);
-      }
-    },
-
-    startWave() {
-      this.set('waveStarted', true);
     }
   }
 });
