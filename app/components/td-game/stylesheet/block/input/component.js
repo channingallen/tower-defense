@@ -81,7 +81,7 @@ InputComponent.reopen({
     }
     return !this.attrs.blockSubmitted;
   }),
-  
+
   _notifyOnFinalInput: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
       if (this.attrs.unitId === this.attrs.finalTowerId) {
@@ -168,8 +168,9 @@ InputComponent.reopen({
       return false;
     }
 
+    const propertyType = this.attrs.tower ? 'item' : 'container';
     const property = this._getProperty();
-    if (!this.get('flexboxRef')[property]) {
+    if (!this.get('flexboxRef').get(propertyType)[property]) {
       return false;
     }
 
@@ -192,8 +193,9 @@ InputComponent.reopen({
 
     let value = this._getValWithoutSemiColon(fullValue);
 
+    const propertyType = this.attrs.tower ? 'item' : 'container';
     let valueFound = false;
-    this.get('flexboxRef')[property].forEach(function (validValue) {
+    this.get('flexboxRef').get(propertyType)[property].forEach(function (validValue) {
       if (value === validValue.toString()) {
         valueFound = true;
       }
