@@ -1,17 +1,25 @@
 import Ember from 'ember';
 import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 
-export default Ember.Component.extend({
+////////////////
+//            //
+//   Basics   //
+//            //
+////////////////
+
+const BlockComponent = Ember.Component.extend({
   classNames: ['stylesheet__block'],
 
-  finalInputFound: false,
+  tagName: 'ol'
+});
 
-  inputIdSelectedManually: null,
+//////////////////////////////
+//                          //
+//   Code Line Management   //
+//                          //
+//////////////////////////////
 
-  inputIdToFocus: null,
-
-  tagName: 'ol',
-
+BlockComponent.reopen({
   _deleteCodeLine(id) {
     let index;
     this.get('codeLines').forEach((codeLine) => {
@@ -22,6 +30,47 @@ export default Ember.Component.extend({
 
     this.get('codeLines').removeAt(index);
   },
+
+  codeLines: Ember.computed(
+    'attrs.towerGroup.styles.[]',
+    'attrs.tower.styles.[]',
+    function () {
+      return this.attrs.tower ?
+             this.attrs.tower.get('styles') :
+             this.attrs.towerGroup.get('styles');
+    }
+  ),
+
+  actions: {
+    deleteCodeLine(id) {
+      this._deleteCodeLine(id);
+
+      this.attrs['update-unit-styles'](this.get('codeLines'));
+    },
+
+    submitCodeLine(codeStr, id) {
+      this.get('codeLines').forEach((unitCodeLine) => {
+        if (unitCodeLine.get('id') === id) {
+          unitCodeLine.set('codeLine', codeStr);
+          unitCodeLine.set('submitted', true);
+        }
+      });
+
+      this.attrs['update-unit-styles'](this.get('codeLines'));
+    }
+  }
+});
+
+////////////////////
+//                //
+//   Auto Focus   //
+//                //
+////////////////////
+
+BlockComponent.reopen({
+  inputIdSelectedManually: null,
+
+  inputIdToFocus: null,
 
   _getUnsubmittedId() {
     let unsubmittedId;
@@ -34,29 +83,6 @@ export default Ember.Component.extend({
 
     return unsubmittedId;
   },
-
-  // TODO THIS COMMIT: refine observed values
-  codeLines: Ember.computed(
-    'attrs.towerGroup.styles.[]',
-    'attrs.tower.styles.[]',
-    // 'attrs.towerGroup.styles.@each.submitted',
-    // 'attrs.tower.styles.@each.submitted',
-    function () {
-      return this.attrs.tower ?
-             this.attrs.tower.get('styles') :
-             this.attrs.towerGroup.get('styles');
-    }
-  ),
-
-  selector: Ember.computed(
-    'attrs.tower.selector',
-    'attrs.towerGroup.selector',
-    function () {
-      return this.attrs.tower ?
-             this.attrs.tower.get('selector') :
-             this.attrs.towerGroup.get('selector');
-    }
-  ),
 
   _ensureUnsubmittedCodeLinesExist: Ember.observer(
     'codeLines.@each.submitted',
@@ -97,42 +123,31 @@ export default Ember.Component.extend({
     }
   ),
 
-  _resetBlock: Ember.observer('attrs.waveStarted', function () {
-    if (!this.attrs.waveStarted) {
-      this.set('finalInputFound', false);
-      this.set('inputIdSelectedManually', null);
-      this.set('inputIdToFocus', null);
-    }
-  }),
-
   actions: {
-    deleteCodeLine(id) {
-      this._deleteCodeLine(id);
-
-      this.attrs['update-unit-styles'](this.get('codeLines'));
-    },
-
     disableAutoFocus(id) {
       this.set('inputIdSelectedManually', id);
     },
 
     enableAutoFocus() {
       this.set('inputIdSelectedManually', null);
-    },
-
-    notifyFinalInput() {
-      this.set('finalInputFound', true);
-    },
-
-    submitCodeLine(codeStr, id) {
-      this.get('codeLines').forEach((unitCodeLine) => {
-        if (unitCodeLine.get('id') === id) {
-          unitCodeLine.set('codeLine', codeStr);
-          unitCodeLine.set('submitted', true);
-        }
-      });
-
-      this.attrs['update-unit-styles'](this.get('codeLines'));
     }
   }
 });
+
+/////////////////////////
+//                     //
+//   Input Reporting   //
+//                     //
+/////////////////////////
+
+BlockComponent.reopen({
+  finalInputFound: false,
+
+  actions: {
+    notifyFinalInput() {
+      this.set('finalInputFound', true);
+    }
+  }
+});
+
+export default BlockComponent;
