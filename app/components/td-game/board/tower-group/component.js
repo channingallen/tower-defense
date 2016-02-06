@@ -10,12 +10,46 @@ import { towerDimensions } from 'tower-defense/objects/tower';
 ////////////////
 
 const TowerGroupComponent = Ember.Component.extend({
-  classNameBindings: [
-    'selected:board__tower-group--selected'
-  ],
+  classNameBindings: ['selected:board__tower-group--selected'],
 
   classNames: ['board__tower-group'],
 
+  selected: Ember.computed(
+    'attrs.selectedTowerGroup',
+    'attrs.towerGroup',
+    function () {
+      return this.attrs.selectedTowerGroup === this.attrs.towerGroup ?
+             true :
+             false;
+    }
+  )
+});
+
+////////////////
+//            //
+//   Towers   //
+//            //
+////////////////
+
+TowerGroupComponent.reopen({
+  groupTowers: Ember.computed('attrs.towerGroup', function () {
+    let towers = [];
+
+    this.attrs.towerGroup.get('towers').forEach((tower) => {
+      towers.push(tower);
+    });
+
+    return towers;
+  })
+});
+
+//////////////////////////////
+//                          //
+//   Code Line Management   //
+//                          //
+//////////////////////////////
+
+TowerGroupComponent.reopen({
   _clearPreviousStyles() {
     this.$().css('justify-content', 'flex-start');
     this.$().css('align-items', 'flex-start');
@@ -66,33 +100,7 @@ const TowerGroupComponent = Ember.Component.extend({
     return styleApplicable;
   },
 
-  groupTowers: Ember.computed('attrs.towerGroup', function () {
-    let towers = [];
-
-    this.attrs.towerGroup.get('towers').forEach((tower) => {
-      towers.push(tower);
-    });
-
-    return towers;
-  }),
-
-  selected: Ember.computed(
-    'attrs.selectedTowerGroup',
-    'attrs.towerGroup',
-    function () {
-      return this.attrs.selectedTowerGroup === this.attrs.towerGroup ?
-             true :
-             false;
-    }
-  ),
-
-  _resetTowerGroupStyles: Ember.observer('attrs.waveStarted', function () {
-    if (!this.attrs.waveStarted) {
-      this._clearPreviousStyles();
-    }
-  }),
-
-  _updateCodeLines: Ember.observer(
+  _applyCodeLines: Ember.observer(
     'attrs.towerGroup.styles',
     'attrs.towerGroup.styles.[]',
     'attrs.towerGroup.styles.length',
