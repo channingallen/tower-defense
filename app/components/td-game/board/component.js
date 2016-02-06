@@ -173,7 +173,7 @@ BoardComponent.reopen({
       });
     },
 
-    updateMobPosition(mobId, axis, pos) {
+    reportMobPosition(mobId, axis, pos) {
       this.get('mobs').forEach((mob) => {
         if (mobId === mob.get('id')) {
           mob.set('pos' + axis, pos);
