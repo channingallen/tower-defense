@@ -1,10 +1,24 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+////////////////
+//            //
+//   Basics   //
+//            //
+////////////////
+
+const ProjectileComponent = Ember.Component.extend({
   classNameBindings: ['inFlight:projectile--in-flight:projectile--default'],
 
-  inFlight: false,
+  inFlight: false
+});
 
+////////////////////////
+//                    //
+//   Target Pursuit   //
+//                    //
+////////////////////////
+
+ProjectileComponent.reopen({
   targetLeftA: null,
 
   targetTopA: null,
@@ -42,16 +56,6 @@ export default Ember.Component.extend({
 
       this._destroy();
     }
-  },
-
-  _destroy() {
-    // TODO: after improving targetReached() logic,
-    //       only call damage-mob on targetReached()
-    this.attrs['damage-mob'](this.attrs.mobId, this.attrs.towerId);
-
-    this.set('inFlight', false);
-
-    this.attrs.destroy(this.attrs.id);
   },
 
   _fetchNewTargetCoords() {
@@ -151,7 +155,7 @@ export default Ember.Component.extend({
     return totalDiff < 2;
   },
 
-  _placeProjectile: Ember.on('didInsertElement', function () {
+  _kickOffProjectileMovement: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
       this._setPosition(this.attrs.towerX + 1, this.attrs.towerY + 1);
 
@@ -163,7 +167,25 @@ export default Ember.Component.extend({
         this._closeInOnTarget();
       }, 20);
     });
-  }),
+  })
+});
+
+/////////////////////
+//                 //
+//   Termination   //
+//                 //
+/////////////////////
+
+ProjectileComponent.reopen({
+  _destroy() {
+    // TODO: after improving targetReached() logic,
+    //       only call damage-mob on targetReached()
+    this.attrs['damage-mob'](this.attrs.mobId, this.attrs.towerId);
+
+    this.set('inFlight', false);
+
+    this.attrs.destroy(this.attrs.id);
+  },
 
   _selfDestructAfterTimeout: Ember.on('didInsertElement', function () {
     Ember.run.later(this, () => {
@@ -174,3 +196,5 @@ export default Ember.Component.extend({
     }, 350); // determined with respect to 0.3s CSS transition
   })
 });
+
+export default ProjectileComponent;
