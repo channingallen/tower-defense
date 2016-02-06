@@ -27,8 +27,6 @@ TowerComponent.reopen({
         this.$().css('background-color', 'black');
         const attackPower = this.attrs.tower.get('attackPower');
         this.attrs.tower.set('attackPower', attackPower + 20);
-        // const attackRange = this.attrs.tower.get('attackRange');
-        // this.attrs.tower.set('attackRange', attackRange + 5);
       }
     });
   })
