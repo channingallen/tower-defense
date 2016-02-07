@@ -110,7 +110,7 @@ function generateIdForRecord() {
          generate4DigitString() + generate4DigitString();
 }
 
-export default function createWave4() {
+export default function createWave5() {
   const wave = Wave.create({ minimumScore: 40 });
 
   addBoardToWave(wave);
