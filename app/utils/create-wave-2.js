@@ -9,15 +9,15 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/path-2.png');
+  board.set('imageUrl', '/images/path-1.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 60, y: -5 }),
-    PathCoords.create({ x: 60, y: 40 }),
-    PathCoords.create({ x: 35, y: 40 }),
-    PathCoords.create({ x: 35, y: 60 }),
-    PathCoords.create({ x: 60, y: 60 }),
-    PathCoords.create({ x: 60, y: 105 })
+    PathCoords.create({ x: 85, y: -5 }),
+    PathCoords.create({ x: 85, y: 40 }),
+    PathCoords.create({ x: 40, y: 40 }),
+    PathCoords.create({ x: 40, y: 60 }),
+    PathCoords.create({ x: 85, y: 60 }),
+    PathCoords.create({ x: 85, y: 105 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -54,18 +54,22 @@ function addTowerGroupsToWave(wave) {
   function getNewTowerGroup(numRows, posY) {
     return TowerGroup.create({
       id: generateIdForRecord(),
-      numRows: numRows,
+      numRows,
       posY: 'board__tower-group--position-y' + posY,
       selector: '.tg' + groupNum++,
       styles: Ember.A([createUnitCodeLine()])
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 47);
+  const towerGroup1 = getNewTowerGroup(1, 20);
+  const towerGroup2 = getNewTowerGroup(1, 47);
+  const towerGroup3 = getNewTowerGroup(1, 80);
 
-  addTowersToTowerGroup(towerGroup1, 2);
+  addTowersToTowerGroup(towerGroup1, 1);
+  addTowersToTowerGroup(towerGroup2, 1);
+  addTowersToTowerGroup(towerGroup3, 1);
 
-  wave.set('towerGroups', Ember.A([towerGroup1]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2, towerGroup3]));
 }
 
 function addTowersToTowerGroup(towerGroup, numTowers) {
@@ -100,8 +104,8 @@ function generateIdForRecord() {
          generate4DigitString() + generate4DigitString();
 }
 
-export default function createWave2() {
-  const wave = Wave.create({ minimumScore: 40 });
+export default function createWave1() {
+  const wave = Wave.create({ minimumScore: 20 });
 
   addBoardToWave(wave);
   addMobsToWave(wave);
