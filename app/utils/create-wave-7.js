@@ -12,7 +12,14 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-0.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 65, y: 105 })
+    PathCoords.create({ x: -5, y: 55 }),
+    PathCoords.create({ x: 25, y: 55 }),
+    PathCoords.create({ x: 25, y: 40 }),
+    PathCoords.create({ x: 50, y: 40 }),
+    PathCoords.create({ x: 50, y: 55 }),
+    PathCoords.create({ x: 75, y: 55 }),
+    PathCoords.create({ x: 75, y: 40 }),
+    PathCoords.create({ x: 105, y: 40 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -29,7 +36,7 @@ function addMobsToWave(wave) {
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 1500,
+      frequency: 2000,
       health: 300,
       maxHealth: 300,
       points: 20,
@@ -56,7 +63,7 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(7, 32);
+  const towerGroup1 = getNewTowerGroup(7, 30);
 
   addTowersToTowerGroup(towerGroup1, [
     { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
