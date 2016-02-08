@@ -56,10 +56,10 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(3, 35);
+  const towerGroup1 = getNewTowerGroup(7, 32);
 
   addTowersToTowerGroup(towerGroup1, [
-    { type: 1 }, { type: 2 }, { type: 1 }, { type: 2 }
+    { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
   ]);
 
   wave.set('towerGroups', Ember.A([towerGroup1]));
