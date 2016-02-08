@@ -9,16 +9,16 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/path-0.png');
+  board.set('imageUrl', '/images/path-7.png');
 
   const pathObjects = [
     PathCoords.create({ x: -5, y: 55 }),
-    PathCoords.create({ x: 25, y: 55 }),
-    PathCoords.create({ x: 25, y: 40 }),
+    PathCoords.create({ x: 15, y: 55 }),
+    PathCoords.create({ x: 15, y: 40 }),
     PathCoords.create({ x: 50, y: 40 }),
     PathCoords.create({ x: 50, y: 55 }),
-    PathCoords.create({ x: 75, y: 55 }),
-    PathCoords.create({ x: 75, y: 40 }),
+    PathCoords.create({ x: 85, y: 55 }),
+    PathCoords.create({ x: 85, y: 40 }),
     PathCoords.create({ x: 105, y: 40 })
   ];
 
@@ -32,11 +32,11 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 5;
+  const mobQuantity = 10;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 2000,
+      frequency: 1500,
       health: 300,
       maxHealth: 300,
       points: 20,
