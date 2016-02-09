@@ -6,11 +6,16 @@ $color--muted: hsla(0, 50%, 0%, 0.5);
 
 // a line of code
 .block__line {
-  height: 24px;
+  height: $stylesheet__line-height;
+  line-height: $stylesheet__line-height;
 }
 
 .block__brace-line {
   color: $color--muted;
+}
+
+.block__brace-line--close {
+  margin-bottom: $stylesheet__line-height;
 }
 
 .block__selector {

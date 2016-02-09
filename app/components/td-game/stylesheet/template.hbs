@@ -1,4 +1,8 @@
-{{!-- <span>inputs: {{numInputs}}</span> --}}
+<div class="stylesheet__line-numbers">
+  {{#each lineNumbers as |lineNumber|}}
+    <div class="stylesheet__line-number">{{lineNumber}}</div>
+  {{/each}}
+</div>
 
 <div class="stylesheet__content">
   {{#each attrs.towerGroups as |towerGroup|}}
@@ -17,7 +21,7 @@
                                update-unit-styles=(action attrs.submit-styles)
                                waveStarted=(readonly attrs.waveStarted)}}
 
-    <li class="block__line block__brace-line">
+    <li class="block__line block__brace-line block__brace-line--close">
       <span class="block__brace">}</span>
     </li>
 
@@ -34,7 +38,7 @@
                                  tower=(readonly tower)
                                  update-unit-styles=(action attrs.submit-styles)
                                  waveStarted=(readonly attrs.waveStarted)}}
-      <li class="block__line block__brace-line">
+      <li class="block__line block__brace-line block__brace-line--close">
         <span class="block__brace">}</span>
       </li>
     {{/each}}

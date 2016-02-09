@@ -17,27 +17,50 @@ const StylesheetComponent = Ember.Component.extend({
 /////////////////////
 
 StylesheetComponent.reopen({
-  // 2 per TG
-  _addLinesForTowerGroupBraces(blockLineNumbers) {
+  _getLinesForBraces() {
+    let count = 0;
+    const towerGroups = this.attrs.towerGroups;
+    let towersAndTowerGroups = towerGroups.concat(this.get('towers'));
 
+    towersAndTowerGroups.forEach(() => {
+      for (let i = 0; i < 2; i++) {
+        count++;
+      }
+    });
+
+    return count;
   },
 
-  // 2 per T
-  _addLinesForTowerBraces(blockLineNumbers) {
+  _getLinesForInputs() {
+    let count = 0;
+    const towerGroupStyles = this.get('towerGroupStyles');
+    let towerAndTowerGroupStyles = towerGroupStyles.concat(this.get('towerStyles'));
 
+    towerAndTowerGroupStyles.forEach(() => {
+      count++;
+    });
+
+    return count;
   },
 
-  _addLinesForTowerGroupInputs(blockLineNumbers) {
+  // Line breaks: TG + T - 1
+  _getLinesForLineBreaks() {
+    let count = 0;
+    const numTowers = this.get('towers.length');
+    const numTowerGroups = this.attrs.towerGroups.length;
+    const numTowersAndTowerGroups = numTowers + numTowerGroups;
+    const numLineBreakLines = numTowersAndTowerGroups - 1;
 
+    for (let i = 0; i < numLineBreakLines; i++) {
+      count++;
+    }
+
+    return count;
   },
 
-  _addLinesForTowerInputs(blockLineNumbers) {
-
-  },
-
-  // TG + T - 1
-  _addLinesForLineBreaks(blockLineNumbers) {
-
+  // Manual properties (display: flex): 1 per tower group
+  _getLinesForManualProperties() {
+    return this.attrs.towerGroups.length;
   },
 
   _flatten(arrays) {
@@ -52,35 +75,27 @@ StylesheetComponent.reopen({
     return items;
   },
 
-  blockLineNumbers: Ember.computed(
+  lineNumbers: Ember.computed(
+    'attrs.currentWaveNumber',
     'attrs.towersGroups.[]',
-    'towers.[]',
+    'attrs.waveStarted',
     'towerGroupStyles.[]',
+    'towers.[]',
     'towerStyles.[]',
     function () {
-      let blockLineNumbers = [];
+      const lineCount = this._getLinesForManualProperties() +
+        this._getLinesForBraces() +
+        this._getLinesForInputs() +
+        this._getLinesForLineBreaks(); // TG + T - 1
 
-      this._addLinesForTowerGroupBraces(blockLineNumbers); // 2 per TG
-      this._addLinesForTowerBraces(blockLineNumbers); // 2 per T
-      this._addLinesForTowerGroupInputs(blockLineNumbers);
-      this._addLinesForTowerInputs(blockLineNumbers);
-      this._addLinesForLineBreaks(blockLineNumbers); // TG + T - 1
+      let lineNumbers = [];
+      for (let i = 1; i <= lineCount; i++) {
+        lineNumbers.push(i);
+      }
 
-      return blockLineNumbers;
+      return lineNumbers;
     }
   ),
-
-  test: Ember.on('didInsertElement', function () {
-    // debugger; // TODO THIS COMMIT: remove this
-  }),
-
-  // numInputs: Ember.computed(
-  //   'towerGroupStyles',
-  //   'towerStyles',
-  //   function () {
-  //     return this.get('towerGroupStyles.length') + this.get('towerStyles.length');
-  //   }
-  // ),
 
   towerGroupStylesMapped: Ember.computed.mapBy('attrs.towerGroups', 'styles'),
 
@@ -103,13 +118,7 @@ StylesheetComponent.reopen({
 
   towerStyles: Ember.computed('towerStylesMapped.@each.[]', function () {
     return this._flatten(this.get('towerStylesMapped'));
-  }),
-
-  actions: {
-    handleSubmitStyles(blockCodeLines) {
-      this.attrs['submit-styles'](blockCodeLines);
-    }
-  }
+  })
 });
 
 /////////////////////

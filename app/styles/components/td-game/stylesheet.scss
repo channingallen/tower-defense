@@ -27,4 +27,13 @@
   cursor: pointer;
 }
 
+.stylesheet__line-numbers {
+
+}
+
+.stylesheet__line-number {
+  height: $stylesheet__line-height;
+  line-height: $stylesheet__line-height;
+}
+
 @import "stylesheet/block";
