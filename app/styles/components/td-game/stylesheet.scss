@@ -3,6 +3,7 @@
   border-radius: 3px;
   display: flex;
   padding: 15px 10px;
+  position: relative;
 }
 
 .stylesheet__content {
@@ -11,13 +12,19 @@
 }
 
 .stylesheet__start-wave-button {
-  background-color: hsl(5, 94%, 42%);
   border-radius: 4px;
-  color: hsl(0, 100%, 100%);
-  cursor: pointer;
+  bottom: 30px;
   display: inline-block;
   font-family: 'PT Sans', sans-serif;
   padding: 0.4em 0.8em;
+  position: absolute;
+  right: 30px;
+}
+
+.stylesheet__start-wave-button--active {
+  background-color: hsl(5, 94%, 42%);
+  color: hsl(0, 100%, 100%);
+  cursor: pointer;
 }
 
 @import "stylesheet/block";

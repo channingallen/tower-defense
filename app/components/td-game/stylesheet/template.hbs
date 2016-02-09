@@ -1,7 +1,7 @@
 <div class="stylesheet__line-numbers">
-  {{#each blockLines as |blockLine|}}
-    <div class="block-line"></div>
-  {{/each}}
+  {{!-- {{#each blockLines as |blockLine|}} --}}
+    <div class="block-line">blockLine</div>
+  {{!-- {{/each}} --}}
 </div>
 
 <div class="stylesheet__content">
@@ -43,12 +43,12 @@
       </li>
     {{/each}}
   {{/each}}
-
-  {{#unless attrs.waveStarted}}
-    {{#if attrs.towersColliding}}
-      <button>Start Wave</button>
-    {{else}}
-      <button class="stylesheet__start-wave-button" {{action attrs.start-wave}}>Start Wave</button>
-    {{/if}}
-  {{/unless}}
 </div>
+
+{{#unless attrs.waveStarted}}
+  {{#if attrs.towersColliding}}
+    <button class="stylesheet__start-wave-button">Start Wave</button>
+  {{else}}
+    <button class="stylesheet__start-wave-button stylesheet__start-wave-button--active" {{action attrs.start-wave}}>Start Wave</button>
+  {{/if}}
+{{/unless}}
