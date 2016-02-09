@@ -96,10 +96,6 @@ GameComponent.reopen({
 ////////////////////////
 
 GameComponent.reopen({
-  twrStyles: null,
-
-  twrGrpStyles: null,
-
   actions: {
     setStyles(blockCodeLines) {
       if (this.get('selectedTowerGroup')) {
