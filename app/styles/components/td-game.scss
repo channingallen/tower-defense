@@ -19,13 +19,13 @@ $td-game__item__margin-bottom: 20px;
 }
 
 .td-game__header {
+  color: white;
   display: flex;
   justify-content: space-between;
   margin-bottom: $td-game__item__margin-bottom;
 }
 
 .header__title {
-  color: white;
   font-weight: bold;
 }
 
