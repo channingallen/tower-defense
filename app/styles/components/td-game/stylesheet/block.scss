@@ -12,6 +12,7 @@ $color--muted: hsla(0, 50%, 0%, 0.5);
 
 .block__brace-line {
   color: $color--muted;
+  list-style-type: none;
 }
 
 .block__brace-line--close {
