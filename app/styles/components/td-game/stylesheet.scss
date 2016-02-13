@@ -1,3 +1,4 @@
+$color--stylesheet--light: hsl(0, 0%, 80%);
 $width--line-number: 5%;
 
 .sidebar__stylesheet {
@@ -10,6 +11,7 @@ $width--line-number: 5%;
 
 .stylesheet__line-numbers {
   background-color: gray;
+  color: $color--stylesheet--light;
   height: 100%;
   max-width: 30px;
   min-width: 25px;
@@ -27,7 +29,7 @@ $width--line-number: 5%;
 }
 
 .stylesheet__content {
-  background-color: hsl(0, 0%, 82%);
+  background-color: $color--stylesheet--light;
   display: flex;
   flex-direction: column;
   height: 100%;
