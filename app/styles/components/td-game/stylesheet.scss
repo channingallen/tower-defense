@@ -18,6 +18,10 @@ $width--line-number: 5%;
   text-align: center;
   width: $width--line-number;
 
+  & > :first-child {
+    margin-top: 10px;
+  }
+
   & > :last-child {
     margin-bottom: 50px;
   }
@@ -34,6 +38,7 @@ $width--line-number: 5%;
   flex-direction: column;
   height: 100%;
   padding-left: 5px;
+  padding-top: 10px;
   position: relative;
   width: 100%;
 
