@@ -7,7 +7,7 @@ $width--line-number: 5%;
   display: flex;
   font-family: menlo, monospace;
   font-size: 14px;
-  overflow-y: scroll;
+  overflow-y: auto;
   position: relative;
 }
 
