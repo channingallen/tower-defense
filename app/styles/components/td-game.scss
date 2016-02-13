@@ -4,7 +4,8 @@ $td-game__item__margin-bottom: 20px;
   background-color: hsl(200, 50%, 30%);
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: hidden;
   position: relative;
 }
 

@@ -5,6 +5,14 @@
 </div>
 
 <div class="stylesheet__content">
+  {{#unless attrs.waveStarted}}
+    {{#if attrs.towersColliding}}
+      <button class="stylesheet__start-wave-button">Start Wave</button>
+    {{else}}
+      <button class="stylesheet__start-wave-button stylesheet__start-wave-button--active" {{action attrs.start-wave}}>Start Wave</button>
+    {{/if}}
+  {{/unless}}
+
   {{#each attrs.towerGroups as |towerGroup|}}
     <li class="block__line block__brace-line">
       <span class="block__selector">.{{towerGroup.selector}}</span>
@@ -44,11 +52,3 @@
     {{/each}}
   {{/each}}
 </div>
-
-{{#unless attrs.waveStarted}}
-  {{#if attrs.towersColliding}}
-    <button class="stylesheet__start-wave-button">Start Wave</button>
-  {{else}}
-    <button class="stylesheet__start-wave-button stylesheet__start-wave-button--active" {{action attrs.start-wave}}>Start Wave</button>
-  {{/if}}
-{{/unless}}
