@@ -1,3 +1,19 @@
+@-moz-keyframes pulse {
+  0% { -moz-transform: scale(0); opacity: 0.0; }
+  25% { -moz-transform: scale(0); opacity: 0.1; }
+  50% { -moz-transform: scale(0.1); opacity: 0.3; }
+  75% { -moz-transform: scale(0.5); opacity: 0.5; }
+  100% { -moz-transform: scale(1); opacity: 0.0; }
+}
+
+@-webkit-keyframes "pulse" {
+  0% { -webkit-transform: scale(0); opacity: 0.0; }
+  25% { -webkit-transform: scale(0); opacity: 0.1; }
+  50% { -webkit-transform: scale(0.1); opacity: 0.3; }
+  75% { -webkit-transform: scale(0.5); opacity: 0.5; }
+  100% { -webkit-transform: scale(1); opacity: 0.0; }
+}
+
 $turret-color: hsl(0, 100%, 0%);
 
 .tower-group__tower {
@@ -10,6 +26,32 @@ $turret-color: hsl(0, 100%, 0%);
   &:hover {
     box-shadow: 0 0 10px transparentize($background-color, 0.15);
   }
+}
+
+.tower__pulse {
+  display: none;
+  background: yellow;
+  border: 10px solid yellow;
+
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  border-radius: 60px;
+
+  height: 300%;
+  width: 300%;
+
+  -webkit-animation: pulse 1.5s ease-out;
+  -moz-animation: pulse 1.5s ease-out;
+  animation: pulse 1.5s ease-out;
+
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+
+  position: absolute;
+  top: -100%; left: -100%;
+  transform: translate(-50%,-50%);
+  opacity: 0;
 }
 
 .tower__turret {
@@ -32,7 +74,11 @@ $turret-color: hsl(0, 100%, 0%);
 
 .tower-group__tower--selected {
   $background-color--selected: hsl(120, 100%, 50%);
-  background-color: $background-color--selected;
+  // background-color: $background-color--selected;
+
+  .tower__pulse {
+    display: block;
+  }
 
   &:hover {
     box-shadow: 0 0 10px transparentize($background-color--selected, 0.15);
