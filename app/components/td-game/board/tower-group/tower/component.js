@@ -301,6 +301,14 @@ TowerComponent.reopen({
     const towerDimensionsPx = (towerDimensions / 100) * boardDimensions;
     this.$().css('width', towerDimensionsPx);
     this.$().css('height', towerDimensionsPx);
+
+    // the tower's cannon forms a triangle using the following border styles
+    const turretColor = Ember.$('.tower__turret').css('background-color');
+    Ember.$('.turret__cannon').css({
+      'border-bottom': `${towerDimensionsPx / 2}px solid ${turretColor}`,
+      'border-left': `${towerDimensionsPx / 4}px solid transparent`,
+      'border-right': `${towerDimensionsPx / 4}px solid transparent`
+    });
   }),
 
   _stopWatchingWindowResize: Ember.on('willDestroyElement', function () {
@@ -356,10 +364,10 @@ TowerComponent.reopen({
     ) / Math.PI * 180;
 
     // Rotate component
-    this.$().css({'-webkit-transform' : 'rotate('+ cannonDirection +'deg)',
-                   '-moz-transform' : 'rotate('+ cannonDirection +'deg)',
-                   '-ms-transform' : 'rotate('+ cannonDirection +'deg)',
-                   'transform' : 'rotate('+ cannonDirection +'deg)'});
+    this.$().css({'-webkit-transform': 'rotate('+ cannonDirection +'deg)',
+                   '-moz-transform': 'rotate('+ cannonDirection +'deg)',
+                   '-ms-transform': 'rotate('+ cannonDirection +'deg)',
+                   'transform': 'rotate('+ cannonDirection +'deg)'});
 
     // Ember.$().css('transform', `rotate(${cannonDirection}deg)`);
     // Ember.$().css('-ms-transform', `rotate(${cannonDirection}deg)`);
