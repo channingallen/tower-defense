@@ -11,7 +11,7 @@ import { towerDimensions } from 'tower-defense/objects/tower';
 const TowerComponent = Ember.Component.extend({
   classNameBindings: ['selected:tower-group__tower--selected'],
 
-  classNames: ['tower-group__tower'],
+  classNames: ['tower-group__tower']
 });
 
 ////////////////////////////
@@ -24,7 +24,7 @@ TowerComponent.reopen({
   applyTowerType: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
       if (this.attrs.type === 2) {
-        this.$().css('background-color', 'black');
+        this.$().css('background-color', 'white');
         const attackPower = this.attrs.tower.get('attackPower');
         this.attrs.tower.set('attackPower', attackPower + 20);
       }

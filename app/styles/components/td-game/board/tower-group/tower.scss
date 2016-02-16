@@ -1,15 +1,39 @@
-.tower-group__tower {
-  $background-color: hsl(0, 100%, 50%);
+$turret-color: hsl(0, 100%, 0%);
 
-  align-items: center;
+.tower-group__tower {
+  $background-color: hsl(0, 0%, 50%);
+
+  // align-items: center;
   background-color: $background-color;
   border-radius: 9999px;
-  display: flex;
-  justify-content: center;
+  position: relative;
+  // display: flex;
+  // justify-content: center;
 
   &:hover {
     box-shadow: 0 0 10px transparentize($background-color, 0.15);
   }
+}
+
+.tower__turret {
+  background-color: $turret-color;
+  border-radius: 9999px;
+  height: 60%;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 60%;
+}
+
+.turret__cannon {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid $turret-color;
+  position: absolute;
+  top: -10%; left: 50%;
+  transform: translate(-50%,-50%);
 }
 
 .tower-group__tower--selected {
