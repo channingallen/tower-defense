@@ -315,4 +315,91 @@ TowerComponent.reopen({
   })
 });
 
+
+///////////////////////////////////
+//                               //
+//   Rotation (Facing Targets)   //
+//                               //
+///////////////////////////////////
+
+TowerComponent.reopen({
+  _faceTarget() {
+    if (!this.attrs.waveStarted) {
+      return;
+    }
+
+    if (!this.attrs.tower.get('targetedMobId')) {
+      Ember.run.later(this, this._faceTarget, 50);
+
+      return;
+    }
+
+    const targetFound = Ember.$(`#${this.attrs.tower.get('targetedMobId')}`).css('left');
+    if (!targetFound) {
+      Ember.run.later(this, this._faceTarget, 50);
+
+      return;
+    }
+
+    const targetLeftPosition = this._getTargetPercentageLeft();
+    const targetTopPosition = this._getTargetPercentageTop();
+
+    // TODO THIS COMMIT: ensure targetLeftPosition & targetTopPosition
+    //                   are pct-based
+    const relativeTargetLeftPosition = targetLeftPosition - this.get('centerLeftPct');
+    const relativeTargetTopPosition = this.get('centerTopPct') - targetTopPosition;
+
+    // cannonDirection represents tower's rotation in degrees
+    const cannonDirection = Math.atan2(
+      relativeTargetLeftPosition,
+      relativeTargetTopPosition
+    ) / Math.PI * 180;
+
+    // Rotate component
+    this.$().css({'-webkit-transform' : 'rotate('+ cannonDirection +'deg)',
+                   '-moz-transform' : 'rotate('+ cannonDirection +'deg)',
+                   '-ms-transform' : 'rotate('+ cannonDirection +'deg)',
+                   'transform' : 'rotate('+ cannonDirection +'deg)'});
+
+    // Ember.$().css('transform', `rotate(${cannonDirection}deg)`);
+    // Ember.$().css('-ms-transform', `rotate(${cannonDirection}deg)`);
+    // Ember.$().css('-webkit-transform', `rotate(${cannonDirection}deg)`);
+
+    Ember.run.later(this, () => {
+      if (!this.isDestroying) {
+        this._faceTarget();
+      }
+    }, 50);
+  },
+
+  _getNumFromPx(pixels) {
+    if (!pixels) {
+      return undefined;
+    }
+
+    const valWithoutPx = pixels.split('px')[0];
+    return parseInt(valWithoutPx, 10);
+  },
+
+  _getTargetPercentageLeft() {
+    const leftPxStr = Ember.$(`#${this.attrs.tower.get('targetedMobId')}`).css('left');
+    const leftPx = this._getNumFromPx(leftPxStr);
+    const boardWidthPx = Ember.$('.td-game__board').width();
+    return (leftPx / boardWidthPx) * 100;
+  },
+
+  _getTargetPercentageTop() {
+    const topPxStr = Ember.$(`#${this.attrs.tower.get('targetedMobId')}`).css('top');
+    const topPx = this._getNumFromPx(topPxStr);
+    const boardHeightPx = Ember.$('.td-game__board').height();
+    return (topPx / boardHeightPx) * 100;
+  },
+
+  beginFacingTargets: Ember.observer('attrs.waveStarted', function () {
+    if (this.attrs.waveStarted) {
+      this._faceTarget();
+    }
+  })
+});
+
 export default TowerComponent;

@@ -3,12 +3,13 @@ $turret-color: hsl(0, 100%, 0%);
 .tower-group__tower {
   $background-color: hsl(0, 0%, 50%);
 
-  // align-items: center;
   background-color: $background-color;
   border-radius: 9999px;
   position: relative;
-  // display: flex;
-  // justify-content: center;
+
+  /* Rotate div */
+  // -ms-transform: rotate(0deg); /* IE 9 */
+  // -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
 
   &:hover {
     box-shadow: 0 0 10px transparentize($background-color, 0.15);

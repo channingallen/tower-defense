@@ -44,6 +44,7 @@ BoardComponent.reopen({
           towerHasShot = true;
 
           const mobId = mob.get('id');
+          tower.set('targetedMobId', mobId);
           this._buildProjectile(towerId, mobId);
         }
       });
