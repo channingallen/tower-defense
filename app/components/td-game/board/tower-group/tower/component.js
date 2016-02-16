@@ -344,34 +344,31 @@ TowerComponent.reopen({
 
     const targetFound = Ember.$(`#${this.attrs.tower.get('targetedMobId')}`).css('left');
     if (!targetFound) {
+      this.attrs.tower.set('targetedMobId', null);
+
       Ember.run.later(this, this._faceTarget, 50);
 
       return;
     }
 
-    const targetLeftPosition = this._getTargetPercentageLeft();
-    const targetTopPosition = this._getTargetPercentageTop();
+    const targetPctLeft = this._getTargetPercentageLeft();
+    const targetPctTop = this._getTargetPercentageTop();
 
-    // TODO THIS COMMIT: ensure targetLeftPosition & targetTopPosition
-    //                   are pct-based
-    const relativeTargetLeftPosition = targetLeftPosition - this.get('centerLeftPct');
-    const relativeTargetTopPosition = this.get('centerTopPct') - targetTopPosition;
+    // find the target's position relative to this tower
+    // e.g. given a tower position of [1,1] and a target position of [3,3], the
+    //      relative target position would be [2, -2]
+    const relTargetPctLeft = targetPctLeft - this.get('centerLeftPct');
+    const relTargetPctTop = this.get('centerTopPct') - targetPctTop;
 
-    // cannonDirection represents tower's rotation in degrees
-    const cannonDirection = Math.atan2(
-      relativeTargetLeftPosition,
-      relativeTargetTopPosition
+    const rotationDegrees = Math.atan2(
+      relTargetPctLeft,
+      relTargetPctTop
     ) / Math.PI * 180;
 
-    // Rotate component
-    this.$().css({'-webkit-transform': 'rotate('+ cannonDirection +'deg)',
-                   '-moz-transform': 'rotate('+ cannonDirection +'deg)',
-                   '-ms-transform': 'rotate('+ cannonDirection +'deg)',
-                   'transform': 'rotate('+ cannonDirection +'deg)'});
-
-    // Ember.$().css('transform', `rotate(${cannonDirection}deg)`);
-    // Ember.$().css('-ms-transform', `rotate(${cannonDirection}deg)`);
-    // Ember.$().css('-webkit-transform', `rotate(${cannonDirection}deg)`);
+    this.$().css({'-webkit-transform': `rotate(${rotationDegrees}deg)`,
+                  '-moz-transform': `rotate(${rotationDegrees}deg)`,
+                  '-ms-transform': `rotate(${rotationDegrees}deg)`,
+                  'transform': `rotate(${rotationDegrees}deg)`});
 
     Ember.run.later(this, () => {
       if (!this.isDestroying) {

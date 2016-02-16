@@ -29,9 +29,6 @@ $turret-color: hsl(0, 100%, 0%);
 .turret__cannon {
   width: 0;
   height: 0;
-  // border-left: 5px solid transparent;
-  // border-right: 5px solid transparent;
-  // border-bottom: 10px solid $turret-color;
   position: absolute;
   top: -10%; left: 50%;
   transform: translate(-50%,-50%);
