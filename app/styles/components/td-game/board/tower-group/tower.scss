@@ -7,10 +7,6 @@ $turret-color: hsl(0, 100%, 0%);
   border-radius: 9999px;
   position: relative;
 
-  /* Rotate div */
-  // -ms-transform: rotate(0deg); /* IE 9 */
-  // -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
-
   &:hover {
     box-shadow: 0 0 10px transparentize($background-color, 0.15);
   }
