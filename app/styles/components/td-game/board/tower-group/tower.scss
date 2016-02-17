@@ -14,6 +14,30 @@
   100% { -webkit-transform: scale(0); opacity: 0.0; }
 }
 
+@-moz-keyframes redden-element {
+  0% { background-color: black; }
+  50% { background-color: red; }
+  100% { background-color: black; }
+}
+
+@-webkit-keyframes "redden-element" {
+  0% { background-color: black; }
+  50% { background-color: red; }
+  100% { background-color: black; }
+}
+
+@-moz-keyframes redden-border {
+  0% { border-bottom-color: black; }
+  50% { border-bottom-color: red; }
+  100% { border-bottom-color: black; }
+}
+
+@-webkit-keyframes "redden-border" {
+  0% { border-bottom-color: black; }
+  50% { border-bottom-color: red; }
+  100% { border-bottom-color: black; }
+}
+
 $turret-color: hsl(0, 100%, 0%);
 
 .tower-group__tower {
@@ -91,13 +115,23 @@ $turret-color: hsl(0, 100%, 0%);
 }
 
 .tower--colliding {
-  $bg--colliding: hsl(0, 75%, 50%);
-
   .tower__turret {
-    background-color: $bg--colliding;
+    -webkit-animation: redden-element 1.5s linear;
+    -moz-animation: redden-element 1.5s linear;
+    animation: redden-element 1.5s linear;
+
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
   }
 
   .turret__cannon {
-    border-bottom-color: $bg--colliding;
+    -webkit-animation: redden-border 1.5s linear;
+    -moz-animation: redden-border 1.5s linear;
+    animation: redden-border 1.5s linear;
+
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
   }
 }
