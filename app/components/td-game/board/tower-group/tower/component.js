@@ -9,8 +9,6 @@ import { towerDimensions } from 'tower-defense/objects/tower';
 ////////////////
 
 const TowerComponent = Ember.Component.extend({
-  classNameBindings: ['selected:tower-group__tower--selected'],
-
   classNames: ['tower-group__tower']
 });
 
@@ -21,16 +19,46 @@ const TowerComponent = Ember.Component.extend({
 ////////////////////////////
 
 TowerComponent.reopen({
+  classNameBindings: ['towerUpgraded:tower-group__tower--upgraded'],
+
+  towerUpgraded: false,
+
   applyTowerType: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
       if (this.attrs.type === 2) {
-        this.$().css('background-color', 'white');
+        this.set('towerUpgraded', true);
+
         const attackPower = this.attrs.tower.get('attackPower');
         this.attrs.tower.set('attackPower', attackPower + 20);
       }
     });
   })
 });
+
+/////////////////////////
+//                     //
+//   Tower Selection   //
+//                     //
+/////////////////////////
+
+TowerComponent.reopen({
+  classNameBindings: ['selected:tower-group__tower--selected'],
+
+  selected: Ember.computed(
+    'attrs.selectedTower',
+    'attrs.tower',
+    function () {
+      return this.attrs.selectedTower === this.attrs.tower ? true : false;
+    }
+  ),
+
+  _sendSelectAction: Ember.on('click', function (clickEvent) {
+    clickEvent.stopPropagation();
+
+    this.attrs.select(this.attrs.tower);
+  })
+});
+
 
 //////////////////////////////
 //                          //
@@ -88,20 +116,6 @@ TowerComponent.reopen({
 
     return styleApplicable;
   },
-
-  selected: Ember.computed(
-    'attrs.selectedTower',
-    'attrs.tower',
-    function () {
-      return this.attrs.selectedTower === this.attrs.tower ? true : false;
-    }
-  ),
-
-  _sendSelectAction: Ember.on('click', function (clickEvent) {
-    clickEvent.stopPropagation();
-
-    this.attrs.select(this.attrs.tower);
-  }),
 
   _updateCodeLines: Ember.observer(
     'attrs.tower.styles',
@@ -303,9 +317,10 @@ TowerComponent.reopen({
     this.$().css('height', towerDimensionsPx);
 
     // the tower's cannon forms a triangle using the following border styles
-    const turretColor = Ember.$('.tower__turret').css('background-color');
+    // const turretColor = Ember.$('.tower__turret').css('background-color');
     Ember.$('.turret__cannon').css({
-      'border-bottom': `${towerDimensionsPx / 2}px solid ${turretColor}`,
+      'border-bottom-style': 'solid',
+      'border-bottom-width': `${towerDimensionsPx / 2}px`,
       'border-left': `${towerDimensionsPx / 4}px solid transparent`,
       'border-right': `${towerDimensionsPx / 4}px solid transparent`
     });

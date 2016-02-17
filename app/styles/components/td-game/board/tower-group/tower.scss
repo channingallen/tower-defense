@@ -1,31 +1,35 @@
 @-moz-keyframes pulse {
-  0% { -moz-transform: scale(0); opacity: 0.0; }
-  25% { -moz-transform: scale(0); opacity: 0.1; }
-  50% { -moz-transform: scale(0.1); opacity: 0.3; }
-  75% { -moz-transform: scale(0.5); opacity: 0.5; }
-  100% { -moz-transform: scale(1); opacity: 0.0; }
+  0% { -moz-transform: scale(0.3); opacity: 0.1; }
+  25% { -moz-transform: scale(0.4); opacity: 0.3; }
+  50% { -moz-transform: scale(0.5); opacity: 0.5; }
+  75% { -moz-transform: scale(1); opacity: 0.0; }
+  100% { -moz-transform: scale(0); opacity: 0.0; }
 }
 
 @-webkit-keyframes "pulse" {
-  0% { -webkit-transform: scale(0); opacity: 0.0; }
-  25% { -webkit-transform: scale(0); opacity: 0.1; }
-  50% { -webkit-transform: scale(0.1); opacity: 0.3; }
-  75% { -webkit-transform: scale(0.5); opacity: 0.5; }
-  100% { -webkit-transform: scale(1); opacity: 0.0; }
+  0% { -webkit-transform: scale(0.3); opacity: 0.1; }
+  25% { -webkit-transform: scale(0.4); opacity: 0.3; }
+  50% { -webkit-transform: scale(0.5); opacity: 0.5; }
+  75% { -webkit-transform: scale(1); opacity: 0.0; }
+  100% { -webkit-transform: scale(0); opacity: 0.0; }
 }
 
 $turret-color: hsl(0, 100%, 0%);
 
 .tower-group__tower {
-  $background-color: hsl(0, 0%, 50%);
+  $background-color: hsl(0, 0%, 40%);
 
   background-color: $background-color;
   border-radius: 9999px;
   position: relative;
 
   &:hover {
-    box-shadow: 0 0 10px transparentize($background-color, 0.15);
+    box-shadow: 0 0 10px transparentize($background-color, 0.2);
   }
+}
+
+.tower-group__tower--upgraded {
+  background-color: hsl(0, 0%, 100%);
 }
 
 .tower__pulse {
@@ -65,6 +69,7 @@ $turret-color: hsl(0, 100%, 0%);
 }
 
 .turret__cannon {
+  border-bottom-color: $turret-color;
   width: 0;
   height: 0;
   position: absolute;
@@ -73,15 +78,8 @@ $turret-color: hsl(0, 100%, 0%);
 }
 
 .tower-group__tower--selected {
-  $background-color--selected: hsl(120, 100%, 50%);
-  // background-color: $background-color--selected;
-
   .tower__pulse {
     display: block;
-  }
-
-  &:hover {
-    box-shadow: 0 0 10px transparentize($background-color--selected, 0.15);
   }
 }
 
@@ -93,5 +91,13 @@ $turret-color: hsl(0, 100%, 0%);
 }
 
 .tower--colliding {
-  box-shadow: 0 0 0px 5px blue;
+  $bg--colliding: hsl(0, 75%, 50%);
+
+  .tower__turret {
+    background-color: $bg--colliding;
+  }
+
+  .turret__cannon {
+    border-bottom-color: $bg--colliding;
+  }
 }
