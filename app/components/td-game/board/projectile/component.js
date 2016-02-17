@@ -39,6 +39,22 @@ ProjectileComponent.reopen({
   })
 });
 
+//////////////////
+//              //
+//   Shrapnel   //
+//              //
+//////////////////
+
+ProjectileComponent.reopen({
+  particulates: [],
+
+  addParticulates: Ember.on('didInsertElement', function () {
+    for (let i = 0; i < 50; i++) {
+      this.get('particulates').addObject(i);
+    }
+  })
+});
+
 /////////////////////
 //                 //
 //   Termination   //
