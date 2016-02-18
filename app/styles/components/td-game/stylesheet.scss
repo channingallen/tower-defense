@@ -17,7 +17,8 @@ $width--line-number: 5%;
   height: 100%;
   max-width: 30px;
   min-width: 25px;
-  text-align: center;
+  padding-right: 4px;
+  text-align: right;
   width: $width--line-number;
 
   & > :first-child {
