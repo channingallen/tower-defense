@@ -101,7 +101,11 @@ function generateIdForRecord() {
 }
 
 export default function createWave1() {
-  const wave = Wave.create({ minimumScore: 40 });
+  const wave = Wave.create({
+    instructions: `Welcome to Flexbox Tower Defense!
+                   These are the instructions for the first wave.`,
+    minimumScore: 80
+  });
 
   addBoardToWave(wave);
   addMobsToWave(wave);
