@@ -325,7 +325,12 @@ BoardComponent.reopen({
   actions: {
     addPoints(points) {
       const currentWavePoints = this.get('wavePoints');
-      this.set('wavePoints', currentWavePoints + points);
+
+      if (currentWavePoints + points >= 100) {
+        this.set('wavePoints', 100);
+      } else {
+        this.set('wavePoints', currentWavePoints + points);
+      }
     },
 
     subtractPoints(points) {
