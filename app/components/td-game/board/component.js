@@ -316,18 +316,6 @@ BoardComponent.reopen({
 BoardComponent.reopen({
   wavePoints: 0,
 
-  _addMobPoints(mobId) {
-    let pointsToAdd;
-    this.get('mobs').forEach((mob) => {
-      if (mobId === mob.get('id')) {
-        pointsToAdd = mob.get('points');
-      }
-    });
-
-    const currentWavePoints = this.get('wavePoints');
-    this.set('wavePoints', currentWavePoints + pointsToAdd);
-  },
-
   _getFinalScore: Ember.observer('mobs.@each.active', function () {
     if (!this.get('mobs.length')) {
       this.attrs['score-wave'](this.get('wavePoints'));
