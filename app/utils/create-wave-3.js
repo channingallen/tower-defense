@@ -102,7 +102,8 @@ function generateIdForRecord() {
 
 export default function createWave3() {
   const wave = Wave.create({
-    instructions: `These are the instructions for the third wave.`,
+    instructions: `This time, see if you can make a single tower group effective
+                   on both sides of the map.`,
     minimumScore: 80
   });
 
