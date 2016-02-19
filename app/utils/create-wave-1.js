@@ -118,7 +118,11 @@ values:
 * space-between: evenly distribute items in a container such that the first item
 aligns to the left and the final item aligns to the right
 * space-around: evenly distribute items in a container such that all items have
-equal space around them`,
+equal space around them
+
+Press Enter to apply a line of CSS code, and then click Start Wave
+to see how your towers fare! You must get a score of 80 or above to advance
+to the next level.`,
     minimumScore: 80
   });
 
