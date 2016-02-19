@@ -9,7 +9,8 @@
     "jquery": "1.11.3",
     "loader.js": "^3.5.0",
     "qunit": "~1.20.0",
-    "fontawesome": "~4.5.0"
+    "fontawesome": "~4.5.0",
+    "marked": "^0.3.5"
   },
   "resolutions": {
     "ember": "2.2.0"

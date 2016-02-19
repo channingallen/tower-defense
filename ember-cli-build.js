@@ -28,5 +28,7 @@ module.exports = function(defaults) {
   app.import('bower_components/fontawesome/fonts/fontawesome-webfont.woff2', { destDir: 'fonts' });
   app.import('bower_components/fontawesome/fonts/FontAwesome.otf', { destDir: 'fonts' });
 
+  app.import('bower_components/marked/marked.min.js');
+
   return app.toTree();
 };
