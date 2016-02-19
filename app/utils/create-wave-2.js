@@ -106,7 +106,7 @@ function generateIdForRecord() {
 
 export default function createWave2() {
   const wave = Wave.create({
-    instructions: `These are the instructions for the second wave.`,
+    instructions: `Now you have a couple more tower groups at your disposal.`,
     minimumScore: 80
   });
 
