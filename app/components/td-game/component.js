@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import createGame from 'tower-defense/utils/create-game';
+/* global marked */
 
 ////////////////
 //            //
@@ -171,6 +172,18 @@ GameComponent.reopen({
       this.get('collidingTowers').removeObject(towerId);
     }
   }
+});
+
+//////////////////////
+//                  //
+//   Instructions   //
+//                  //
+//////////////////////
+
+GameComponent.reopen({
+  instructions: Ember.computed('currentWaveNumber', function () {
+    return marked(this.get('currentWave.instructions'));
+  })
 });
 
 export default GameComponent;

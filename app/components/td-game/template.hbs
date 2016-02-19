@@ -1,7 +1,7 @@
 {{#if currentWave}}
   <div class="td-game__sidebar">
     <div class="td-game__header">
-      <div class="header__title">Flexbox Defense</div>
+      <div class="header__title">Flexbox Tower Defense</div>
 
       <div class="header__navigation">
         <i class="fa fa-chevron-left" {{action "changeWavePrevious"}}></i>
@@ -11,7 +11,7 @@
     </div>
 
     <div class="sidebar__instructions">
-      {{currentWave.instructions}}
+      {{{instructions}}}
     </div>
 
     {{td-game/stylesheet currentWaveNumber=(readonly currentWaveNumber)
