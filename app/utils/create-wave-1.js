@@ -102,8 +102,23 @@ function generateIdForRecord() {
 
 export default function createWave1() {
   const wave = Wave.create({
-    instructions: `Welcome to Flexbox Tower Defense!
-                   These are the instructions for the first wave.`,
+    instructions: `Your job is to stop the incoming enemies from getting past
+                   your defenses. Unlike other tower defense games, however, you
+                   must position your towers using CSS code!
+
+We'll start with container properties. Use the
+justify-content property to move these two towers into
+effective positions. justify-content aligns items
+horizontally in a container and accepts the following
+values:
+
+* flex-start: group items to the left (the start) of a container
+* flex-end: group items to the right of a container
+* center: group items in the center of a container
+* space-between: evenly distribute items in a container such that the first item
+aligns to the left and the final item aligns to the right
+* space-around: evenly distribute items in a container such that all items have
+equal space around them`,
     minimumScore: 80
   });
 
