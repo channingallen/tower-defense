@@ -119,7 +119,10 @@ export default function createWave4() {
 * flex-end: align items across the bottom of the container
 * center: align items vertically across the center of the container
 * baseline: align items across the baseline of the container
-* stretch: stretch items to fill the container`,
+* stretch: stretch items to fill the container
+
+Apply both align-items and justify-content properties to the tower groups to
+keep the enemies at bay.`,
     minimumScore: 80
   });
 
