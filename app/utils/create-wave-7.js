@@ -106,7 +106,8 @@ function generateIdForRecord() {
 
 export default function createWave7() {
   const wave = Wave.create({
-    instructions: `These are the instructions for the seventh wave.`,
+    instructions: `Use align-items and justify-content to keep the enemies at
+                   bay.`,
     minimumScore: 80
   });
 

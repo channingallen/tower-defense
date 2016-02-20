@@ -106,7 +106,9 @@ function generateIdForRecord() {
 
 export default function createWave7() {
   const wave = Wave.create({
-    instructions: `These are the instructions for the eighth wave.`,
+    instructions: `To vertically position individual items in a container, use
+                   the align-self property. align-self accepts the same values
+                   as align-items.`,
     minimumScore: 80
   });
 
