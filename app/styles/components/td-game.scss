@@ -42,6 +42,7 @@ $td-game__item__margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   margin-bottom: $td-game__item__margin-bottom;
+  min-width: 270px;
 }
 
 .header__title {
