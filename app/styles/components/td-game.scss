@@ -15,6 +15,23 @@ $td-game__item__margin-bottom: 20px;
   position: relative;
 }
 
+/////////////////
+//             //
+//   Overlay   //
+//             //
+/////////////////
+
+.overlay {
+  background-color: hsla(0, 0%, 0%, 0.6);
+  height: 100%;
+  left: 0;
+  // opacity: 0.6;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
 .td-game__loading-container {
   position: absolute;
   left: 50%;
