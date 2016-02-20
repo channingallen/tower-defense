@@ -1,8 +1,19 @@
-html {
-
-}
+html {}
 
 body {
   height: 100vh;
   width: 100vw;
+}
+
+p, ul, li {
+  font-size: 15px;
+  line-height: 150%;
+}
+
+p, ul {
+  margin-top: 15px;
+}
+
+p:first-child {
+  margin-top: 0px;
 }

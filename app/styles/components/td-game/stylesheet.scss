@@ -1,8 +1,8 @@
-$color--stylesheet--light: hsl(0, 0%, 80%);
+$stylesheet__color--light: hsl(0, 0%, 80%);
 $width--line-number: 5%;
 
 .sidebar__stylesheet {
-  background-color: hsla(0, 0%, 95%, 0.65);
+  background-color: $font-color--standard;
   border-radius: 4px;
   display: flex;
   font-family: menlo, monospace;
@@ -13,7 +13,7 @@ $width--line-number: 5%;
 
 .stylesheet__line-numbers {
   background-color: gray;
-  color: $color--stylesheet--light;
+  color: $stylesheet__color--light;
   height: 100%;
   max-width: 30px;
   min-width: 25px;
@@ -36,7 +36,7 @@ $width--line-number: 5%;
 }
 
 .stylesheet__content {
-  background-color: $color--stylesheet--light;
+  background-color: $stylesheet__color--light;
   display: flex;
   flex-direction: column;
   height: 100%;
