@@ -105,7 +105,14 @@ function generateIdForRecord() {
 
 export default function createWave6() {
   const wave = Wave.create({
-    instructions: `These are the instructions for the sixth wave.`,
+    instructions: `The super tower is in another bad position, but not one
+                   you can address with flex-direction or any other
+                   container property you've learned. Instead you'll need to
+                   apply a style to the item itself.
+
+The order property defines the order in which an item appears in the flex
+container and accepts both positive and negative integer values. All flex items
+begin with a default order of 0.`,
     minimumScore: 80
   });
 
