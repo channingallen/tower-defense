@@ -113,9 +113,8 @@ $turret-color: hsl(0, 100%, 0%);
 }
 
 .turret__cannon {
-  border-bottom-color: $turret-color;
-  width: 0;
-  height: 0;
+  background-color: $turret-color;
+  border-radius: 3px;
   position: absolute;
   top: -10%; left: 50%;
   transform: translate(-50%,-50%);
@@ -146,9 +145,9 @@ $turret-color: hsl(0, 100%, 0%);
   }
 
   .turret__cannon {
-    -webkit-animation: redden-border 1.5s linear;
-    -moz-animation: redden-border 1.5s linear;
-    animation: redden-border 1.5s linear;
+    -webkit-animation: redden-element 1.5s linear;
+    -moz-animation: redden-element 1.5s linear;
+    animation: redden-element 1.5s linear;
 
     -webkit-animation-iteration-count: infinite;
     -moz-animation-iteration-count: infinite;
