@@ -110,7 +110,16 @@ function generateIdForRecord() {
 
 export default function createWave4() {
   const wave = Wave.create({
-    instructions: `These are the instructions for the fourth wave.`,
+    instructions: `Now some of the tower groups have vertical space, which is
+                   the perfect opportunity to use the align-items property.
+                   align-items positions items vertically in a container and
+                   accepts the following values:
+
+* flex-start: align items across the top of the container
+* flex-end: align items across the bottom of the container
+* center: align items vertically across the center of the container
+* baseline: align items across the baseline of the container
+* stretch: stretch items to fill the container`,
     minimumScore: 80
   });
 
