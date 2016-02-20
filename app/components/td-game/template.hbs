@@ -10,7 +10,8 @@
       </div>
     </div>
 
-    <div class="sidebar__instructions">{{{instructions}}}</div>
+    {{!-- TODO: display "basic instructions" here --}}
+    <div class="sidebar__instructions"></div>
 
     {{td-game/stylesheet currentWaveNumber=(readonly currentWaveNumber)
                          select-tower=(action "selectTower")
@@ -41,8 +42,26 @@
   {{#if overlayShown}}
     <div class="overlay">
       <div class="modal">
-        <div class="modal__instructions">{{{instructions}}}</div>
-        <button class="modal__button" {{action "hideOverlay"}}>Ok, got it!</button>
+        {{#if instructionsModalShown}}
+          <div class="modal__instructions">{{{instructions}}}</div>
+          <button class="modal__button" {{action "hideOverlay"}}>Ok, got it!</button>
+
+        {{else if gradeModalShown}}
+          {{#if passed}}
+            <div class="modal__grade">
+              <p>Congratulations! You scored {{score}} points!</p>
+            </div>
+          {{else}}
+            <div class="modal__grade">
+              <p>You scored {{score}} points. See if you can get 80 or more!</p>
+            </div>
+          {{/if}}
+
+          <button class="modal__button" {{action "hideOverlay"}}>Try again</button>
+          <button class="modal__button" {{action "changeWaveNext"}}>Next wave</button>
+        {{else}}
+          <button class="modal__button" {{action "hideOverlay"}}>Dismiss</button>
+        {{/if}}
       </div>
     </div>
   {{/if}}

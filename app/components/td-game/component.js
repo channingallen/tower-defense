@@ -51,7 +51,7 @@ GameComponent.reopen({
         this.incrementProperty('currentWaveNumber');
       }
 
-      this._showOverlay();
+      this._refreshOverlayAndModal();
     },
 
     changeWavePrevious() {
@@ -65,7 +65,7 @@ GameComponent.reopen({
         this.decrementProperty('currentWaveNumber');
       }
 
-      this._showOverlay();
+      this._refreshOverlayAndModal();
     },
 
     // TODO THIS COMMIT: this is never currently called
@@ -77,17 +77,7 @@ GameComponent.reopen({
 
       this.set('currentWaveNumber', waveNum);
 
-      this._showOverlay();
-    },
-
-    scoreWave(wavePoints) {
-      if (wavePoints >= this.get('currentWave.minimumScore')) {
-        console.log('Congratulations! You hit the minimum score!');
-        this.set('waveStarted', false);
-      } else {
-        console.log('Oh no! You did not reach the minimum score!');
-        this.set('waveStarted', false);
-      }
+      this._refreshOverlayAndModal();
     },
 
     startWave() {
@@ -193,6 +183,12 @@ GameComponent.reopen({
     this.set('overlayShown', false);
   },
 
+  _refreshOverlayAndModal() {
+    this._hideGradeModal();
+    this._showInstructionsModal();
+    this._showOverlay();
+  },
+
   _showOverlay() {
     this.set('overlayShown', true);
   },
@@ -200,6 +196,47 @@ GameComponent.reopen({
   actions: {
     hideOverlay() {
       this._hideOverlay();
+      this._hideInstructionsModal();
+      this._hideGradeModal();
+    }
+  }
+});
+
+//////////////////////////
+//                      //
+//   Score Management   //
+//                      //
+//////////////////////////
+
+GameComponent.reopen({
+  gradeModalShown: false,
+
+  passed: false,
+
+  _hideGradeModal() {
+    this.set('gradeModalShown', false);
+  },
+
+  _showGradeModal() {
+    this.set('gradeModalShown', true);
+  },
+
+  score: null,
+
+  actions: {
+    scoreWave(wavePoints) {
+      this.set('score', wavePoints);
+
+      if (wavePoints >= this.get('currentWave.minimumScore')) {
+        this.set('passed', true);
+      } else {
+        this.set('passed', false);
+      }
+
+      this._showGradeModal();
+      this._showOverlay();
+
+      this.set('waveStarted', false);
     }
   }
 });
@@ -211,6 +248,16 @@ GameComponent.reopen({
 //////////////////////
 
 GameComponent.reopen({
+  instructionsModalShown: true,
+
+  _hideInstructionsModal() {
+    this.set('instructionsModalShown', false);
+  },
+
+  _showInstructionsModal() {
+    this.set('instructionsModalShown', true);
+  },
+
   instructions: Ember.computed('currentWaveNumber', function () {
     return marked(this.get('currentWave.instructions'));
   })
