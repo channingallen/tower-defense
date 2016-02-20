@@ -38,12 +38,14 @@
                   waveMobs=(readonly currentWave.mobs)
                   waveStarted=(readonly waveStarted)}}
 
-  <div class="overlay">
-    <div class="modal">
-      <div class="modal__instructions">{{{instructions}}}</div>
-      <button class="modal__button">Ok, got it!</button>
+  {{#if overlayShown}}
+    <div class="overlay">
+      <div class="modal">
+        <div class="modal__instructions">{{{instructions}}}</div>
+        <button class="modal__button" {{action "hideOverlay"}}>Ok, got it!</button>
+      </div>
     </div>
-  </div>
+  {{/if}}
 {{else}}
   <div class="td-game__loading-container">
     <i class="fa fa-5x fa-spinner fa-spin"></i>

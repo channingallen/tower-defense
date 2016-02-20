@@ -50,6 +50,8 @@ GameComponent.reopen({
       if (currentWaveNum < this.get('game.waves.length')) {
         this.incrementProperty('currentWaveNumber');
       }
+
+      this._showOverlay();
     },
 
     changeWavePrevious() {
@@ -62,6 +64,8 @@ GameComponent.reopen({
       if (currentWaveNum > 1) {
         this.decrementProperty('currentWaveNumber');
       }
+
+      this._showOverlay();
     },
 
     // TODO THIS COMMIT: this is never currently called
@@ -72,6 +76,8 @@ GameComponent.reopen({
       }
 
       this.set('currentWaveNumber', waveNum);
+
+      this._showOverlay();
     },
 
     scoreWave(wavePoints) {
@@ -170,6 +176,30 @@ GameComponent.reopen({
 
     removeCollidingTower(towerId) {
       this.get('collidingTowers').removeObject(towerId);
+    }
+  }
+});
+
+/////////////////
+//             //
+//   Overlay   //
+//             //
+/////////////////
+
+GameComponent.reopen({
+  overlayShown: true,
+
+  _hideOverlay() {
+    this.set('overlayShown', false);
+  },
+
+  _showOverlay() {
+    this.set('overlayShown', true);
+  },
+
+  actions: {
+    hideOverlay() {
+      this._hideOverlay();
     }
   }
 });
