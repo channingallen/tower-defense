@@ -39,7 +39,10 @@
                   waveStarted=(readonly waveStarted)}}
 
   <div class="overlay">
-    <div class="modal"></div>
+    <div class="modal">
+      <div class="modal__instructions">{{{instructions}}}</div>
+      <button class="modal__button">Ok, got it!</button>
+    </div>
   </div>
 {{else}}
   <div class="td-game__loading-container">
