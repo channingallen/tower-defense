@@ -40,24 +40,6 @@
   100% { background-color: black; }
 }
 
-@keyframes redden-border {
-  0% { border-bottom-color: black; }
-  50% { border-bottom-color: red; }
-  100% { border-bottom-color: black; }
-}
-
-@-moz-keyframes redden-border {
-  0% { border-bottom-color: black; }
-  50% { border-bottom-color: red; }
-  100% { border-bottom-color: black; }
-}
-
-@-webkit-keyframes "redden-border" {
-  0% { border-bottom-color: black; }
-  50% { border-bottom-color: red; }
-  100% { border-bottom-color: black; }
-}
-
 $turret-color: hsl(0, 100%, 0%);
 
 .tower-group__tower {

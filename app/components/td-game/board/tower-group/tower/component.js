@@ -316,19 +316,12 @@ TowerComponent.reopen({
     this.$().css('width', towerDimensionsPx);
     this.$().css('height', towerDimensionsPx);
 
+    // the tower's cannon forms a rectangle using the following border styles
     Ember.$('.turret__cannon').css({
       'height': `${towerDimensionsPx / 2}px`,
       'width': `${towerDimensionsPx / 4}px `
     });
 
-    // // the tower's cannon forms a triangle using the following border styles
-    // // const turretColor = Ember.$('.tower__turret').css('background-color');
-    // Ember.$('.turret__cannon').css({
-    //   'border-bottom-style': 'solid',
-    //   'border-bottom-width': `${towerDimensionsPx / 2}px`,
-    //   'border-left': `${towerDimensionsPx / 4}px solid transparent`,
-    //   'border-right': `${towerDimensionsPx / 4}px solid transparent`
-    // });
   }),
 
   _stopWatchingWindowResize: Ember.on('willDestroyElement', function () {
