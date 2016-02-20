@@ -118,7 +118,7 @@ InputComponent.reopen({
         attribute = 'tower';
       } else {
         unit = this.attrs.towerGroup;
-        attribute = 'tower-group';
+        attribute = 'tower-group-';
       }
 
       this.attrs['select-' + attribute](unit);
