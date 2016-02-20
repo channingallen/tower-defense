@@ -1,5 +1,11 @@
 $td-game__item__margin-bottom: 20px;
 
+///////////////////
+//               //
+//   Game-wide   //
+//               //
+///////////////////
+
 .td-game {
   background-color: hsl(200, 50%, 30%);
   display: flex;
@@ -9,38 +15,51 @@ $td-game__item__margin-bottom: 20px;
   position: relative;
 }
 
+.td-game__loading-container {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+}
+
+/////////////////
+//             //
+//   Sidebar   //
+//             //
+/////////////////
+
 .td-game__sidebar {
   background-color: hsl(200, 50%, 30%);
+  color: hsla(0, 0%, 90%, 0.75);
   display: flex;
+  flex: 1 0 40%;
   flex-direction: column;
+  font-family: $font-family--standard;
   min-width: 300px;
   padding-top: 20px;
   padding-left: 10px;
   padding-right: 30px;
-  width: 50%;
+  // width: 50%;
 }
 
 .td-game__header {
-  color: white;
   display: flex;
   justify-content: space-between;
   margin-bottom: $td-game__item__margin-bottom;
 }
 
 .header__title {
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .sidebar__instructions {
-  color: white;
   flex: none;
   margin-bottom: $td-game__item__margin-bottom;
-}
 
-.td-game__loading-container {
-  position: absolute;
-  left: 50%;
-  bottom: 50%;
+  ul {
+    list-style: disc;
+    padding-left: 35px;
+  }
 }
 
 @import
