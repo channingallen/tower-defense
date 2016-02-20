@@ -112,7 +112,20 @@ function generateIdForRecord() {
 
 export default function createWave5() {
   const wave = Wave.create({
-    instructions: `These are the instructions for the fifth wave.`,
+    instructions: `This time, each group contains a super tower. Super towers
+                   deal two times more damage to enemies than normal towers do.
+                   The only problem is, they aren't effectively arranged in
+                   their groups!
+
+Enter flex-direction. The flex-direction property defines the directional layout
+of the items in the flex container. Flex items can lay out either in horizontal
+rows or vertical columns; accordingly, flex-direction accepts the following
+values:
+
+* row: lay out items from left to right
+* row-reverse: lay out items from right to left
+* column: lay out items from top to bottom
+* column-reverse: lay out items from bottom to top`,
     minimumScore: 80
   });
 
