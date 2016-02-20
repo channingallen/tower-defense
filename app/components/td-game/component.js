@@ -49,9 +49,9 @@ GameComponent.reopen({
       const currentWaveNum = this.get('currentWaveNumber');
       if (currentWaveNum < this.get('game.waves.length')) {
         this.incrementProperty('currentWaveNumber');
+        this._refreshOverlayAndModal();
       }
 
-      this._refreshOverlayAndModal();
     },
 
     changeWavePrevious() {
@@ -63,9 +63,9 @@ GameComponent.reopen({
       const currentWaveNum = this.get('currentWaveNumber');
       if (currentWaveNum > 1) {
         this.decrementProperty('currentWaveNumber');
+        this._refreshOverlayAndModal();
       }
 
-      this._refreshOverlayAndModal();
     },
 
     // TODO THIS COMMIT: this is never currently called
