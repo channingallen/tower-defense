@@ -111,10 +111,11 @@ function generateIdForRecord() {
 
 export default function createWave4() {
   const wave = Wave.create({
-    instructions: `Now some of the groups have vertical space, which is the
-                   perfect opportunity to use the align-items property.
-                   align-items positions items vertically in a container and
-                   accepts the following values:
+    instructions: {
+      main: `Now some of the groups have vertical space, which is the
+             perfect opportunity to use the align-items property.
+             align-items positions items vertically in a container and
+             accepts the following values:
 
 * flex-start: align items across the top of the container
 * flex-end: align items across the bottom of the container
@@ -124,6 +125,9 @@ export default function createWave4() {
 
 Apply both align-items and justify-content properties to the groups to keep the
 enemies at bay.`,
+      tldr: `Use justify-content and align-items to move your towers into
+             effective positions.`
+    },
     minimumScore: 80
   });
 

@@ -2,7 +2,6 @@
   <div class="td-game__sidebar">
 
     {{!-- Header --}}
-
     <div class="td-game__header">
       <div class="header__title">Flex Defense</div>
       <div class="header__nav">
@@ -61,8 +60,7 @@
     </div>
 
     {{!-- Instructions --}}
-
-    <div class="sidebar__instructions"></div>
+    <div class="sidebar__instructions">{{{instructionsTldr}}}</div>
 
     {{td-game/stylesheet currentWaveNumber=(readonly currentWaveNumber)
                          select-tower=(action "selectTower")
@@ -91,13 +89,12 @@
                   waveStarted=(readonly waveStarted)}}
 
   {{!-- Overlay --}}
-
   {{#if overlayShown}}
     <div class="overlay"
          onclick={{action "handleOverlayClick"}}>
       <div class="modal">
         {{#if instructionsModalShown}}
-          <div class="modal__instructions">{{{instructions}}}</div>
+          <div class="modal__instructions">{{{instructionsMain}}}</div>
           <button class="modal__button" {{action "hideOverlay"}}>Ok, got it!</button>
 
         {{else if gradeModalShown}}

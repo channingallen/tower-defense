@@ -103,8 +103,11 @@ function generateIdForRecord() {
 
 export default function createWave3() {
   const wave = Wave.create({
-    instructions: `This time, see if you can make a single tower group effective
-                   on both sides of the map.`,
+    instructions: {
+      main: `This time, see if you can make a single tower group effective on
+             both sides of the map.`,
+      tldr: `Use justify-content to move your towers into effective positions.`
+    },
     minimumScore: 80
   });
 

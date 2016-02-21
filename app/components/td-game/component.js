@@ -279,8 +279,12 @@ GameComponent.reopen({
     this.set('instructionsModalShown', true);
   },
 
-  instructions: Ember.computed('currentWaveNumber', function () {
-    return marked(this.get('currentWave.instructions'));
+  instructionsMain: Ember.computed('currentWaveNumber', function () {
+    return marked(this.get('currentWave.instructions.main'));
+  }),
+
+  instructionsTldr: Ember.computed('currentWaveNumber', function () {
+    return marked(this.get('currentWave.instructions.tldr'));
   })
 });
 

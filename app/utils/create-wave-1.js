@@ -103,9 +103,10 @@ function generateIdForRecord() {
 
 export default function createWave1() {
   const wave = Wave.create({
-    instructions: `Your job is to stop the incoming enemies from getting past
-                   your defenses. Unlike other tower defense games, however, you
-                   must position your towers using CSS code!
+    instructions: {
+      main: `Your job is to stop the incoming enemies from getting past
+             your defenses. Unlike other tower defense games, however, you
+             must position your towers using CSS code!
 
 We'll start with container properties. Use the justify-content property to move
 these two towers into effective positions. justify-content positions items
@@ -124,6 +125,8 @@ your towers fare! To remove a line of code that has already been applied, delete
 the line and press Enter.
 
 You must get a score of 80 or above to advance to the next level.`,
+    tldr: `Use the justify-content property to move these two towers into effective
+    positions.`},
     minimumScore: 80
   });
 

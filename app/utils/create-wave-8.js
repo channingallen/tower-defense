@@ -107,9 +107,12 @@ function generateIdForRecord() {
 
 export default function createWave7() {
   const wave = Wave.create({
-    instructions: `To vertically position individual items in a container, use
-                   the align-self property. align-self accepts the same values
-                   as align-items.`,
+    instructions: {
+      main: `To vertically position individual items in a container, use
+             the align-self property. align-self accepts the same values
+             as align-items.`,
+      tldr: `Use justify-content, align-items, and align-self to move your
+             towers into effective positions.`},
     minimumScore: 80
   });
 

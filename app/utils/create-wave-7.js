@@ -107,8 +107,12 @@ function generateIdForRecord() {
 
 export default function createWave7() {
   const wave = Wave.create({
-    instructions: `Use align-items and justify-content to keep the enemies at
-                   bay.`,
+    instructions: {
+      main: `Use align-items and justify-content to keep the enemies at
+             bay.`,
+      tldr: `Use justify-content and align-items to move your towers into
+             effective positions.`
+    },
     minimumScore: 80
   });
 
