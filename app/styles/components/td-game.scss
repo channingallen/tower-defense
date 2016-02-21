@@ -21,6 +21,118 @@ $td-game__item__margin-bottom: 20px;
   bottom: 50%;
 }
 
+
+/////////////////
+//             //
+//   Sidebar   //
+//             //
+/////////////////
+
+.td-game__sidebar {
+  background-color: hsl(200, 50%, 30%);
+  color: hsla(0, 0%, 90%, 0.75);
+  display: flex;
+  flex: 1 0 40%;
+  flex-direction: column;
+  font-family: $font-family--standard;
+  min-width: 300px;
+  padding: 20px 30px 0px;
+}
+
+////////////////
+//            //
+//   Header   //
+//            //
+////////////////
+
+.td-game__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $td-game__item__margin-bottom;
+  min-width: 270px;
+}
+
+.header__title {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+// Navigation
+
+.header__nav {
+  position: relative;
+}
+
+.nav__button {
+  background-color: hsla(0, 0%, 10%, 0.5);
+  border-radius: 4px;
+  color: hsl(0, 0%, 45%);
+  display: inline-block;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  padding: 0.4em 0.8em;
+}
+
+.nav__button--active {
+  $nav__background-color--active: hsla(0, 0%, 10%, 0.5);
+
+  background-color: $nav__background-color--active;
+  color: hsl(0, 0%, 100%);
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparentize($nav__background-color--active, 0.25);
+  }
+}
+
+.button__menu {
+  position: absolute;
+  left: -66px;
+  top: 40px;
+  z-index: 2;
+}
+
+.menu__wave-links {
+  background-color: hsla(0, 0%, 10%, 0.6);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0;
+}
+
+.menu__wave-link {
+  background-color: hsl(0, 0%, 80%);
+  border-radius: 3px;
+  color: hsl(0, 0%, 10%);
+  height: 30px;
+  width: 30px;
+  margin: 0 5px;
+
+  &:first-child {
+    margin-left: 10px
+  }
+
+  &:last-child {
+    margin-right: 10px
+  }
+}
+
+//////////////////////
+//                  //
+//   Instructions   //
+//                  //
+//////////////////////
+
+.sidebar__instructions {
+  flex: none;
+  margin-bottom: $td-game__item__margin-bottom;
+
+  ul {
+    list-style: disc;
+    padding-left: 35px;
+  }
+}
+
 /////////////////
 //             //
 //   Overlay   //
@@ -63,67 +175,6 @@ $td-game__item__margin-bottom: 20px;
   font-size: 16px;
   margin-top: 15px;
   padding: 0.4em 0.8em;
-}
-
-/////////////////
-//             //
-//   Sidebar   //
-//             //
-/////////////////
-
-.td-game__sidebar {
-  background-color: hsl(200, 50%, 30%);
-  color: hsla(0, 0%, 90%, 0.75);
-  display: flex;
-  flex: 1 0 40%;
-  flex-direction: column;
-  font-family: $font-family--standard;
-  min-width: 300px;
-  padding: 20px 30px 0px;
-}
-
-.td-game__header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: $td-game__item__margin-bottom;
-  min-width: 270px;
-}
-
-.navigation__button {
-  background-color: hsla(0, 0%, 10%, 0.5);
-  border-radius: 4px;
-  color: hsl(0, 0%, 45%);
-  display: inline-block;
-  font-family: 'PT Sans', sans-serif;
-  font-size: 16px;
-  padding: 0.4em 0.8em;
-}
-
-.navigation__button--active {
-  $nav__background-color--active: hsla(0, 0%, 10%, 0.5);
-
-  background-color: $nav__background-color--active;
-  color: hsl(0, 0%, 100%);
-  cursor: pointer;
-
-  &:hover {
-    background-color: transparentize($nav__background-color--active, 0.25);
-  }
-}
-
-.header__title {
-  font-size: 25px;
-  font-weight: 600;
-}
-
-.sidebar__instructions {
-  flex: none;
-  margin-bottom: $td-game__item__margin-bottom;
-
-  ul {
-    list-style: disc;
-    padding-left: 35px;
-  }
 }
 
 @import

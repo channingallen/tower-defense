@@ -284,4 +284,41 @@ GameComponent.reopen({
   })
 });
 
+///////////////////////
+//                   //
+//   Dropdown Menu   //
+//                   //
+///////////////////////
+
+GameComponent.reopen({
+  dropdownActive: false,
+
+  waveLinks: Ember.computed('game', function () {
+    let waveLink = [];
+
+    for (let i = 1; i <= this.get('game.waves.length'); i++) {
+      waveLink.addObject(i);
+    }
+
+    return waveLink;
+  }),
+
+  // _closeDropdown: Ember.observer('dropdownActive', function () {
+  //   // Ember.on('click', function (clickEvent) {
+  //   //
+  //   // });
+  // }),
+
+  // _closeDropdown: Ember.on('click', function (clickEvent) {
+  //   console.log(Ember.$(`.${clickEvent.target.className}`)); // TODO THIS COMMIT: remove this
+  //   console.log(`click detected`); // TODO THIS COMMIT: remove this
+  // }),
+
+  actions: {
+    openDropdown() {
+      this.set('dropdownActive', true);
+    }
+  }
+});
+
 export default GameComponent;

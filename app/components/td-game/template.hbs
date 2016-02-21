@@ -5,24 +5,25 @@
 
     <div class="td-game__header">
       <div class="header__title">Flex Defense</div>
-      <div class="header__navigation">
+      <div class="header__nav">
         {{#if isFirstWave}}
-          <button class="navigation__button"
+          <button class="nav__button"
                   type="button"
                   name="button" {{action "changeWavePrevious"}}>
             <i class="fa fa-angle-double-left"></i>
           </button>
         {{else}}
-          <button class="navigation__button navigation__button--active"
+          <button class="nav__button nav__button--active"
                   type="button"
                   name="button" {{action "changeWavePrevious"}}>
             <i class="fa fa-angle-double-left"></i>
           </button>
         {{/if}}
 
-        <button class="navigation__button navigation__button--active"
+        <button class="nav__button nav__button--active nav__button--selector"
                 type="button"
-                name="button">
+                name="button"
+                onclick={{action "openDropdown"}}>
           <span>
             Wave {{currentWaveNumber}} of {{game.waves.length}}
             <i class="fa fa-caret-down"></i>
@@ -30,17 +31,27 @@
         </button>
 
         {{#if isLastWave}}
-          <button class="navigation__button"
+          <button class="nav__button"
                   type="button"
                   name="button" {{action "changeWaveNext"}}>
             <i class="fa fa-angle-double-right"></i>
           </button>
         {{else}}
-          <button class="navigation__button navigation__button--active"
+          <button class="nav__button nav__button--active"
                   type="button"
                   name="button" {{action "changeWaveNext"}}>
             <i class="fa fa-angle-double-right"></i>
           </button>
+        {{/if}}
+
+        {{#if dropdownActive}}
+          <div class="button__menu">
+            <div class='menu__wave-links'>
+              {{#each waveLinks as |waveLink|}}
+                <button class="menu__wave-link">{{waveLink}}</button>
+              {{/each}}
+            </div>
+          </div>
         {{/if}}
       </div>
     </div>
