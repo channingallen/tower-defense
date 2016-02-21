@@ -194,6 +194,17 @@ GameComponent.reopen({
   },
 
   actions: {
+    // hide overlay whenever user "clicks out" of modal
+    handleOverlayClick(event) {
+      // the directly-clicked element (event.target), must be the overlay
+      // (event.currentTarget) for the overlay to remain
+      if (event.currentTarget === event.target) {
+        this._hideOverlay();
+        this._hideInstructionsModal();
+        this._hideGradeModal();
+      }
+    },
+
     hideOverlay() {
       this._hideOverlay();
       this._hideInstructionsModal();

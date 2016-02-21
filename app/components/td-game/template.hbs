@@ -40,7 +40,8 @@
                   waveStarted=(readonly waveStarted)}}
 
   {{#if overlayShown}}
-    <div class="overlay">
+    <div class="overlay"
+         onclick={{action "handleOverlayClick"}}>
       <div class="modal">
         {{#if instructionsModalShown}}
           <div class="modal__instructions">{{{instructions}}}</div>
