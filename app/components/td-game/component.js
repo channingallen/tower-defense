@@ -291,9 +291,11 @@ GameComponent.reopen({
 ///////////////////////
 
 GameComponent.reopen({
+  closeDropdownFn: null,
+
   dropdownActive: false,
 
-  closeDropdownFn: null,
+  numDropdownClicks: 0,
 
   _deactivateDropdown(clickEvent) {
     const $clickedElement = Ember.$(clickEvent.target);
@@ -301,10 +303,16 @@ GameComponent.reopen({
                                $clickedElement.parents('.nav__button--selector').length > 0;
     const clickedButtonMenu = $clickedElement.hasClass('button__menu') ||
                                $clickedElement.parents('.button__menu').length > 0;
-    if (clickedDropdownBtn || clickedButtonMenu) {
+
+    if (clickedDropdownBtn) {
+      this.incrementProperty('numDropdownClicks');
+    }
+
+    if (this.get('numDropdownClicks') < 2 || clickedButtonMenu) {
       return;
     }
 
+    this.set('numDropdownClicks', 0);
     this.set('dropdownActive', false);
   },
 
