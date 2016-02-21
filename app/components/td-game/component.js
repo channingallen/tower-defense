@@ -302,13 +302,13 @@ GameComponent.reopen({
     const clickedDropdownBtn = $clickedElement.hasClass('nav__button--selector') ||
                                $clickedElement.parents('.nav__button--selector').length > 0;
     const clickedButtonMenu = $clickedElement.hasClass('button__menu') ||
-                               $clickedElement.parents('.button__menu').length > 0;
+                              $clickedElement.parents('.button__menu').length > 0;
 
     if (clickedDropdownBtn) {
       this.incrementProperty('numDropdownClicks');
     }
 
-    if (this.get('numDropdownClicks') < 2 || clickedButtonMenu) {
+    if (clickedDropdownBtn && this.get('numDropdownClicks') < 2 || clickedButtonMenu) {
       return;
     }
 
