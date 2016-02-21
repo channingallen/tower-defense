@@ -33,6 +33,16 @@ GameComponent.reopen({
     }
   ),
 
+  isFirstWave: Ember.computed('currentWaveNumber', function () {
+    return this.get('currentWaveNumber') === 1 ? true : false;
+  }),
+
+  isLastWave: Ember.computed('currentWaveNumber', function () {
+    return this.get('currentWaveNumber') === this.get('game.waves.length') ?
+           true :
+           false;
+  }),
+
   _resetGame: Ember.observer('waveStarted', function () {
     if (!this.get('waveStarted')) {
       this.set('game', createGame());

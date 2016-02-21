@@ -92,11 +92,23 @@ $td-game__item__margin-bottom: 20px;
 .navigation__button {
   background-color: hsla(0, 0%, 10%, 0.5);
   border-radius: 4px;
-  color: hsl(0, 100%, 100%);
+  color: hsl(0, 0%, 45%);
   display: inline-block;
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   padding: 0.4em 0.8em;
+}
+
+.navigation__button--active {
+  $nav__background-color--active: hsla(0, 0%, 10%, 0.5);
+
+  background-color: $nav__background-color--active;
+  color: hsl(0, 0%, 100%);
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparentize($nav__background-color--active, 0.25);
+  }
 }
 
 .header__title {
