@@ -29,10 +29,8 @@ $td-game__item__margin-bottom: 20px;
 
 .overlay {
   background-color: hsla(0, 0%, 0%, 0.55);
-  display: flex;
   font-family: $font-family--standard;
   height: 100vh;
-  justify-content: center;
   left: 0;
   padding-top: 10%;
   position: absolute;
@@ -44,9 +42,9 @@ $td-game__item__margin-bottom: 20px;
 .modal {
   background-color: hsl(0, 0%, 80%);
   border-radius: 4px;
+  margin: 0 auto;
   overflow-y: auto;
   padding: 20px;
-  height: 500px;
   width: 650px;
 
   ul {
