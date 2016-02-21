@@ -9,9 +9,14 @@
   max-height: 60vw;
   max-width: 60%;
   overflow: hidden;
-  padding-left: 30px;
-  padding-top: 30px;
   position: relative;
+}
+
+.board__points {
+  font-family: $font-family--standard;
+  left: 20px;
+  position: absolute;
+  top: 20px;
 }
 
 @import
