@@ -101,9 +101,9 @@ $td-game__item__margin-bottom: 20px;
 }
 
 .menu__wave-link {
-  background-color: hsl(0, 0%, 50%);
+  background-color: hsl(0, 0%, 65%);
   border-radius: 3px;
-  color: hsl(0, 0%, 10%);
+  color: hsl(0, 0%, 35%);
   height: 30px;
   width: 30px;
   margin: 0 5px;
@@ -118,11 +118,12 @@ $td-game__item__margin-bottom: 20px;
 }
 
 .menu__wave-link--active {
-  background-color: hsl(0, 0%, 80%);
+  background-color: hsl(0, 0%, 85%);
+  color: hsl(0, 0%, 10%);
   cursor: pointer;
 
   &:hover {
-    background-color: hsl(0, 0%, 95%);
+    background-color: hsl(0, 0%, 100%);
   }
 }
 

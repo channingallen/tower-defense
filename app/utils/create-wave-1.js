@@ -54,7 +54,8 @@ function addTowerGroupsToWave(wave) {
   function getNewTowerGroup(numRows, posY) {
     return TowerGroup.create({
       id: generateIdForRecord(),
-      numRows: numRows,
+      groupNum,
+      numRows,
       posY: 'board__tower-group--position-y' + posY,
       selector: 'tower-group-' + groupNum++,
       styles: Ember.A([createUnitCodeLine()])
@@ -74,7 +75,7 @@ function addTowersToTowerGroup(towerGroup, numTowers) {
       id: generateIdForRecord(),
       attackPower: 20,
       attackRange: 20,
-      selector: 'tower-' + towerNum,
+      selector: `tower-${towerGroup.get('groupNum')}-${towerNum}`,
       type: 1,
       styles: Ember.A([createUnitCodeLine()])
     });
