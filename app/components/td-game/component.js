@@ -293,6 +293,21 @@ GameComponent.reopen({
 GameComponent.reopen({
   dropdownActive: false,
 
+  closeDropdownFn: null,
+
+  _deactivateDropdown(clickEvent) {
+    const $clickedElement = Ember.$(clickEvent.target);
+    const clickedDropdownBtn = $clickedElement.hasClass('nav__button--selector') ||
+                               $clickedElement.parents('.nav__button--selector').length > 0;
+    const clickedButtonMenu = $clickedElement.hasClass('button__menu') ||
+                               $clickedElement.parents('.button__menu').length > 0;
+    if (clickedDropdownBtn || clickedButtonMenu) {
+      return;
+    }
+
+    this.set('dropdownActive', false);
+  },
+
   waveLinks: Ember.computed('game', function () {
     let waveLink = [];
 
@@ -303,16 +318,17 @@ GameComponent.reopen({
     return waveLink;
   }),
 
-  // _closeDropdown: Ember.observer('dropdownActive', function () {
-  //   // Ember.on('click', function (clickEvent) {
-  //   //
-  //   // });
-  // }),
+  _toggleDropdown: Ember.observer('dropdownActive', function () {
+    if (this.get('dropdownActive')) {
+      const closeDropdownFn = Ember.run.bind(this, '_deactivateDropdown');
 
-  // _closeDropdown: Ember.on('click', function (clickEvent) {
-  //   console.log(Ember.$(`.${clickEvent.target.className}`)); // TODO THIS COMMIT: remove this
-  //   console.log(`click detected`); // TODO THIS COMMIT: remove this
-  // }),
+      Ember.$(window).on('click', closeDropdownFn);
+
+      this.set('closeDropdownFn', closeDropdownFn);
+    } else {
+      Ember.$(window).off('click', this.get('closeDropdownFn'));
+    }
+  }),
 
   actions: {
     openDropdown() {
