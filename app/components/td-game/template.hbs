@@ -48,7 +48,7 @@
           <div class="button__menu">
             <div class='menu__wave-links'>
               {{#each waveLinks as |waveLink|}}
-                <button class="menu__wave-link">{{waveLink}}</button>
+                <button class="menu__wave-link" {{action "changeWaveSelect" waveLink}}>{{waveLink}}</button>
               {{/each}}
             </div>
           </div>
