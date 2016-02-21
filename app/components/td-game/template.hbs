@@ -4,9 +4,24 @@
       <div class="header__title">Flex Defense</div>
 
       <div class="header__navigation">
-        <i class="fa fa-chevron-left" {{action "changeWavePrevious"}}></i>
-        <span>Wave {{currentWaveNumber}} of {{game.waves.length}}</span>
-        <i class="fa fa-chevron-right" {{action "changeWaveNext"}}></i>
+        <button class="navigation__button navigation__button--back"
+                type="button"
+                name="button" {{action "changeWavePrevious"}}>
+          <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button class="navigation__button navigation__button--select"
+                type="button"
+                name="button">
+          <span>
+            Wave {{currentWaveNumber}} of {{game.waves.length}}
+            <i class="fa fa-caret-down"></i>
+          </span>
+        </button>
+        <button class="navigation__button navigation__button--next"
+                type="button"
+                name="button" {{action "changeWaveNext"}}>
+          <i class="fa fa-angle-double-right"></i>
+        </button>
       </div>
     </div>
 

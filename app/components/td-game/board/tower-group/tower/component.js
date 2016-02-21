@@ -47,8 +47,13 @@ TowerComponent.reopen({
   selected: Ember.computed(
     'attrs.selectedTower',
     'attrs.tower',
+    'attrs.waveStarted',
     function () {
-      return this.attrs.selectedTower === this.attrs.tower ? true : false;
+      if (!this.attrs.waveStarted) {
+        return this.attrs.selectedTower === this.attrs.tower ? true : false;
+      } else {
+        return false;
+      }
     }
   ),
 
