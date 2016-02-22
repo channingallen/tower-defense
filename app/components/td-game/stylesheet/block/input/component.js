@@ -58,13 +58,15 @@ InputComponent.reopen({
     inputEl.focus();
   },
 
-  _focusIfFirstInput: Ember.on('didInsertElement', function () {
-    Ember.run.schedule('afterRender', this, () => {
-      if (this.attrs.unitId === this.attrs.firstTowerGroupId) {
-        this._focusInput();
-      }
-    });
-  }),
+  _focusIfFirstInput: Ember.on('didInsertElement',
+    Ember.observer('overlayShown', function () {
+      Ember.run.schedule('afterRender', this, () => {
+        if (this.attrs.unitId === this.attrs.firstTowerGroupId && !this.attrs.overlayShown) {
+          this._focusInput();
+        }
+      });
+    })
+  ),
 
   _focusMatchedInput: Ember.observer(
     'attrs.inputIdToFocus',

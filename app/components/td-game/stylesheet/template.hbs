@@ -22,6 +22,7 @@
     {{td-game/stylesheet/block currentWaveNumber=(readonly attrs.currentWaveNumber)
                                finalTowerId=(readonly finalTowerId)
                                firstTowerGroupId=(readonly firstTowerGroupId)
+                               overlayShown=(readonly attrs.overlayShown)
                                select-tower-group=(action attrs.select-tower-group)
                                selectedTowerGroup=(readonly attrs.selectedTowerGroup)
                                shake-stylesheet=(action "shake")
@@ -41,6 +42,7 @@
       </li>
       {{td-game/stylesheet/block finalTowerId=(readonly finalTowerId)
                                  firstTowerGroupId=(readonly firstTowerGroupId)
+                                 overlayShown=(readonly attrs.overlayShown)
                                  select-tower=(action attrs.select-tower)
                                  selectedTower=(readonly attrs.selectedTower)
                                  shake-stylesheet=(action "shake")
