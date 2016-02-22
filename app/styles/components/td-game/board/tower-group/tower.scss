@@ -48,6 +48,7 @@ $turret-color: hsl(0, 100%, 0%);
   background-color: $background-color;
   border-radius: 9999px;
   position: relative;
+  z-index: 1;
 
   &:hover {
     box-shadow: 0 0 10px transparentize($background-color, 0.2);
