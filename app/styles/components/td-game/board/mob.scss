@@ -48,9 +48,19 @@
   width: 100%;
 }
 
+.mob__health-bar--90 {
+  background-color: hsl(105, 100%, 50%);
+  width: 90%;
+}
+
 .mob__health-bar--80 {
   background-color: hsl(90, 100%, 50%);
   width: 80%;
+}
+
+.mob__health-bar--70 {
+  background-color: hsl(75, 100%, 50%);
+  width: 70%;
 }
 
 .mob__health-bar--60 {
@@ -58,14 +68,29 @@
   width: 60%;
 }
 
+.mob__health-bar--50 {
+  background-color: hsl(45, 100%, 50%);
+  width: 50%;
+}
+
 .mob__health-bar--40 {
   background-color: hsl(30, 100%, 50%);
   width: 40%;
 }
 
+.mob__health-bar--30 {
+  background-color: hsl(15, 100%, 50%);
+  width: 30%;
+}
+
 .mob__health-bar--20 {
   background-color: hsl(0, 100%, 50%);
   width: 20%;
+}
+
+.mob__health-bar--10 {
+  background-color: hsl(0, 100%, 50%);
+  width: 10%;
 }
 
 .mob--dead {

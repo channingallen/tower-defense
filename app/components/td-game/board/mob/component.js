@@ -189,16 +189,26 @@ MobComponent.reopen({
 
   _updateHealth: Ember.observer('attrs.health', function () {
     const maxHealth = this.attrs.mob.get('maxHealth');
-    if (this.attrs.health > Math.floor(maxHealth * 0.80)) {
+    if (this.attrs.health > Math.floor(maxHealth * 0.90)) {
       this.set('healthBarClass', 'mob__health-bar--100');
-    } else if (this.attrs.health > Math.floor(maxHealth * 0.60)) {
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.80)) {
+      this.set('healthBarClass', 'mob__health-bar--90');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.70)) {
       this.set('healthBarClass', 'mob__health-bar--80');
-    } else if (this.attrs.health > Math.floor(maxHealth * 0.40)) {
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.60)) {
+      this.set('healthBarClass', 'mob__health-bar--70');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.50)) {
       this.set('healthBarClass', 'mob__health-bar--60');
-    } else if (this.attrs.health > Math.floor(maxHealth * 0.20)) {
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.40)) {
+      this.set('healthBarClass', 'mob__health-bar--50');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.30)) {
       this.set('healthBarClass', 'mob__health-bar--40');
-    } else {
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.20)) {
+      this.set('healthBarClass', 'mob__health-bar--30');
+    } else if (this.attrs.health > Math.floor(maxHealth * 0.10)) {
       this.set('healthBarClass', 'mob__health-bar--20');
+    } else {
+      this.set('healthBarClass', 'mob__health-bar--10');
     }
   })
 });
