@@ -106,7 +106,8 @@ export default function createWave3() {
     instructions: {
       main: `This time, see if you can make a single tower group effective on
              both sides of the map.`,
-      tldr: `Use justify-content to move your towers into effective positions.`
+      tldr: `Use \`justify-content\` to move your towers into effective
+             positions.`
     },
     minimumScore: 80
   });

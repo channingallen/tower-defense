@@ -109,7 +109,8 @@ export default function createWave2() {
   const wave = Wave.create({
     instructions: {
       main: `Now you have a couple more tower groups at your disposal.`,
-      tldr: `Use justify-content to move your towers into effective positions.`
+      tldr: `Use \`justify-content\` to move your towers into effective
+             positions.`
     },
     minimumScore: 80
   });

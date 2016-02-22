@@ -119,17 +119,17 @@ export default function createWave5() {
              The only problem is, they aren't effectively arranged in
              their groups!
 
-Enter flex-direction. The flex-direction property defines the directional layout
-of the items in the flex container. Flex items can lay out either in horizontal
-rows or vertical columns; accordingly, flex-direction accepts the following
-values:
+Enter \`flex-direction\`. The \`flex-direction\` property defines the
+directional layout of the items in the flex container. Flex items can lay out
+either in horizontal rows or vertical columns; accordingly, \`flex-direction\`
+accepts the following values:
 
-* row: lay out items from left to right
-* row-reverse: lay out items from right to left
-* column: lay out items from top to bottom
-* column-reverse: lay out items from bottom to top`,
-      tldr: `Use justify-content, align-items, and flex-direction to move your
-             towers into effective positions.`
+* \`row\`: lay out items from left to right
+* \`row-reverse\`: lay out items from right to left
+* \`column\`: lay out items from top to bottom
+* \`column-reverse\`: lay out items from bottom to top`,
+      tldr: `Use \`justify-content\`, \`align-items\`, and \`flex-direction\` to
+             move your towers into effective positions.`
     },
     minimumScore: 80
   });

@@ -113,20 +113,20 @@ export default function createWave4() {
   const wave = Wave.create({
     instructions: {
       main: `Now some of the groups have vertical space, which is the
-             perfect opportunity to use the align-items property.
-             align-items positions items vertically in a container and
+             perfect opportunity to use the \`align-items\` property.
+             \`align-items\` positions items vertically in a container and
              accepts the following values:
 
-* flex-start: align items across the top of the container
-* flex-end: align items across the bottom of the container
-* center: align items vertically across the center of the container
-* baseline: align items across the baseline of the container
-* stretch: stretch items to fill the container
+* \`flex-start\`: align items across the top of the container
+* \`flex-end\`: align items across the bottom of the container
+* \`center\`: align items vertically across the center of the container
+* \`baseline\`: align items across the baseline of the container
+* \`stretch\`: stretch items to fill the container
 
-Apply both align-items and justify-content properties to the groups to keep the
-enemies at bay.`,
-      tldr: `Use justify-content and align-items to move your towers into
-             effective positions.`
+Apply both \`align-items\` and \`justify-content\` properties to the groups to
+keep the enemies at bay.`,
+      tldr: `Use \`justify-content\` and \`align-items\` to move your towers
+             into effective positions.`
     },
     minimumScore: 80
   });
