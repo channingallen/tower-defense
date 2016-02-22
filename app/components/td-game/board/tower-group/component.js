@@ -17,10 +17,15 @@ const TowerGroupComponent = Ember.Component.extend({
   selected: Ember.computed(
     'attrs.selectedTowerGroup',
     'attrs.towerGroup',
+    'attrs.waveStarted',
     function () {
-      return this.attrs.selectedTowerGroup === this.attrs.towerGroup ?
-             true :
-             false;
+      if (!this.attrs.waveStarted) {
+        return this.attrs.selectedTowerGroup === this.attrs.towerGroup ?
+          true :
+          false;
+      } else {
+        return false;
+      }
     }
   )
 });
