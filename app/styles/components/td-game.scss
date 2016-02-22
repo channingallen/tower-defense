@@ -45,21 +45,41 @@ $td-game__item__margin-bottom: 20px;
 //            //
 ////////////////
 
-.td-game__header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: $td-game__item__margin-bottom;
-  min-width: 270px;
+@media (max-width: 1100px) {
+  .td-game__header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: $td-game__item__margin-bottom;
+    min-width: 270px;
+  }
+
+  .header__title {
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: 600;
+  }
 }
 
-.header__title {
-  font-size: 25px;
-  font-weight: 600;
+@media (min-width: 1101px) {
+  .td-game__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $td-game__item__margin-bottom;
+    min-width: 270px;
+  }
+
+  .header__title {
+    font-size: 25px;
+    font-weight: 600;
+  }
 }
 
 // Navigation
 .header__nav {
   position: relative;
+  min-width: 197px;
 }
 
 .nav__button {
