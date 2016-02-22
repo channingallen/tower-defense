@@ -10,6 +10,29 @@ const StylesheetComponent = Ember.Component.extend({
   classNames: ['sidebar__stylesheet']
 });
 
+/////////////////////////
+//                     //
+//   Wave Initiation   //
+//                     //
+/////////////////////////
+
+StylesheetComponent.reopen({
+  waveStarting: false,
+
+  _falsifyWaveStarting: Ember.observer('waveStarted', function () {
+    if (this.attrs.waveStarted) {
+      this.set('waveStarting', false);
+    }
+  }),
+
+  actions: {
+    startWave() {
+      this.set('waveStarting', true);
+      this.attrs['start-wave']();
+    }
+  }
+});
+
 /////////////////////
 //                 //
 //   Block Lines   //

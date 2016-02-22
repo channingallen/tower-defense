@@ -61,6 +61,27 @@ BlockComponent.reopen({
   }
 });
 
+/////////////////////////
+//                     //
+//   Wave Initiation   //
+//                     //
+/////////////////////////
+
+BlockComponent.reopen({
+  removeUnsubmittedCodeLines: Ember.observer(
+    'attrs.waveStarting',
+    function () {
+      if (this.attrs.waveStarting) {
+        this.get('codeLines').forEach((codeLine) => {
+          if (!codeLine.submitted) {
+            this._deleteCodeLine(codeLine.get('id'));
+          }
+        });
+      }
+    }
+  )
+});
+
 ////////////////////
 //                //
 //   Auto Focus   //
@@ -87,6 +108,10 @@ BlockComponent.reopen({
   _ensureUnsubmittedCodeLinesExist: Ember.observer(
     'codeLines.@each.submitted',
     function () {
+      if (this.attrs.waveStarting) {
+        return;
+      }
+
       const codeLines = this.get('codeLines');
       if (codeLines.isEvery('submitted')) {
         codeLines.pushObject(createUnitCodeLine());

@@ -9,7 +9,7 @@
     {{#if attrs.towersColliding}}
       <button class="stylesheet__start-wave-button">Start Wave</button>
     {{else}}
-      <button class="stylesheet__start-wave-button stylesheet__start-wave-button--active" {{action attrs.start-wave}}>Start Wave</button>
+      <button class="stylesheet__start-wave-button stylesheet__start-wave-button--active" {{action "startWave"}}>Start Wave</button>
     {{/if}}
   {{/unless}}
 
@@ -27,7 +27,8 @@
                                shake-stylesheet=(action "shake")
                                towerGroup=(readonly towerGroup)
                                update-unit-styles=(action attrs.submit-styles)
-                               waveStarted=(readonly attrs.waveStarted)}}
+                               waveStarted=(readonly attrs.waveStarted)
+                               waveStarting=(readonly waveStarting)}}
 
     <li class="block__line block__brace-line block__brace-line--close">
       <span class="block__brace">}</span>
@@ -45,7 +46,8 @@
                                  shake-stylesheet=(action "shake")
                                  tower=(readonly tower)
                                  update-unit-styles=(action attrs.submit-styles)
-                                 waveStarted=(readonly attrs.waveStarted)}}
+                                 waveStarted=(readonly attrs.waveStarted)
+                                 waveStarting=(readonly waveStarting)}}
       <li class="block__line block__brace-line block__brace-line--close">
         <span class="block__brace">}</span>
       </li>

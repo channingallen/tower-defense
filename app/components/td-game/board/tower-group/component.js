@@ -108,11 +108,12 @@ TowerGroupComponent.reopen({
     'attrs.towerGroup.styles.@each.submitted',
     function () {
       const styles = this.attrs.towerGroup.get('styles');
-      const styleFound = !!styles;
+      const styleFound = !!styles && styles.get('length') > 0;
 
       let codeLineEmpty = true;
       if (styleFound) {
         const firstCodeLine = styles.get('firstObject');
+
         const codeLineLength = firstCodeLine.get('codeLine.length');
         codeLineEmpty = isNaN(codeLineLength) || codeLineLength < 1;
       }
