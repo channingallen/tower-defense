@@ -356,7 +356,12 @@ TowerComponent.reopen({
     }
 
     if (!this.attrs.tower.get('targetedMobId')) {
-      Ember.run.later(this, this._faceTarget, 50);
+      Ember.run.later(this, () => {
+        if (!this.isDestroying) {
+          this._faceTarget();
+        }
+      }, 50);
+      // Ember.run.later(this, this._faceTarget, 50);
 
       return;
     }
@@ -365,7 +370,12 @@ TowerComponent.reopen({
     if (!targetFound) {
       this.attrs.tower.set('targetedMobId', null);
 
-      Ember.run.later(this, this._faceTarget, 50);
+      Ember.run.later(this, () => {
+        if (!this.isDestroying) {
+          this._faceTarget();
+        }
+      }, 50);
+      // Ember.run.later(this, this._faceTarget, 50);
 
       return;
     }
