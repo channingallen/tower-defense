@@ -92,7 +92,7 @@ $td-game__item__margin-bottom: 20px;
 }
 
 .menu__wave-links {
-  background-color: hsla(0, 0%, 10%, 0.6);
+  background-color: hsla(0, 0%, 10%, 0.7);
   border-radius: 4px;
   display: flex;
   flex-direction: row;
@@ -103,6 +103,7 @@ $td-game__item__margin-bottom: 20px;
   background-color: hsl(0, 0%, 65%);
   border-radius: 3px;
   color: hsl(0, 0%, 35%);
+  font-weight: bold;
   height: 30px;
   width: 30px;
   margin: 0 5px;
