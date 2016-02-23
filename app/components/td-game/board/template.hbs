@@ -40,10 +40,11 @@
 {{#each attrs.towerGroups as |towerGroup|}}
   {{td-game/board/tower-group add-colliding-tower=(action attrs.add-colliding-tower)
                               allTowers=(readonly towers)
-                              class=(readonly towerGroup.posY)
                               click=(action attrs.select-tower-group towerGroup)
+                              mobs=(readonly mobs)
                               numRows=(readonly towerGroup.numRows)
                               path=(readonly attrs.path)
+                              posY=(readonly towerGroup.posY)
                               remove-colliding-tower=(action attrs.remove-colliding-tower)
                               selectedTower=(readonly selectedTower)
                               selectedTowerGroup=(readonly selectedTowerGroup)

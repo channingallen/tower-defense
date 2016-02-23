@@ -159,6 +159,8 @@ TowerGroupComponent.reopen({
                       (spaceBetweenTowersPct * 2) +
                       (spaceBetweenTowersPct * (numRows - 1));
     this.$().css('height', `${heightPct}%`);
+    this.$('.board__tower-group--body').css('height', `${heightPct}%`);
+
   },
 
   _setPadding() {
@@ -166,12 +168,20 @@ TowerGroupComponent.reopen({
   },
 
   _setPosition() {
-    this.$().css('left', `${boardPaddingPct}%`);
+    const offsetTopPx = this.$().offset().top;
+    const boardHeightVal = Ember.$('.td-game__board').css('height');
+    const boardHeightPxStr = boardHeightVal.split('px')[0];
+    const boardHeightPx = parseInt(boardHeightPxStr, 10);
+    const offsetTopPct = (offsetTopPx / boardHeightPx) * 100;
+
+    this.$().css('margin-left', `${boardPaddingPct}%`);
+    this.$().css('margin-top', `${this.attrs.posY - offsetTopPct}%`);
   },
 
   _setWidth() {
     const width = 100 - (boardPaddingPct * 2);
     this.$().css('width', `${width}%`);
+    this.$('.board__tower-group--body').css('width', `${width}%`);
   },
 
   _initializeStyles: Ember.on('didInsertElement', function () {
@@ -180,6 +190,9 @@ TowerGroupComponent.reopen({
       this._setPadding();
       this._setWidth();
       this._setPosition();
+
+      this.$('.board__tower-group--body').css('top', `${this.attrs.posY}%`);
+      this.$('.board__tower-group--body').css('left', `${boardPaddingPct}%`);
 
       this.set('stylesInitialized', true);
     });

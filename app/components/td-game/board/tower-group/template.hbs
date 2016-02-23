@@ -1,7 +1,6 @@
 {{#each groupTowers as |tower|}}
-  <div class="tower-group__pulse"></div>
-
   {{td-game/board/tower-group/tower add-colliding-tower=(action attrs.add-colliding-tower)
+                                    mobs=(readonly attrs.mobs)
                                     path=(readonly attrs.path)
                                     remove-colliding-tower=(action attrs.remove-colliding-tower)
                                     select=(action attrs.select-tower tower)
@@ -13,3 +12,7 @@
                                     report-tower-position=(action attrs.report-tower-position)
                                     waveStarted=(readonly attrs.waveStarted)}}
 {{/each}}
+
+<div class="board__tower-group--body">
+  <div class="tower-group__pulse"></div>
+</div>

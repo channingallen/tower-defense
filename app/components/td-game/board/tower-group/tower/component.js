@@ -361,7 +361,6 @@ TowerComponent.reopen({
           this._faceTarget();
         }
       }, 50);
-      // Ember.run.later(this, this._faceTarget, 50);
 
       return;
     }
@@ -375,7 +374,6 @@ TowerComponent.reopen({
           this._faceTarget();
         }
       }, 50);
-      // Ember.run.later(this, this._faceTarget, 50);
 
       return;
     }
