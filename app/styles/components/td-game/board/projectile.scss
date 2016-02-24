@@ -50,11 +50,7 @@ $particulates: 50;
   }
 }
 
-.projectile--default {
-  display: none;
-}
-
-.projectile--in-flight {
+.tower__projectile {
   height: $projectile-width;
   position: absolute;
   width: $projectile-width;

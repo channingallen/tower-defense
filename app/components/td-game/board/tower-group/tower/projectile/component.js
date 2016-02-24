@@ -7,11 +7,7 @@ import Ember from 'ember';
 ////////////////
 
 const ProjectileComponent = Ember.Component.extend({
-  classNameBindings: ['inFlight:projectile--in-flight:projectile--default'],
-
-  classNames: ['tower__projectile'],
-
-  // inFlight: false
+  classNames: ['tower__projectile']
 });
 
 /////////////////////
@@ -23,8 +19,6 @@ const ProjectileComponent = Ember.Component.extend({
 ProjectileComponent.reopen({
   _positionProjectileOnMob: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
-      this.set('inFlight', true);
-
       const targetPosX = this.attrs.targetPosX;
       const targetPosY = this.attrs.targetPosY;
       this.$().css('left', `${targetPosX}%`);
