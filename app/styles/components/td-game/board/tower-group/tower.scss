@@ -47,7 +47,6 @@ $turret-color: hsl(0, 100%, 0%);
 
   background-color: $background-color;
   border-radius: 9999px;
-  // position: relative;
   z-index: 1;
 
   &:hover {
@@ -146,10 +145,3 @@ $turret-color: hsl(0, 100%, 0%);
     animation-iteration-count: infinite;
   }
 }
-
-// .tower__projectile {
-//   background-color: white;
-//   width: 5px;
-//   height: 5px;
-//   position: absolute;
-// }
