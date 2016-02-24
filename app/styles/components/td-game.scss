@@ -7,7 +7,7 @@ $td-game__item__margin-bottom: 20px;
 ///////////////////
 
 .td-game {
-  background-color: hsl(200, 50%, 30%);
+  background-color: $background-color--main;
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -29,7 +29,7 @@ $td-game__item__margin-bottom: 20px;
 /////////////////
 
 .td-game__sidebar {
-  background-color: hsl(200, 50%, 30%);
+  background-color: $background-color--main;
   color: hsla(0, 0%, 90%, 0.75);
   display: flex;
   flex: 1 0 40%;
@@ -204,7 +204,7 @@ $td-game__item__margin-bottom: 20px;
 }
 
 .modal__button {
-  background-color: hsl(5, 94%, 42%);
+  background-color: $background-color--main;
   border-radius: 4px;
   color: hsl(0, 100%, 100%);
   cursor: pointer;

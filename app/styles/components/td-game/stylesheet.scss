@@ -1,4 +1,5 @@
 $stylesheet__color--light: hsl(0, 0%, 80%);
+// $stylesheet__button--color: hsl(200, 50%, 30%);
 $width--line-number: 5%;
 
 .sidebar__stylesheet {
@@ -51,7 +52,7 @@ $width--line-number: 5%;
 }
 
 .stylesheet__start-wave-button {
-  background-color: hsla(5, 95%, 42%, 0.3);
+  background-color: transparentize($background-color--main, 0.4);
   border-radius: 4px;
   bottom: 10px;
   color: hsl(0, 100%, 100%);
@@ -64,7 +65,7 @@ $width--line-number: 5%;
 }
 
 .stylesheet__start-wave-button--active {
-  background-color: hsl(5, 94%, 42%);
+  background-color: $background-color--main;
   cursor: pointer;
 }
 
