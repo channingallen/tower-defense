@@ -1,15 +1,19 @@
-{{#each groupTowers as |tower|}}
+{{#each attrs.towerGroup.towers as |tower|}}
   {{td-game/board/tower-group/tower add-colliding-tower=(action attrs.add-colliding-tower)
+                                    damage-mob=(action attrs.damage-mob)
                                     mobs=(readonly attrs.mobs)
                                     path=(readonly attrs.path)
                                     remove-colliding-tower=(action attrs.remove-colliding-tower)
+                                    report-tower-position=(action attrs.report-tower-position)
                                     select=(action attrs.select-tower tower)
                                     selectedTower=(readonly selectedTower)
                                     stylesInitialized=(readonly stylesInitialized)
                                     towerGroupStyles=(readonly attrs.towerGroup.styles)
                                     tower=(readonly tower)
+                                    towerAttackRange=(readonly tower.attackRange)
+                                    towerAttackPower=(readonly tower.attackPower)
+                                    towerId=(readonly tower.id)
                                     type=(readonly tower.type)
-                                    report-tower-position=(action attrs.report-tower-position)
                                     waveStarted=(readonly attrs.waveStarted)}}
 {{/each}}
 

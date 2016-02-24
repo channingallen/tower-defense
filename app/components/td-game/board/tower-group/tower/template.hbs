@@ -6,4 +6,12 @@
   </div>
 </div>
 
-{{!-- <div class="tower__projectile"></div> --}}
+{{#each projectiles as |projectile|}}
+  {{td-game/board/tower-group/tower/projectile damage-mob=(action attrs.damage-mob)
+                                               destroy=(action "destroyProjectile")
+                                               projectileId=(readonly projectile.id)
+                                               attackPower=(readonly attrs.towerAttackPower)
+                                               targetId=(readonly projectile.mobId)
+                                               targetPosX=(readonly projectile.mobX)
+                                               targetPosY=(readonly projectile.mobY)}}
+{{/each}}

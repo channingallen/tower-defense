@@ -12,6 +12,7 @@ const Tower = Ember.Object.extend({
   selector: '.t',
   styles: null,
   targetedMobId: null,
+  targetId: null,
   type: null
 });
 

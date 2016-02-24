@@ -9,7 +9,9 @@ import Ember from 'ember';
 const ProjectileComponent = Ember.Component.extend({
   classNameBindings: ['inFlight:projectile--in-flight:projectile--default'],
 
-  inFlight: false
+  classNames: ['tower__projectile'],
+
+  // inFlight: false
 });
 
 /////////////////////
@@ -19,18 +21,16 @@ const ProjectileComponent = Ember.Component.extend({
 /////////////////////
 
 ProjectileComponent.reopen({
-  _setPosition(left, top) {
-    this.$().css('left', left + '%');
-    this.$().css('top', top + '%');
-  },
-
   _positionProjectileOnMob: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
       this.set('inFlight', true);
 
-      this._setPosition(this.attrs.mobX, this.attrs.mobY);
+      const targetPosX = this.attrs.targetPosX;
+      const targetPosY = this.attrs.targetPosY;
+      this.$().css('left', `${targetPosX}%`);
+      this.$().css('top', `${targetPosY}%`);
 
-      this.attrs['damage-mob'](this.attrs.mobId, this.attrs.towerId);
+      this.attrs['damage-mob'](this.attrs.targetId, this.attrs.attackPower);
 
       Ember.run.later(this, () => {
         this._destroy();
@@ -63,9 +63,7 @@ ProjectileComponent.reopen({
 
 ProjectileComponent.reopen({
   _destroy() {
-    this.set('inFlight', false);
-
-    this.attrs.destroy(this.attrs.id);
+    this.attrs.destroy(this.attrs.projectileId, this.attrs.targetId);
   }
 });
 

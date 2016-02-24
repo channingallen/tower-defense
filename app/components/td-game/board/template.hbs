@@ -23,33 +23,20 @@
   {{/each}}
 {{/if}}
 
-{{#each projectiles as |projectile|}}
-  {{td-game/board/projectile damage-mob=(action "damageMob")
-                             destroy=(action "destroyProjectile")
-                             mobId=(readonly projectile.mobId)
-                             mobX=(readonly projectile.mobX)
-                             mobY=(readonly projectile.mobY)
-                             id=(readonly projectile.id)
-                             towerId=(readonly projectile.towerId)
-                             towerX=(readonly projectile.towerX)
-                             towerY=(readonly projectile.towerY)
-                             update-target-coords=(action "updateProjectileTargetCoords")
-                             waveStarted=(readonly attrs.waveStarted)}}
-{{/each}}
-
 {{#each attrs.towerGroups as |towerGroup|}}
   {{td-game/board/tower-group add-colliding-tower=(action attrs.add-colliding-tower)
                               allTowers=(readonly towers)
                               click=(action attrs.select-tower-group towerGroup)
+                              damage-mob=(action "damageMob")
                               mobs=(readonly mobs)
                               numRows=(readonly towerGroup.numRows)
                               path=(readonly attrs.path)
                               posY=(readonly towerGroup.posY)
                               remove-colliding-tower=(action attrs.remove-colliding-tower)
+                              report-tower-position=(action attrs.report-tower-position)
                               selectedTower=(readonly selectedTower)
                               selectedTowerGroup=(readonly selectedTowerGroup)
                               select-tower=(action attrs.select-tower)
                               towerGroup=(readonly towerGroup)
-                              report-tower-position=(action "reportTowerPosition")
                               waveStarted=(readonly attrs.waveStarted)}}
 {{/each}}

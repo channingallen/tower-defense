@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Projectile from 'tower-defense/objects/projectile';
 import { pathWidth } from 'tower-defense/objects/board';
 import { towerDimensions } from 'tower-defense/objects/tower';
 
@@ -234,10 +235,8 @@ TowerComponent.reopen({
 
   _reportPosition: Ember.observer('centerLeftPct', 'centerTopPct', function () {
     const towerId = this.attrs.tower.get('id');
-
     const centerLeftPct = this.get('centerLeftPct');
     const centerTopPct = this.get('centerTopPct');
-
     this.attrs['report-tower-position'](towerId, 'X', centerLeftPct);
     this.attrs['report-tower-position'](towerId, 'Y', centerTopPct);
   })
@@ -327,7 +326,6 @@ TowerComponent.reopen({
       'height': `${towerDimensionsPx / 2}px`,
       'width': `${towerDimensionsPx / 4}px `
     });
-
   }),
 
   _stopWatchingWindowResize: Ember.on('willDestroyElement', function () {
@@ -338,7 +336,9 @@ TowerComponent.reopen({
     const resizeFn = Ember.run.bind(this, '_setTowerDimensions');
     Ember.$(window).on('resize', resizeFn);
 
-    this.set('resizeFn', resizeFn);
+    Ember.run.schedule('afterRender', this, () => {
+      this.set('resizeFn', resizeFn);
+    });
   })
 });
 
@@ -350,59 +350,7 @@ TowerComponent.reopen({
 ///////////////////////////////////
 
 TowerComponent.reopen({
-  _faceTarget() {
-    if (!this.attrs.waveStarted) {
-      return;
-    }
-
-    if (!this.attrs.tower.get('targetedMobId')) {
-      Ember.run.later(this, () => {
-        if (!this.isDestroying) {
-          this._faceTarget();
-        }
-      }, 50);
-
-      return;
-    }
-
-    const targetFound = Ember.$(`#${this.attrs.tower.get('targetedMobId')}`).css('left');
-    if (!targetFound) {
-      this.attrs.tower.set('targetedMobId', null);
-
-      Ember.run.later(this, () => {
-        if (!this.isDestroying) {
-          this._faceTarget();
-        }
-      }, 50);
-
-      return;
-    }
-
-    const targetPctLeft = this._getTargetPercentageLeft();
-    const targetPctTop = this._getTargetPercentageTop();
-
-    // find the target's position relative to this tower
-    // e.g. given a tower position of [1,1] and a target position of [3,3], the
-    //      relative target position would be [2, -2]
-    const relTargetPctLeft = targetPctLeft - this.get('centerLeftPct');
-    const relTargetPctTop = this.get('centerTopPct') - targetPctTop;
-
-    const rotationDegrees = Math.atan2(
-      relTargetPctLeft,
-      relTargetPctTop
-    ) / Math.PI * 180;
-
-    this.$().css({'-webkit-transform': `rotate(${rotationDegrees}deg)`,
-                  '-moz-transform': `rotate(${rotationDegrees}deg)`,
-                  '-ms-transform': `rotate(${rotationDegrees}deg)`,
-                  'transform': `rotate(${rotationDegrees}deg)`});
-
-    Ember.run.later(this, () => {
-      if (!this.isDestroying) {
-        this._faceTarget();
-      }
-    }, 50);
-  },
+  // facingTarget: false,
 
   _getNumFromPx(pixels) {
     if (!pixels) {
@@ -414,24 +362,195 @@ TowerComponent.reopen({
   },
 
   _getTargetPercentageLeft() {
-    const leftPxStr = Ember.$(`#${this.attrs.tower.get('targetedMobId')}`).css('left');
+    const leftPxStr = Ember.$(`#${this.attrs.tower.get('targetId')}`).css('left');
     const leftPx = this._getNumFromPx(leftPxStr);
     const boardWidthPx = Ember.$('.td-game__board').width();
     return (leftPx / boardWidthPx) * 100;
   },
 
   _getTargetPercentageTop() {
-    const topPxStr = Ember.$(`#${this.attrs.tower.get('targetedMobId')}`).css('top');
+    const topPxStr = Ember.$(`#${this.attrs.tower.get('targetId')}`).css('top');
     const topPx = this._getNumFromPx(topPxStr);
     const boardHeightPx = Ember.$('.td-game__board').height();
     return (topPx / boardHeightPx) * 100;
   },
 
-  beginFacingTargets: Ember.observer('attrs.waveStarted', function () {
+  _faceTarget: Ember.observer('targetId', function () {
+    if (!this.attrs.waveStarted || !this.get('targetId')) {
+      return;
+    }
+
+    const target = this._getMobById(this.get('targetId'));
+    if (!target) {
+      this.set('targetId', null);
+      return;
+    }
+
+    const targetLeftPct = target.get('posX');
+    const targetTopPct = target.get('posY');
+
+    // find the target's position relative to this tower
+    // e.g. given a tower position of [1,1] and a target position of [3,3], the
+    //      relative target position would be [2, -2]
+    const relTargetPctLeft = targetLeftPct - this.get('centerLeftPct');
+    const relTargetPctTop = this.get('centerTopPct') - targetTopPct;
+
+    const rotationDegrees = Math.atan2(
+      relTargetPctLeft,
+      relTargetPctTop
+    ) / Math.PI * 180;
+
+    this.$('.tower__body').css({'-webkit-transform': `rotate(${rotationDegrees}deg)`,
+                                '-moz-transform': `rotate(${rotationDegrees}deg)`,
+                                '-ms-transform': `rotate(${rotationDegrees}deg)`,
+                                'transform': `rotate(${rotationDegrees}deg)`});
+
+    Ember.run.later(this, () => {
+      if (!this.get('isDestroying')) {
+        this._faceTarget();
+      }
+    }, 50);
+  })
+});
+
+///////////////////
+//               //
+//   Targeting   //
+//               //
+///////////////////
+
+TowerComponent.reopen({
+  targetId: null,
+
+  _attackMobsInRange() {
+    if (this.attrs.mobs.length < 1) {
+      return;
+    }
+
+    const range = this.attrs.towerAttackRange;
+    let towerHasShot = false;
+    this.attrs.mobs.forEach((mob) => {
+      const mobInRange = this._mobInRange(mob, range);
+      const mobAlive = mob.get('health') > 0;
+
+      if (mobInRange && mobAlive && !towerHasShot) {
+        towerHasShot = true;
+
+        const mobId = mob.get('id');
+        this.set('targetId', mobId);
+        this._buildProjectile(mobId);
+      }
+    });
+
+    if (!towerHasShot) {
+      this.set('targetId', null);
+    }
+
+    // debugger; // TODO THIS COMMIT: remove this
+    Ember.run.later(this, () => {
+      if (!this.get('isDestroying') && this.attrs.waveStarted) {
+        this._attackMobsInRange();
+      }
+    }, 500);
+  },
+
+  _getTargetDistance(target) {
+    const tower = this.attrs.tower;
+    const latDiff = Math.abs(tower.get('posX') - target.get('posX'));
+    const lngDiff = Math.abs(tower.get('posY') - target.get('posY'));
+    return latDiff + lngDiff;
+  },
+
+  _mobInRange(mob, range) {
+    if (!mob) {
+      return false;
+    }
+
+    return this._getTargetDistance(mob) < range ? true : false;
+  },
+
+  _beginAttackingMobsInRange: Ember.observer('attrs.waveStarted', function () {
     if (this.attrs.waveStarted) {
-      this._faceTarget();
+      this._attackMobsInRange();
     }
   })
+});
+
+/////////////////////
+//                 //
+//   Projectiles   //
+//                 //
+/////////////////////
+
+TowerComponent.reopen({
+  projectiles: Ember.computed(function () {
+    return [];
+  }),
+
+  _buildProjectile(mobId) {
+    const targetedMob = this._getMobById(mobId);
+    if (targetedMob) {
+      const newProjectile = Projectile.create({
+        id: this._generateIdForProjectile(),
+        mobId: mobId,
+
+        mobX: targetedMob.get('posX'),
+        mobY: targetedMob.get('posY')
+      });
+
+      this.get('projectiles').addObject(newProjectile);
+
+      return;
+    }
+  },
+
+  _generateIdForProjectile() {
+    function generate4DigitString() {
+      const baseInt = Math.floor((1 + Math.random()) * 0x10000);
+      return baseInt.toString(16).substring(1);
+    }
+
+    return generate4DigitString() + generate4DigitString() + '-' +
+           generate4DigitString() + '-' + generate4DigitString() + '-' +
+           generate4DigitString() + '-' + generate4DigitString() +
+           generate4DigitString() + generate4DigitString();
+  },
+
+  _getMobById(mobId) {
+    let needle;
+    this.attrs.mobs.forEach((mob) => {
+      if (mob.get('id') === mobId) {
+        needle = mob;
+      }
+    });
+    return needle;
+  },
+
+  _getProjectileById(projectileId) {
+    let needle;
+    this.get('projectiles').forEach((projectile) => {
+      if (projectile.get('id') === projectileId) {
+        needle = projectile;
+      }
+    });
+    return needle;
+  },
+
+  actions: {
+    destroyProjectile(projectileId) {
+      if (this.get('isDestroying') || !this.attrs.waveStarted) {
+        return;
+      }
+
+      const projectile = this._getProjectileById(projectileId);
+      const projectileFound = !!projectile;
+      const projectilesFound = this.get('projectiles.length') > 0;
+      if (projectileFound && projectilesFound) {
+        const projectileIndex = this.get('projectiles').indexOf(projectile);
+        this.get('projectiles').removeAt(projectileIndex);
+      }
+    }
+  }
 });
 
 export default TowerComponent;

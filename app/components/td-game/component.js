@@ -180,6 +180,22 @@ GameComponent.reopen({
   }
 });
 
+GameComponent.reopen({
+  actions: {
+    reportTowerPosition(id, axis, pos) {
+      axis = axis.toUpperCase();
+
+      this.get('currentWave.towerGroups').forEach((tg) => {
+        tg.get('towers').forEach((tower) => {
+          if (tower.get('id') === id) {
+            tower.set('pos' + axis, pos);
+          }
+        });
+      });
+    }
+  }
+});
+
 /////////////////
 //             //
 //   Overlay   //
