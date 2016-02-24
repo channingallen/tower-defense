@@ -19,7 +19,7 @@ function addBoardToWave(wave) {
   ];
 
   pathObjects.forEach((pathObject) => {
-    board.get('pathData').pushObject(pathObject);
+    board.get('pathData').addObject(pathObject);
   });
 
   wave.set('board', board);
@@ -83,7 +83,7 @@ function addTowersToTowerGroup(towerGroup, numTowers) {
 
   let newTowers = Ember.A([]);
   for (var i = 1; i < numTowers + 1; i++) {
-    newTowers.pushObject(getNewTower(i));
+    newTowers.addObject(getNewTower(i));
   }
 
   towerGroup.set('towers', newTowers);

@@ -39,7 +39,7 @@ BoardComponent.reopen({
   _generateMobs() {
     const mobIndex = this.get('mobIndex');
     const currentMob = this.attrs.waveMobs.objectAt(mobIndex);
-    this.get('mobs').pushObject(currentMob);
+    this.get('mobs').addObject(currentMob);
 
     const anotherMobExists = !!this.attrs.waveMobs.objectAt(mobIndex + 1);
     if (anotherMobExists) {

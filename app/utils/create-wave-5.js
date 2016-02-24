@@ -29,7 +29,7 @@ function addBoardToWave(wave) {
   ];
 
   pathObjects.forEach((pathObject) => {
-    board.get('pathData').pushObject(pathObject);
+    board.get('pathData').addObject(pathObject);
   });
 
   wave.set('board', board);
@@ -93,7 +93,7 @@ function addTowersToTowerGroup(towerGroup, specsForTowers) {
 
   let newTowers = [];
   for (var i = 1; i < specsForTowers.length + 1; i++) {
-    newTowers.pushObject(getNewTower(i, specsForTowers.objectAt(i - 1).type));
+    newTowers.addObject(getNewTower(i, specsForTowers.objectAt(i - 1).type));
   }
 
   towerGroup.set('towers', newTowers);

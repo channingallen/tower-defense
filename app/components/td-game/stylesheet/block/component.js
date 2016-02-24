@@ -114,7 +114,7 @@ BlockComponent.reopen({
 
       const codeLines = this.get('codeLines');
       if (codeLines.isEvery('submitted')) {
-        codeLines.pushObject(createUnitCodeLine());
+        codeLines.addObject(createUnitCodeLine());
       }
     }
   ),
