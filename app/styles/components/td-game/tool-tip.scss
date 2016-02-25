@@ -28,10 +28,6 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
   position: absolute;
   top: -50px;
 
-  // -webkit-transform: translateZ(0); /* webkit flicker fix */
-  // -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
-
-
   -webkit-animation: emerge 0.25s ease-out;
      -moz-animation: emerge 0.25s ease-out;
           animation: emerge 0.25s ease-out;
