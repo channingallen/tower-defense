@@ -30,24 +30,6 @@ const TowerGroupComponent = Ember.Component.extend({
   )
 });
 
-////////////////
-//            //
-//   Towers   //
-//            //
-////////////////
-
-TowerGroupComponent.reopen({
-  // groupTowers: Ember.computed('attrs.towerGroup', function () {
-  //   let towers = [];
-  //
-  //   this.attrs.towerGroup.get('towers').forEach((tower) => {
-  //     towers.push(tower);
-  //   });
-  //
-  //   return towers;
-  // })
-});
-
 //////////////////////////////
 //                          //
 //   Code Line Management   //
