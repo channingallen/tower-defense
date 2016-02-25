@@ -18,8 +18,10 @@
 {{/each}}
 
 <div class="board__tower-group--body">
-  {{tool-tip selected=(readonly selected)
-             selector=(readonly attrs.towerGroup.selector)}}
-
+  {{#if selected}}
+    {{tool-tip selected=(readonly selected)
+               selector=(readonly attrs.towerGroup.selector)
+               type=(readonly "tower-group")}}
+  {{/if}}
   <div class="tower-group__pulse"></div>
 </div>

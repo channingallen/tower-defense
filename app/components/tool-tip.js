@@ -1,5 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+////////////////
+//            //
+//   Basics   //
+//            //
+////////////////
+
+const ToolTipComponent = Ember.Component.extend({
   classNames: ['tool-tip']
+  // tagName: 'p'
 });
+
+export default ToolTipComponent;
