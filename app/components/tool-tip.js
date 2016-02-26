@@ -7,7 +7,7 @@ import Ember from 'ember';
 ////////////////
 
 const ToolTipComponent = Ember.Component.extend({
-  classNames: ['tool-tip']
+  classNames: ['tool-tip', 'tool-tip__top']
   // tagName: 'p'
 });
 
