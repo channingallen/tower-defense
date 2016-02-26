@@ -37,7 +37,7 @@
 
     {{#each towerGroup.towers as |tower|}}
       <li class="block__line block__brace-line">
-        <span class="block__selector">#{{tower.selector}}</span>
+        <span class="block__selector">.{{tower.selector}}</span>
         <span class="block__brace">{</span>
       </li>
       {{td-game/stylesheet/block finalTowerId=(readonly finalTowerId)
