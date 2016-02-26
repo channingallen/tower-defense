@@ -4,13 +4,13 @@
 }
 
 @-moz-keyframes emerge-up {
-  from { transform: translateY(10px); opacity: 0; }
-  to { transform: translateY(0px); opacity: 1; }
+  from { -moz-transform: translateY(10px); opacity: 0; }
+  to { -moz-transform: translateY(0px); opacity: 1; }
 }
 
 @-webkit-keyframes "emerge-up" {
-  from { transform: translateY(10px); opacity: 0; }
-  to { transform: translateY(0px); opacity: 1; }
+  from { -webkit-transform: translateY(10px); opacity: 0; }
+  to { -webkit-transform: translateY(0px); opacity: 1; }
 }
 
 @keyframes emerge-down {
@@ -19,13 +19,13 @@
 }
 
 @-moz-keyframes emerge-down {
-  from { transform: translateY(-10px); opacity: 0; }
-  to { transform: translateY(0px); opacity: 1; }
+  from { -moz-transform: translateY(-10px); opacity: 0; }
+  to { -moz-transform: translateY(0px); opacity: 1; }
 }
 
 @-webkit-keyframes "emerge-down" {
-  from { transform: translateY(-10px); opacity: 0; }
-  to { transform: translateY(0px); opacity: 1; }
+  from { -webkit-transform: translateY(-10px); opacity: 0; }
+  to { -webkit-transform: translateY(0px); opacity: 1; }
 }
 
 $tooltip--color: hsla(0, 0%, 0%, 0.5);
