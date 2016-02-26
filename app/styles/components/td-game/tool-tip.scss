@@ -13,6 +13,21 @@
   to { transform: translateY(0px); opacity: 1; }
 }
 
+@keyframes emerge-down {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0px); opacity: 1; }
+}
+
+@-moz-keyframes emerge-down {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0px); opacity: 1; }
+}
+
+@-webkit-keyframes "emerge-down" {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0px); opacity: 1; }
+}
+
 $tooltip--color: hsla(0, 0%, 0%, 0.5);
 
 .tool-tip {
@@ -26,19 +41,28 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
   width: 100%;
 }
 
-.tool-tip--top {
+.tool-tip--above {
   top: -40px;
 }
 
-.tool-tip--bottom {
-  bottom: -115%;
+.tool-tip--below {
+  bottom: -105%;
 }
 
 .tool-tip__content {
   text-align: center;
+}
+
+.tool-tip__content--above {
   -webkit-animation: emerge-up 0.25s ease-out;
      -moz-animation: emerge-up 0.25s ease-out;
           animation: emerge-up 0.25s ease-out;
+}
+
+.tool-tip__content--below {
+  -webkit-animation: emerge-down 0.25s ease-out;
+     -moz-animation: emerge-down 0.25s ease-out;
+          animation: emerge-down 0.25s ease-out;
 }
 
 .tool-tip__content nobr {
@@ -53,16 +77,24 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
   height: 0;
   margin: 4px auto;
   width: 0;
+}
 
+.tool-tip__caret--above {
   -webkit-animation: emerge-up 0.25s ease-out;
      -moz-animation: emerge-up 0.25s ease-out;
           animation: emerge-up 0.25s ease-out;
 }
 
-.tool-tip__caret--top {
+.tool-tip__caret--below {
+  -webkit-animation: emerge-down 0.25s ease-out;
+     -moz-animation: emerge-down 0.25s ease-out;
+          animation: emerge-down 0.25s ease-out;
+}
+
+.tool-tip__caret--below {
   border-bottom: solid $tooltip--color 8px;
 }
 
-.tool-tip__caret--bottom {
+.tool-tip__caret--above {
   border-top: solid $tooltip--color 8px;
 }
