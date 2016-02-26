@@ -1,14 +1,14 @@
-@keyframes emerge {
+@keyframes emerge-up {
   from { transform: translateY(10px); opacity: 0; }
   to { transform: translateY(0px); opacity: 1; }
 }
 
-@-moz-keyframes emerge {
+@-moz-keyframes emerge-up {
   from { transform: translateY(10px); opacity: 0; }
   to { transform: translateY(0px); opacity: 1; }
 }
 
-@-webkit-keyframes "emerge" {
+@-webkit-keyframes "emerge-up" {
   from { transform: translateY(10px); opacity: 0; }
   to { transform: translateY(0px); opacity: 1; }
 }
@@ -18,36 +18,27 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
 .tool-tip {
   color: hsl(0, 0%, 85%);
   cursor: default;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: -35px;
   font-family: $font-family--monospace;
   font-size: 13px;
   font-weight: 500;
-  // display: inline-block;
-  // padding: 5px 10px;
-  // position: absolute;
-  //
-  //
-  // &:after {
-  //   border-left: solid transparent 10px;
-  //   border-right: solid transparent 10px;
-  //   border-top: solid $tooltip--color 10px;
-  //   bottom: -10px;
-  //   content: " ";
-  //   height: 0;
-  //   left: 5px;
-  //   position: absolute;
-  //   width: 0;
-  // }
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.tool-tip--top {
+  top: -40px;
+}
+
+.tool-tip--bottom {
+  bottom: -115%;
 }
 
 .tool-tip__content {
   text-align: center;
-  -webkit-animation: emerge 0.25s ease-out;
-     -moz-animation: emerge 0.25s ease-out;
-          animation: emerge 0.25s ease-out;
+  -webkit-animation: emerge-up 0.25s ease-out;
+     -moz-animation: emerge-up 0.25s ease-out;
+          animation: emerge-up 0.25s ease-out;
 }
 
 .tool-tip__content nobr {
@@ -55,20 +46,23 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
   padding: 4px 5px;
 }
 
+.tool-tip__caret {
+  border-left: solid transparent 8px;
+  border-right: solid transparent 8px;
+  content: " ";
+  height: 0;
+  margin: 4px auto;
+  width: 0;
+
+  -webkit-animation: emerge-up 0.25s ease-out;
+     -moz-animation: emerge-up 0.25s ease-out;
+          animation: emerge-up 0.25s ease-out;
+}
+
 .tool-tip__caret--top {
-  display: none;
+  border-bottom: solid $tooltip--color 8px;
 }
 
 .tool-tip__caret--bottom {
-  border-left: solid transparent 8px;
-  border-right: solid transparent 8px;
   border-top: solid $tooltip--color 8px;
-  content: " ";
-  height: 0;
-
-  -webkit-animation: emerge 0.25s ease-out;
-     -moz-animation: emerge 0.25s ease-out;
-          animation: emerge 0.25s ease-out;
-  margin: 4px auto;
-  width: 0;
 }

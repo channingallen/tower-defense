@@ -1,6 +1,12 @@
 {{!-- container: div.tool-tip --}}
-<div class="tool-tip__caret--top"></div>
-<div class="tool-tip__content">
-  <nobr>.{{attrs.selector}}</nobr>
-</div>
-<div class="tool-tip__caret--bottom"></div>
+{{#if atTop}}
+  <div class="tool-tip__caret tool-tip__caret--top"></div>
+  <div class="tool-tip__content">
+    <nobr>.{{attrs.selector}}</nobr>
+  </div>
+{{else}}
+  <div class="tool-tip__content">
+    <nobr>.{{attrs.selector}}</nobr>
+  </div>
+  <div class="tool-tip__caret tool-tip__caret--bottom"></div>
+{{/if}}
