@@ -12,14 +12,16 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-5.png');
 
   const pathObjects = [
-    PathCoords.create({ x: -5, y: 55 }),
-    PathCoords.create({ x: 15, y: 55 }),
-    PathCoords.create({ x: 15, y: 40 }),
-    PathCoords.create({ x: 50, y: 40 }),
-    PathCoords.create({ x: 50, y: 55 }),
-    PathCoords.create({ x: 85, y: 55 }),
-    PathCoords.create({ x: 85, y: 40 }),
-    PathCoords.create({ x: 105, y: 40 })
+    PathCoords.create({ x: 5, y: -5 }),
+    PathCoords.create({ x: 5, y: 25 }),
+    PathCoords.create({ x: 35, y: 25 }),
+    PathCoords.create({ x: 35, y: 40 }),
+    PathCoords.create({ x: 65, y: 40 }),
+    PathCoords.create({ x: 65, y: 25 }),
+    PathCoords.create({ x: 90, y: 25 }),
+    PathCoords.create({ x: 90, y: 75 }),
+    PathCoords.create({ x: 35, y: 75 }),
+    PathCoords.create({ x: 35, y: 105 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -37,8 +39,8 @@ function addMobsToWave(wave) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
       frequency: 1500,
-      health: 300,
-      maxHealth: 300,
+      health: 220,
+      maxHealth: 220,
       points: 20,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
@@ -64,30 +66,32 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(7, 30);
+  const towerGroup1 = getNewTowerGroup(3, 4);
+  const towerGroup2 = getNewTowerGroup(1, 46);
+  const towerGroup3 = getNewTowerGroup(3, 60);
 
-  addTowersToTowerGroup(towerGroup1, [
-    { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
-  ]);
+  addTowersToTowerGroup(towerGroup1, 2);
+  addTowersToTowerGroup(towerGroup2, 1);
+  addTowersToTowerGroup(towerGroup3, 2);
 
-  wave.set('towerGroups', Ember.A([towerGroup1]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2, towerGroup3]));
 }
 
-function addTowersToTowerGroup(towerGroup, specsForTowers) {
-  function getNewTower(towerNum, type) {
+function addTowersToTowerGroup(towerGroup, numTowers) {
+  function getNewTower(towerNum) {
     return Tower.create({
       id: generateIdForRecord(),
       attackPower: 20,
       attackRange: 20,
       selector: `tower-${towerGroup.get('groupNum')}-${towerNum}`,
-      type,
+      type: 1,
       styles: Ember.A([createUnitCodeLine()])
     });
   }
 
-  let newTowers = [];
-  for (var i = 1; i < specsForTowers.length + 1; i++) {
-    newTowers.addObject(getNewTower(i, specsForTowers.objectAt(i - 1).type));
+  let newTowers = Ember.A([]);
+  for (var i = 1; i < numTowers + 1; i++) {
+    newTowers.addObject(getNewTower(i));
   }
 
   towerGroup.set('towers', newTowers);
@@ -108,8 +112,19 @@ function generateIdForRecord() {
 export default function createWave5() {
   const wave = Wave.create({
     instructions: {
-      main: `Use \`justify-content\` and \`align-items\` to keep the enemies at
-             bay.`,
+      main: `Now some of the groups have vertical space, which is the
+             perfect opportunity to use the \`align-items\` property.
+             \`align-items\` positions items vertically in a container and
+             accepts the following values:
+
+* \`flex-start\`: align items across the top of the container
+* \`flex-end\`: align items across the bottom of the container
+* \`center\`: align items vertically across the center of the container
+* \`baseline\`: align items across the baseline of the container
+* \`stretch\`: stretch items to fill the container
+
+Apply both \`align-items\` and \`justify-content\` properties to the groups to
+keep the enemies at bay.`,
       tldr: `Use \`justify-content\` and \`align-items\` to move your towers
              into effective positions.`
     },
