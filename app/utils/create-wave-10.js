@@ -9,23 +9,17 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/path-7.png');
+  board.set('imageUrl', '/images/path-10.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 90, y: -5 }),
-    PathCoords.create({ x: 90, y: 35 }),
-    PathCoords.create({ x: 71, y: 35 }),
-    PathCoords.create({ x: 71, y: 10 }),
-    PathCoords.create({ x: 90, y: 10 }),
-    PathCoords.create({ x: 90, y: 10 }),
-    PathCoords.create({ x: 90, y: 50 }),
-    PathCoords.create({ x: 40, y: 50 }),
-    PathCoords.create({ x: 40, y: 10 }),
-    PathCoords.create({ x: 10, y: 10 }),
-    PathCoords.create({ x: 10, y: 90 }),
-    PathCoords.create({ x: 30, y: 90 }),
-    PathCoords.create({ x: 30, y: 70 }),
-    PathCoords.create({ x: 105, y: 70 })
+    PathCoords.create({ x: -5, y: 75 }),
+    PathCoords.create({ x: 15, y: 75 }),
+    PathCoords.create({ x: 15, y: 25 }),
+    PathCoords.create({ x: 50, y: 25 }),
+    PathCoords.create({ x: 50, y: 75 }),
+    PathCoords.create({ x: 85, y: 75 }),
+    PathCoords.create({ x: 85, y: 25 }),
+    PathCoords.create({ x: 105, y: 25 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -42,7 +36,7 @@ function addMobsToWave(wave) {
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 900,
+      frequency: 2000,
       health: 300,
       maxHealth: 300,
       points: 20,
@@ -70,13 +64,13 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 20);
-  const towerGroup2 = getNewTowerGroup(5, 70);
+  const towerGroup1 = getNewTowerGroup(7, 32);
 
-  addTowersToTowerGroup(towerGroup1, [{ type: 2 }, { type: 1 }, { type: 1 }]);
-  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 1 }, { type: 2 }]);
+  addTowersToTowerGroup(towerGroup1, [
+    { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
+  ]);
 
-  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
+  wave.set('towerGroups', Ember.A([towerGroup1]));
 }
 
 function addTowersToTowerGroup(towerGroup, specsForTowers) {
@@ -111,26 +105,14 @@ function generateIdForRecord() {
          generate4DigitString() + generate4DigitString();
 }
 
-export default function createWave7() {
+export default function createWave10() {
   const wave = Wave.create({
     instructions: {
-      main: `This time, each group contains a super tower. Super towers
-             deal two times more damage to enemies than normal towers do.
-             The only problem is, they aren't effectively arranged in
-             their groups!
-
-Enter \`flex-direction\`. The \`flex-direction\` property defines the
-directional layout of the items in the flex container. Flex items can lay out
-either in horizontal rows or vertical columns; accordingly, \`flex-direction\`
-accepts the following values:
-
-* \`row\`: lay out items from left to right
-* \`row-reverse\`: lay out items from right to left
-* \`column\`: lay out items from top to bottom
-* \`column-reverse\`: lay out items from bottom to top`,
-      tldr: `Use \`justify-content\`, \`align-items\`, and \`flex-direction\` to
-             move your towers into effective positions.`
-    },
+      main: `To vertically position individual items in a container, use the
+             \`align-self\` property. \`align-self\` accepts the same values as
+             \`align-items\`.`,
+      tldr: `Use \`justify-content\`, \`align-items\`, and \`align-self\` to
+             move your towers into effective positions.`},
     minimumScore: 80
   });
 

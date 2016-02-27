@@ -12,14 +12,15 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-9.png');
 
   const pathObjects = [
-    PathCoords.create({ x: -5, y: 75 }),
-    PathCoords.create({ x: 15, y: 75 }),
-    PathCoords.create({ x: 15, y: 25 }),
-    PathCoords.create({ x: 50, y: 25 }),
-    PathCoords.create({ x: 50, y: 75 }),
-    PathCoords.create({ x: 85, y: 75 }),
-    PathCoords.create({ x: 85, y: 25 }),
-    PathCoords.create({ x: 105, y: 25 })
+    PathCoords.create({ x: -5, y: 35 }),
+    PathCoords.create({ x: 35, y: 35 }),
+    PathCoords.create({ x: 35, y: 20 }),
+    PathCoords.create({ x: 65, y: 20 }),
+    PathCoords.create({ x: 65, y: 35 }),
+    PathCoords.create({ x: 90, y: 35 }),
+    PathCoords.create({ x: 90, y: 50 }),
+    PathCoords.create({ x: 65, y: 50 }),
+    PathCoords.create({ x: 65, y: 105 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -32,11 +33,11 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 10;
+  const mobQuantity = 5;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 2000,
+      frequency: 1500,
       health: 300,
       maxHealth: 300,
       points: 20,
@@ -64,11 +65,9 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(7, 32);
+  const towerGroup1 = getNewTowerGroup(3, 35);
 
-  addTowersToTowerGroup(towerGroup1, [
-    { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
-  ]);
+  addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 2 }, { type: 1 }]);
 
   wave.set('towerGroups', Ember.A([towerGroup1]));
 }
@@ -108,11 +107,17 @@ function generateIdForRecord() {
 export default function createWave9() {
   const wave = Wave.create({
     instructions: {
-      main: `To vertically position individual items in a container, use the
-             \`align-self\` property. \`align-self\` accepts the same values as
-             \`align-items\`.`,
-      tldr: `Use \`justify-content\`, \`align-items\`, and \`align-self\` to
-             move your towers into effective positions.`},
+      main: `The super tower is in another bad position, but not one you can
+             address with \`flex-direction\` or any other container property
+             you've learned. Instead you'll need to apply a style to the item
+             itself.
+
+The \`order\` property defines the order in which an item appears in the flex
+container and accepts both positive and negative integer values. All flex items
+begin with a default order of 0.`,
+    tldr: `Use \`justify-content\`, \`align-items\`, and \`order\` to move your
+           towers into effective positions.`
+    },
     minimumScore: 80
   });
 

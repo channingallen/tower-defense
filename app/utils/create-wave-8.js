@@ -12,15 +12,20 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-8.png');
 
   const pathObjects = [
-    PathCoords.create({ x: -5, y: 35 }),
-    PathCoords.create({ x: 35, y: 35 }),
-    PathCoords.create({ x: 35, y: 20 }),
-    PathCoords.create({ x: 65, y: 20 }),
-    PathCoords.create({ x: 65, y: 35 }),
+    PathCoords.create({ x: 90, y: -5 }),
     PathCoords.create({ x: 90, y: 35 }),
+    PathCoords.create({ x: 71, y: 35 }),
+    PathCoords.create({ x: 71, y: 10 }),
+    PathCoords.create({ x: 90, y: 10 }),
+    PathCoords.create({ x: 90, y: 10 }),
     PathCoords.create({ x: 90, y: 50 }),
-    PathCoords.create({ x: 65, y: 50 }),
-    PathCoords.create({ x: 65, y: 105 })
+    PathCoords.create({ x: 40, y: 50 }),
+    PathCoords.create({ x: 40, y: 10 }),
+    PathCoords.create({ x: 10, y: 10 }),
+    PathCoords.create({ x: 10, y: 90 }),
+    PathCoords.create({ x: 30, y: 90 }),
+    PathCoords.create({ x: 30, y: 70 }),
+    PathCoords.create({ x: 105, y: 70 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -33,11 +38,11 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 5;
+  const mobQuantity = 10;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 1500,
+      frequency: 900,
       health: 300,
       maxHealth: 300,
       points: 20,
@@ -65,11 +70,13 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(3, 35);
+  const towerGroup1 = getNewTowerGroup(1, 20);
+  const towerGroup2 = getNewTowerGroup(5, 70);
 
-  addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 2 }, { type: 1 }]);
+  addTowersToTowerGroup(towerGroup1, [{ type: 2 }, { type: 1 }, { type: 1 }]);
+  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 1 }, { type: 2 }]);
 
-  wave.set('towerGroups', Ember.A([towerGroup1]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
 }
 
 function addTowersToTowerGroup(towerGroup, specsForTowers) {
@@ -107,16 +114,22 @@ function generateIdForRecord() {
 export default function createWave8() {
   const wave = Wave.create({
     instructions: {
-      main: `The super tower is in another bad position, but not one you can
-             address with \`flex-direction\` or any other container property
-             you've learned. Instead you'll need to apply a style to the item
-             itself.
+      main: `This time, each group contains a super tower. Super towers
+             deal two times more damage to enemies than normal towers do.
+             The only problem is, they aren't effectively arranged in
+             their groups!
 
-The \`order\` property defines the order in which an item appears in the flex
-container and accepts both positive and negative integer values. All flex items
-begin with a default order of 0.`,
-    tldr: `Use \`justify-content\`, \`align-items\`, and \`order\` to move your
-           towers into effective positions.`
+Enter \`flex-direction\`. The \`flex-direction\` property defines the
+directional layout of the items in the flex container. Flex items can lay out
+either in horizontal rows or vertical columns; accordingly, \`flex-direction\`
+accepts the following values:
+
+* \`row\`: lay out items from left to right
+* \`row-reverse\`: lay out items from right to left
+* \`column\`: lay out items from top to bottom
+* \`column-reverse\`: lay out items from bottom to top`,
+      tldr: `Use \`justify-content\`, \`align-items\`, and \`flex-direction\` to
+             move your towers into effective positions.`
     },
     minimumScore: 80
   });
