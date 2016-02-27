@@ -375,6 +375,14 @@ GameComponent.reopen({
     }
   }),
 
+  _preventSidebarScroll: Ember.observer('dropdownActive', function () {
+    if (this.get('dropdownActive')) {
+      this.$('.td-game__sidebar').css('overflow-y', 'visible');
+    } else {
+      this.$('.td-game__sidebar').css('overflow-y', 'auto');
+    }
+  }),
+
   actions: {
     openDropdown() {
       this.set('dropdownActive', true);
