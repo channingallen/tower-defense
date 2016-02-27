@@ -115,8 +115,20 @@ $td-game__item__margin-bottom: 20px;
 .button__menu {
   position: absolute;
   left: -66px;
-  top: 40px;
+  top: 45px;
   z-index: 2;
+
+  &:before {
+    border-left: solid transparent 8px;
+    border-right: solid transparent 8px;
+    border-bottom: solid hsla(0, 0%, 10%, 0.7) 8px;
+    content: " ";
+    height: 0;
+    top: -8px;
+    left: 48%;
+    position: absolute;
+    width: 0;
+  }
 }
 
 .menu__wave-links {
