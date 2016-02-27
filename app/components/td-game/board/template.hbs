@@ -26,7 +26,6 @@
 {{#each attrs.towerGroups as |towerGroup|}}
   {{td-game/board/tower-group add-colliding-tower=(action attrs.add-colliding-tower)
                               allTowers=(readonly towers)
-                              click=(action attrs.select-tower-group towerGroup)
                               damage-mob=(action "damageMob")
                               mobs=(readonly mobs)
                               numRows=(readonly towerGroup.numRows)
@@ -34,6 +33,7 @@
                               posY=(readonly towerGroup.posY)
                               remove-colliding-tower=(action attrs.remove-colliding-tower)
                               report-tower-position=(action attrs.report-tower-position)
+                              select=(action attrs.select-tower-group)
                               selectedTower=(readonly selectedTower)
                               selectedTowerGroup=(readonly selectedTowerGroup)
                               select-tower=(action attrs.select-tower)

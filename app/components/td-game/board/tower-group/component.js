@@ -181,4 +181,23 @@ TowerGroupComponent.reopen({
   })
 });
 
+///////////////////
+//               //
+//   Selection   //
+//               //
+///////////////////
+
+TowerGroupComponent.reopen({
+  _sendSelectAction: Ember.on('didInsertElement', function () {
+    this.$().click((clickEvent) => {
+      const $clickedEl = Ember.$(clickEvent.target);
+      const $towerParents = $clickedEl.parents('.tower-group__tower');
+      const isChildOfTower = $towerParents.length > 0;
+      if (!isChildOfTower) {
+        this.attrs.select(this.attrs.towerGroup);
+      }
+    });
+  })
+});
+
 export default TowerGroupComponent;

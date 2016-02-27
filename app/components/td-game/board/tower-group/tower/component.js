@@ -58,9 +58,7 @@ TowerComponent.reopen({
     }
   ),
 
-  _sendSelectAction: Ember.on('click', function (clickEvent) {
-    clickEvent.stopPropagation();
-
+  _sendSelectAction: Ember.on('click', function () {
     this.attrs.select(this.attrs.tower);
   })
 });
