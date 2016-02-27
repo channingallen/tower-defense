@@ -25,6 +25,20 @@ StylesheetComponent.reopen({
     }
   }),
 
+  // shift + enter hotkey
+  _startWave: Ember.on('didInsertElement', function () {
+    Ember.$(window).on('keypress', (keyEvent) => {
+      if (this.attrs.towersColliding) {
+        this._shake();
+      } else {
+        if (keyEvent.shiftKey && keyEvent.which === 13) {
+          this.set('waveStarting', true);
+          this.attrs['start-wave']();
+        }
+      }
+    });
+  }),
+
   actions: {
     startWave() {
       this.set('waveStarting', true);
@@ -161,21 +175,25 @@ StylesheetComponent.reopen({
     }, 1300);
   },
 
+  _shake() {
+    if (this.get('shakeActive')) {
+      return;
+    }
+
+    this._delayNextShake();
+
+    let l = 20;
+    for (let i = 0; i < 10; i++) {
+      this.$().animate({
+        'margin-left': "+=" + (l = -l) + 'px',
+        'margin-right': "-=" + l + 'px'
+      }, 115);
+    }
+  },
+
   actions: {
     shake() {
-      if (this.get('shakeActive')) {
-        return;
-      }
-
-      this._delayNextShake();
-
-      let l = 20;
-      for (let i = 0; i < 10; i++) {
-        this.$().animate({
-          'margin-left': "+=" + (l = -l) + 'px',
-          'margin-right': "-=" + l + 'px'
-        }, 115);
-      }
+      this._shake();
     }
   }
 });
