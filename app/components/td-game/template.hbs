@@ -10,16 +10,16 @@
                   type="button"
                   name="button" {{action "changeWavePrevious"}}>
             <i class="fa fa-angle-double-left"></i>
-          </button>
-        {{else}}
-          <button class="nav__button nav__button--active"
+          </button><!--
+    -->{{else}}<!--
+        --><button class="nav__button nav__button--active"
                   type="button"
                   name="button" {{action "changeWavePrevious"}}>
             <i class="fa fa-angle-double-left"></i>
-          </button>
-        {{/if}}
+          </button><!--
+     -->{{/if}}<!--
 
-        <button class="nav__button nav__button--active nav__button--selector"
+       --><button class="nav__button nav__button--active nav__button--selector"
                 type="button"
                 name="button"
                 onclick={{action "openDropdown"}}>
@@ -27,16 +27,16 @@
             Wave {{currentWaveNumber}} of {{game.waves.length}}
             <i class="fa fa-caret-down selector__caret"></i>
           </span>
-        </button>
+        </button><!--
 
-        {{#if isLastWave}}
-          <button class="nav__button"
+     -->{{#if isLastWave}}<!--
+       --><button class="nav__button"
                   type="button"
                   name="button" {{action "changeWaveNext"}}>
             <i class="fa fa-angle-double-right"></i>
-          </button>
-        {{else}}
-          <button class="nav__button nav__button--active"
+          </button><!--
+     -->{{else}}<!--
+       --><button class="nav__button nav__button--active"
                   type="button"
                   name="button" {{action "changeWaveNext"}}>
             <i class="fa fa-angle-double-right"></i>

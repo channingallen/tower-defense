@@ -91,7 +91,12 @@ $td-game__item__margin-bottom: 20px;
   display: inline-block;
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
+  margin-right: 3px;
   padding: 0.4em 0.8em;
+
+  &:last-child {
+    margin-right: 0px;
+  }
 }
 
 .nav__button--active {
