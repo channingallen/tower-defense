@@ -5,7 +5,7 @@ import createWave3 from 'tower-defense/utils/create-wave-3';
 import createWave4 from 'tower-defense/utils/create-wave-4';
 import createWave5 from 'tower-defense/utils/create-wave-5';
 import createWave6 from 'tower-defense/utils/create-wave-6';
-// import createWave7 from 'tower-defense/utils/create-wave-7';
+import createWave7 from 'tower-defense/utils/create-wave-7';
 import createWave8 from 'tower-defense/utils/create-wave-8';
 import createWave9 from 'tower-defense/utils/create-wave-9';
 import createWave10 from 'tower-defense/utils/create-wave-10';
@@ -20,7 +20,7 @@ function addWavesToGame(game) {
   waves.addObject(createWave4());
   waves.addObject(createWave5());
   waves.addObject(createWave6());
-  // waves.addObject(createWave7());
+  waves.addObject(createWave7());
   waves.addObject(createWave8());
   waves.addObject(createWave9());
   waves.addObject(createWave10());
