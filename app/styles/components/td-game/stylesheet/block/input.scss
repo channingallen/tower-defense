@@ -1,4 +1,38 @@
+@keyframes pulse-input {
+  0% { background-color: hsl(0, 0%, 70%); }
+  25% { background-color: hsl(60, 60%, 50%); }
+  50% { background-color: hsl(60, 60%, 50%); }
+  75% { background-color: hsl(0, 0%, 70%); }
+  100% { background-color: hsl(0, 0%, 70%); }
+}
+
+@-moz-keyframes pulse-input {
+  0% { background-color: hsl(0, 0%, 70%); }
+  25% { background-color: hsl(60, 60%, 50%); }
+  50% { background-color: hsl(60, 60%, 50%); }
+  75% { background-color: hsl(0, 0%, 70%); }
+  100% { background-color: hsl(0, 0%, 70%); }
+}
+
+@-webkit-keyframes "pulse-input" {
+  0% { background-color: hsl(0, 0%, 70%); }
+  25% { background-color: hsl(60, 60%, 50%); }
+  50% { background-color: hsl(60, 60%, 50%); }
+  75% { background-color: hsl(0, 0%, 70%); }
+  100% { background-color: hsl(0, 0%, 70%); }
+}
+
 .block__input {
   background-color: hsl(0, 0%, 70%);
   width: 100% - ($width--line-number / 2);
+
+  &:focus {
+    -webkit-animation: pulse-input 1.5s linear;
+       -moz-animation: pulse-input 1.5s linear;
+            animation: pulse-input 1.5s linear;
+
+    -webkit-animation-iteration-count: infinite;
+       -moz-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+  }
 }
