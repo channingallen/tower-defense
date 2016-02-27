@@ -168,7 +168,6 @@ $td-game__item__margin-bottom: 20px;
   color: hsl(0, 0%, 90%);
   // cursor: pointer;
   padding: 3px 5px;
-
 }
 
 /////////////////
@@ -219,6 +218,44 @@ $td-game__item__margin-bottom: 20px;
   background-color: hsl(0, 0%, 70%);
   font-family: $font-family--monospace;
   padding: 0px 3px;
+}
+
+// //////////////
+// //          //
+// //   Help   //
+// //          //
+// //////////////
+//
+// .sidebar__help {
+//   cursor: pointer;
+//   margin: 0px auto 20px;
+//
+//   &:hover {
+//     text-decoration: underline;
+//   }
+// }
+
+////////////////
+//            //
+//   Footer   //
+//            //
+////////////////
+
+.sidebar__footer {
+  font-weight: 300;
+  margin-bottom: 20px;
+  opacity: 0.5;
+  text-align: center;
+}
+
+.footer__text {
+  font-size: 14px;
+}
+
+.footer__link {
+  &:hover {
+    color: white;
+  }
 }
 
 @import

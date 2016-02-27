@@ -235,7 +235,13 @@ GameComponent.reopen({
       this._hideOverlay();
       this._hideInstructionsModal();
       this._hideGradeModal();
-    }
+    }//,
+    //
+    // showOverlay() {
+    //   this._showInstructionsModal();
+    //   this._showOverlay();
+    //   // this._hideGradeModal();
+    // }
   }
 });
 

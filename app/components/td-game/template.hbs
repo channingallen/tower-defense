@@ -60,7 +60,9 @@
     </div>
 
     {{!-- Instructions --}}
-    <div class="sidebar__instructions">{{{instructionsTldr}}}</div>
+    <div class="sidebar__instructions">
+      <div class="">{{{instructionsTldr}}}</div>
+    </div>
 
     {{td-game/stylesheet currentWaveNumber=(readonly currentWaveNumber)
                          overlayShown=(readonly overlayShown)
@@ -73,6 +75,17 @@
                          towersColliding=(readonly towersColliding)
                          towerGroups=(readonly currentWave.towerGroups)
                          waveStarted=(readonly waveStarted)}}
+
+    {{!-- <div class="sidebar__help">
+      <a class="help__link" {{action "showOverlay"}}>Show Help</a>
+    </div> --}}
+
+    <footer class="sidebar__footer">
+      <p class="footer__text">Made by Channing Allen</p>
+      <a class="footer__link" href="https://github.com/channingallen"><i class="fa fa-facebook-square"></i></a>
+      <a class="footer__link" href="https://twitter.com/ChanningAllen"><i class="fa fa-twitter-square"></i></a>
+      <a class="footer__link" href="https://www.linkedin.com/in/channingallen"><i class="fa fa-linkedin-square"></i></a>
+    </footer>
   </div>
 
   {{td-game/board add-colliding-tower=(action "addCollidingTower")

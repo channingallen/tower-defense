@@ -1,5 +1,4 @@
 $stylesheet__color--light: hsl(0, 0%, 80%);
-// $stylesheet__button--color: hsl(200, 50%, 30%);
 $width--line-number: 5%;
 
 .sidebar__stylesheet {
@@ -7,6 +6,7 @@ $width--line-number: 5%;
   display: flex;
   font-family: $font-family--monospace;
   font-size: 14px;
+  margin-bottom: 5px;
   overflow-y: auto;
   position: relative;
 }
