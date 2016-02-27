@@ -219,6 +219,16 @@ GameComponent.reopen({
     this.set('overlayShown', true);
   },
 
+  _escapeOverlay: Ember.on('didInsertElement', function () {
+    Ember.$(window).on('keydown', (keyEvent) => {
+      if (this.get('overlayShown') && keyEvent.which === 27) {
+        this._hideOverlay();
+        this._hideInstructionsModal();
+        this._hideGradeModal();
+      }
+    });
+  }),
+
   actions: {
     // hide overlay whenever user "clicks out" of modal
     handleOverlayClick(event) {
