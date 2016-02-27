@@ -28,13 +28,14 @@ StylesheetComponent.reopen({
   // shift + enter hotkey
   _startWave: Ember.on('didInsertElement', function () {
     Ember.$(window).on('keypress', (keyEvent) => {
-      if (this.attrs.towersColliding) {
-        this._shake();
-      } else {
-        if (keyEvent.shiftKey && keyEvent.which === 13) {
-          this.set('waveStarting', true);
-          this.attrs['start-wave']();
+      if (keyEvent.shiftKey && keyEvent.which === 13) {
+        if (this.attrs.towersColliding) {
+          this._shake();
+          return;
         }
+
+        this.set('waveStarting', true);
+        this.attrs['start-wave']();
       }
     });
   }),
