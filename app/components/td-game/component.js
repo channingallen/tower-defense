@@ -412,7 +412,13 @@ GameComponent.reopen({
 
       const isOverlay = $clickedEl.hasClass('overlay');
 
-      if (!isChildOfTowerGroup && !isChildOfInputContainer && !isChildOfToolTip && !isOverlay) {
+      const isPulse = $clickedEl.hasClass('tower-group__pulse');
+
+      if (!isChildOfTowerGroup &&
+          !isChildOfInputContainer &&
+          !isChildOfToolTip &&
+          !isOverlay &&
+          !isPulse) {
         this.set('selectedTower', null);
         this.set('selectedTowerGroup', null);
       }
