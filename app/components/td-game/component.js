@@ -365,4 +365,32 @@ GameComponent.reopen({
   }
 });
 
+////////////////////////
+//                    //
+//   Deselect Units   //
+//                    //
+////////////////////////
+
+GameComponent.reopen({
+  _sendSelectAction: Ember.on('didInsertElement', function () {
+    this.$().click((clickEvent) => {
+      const $clickedEl = Ember.$(clickEvent.target);
+
+      const $towerGroupParents = $clickedEl.closest('.board__tower-group');
+      const isChildOfTowerGroup = $towerGroupParents.length > 0;
+
+      const $inputContainerParents = $clickedEl.closest('.block__input-container');
+      const isChildOfInputContainer = $inputContainerParents.length > 0;
+
+      const $toolTipParents = $clickedEl.closest('.tool-tip');
+      const isChildOfToolTip = $toolTipParents.length > 0;
+
+      if (!isChildOfTowerGroup && !isChildOfInputContainer && !isChildOfToolTip) {
+        this.set('selectedTower', null);
+        this.set('selectedTowerGroup', null);
+      }
+    });
+  })
+});
+
 export default GameComponent;

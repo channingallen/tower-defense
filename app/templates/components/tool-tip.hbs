@@ -2,11 +2,11 @@
 {{#if atTop}}
   <div class="tool-tip__caret tool-tip__caret--below"></div>
   <div class="tool-tip__content tool-tip__content--below">
-    <nobr>.{{attrs.selector}}</nobr>
+    <nobr class="tool-tip__text">.{{attrs.selector}}</nobr>
   </div>
 {{else}}
   <div class="tool-tip__content tool-tip__content--above">
-    <nobr>.{{attrs.selector}}</nobr>
+    <nobr class="tool-tip__text">.{{attrs.selector}}</nobr>
   </div>
   <div class="tool-tip__caret tool-tip__caret--above"></div>
 {{/if}}
