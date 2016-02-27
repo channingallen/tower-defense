@@ -222,6 +222,8 @@ GameComponent.reopen({
   actions: {
     // hide overlay whenever user "clicks out" of modal
     handleOverlayClick(event) {
+      event.stopPropagation();
+
       // the directly-clicked element (event.target), must be the overlay
       // (event.currentTarget) for the overlay to remain
       if (event.currentTarget === event.target) {
@@ -318,6 +320,8 @@ GameComponent.reopen({
   numDropdownClicks: 0,
 
   _deactivateDropdown(clickEvent) {
+    clickEvent.stopPropagation();
+
     const $clickedElement = Ember.$(clickEvent.target);
     const clickedDropdownBtn = $clickedElement.hasClass('nav__button--selector') ||
                                $clickedElement.parents('.nav__button--selector').length > 0;
