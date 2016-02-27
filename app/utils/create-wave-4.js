@@ -9,7 +9,7 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/path-0.png');
+  board.set('imageUrl', '/images/path-4.png');
 
   const pathObjects = [
     PathCoords.create({ x: 0, y: 30 }),
