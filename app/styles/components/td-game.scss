@@ -100,7 +100,7 @@ $td-game__item__margin-bottom: 20px;
   cursor: pointer;
 
   &:hover {
-    background-color: transparentize($nav__background-color--active, 0.25);
+    background-color: darken($nav__background-color--active, 20%);
   }
 }
 
