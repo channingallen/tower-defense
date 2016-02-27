@@ -87,7 +87,7 @@ $td-game__item__margin-bottom: 20px;
 .nav__button {
   background-color: hsla(0, 0%, 10%, 0.5);
   border-radius: 4px;
-  color: hsl(0, 0%, 45%);
+  color: desaturate(lighten($background-color--main, 10%), 20%);
   display: inline-block;
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
