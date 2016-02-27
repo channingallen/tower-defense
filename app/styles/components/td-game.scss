@@ -92,11 +92,11 @@ $td-game__item__margin-bottom: 20px;
   display: inline-block;
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
-  margin-right: 3px;
+  margin-left: 3px;
   padding: 0.4em 0.8em;
 
-  &:last-child {
-    margin-right: 0px;
+  &:first-child {
+    margin-left: 0px;
   }
 }
 
@@ -107,6 +107,10 @@ $td-game__item__margin-bottom: 20px;
   color: hsl(0, 0%, 100%);
   cursor: pointer;
 
+  &:first-child {
+    margin-left: 0px;
+  }
+
   &:hover {
     background-color: darken($nav__background-color--active, 20%);
   }
@@ -114,9 +118,10 @@ $td-game__item__margin-bottom: 20px;
 
 .button__menu {
   position: absolute;
-  left: -66px;
+  left: -1px;
   top: 45px;
   z-index: 2;
+  width: 100%;
 
   &:before {
     border-left: solid transparent 8px;
@@ -135,8 +140,9 @@ $td-game__item__margin-bottom: 20px;
   background-color: hsla(0, 0%, 10%, 0.7);
   border-radius: 4px;
   display: flex;
-  flex-direction: row;
-  padding: 10px 0;
+  flex-wrap: wrap;
+  padding: 10px 10px 0px;
+  width: 101%;
 }
 
 .menu__wave-link {
@@ -145,15 +151,15 @@ $td-game__item__margin-bottom: 20px;
   color: hsl(0, 0%, 35%);
   font-weight: bold;
   height: 30px;
-  width: 30px;
-  margin: 0 5px;
+  width: 29px;
+  margin: 0 10px 10px 0;
 
-  &:first-child {
-    margin-left: 10px
+  &:nth-child(5) {
+    margin-right: 0
   }
 
   &:last-child {
-    margin-right: 10px
+    margin-right: 0;
   }
 }
 
