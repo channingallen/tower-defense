@@ -146,10 +146,10 @@ $td-game__item__margin-bottom: 20px;
 }
 
 .menu__wave-link {
-  background-color: hsl(0, 0%, 65%);
+  background-color: lighten($background-color--main, 10%);
   border-radius: 3px;
-  color: hsl(0, 0%, 35%);
-  font-weight: bold;
+  color: hsl(0, 0%, 70%);
+  font-weight: 400;
   height: 30px;
   width: 29px;
   margin: 0 10px 10px 0;
@@ -167,6 +167,7 @@ $td-game__item__margin-bottom: 20px;
   background-color: hsl(0, 0%, 85%);
   color: hsl(0, 0%, 10%);
   cursor: pointer;
+  // font-weight: 400;
 
   &:hover {
     background-color: hsl(0, 0%, 100%);
