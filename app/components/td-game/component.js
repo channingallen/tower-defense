@@ -222,8 +222,6 @@ GameComponent.reopen({
   actions: {
     // hide overlay whenever user "clicks out" of modal
     handleOverlayClick(event) {
-      event.stopPropagation();
-
       // the directly-clicked element (event.target), must be the overlay
       // (event.currentTarget) for the overlay to remain
       if (event.currentTarget === event.target) {
@@ -389,7 +387,9 @@ GameComponent.reopen({
       const $toolTipParents = $clickedEl.closest('.tool-tip');
       const isChildOfToolTip = $toolTipParents.length > 0;
 
-      if (!isChildOfTowerGroup && !isChildOfInputContainer && !isChildOfToolTip) {
+      const isOverlay = $clickedEl.hasClass('overlay');
+
+      if (!isChildOfTowerGroup && !isChildOfInputContainer && !isChildOfToolTip && !isOverlay) {
         this.set('selectedTower', null);
         this.set('selectedTowerGroup', null);
       }
