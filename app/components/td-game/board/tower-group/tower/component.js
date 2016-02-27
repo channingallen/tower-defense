@@ -59,7 +59,7 @@ TowerComponent.reopen({
   ),
 
   _sendSelectAction: Ember.on('click', function () {
-    this.attrs.select(this.attrs.tower);
+    this.attrs.select();
   })
 });
 
