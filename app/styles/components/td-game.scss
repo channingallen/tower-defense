@@ -212,6 +212,10 @@ $td-game__item__margin-bottom: 20px;
   font-size: 16px;
   margin-top: 15px;
   padding: 0.7em 1.2em;
+
+  &:hover {
+    background-color: darken($background-color--main, 7.5%);
+  }
 }
 
 .modal code {

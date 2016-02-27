@@ -67,6 +67,10 @@ $width--line-number: 5%;
 .stylesheet__start-wave-button--active {
   background-color: $background-color--main;
   cursor: pointer;
+
+  &:hover {
+    background-color: darken($background-color--main, 7.5%);
+  }
 }
 
 @import "stylesheet/block";
