@@ -12,22 +12,7 @@ import { towerDimensions } from 'tower-defense/objects/tower';
 const TowerGroupComponent = Ember.Component.extend({
   classNameBindings: ['selected:board__tower-group--selected'],
 
-  classNames: ['board__tower-group'],
-
-  selected: Ember.computed(
-    'attrs.selectedTowerGroup',
-    'attrs.towerGroup',
-    'attrs.waveStarted',
-    function () {
-      if (!this.attrs.waveStarted) {
-        return this.attrs.selectedTowerGroup === this.attrs.towerGroup ?
-          true :
-          false;
-      } else {
-        return false;
-      }
-    }
-  )
+  classNames: ['board__tower-group']
 });
 
 //////////////////////////////
@@ -188,13 +173,28 @@ TowerGroupComponent.reopen({
 ///////////////////
 
 TowerGroupComponent.reopen({
+  selected: Ember.computed(
+    'attrs.selectedTowerGroup',
+    'attrs.towerGroup',
+    'attrs.waveStarted',
+    function () {
+      if (!this.attrs.waveStarted) {
+        return this.attrs.selectedTowerGroup === this.attrs.towerGroup ?
+          true :
+          false;
+      } else {
+        return false;
+      }
+    }
+  ),
+
   _sendSelectAction: Ember.on('didInsertElement', function () {
     this.$().click((clickEvent) => {
       const $clickedEl = Ember.$(clickEvent.target);
       const $towerParents = $clickedEl.parents('.tower-group__tower');
       const isChildOfTower = $towerParents.length > 0;
       if (!isChildOfTower) {
-        this.attrs.select(this.attrs.towerGroup);
+        this.attrs.select();
       }
     });
   })
