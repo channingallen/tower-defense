@@ -1,23 +1,23 @@
 @keyframes pulse-input {
-  0% { background-color: hsl(0, 0%, 70%); }
-  25% { background-color: hsl(60, 60%, 50%); }
-  50% { background-color: hsl(60, 60%, 50%); }
+  0% { background-color: hsl(60, 40%, 50%); }
+  25% { background-color: hsl(60, 45%, 50%); }
+  50% { background-color: hsl(60, 50%, 50%); }
   75% { background-color: hsl(0, 0%, 70%); }
   100% { background-color: hsl(0, 0%, 70%); }
 }
 
 @-moz-keyframes pulse-input {
-  0% { background-color: hsl(0, 0%, 70%); }
-  25% { background-color: hsl(60, 60%, 50%); }
-  50% { background-color: hsl(60, 60%, 50%); }
+  0% { background-color: hsl(60, 40%, 50%); }
+  25% { background-color: hsl(60, 45%, 50%); }
+  50% { background-color: hsl(60, 50%, 50%); }
   75% { background-color: hsl(0, 0%, 70%); }
   100% { background-color: hsl(0, 0%, 70%); }
 }
 
 @-webkit-keyframes "pulse-input" {
-  0% { background-color: hsl(0, 0%, 70%); }
-  25% { background-color: hsl(60, 60%, 50%); }
-  50% { background-color: hsl(60, 60%, 50%); }
+  0% { background-color: hsl(60, 40%, 50%); }
+  25% { background-color: hsl(60, 45%, 50%); }
+  50% { background-color: hsl(60, 50%, 50%); }
   75% { background-color: hsl(0, 0%, 70%); }
   100% { background-color: hsl(0, 0%, 70%); }
 }
