@@ -36,6 +36,7 @@ $td-game__item__margin-bottom: 20px;
   flex-direction: column;
   font-family: $font-family--standard;
   min-width: 300px;
+  overflow-y: auto;
   padding: 20px 30px 0px;
 }
 
@@ -48,11 +49,7 @@ $td-game__item__margin-bottom: 20px;
 @media (max-width: 1100px) {
   .td-game__header {
     align-items: center;
-    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: $td-game__item__margin-bottom;
-    min-width: 270px;
   }
 
   .header__title {
@@ -63,17 +60,23 @@ $td-game__item__margin-bottom: 20px;
 }
 
 @media (min-width: 1101px) {
-  .td-game__header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: $td-game__item__margin-bottom;
-    min-width: 270px;
-  }
-
   .header__title {
     font-size: 25px;
     font-weight: 600;
   }
+}
+
+.td-game__header {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  margin-bottom: $td-game__item__margin-bottom;
+  min-width: 270px;
+}
+
+.header__title {
+  font-size: 25px;
+  font-weight: 600;
 }
 
 // Navigation
@@ -154,7 +157,7 @@ $td-game__item__margin-bottom: 20px;
 //////////////////////
 
 .sidebar__instructions {
-  flex: none;
+  flex: 0 0 auto;
   margin-bottom: $td-game__item__margin-bottom;
 
   ul {
