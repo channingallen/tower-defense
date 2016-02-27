@@ -5,6 +5,12 @@
 </div>
 
 <div class="stylesheet__content">
+  <button class="stylesheet__help--button">
+    <a class="help__link" {{action attrs.show-overlay}}>
+      <i class="fa fa-lg fa-question-circle"></i>
+    </a>
+  </button>
+
   {{#unless attrs.waveStarted}}
     {{#if attrs.towersColliding}}
       <button class="stylesheet__start-wave-button">Start Wave</button>

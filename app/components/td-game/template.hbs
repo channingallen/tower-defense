@@ -70,15 +70,12 @@
                          select-tower-group=(action "selectTowerGroup")
                          selectedTower=(readonly selectedTower)
                          selectedTowerGroup=(readonly selectedTowerGroup)
+                         show-overlay=(action "showOverlay")
                          start-wave=(action "startWave")
                          submit-styles=(action "setStyles")
                          towersColliding=(readonly towersColliding)
                          towerGroups=(readonly currentWave.towerGroups)
                          waveStarted=(readonly waveStarted)}}
-
-    <div class="sidebar__help">
-      <a class="help__link" {{action "showOverlay"}}>Show Help</a>
-    </div>
 
     <footer class="sidebar__footer">
       <p class="footer__text">Made by Channing Allen</p>

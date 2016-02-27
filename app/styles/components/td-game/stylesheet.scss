@@ -8,7 +8,6 @@ $width--line-number: 5%;
   font-family: $font-family--monospace;
   font-size: 14px;
   margin-bottom: 5px;
-  // min-height: 250px;
   overflow-y: auto;
   position: relative;
 }
@@ -74,5 +73,18 @@ $width--line-number: 5%;
     background-color: darken($background-color--main, 7.5%);
   }
 }
+
+.stylesheet__help--button {
+  color: gray;
+  cursor: pointer;
+  position: absolute;
+  right: 2.5%;
+  top: 2.5%;
+
+  &:hover {
+    color: darken(gray, 20%);
+  }
+}
+
 
 @import "stylesheet/block";
