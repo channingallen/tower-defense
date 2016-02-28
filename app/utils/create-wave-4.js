@@ -12,10 +12,10 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-4.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 0, y: 30 }),
+    PathCoords.create({ x: -3, y: 30 }),
     PathCoords.create({ x: 40, y: 30 }),
     PathCoords.create({ x: 40, y: 80 }),
-    PathCoords.create({ x: 0, y: 80 })
+    PathCoords.create({ x: -3, y: 80 })
   ];
 
   pathObjects.forEach((pathObject) => {
