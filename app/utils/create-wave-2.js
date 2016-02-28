@@ -110,6 +110,7 @@ export default function createWave2() {
     instructions: {
       main: `Now you have more tower groups at your disposal! Use
             \`justify-content\` to move the towers into position.
+            \`justify-content\` accepts the following values:
 
 * \`flex-start\`: group items in the left (the start) of a container
 * \`flex-end\`: group items in the right of a container

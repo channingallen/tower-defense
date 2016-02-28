@@ -104,10 +104,19 @@ function generateIdForRecord() {
 export default function createWave3() {
   const wave = Wave.create({
     instructions: {
-      main: `This time, see if you can make a single tower group effective on
-             both sides of the map.`,
-      tldr: `Use \`justify-content\` to move your towers into effective
-             positions.`
+      main: `A tower flashes red when it is positioned on the path, and you must
+            reposition it before you can start the wave. Use \`justify-content\`
+            to get your towers into better positions. \`justify-content\`
+            accepts the following values:
+
+* \`flex-start\`: group items in the left (the start) of a container
+* \`flex-end\`: group items in the right of a container
+* \`center\`: group items in the horizontal center of a container
+* \`space-between\`: evenly distribute items in a container such that the first item
+aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items have
+equal space around them`,
+      tldr: `Use \`justify-content\` to move your towers into position.`
     },
     minimumScore: 80
   });
