@@ -192,11 +192,13 @@ InputComponent.reopen({
     const endIndex = this.get('inputValue.length');
 
     let fullValue = this.get('inputValue').substring(startIndex, endIndex).trim();
-    if (fullValue[fullValue.length - 1] !== ';') {
-      return false;
+    const semicolonFound = fullValue[fullValue.length - 1] === ';';
+    let value;
+    if (semicolonFound) {
+      value = this._getValWithoutSemiColon(fullValue);
+    } else {
+      value = fullValue;
     }
-
-    let value = this._getValWithoutSemiColon(fullValue);
 
     const propertyType = this.attrs.tower ? 'item' : 'container';
     let valueFound = false;

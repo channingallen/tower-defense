@@ -103,7 +103,13 @@ TowerGroupComponent.reopen({
           const value = this._getValue(codeLine, property);
 
           if (property && value) {
-            this.$().css(property, this._getValueWithoutSemiColon(value));
+            const semicolonFound = value[value.length - 1] === ';';
+
+            if (semicolonFound) {
+              this.$().css(property, this._getValueWithoutSemiColon(value));
+            } else {
+              this.$().css(property, value);
+            }
           }
         }
       });
