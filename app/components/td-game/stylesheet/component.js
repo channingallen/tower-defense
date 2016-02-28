@@ -231,7 +231,6 @@ StylesheetComponent.reopen({
 
   actions: {
     notifyFinalInput() {
-      console.log(`this.set('finalInputFound', true);`); // TODO THIS COMMIT: remove this
       this.set('finalInputFound', true);
     }
   }
