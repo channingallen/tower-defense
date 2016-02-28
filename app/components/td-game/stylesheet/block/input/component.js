@@ -78,7 +78,7 @@ InputComponent.reopen({
   ),
 
   focusNewInput: Ember.computed('attrs.blockSubmitted', function () {
-    if (!this.attrs.finalInputFound) {
+    if (!this.attrs.finalInputFound || this.attrs.overlayShown) {
       return false;
     }
 
