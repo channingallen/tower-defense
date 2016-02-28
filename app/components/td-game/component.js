@@ -285,10 +285,12 @@ GameComponent.reopen({
         this.set('passed', false);
       }
 
-      this._showGradeModal();
-      this._showOverlay();
+      Ember.run.later(this, () => {
+        this._showGradeModal();
+        this._showOverlay();
 
-      this.set('waveStarted', false);
+        this.set('waveStarted', false);
+      }, 1000);
     }
   }
 });
