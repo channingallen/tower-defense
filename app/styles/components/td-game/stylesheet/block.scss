@@ -8,6 +8,7 @@ $color--muted: hsla(0, 50%, 0%, 0.5);
 .block__line {
   height: $stylesheet__line-height;
   line-height: $stylesheet__line-height;
+  margin-bottom: 4px;
 }
 
 .block__brace-line {
@@ -16,7 +17,7 @@ $color--muted: hsla(0, 50%, 0%, 0.5);
 }
 
 .block__brace-line--close {
-  margin-bottom: $stylesheet__line-height;
+  margin-bottom: $stylesheet__line-height + 8px;
 }
 
 .block__selector {

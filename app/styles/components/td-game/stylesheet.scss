@@ -1,4 +1,5 @@
 $stylesheet__color--light: hsl(0, 0%, 80%);
+$stylesheet__line-height: 22px;
 $width--line-number: 5%;
 
 .sidebar__stylesheet {
@@ -34,6 +35,7 @@ $width--line-number: 5%;
 .stylesheet__line-number {
   height: $stylesheet__line-height;
   line-height: $stylesheet__line-height;
+  margin-bottom: 4px;
 }
 
 .stylesheet__content {
@@ -85,6 +87,5 @@ $width--line-number: 5%;
     color: darken(gray, 20%);
   }
 }
-
 
 @import "stylesheet/block";
