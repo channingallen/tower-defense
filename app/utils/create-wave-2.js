@@ -108,9 +108,17 @@ function generateIdForRecord() {
 export default function createWave2() {
   const wave = Wave.create({
     instructions: {
-      main: `Now you have a couple more tower groups at your disposal.`,
-      tldr: `Use \`justify-content\` to move your towers into effective
-             positions.`
+      main: `Now you have more tower groups at your disposal! Use
+            \`justify-content\` to move the towers into position.
+
+* \`flex-start\`: group items in the left (the start) of a container
+* \`flex-end\`: group items in the right of a container
+* \`center\`: group items in the horizontal center of a container
+* \`space-between\`: evenly distribute items in a container such that the first item
+aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items have
+equal space around them`,
+      tldr: `Use \`justify-content\` to move your towers into position.`
     },
     minimumScore: 80
   });
