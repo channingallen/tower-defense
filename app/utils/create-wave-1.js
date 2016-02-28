@@ -109,7 +109,7 @@ export default function createWave1() {
              must position your towers using CSS!
 
 We'll start with container properties. Use the \`justify-content\` property to move
-these two towers into effective positions. \`justify-content\` positions items
+the towers into effective positions. \`justify-content\` positions items
 horizontally in a container and accepts the following values:
 
 * \`flex-start\`: group items in the left (the start) of a container
@@ -120,13 +120,14 @@ aligns to the left and the final item aligns to the right
 * \`space-around\`: evenly distribute items in a container such that all items have
 equal space around them
 
-Press Enter to apply a line of CSS code, and then click Start Wave to see how
+Press Enter to apply a line of code, and then click *Start Wave* to see how
 your towers fare! To remove a line of code that has already been applied, delete
 the line and press Enter.
 
-You must get a score of 80 or above to advance to the next level.`,
-    tldr: `Use the \`justify-content\` property to move these two towers into effective
-    positions.`},
+A final score of 80 or higher means your towers are well positioned!`,
+      tldr: `Use the \`justify-content\` property to move these two towers into
+           position.`
+    },
     minimumScore: 80
   });
 
