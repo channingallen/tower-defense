@@ -33,11 +33,11 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 5;
+  const mobQuantity = 6;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 1500,
+      frequency: 2100,
       health: 300,
       maxHealth: 300,
       points: 20,
@@ -65,7 +65,7 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(3, 35);
+  const towerGroup1 = getNewTowerGroup(5, 30);
 
   addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 2 }, { type: 1 }]);
 
