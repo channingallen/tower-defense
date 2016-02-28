@@ -108,19 +108,19 @@ function generateIdForRecord() {
 export default function createWave7() {
   const wave = Wave.create({
     instructions: {
-      main: `This time, you have even more towers but you don't have a lot of
-             horizontal room to work with.
+      main: `This time you have more towers, but less horizontal room to work
+             with.
 
-Enter \`flex-direction\`. The \`flex-direction\` property defines the
+The \`flex-direction\` property is your answer. \`flex-direction\` defines the
 directional layout of the items in the flex container. Flex items can lay out
-either in horizontal rows or vertical columns; accordingly, \`flex-direction\`
+either in horizontal rows or vertical columns. Accordingly, \`flex-direction\`
 accepts the following values:
 
 * \`row\`: lay out items from left to right
 * \`row-reverse\`: lay out items from right to left
 * \`column\`: lay out items from top to bottom
 * \`column-reverse\`: lay out items from bottom to top`,
-      tldr: `Use \`align-items\` to move your towers into effective positions.`
+      tldr: `Use \`flex-direction\` to move your towers into position.`
     },
     minimumScore: 80
   });

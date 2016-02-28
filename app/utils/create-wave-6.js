@@ -110,7 +110,7 @@ export default function createWave6() {
     instructions: {
       main: `Use the properties you've learned to score 80 or higher!
 
-\`justify-content\`
+**justify-content**
 * \`flex-start\`: group items in the left (the start) of a container
 * \`flex-end\`: group items in the right of a container
 * \`center\`: group items in the horizontal center of a container
@@ -119,7 +119,7 @@ aligns to the left and the final item aligns to the right
 * \`space-around\`: evenly distribute items in a container such that all items have
 equal space around them
 
-\`align-items\`
+**align-items**
 * \`flex-start\`: align items across the top of the container
 * \`flex-end\`: align items across the bottom of the container
 * \`center\`: align items vertically across the center of the container

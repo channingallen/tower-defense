@@ -114,22 +114,34 @@ function generateIdForRecord() {
 export default function createWave8() {
   const wave = Wave.create({
     instructions: {
-      main: `This time, each group contains a super tower. Super towers
-             deal two times more damage to enemies than normal towers do.
-             The only problem is, they aren't effectively arranged in
-             their groups!
+      main: `This time each group contains a super tower, which deals twice as
+             much damage as a normal tower. Unfortunately, none of the super
+             towers are effectively positioned in their groups. Use all of the
+             properties you've learned so far to score 80 or higher!
 
-Enter \`flex-direction\`. The \`flex-direction\` property defines the
-directional layout of the items in the flex container. Flex items can lay out
-either in horizontal rows or vertical columns; accordingly, \`flex-direction\`
-accepts the following values:
+**justify-content**
+* \`flex-start\`: group items in the left (the start) of a container
+* \`flex-end\`: group items in the right of a container
+* \`center\`: group items in the horizontal center of a container
+* \`space-between\`: evenly distribute items in a container such that the first item
+aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items have
+equal space around them
 
+**align-items**
+* \`flex-start\`: align items across the top of the container
+* \`flex-end\`: align items across the bottom of the container
+* \`center\`: align items vertically across the center of the container
+* \`baseline\`: align items across the baseline of the container
+* \`stretch\`: stretch items to fill the container
+
+**flex-direction**
 * \`row\`: lay out items from left to right
 * \`row-reverse\`: lay out items from right to left
 * \`column\`: lay out items from top to bottom
 * \`column-reverse\`: lay out items from bottom to top`,
       tldr: `Use \`justify-content\`, \`align-items\`, and \`flex-direction\` to
-             move your towers into effective positions.`
+             move your towers into position.`
     },
     minimumScore: 80
   });
