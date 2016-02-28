@@ -210,6 +210,8 @@ StylesheetComponent.reopen({
 
   firstTowerGroupId: null,
 
+  finalInputFound: false,
+
   _setFirstAndFinalUnitIds: Ember.on('init', Ember.observer(
     'attrs.currentWaveNumber',
     'attrs.waveStarted',
@@ -225,7 +227,14 @@ StylesheetComponent.reopen({
         this.set('finalTowerId', finalTowerId);
       }
     }
-  ))
+  )),
+
+  actions: {
+    notifyFinalInput() {
+      console.log(`this.set('finalInputFound', true);`); // TODO THIS COMMIT: remove this
+      this.set('finalInputFound', true);
+    }
+  }
 });
 
 export default StylesheetComponent;

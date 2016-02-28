@@ -26,6 +26,7 @@
     </li>
 
     {{td-game/stylesheet/block currentWaveNumber=(readonly attrs.currentWaveNumber)
+                               finalInputFound=(readonly finalInputFound)
                                finalTowerId=(readonly finalTowerId)
                                firstTowerGroupId=(readonly firstTowerGroupId)
                                overlayShown=(readonly attrs.overlayShown)
@@ -46,8 +47,10 @@
         <span class="block__selector">.{{tower.selector}}</span>
         <span class="block__brace">{</span>
       </li>
-      {{td-game/stylesheet/block finalTowerId=(readonly finalTowerId)
+      {{td-game/stylesheet/block finalInputFound=(readonly finalInputFound)
+                                 finalTowerId=(readonly finalTowerId)
                                  firstTowerGroupId=(readonly firstTowerGroupId)
+                                 notify-final-input=(action "notifyFinalInput")
                                  overlayShown=(readonly attrs.overlayShown)
                                  select-tower=(action attrs.select-tower)
                                  selectedTower=(readonly attrs.selectedTower)

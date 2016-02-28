@@ -125,8 +125,7 @@ BlockComponent.reopen({
     'attrs.tower',
     'attrs.towerGroup',
     function () {
-      const waveStarted = this.attrs.waveStarted;
-      if (waveStarted) {
+      if (this.attrs.waveStarted) {
         return;
       }
 
@@ -155,22 +154,6 @@ BlockComponent.reopen({
 
     enableAutoFocus() {
       this.set('inputIdSelectedManually', null);
-    }
-  }
-});
-
-/////////////////////////
-//                     //
-//   Input Reporting   //
-//                     //
-/////////////////////////
-
-BlockComponent.reopen({
-  finalInputFound: false,
-
-  actions: {
-    notifyFinalInput() {
-      this.set('finalInputFound', true);
     }
   }
 });

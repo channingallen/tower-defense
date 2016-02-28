@@ -81,6 +81,7 @@ InputComponent.reopen({
     if (!this.attrs.finalInputFound) {
       return false;
     }
+
     return !this.attrs.blockSubmitted;
   }),
 
@@ -99,6 +100,8 @@ InputComponent.reopen({
       const focusInCount = this.get('focusInCount');
       const focusOutCount = this.get('focusOutCount');
 
+      // autofocus is the block's function for automatically focusing on the
+      // unsubmitted input
       if (focusInCount > focusOutCount) {
         this.attrs['disable-autofocus'](this.attrs.codeLineId);
       } else {
