@@ -108,10 +108,25 @@ function generateIdForRecord() {
 export default function createWave6() {
   const wave = Wave.create({
     instructions: {
-      main: `Use \`justify-content\` and \`align-items\` to keep the enemies at
-             bay.`,
+      main: `Use the properties you've learned to score 80 or higher!
+
+\`justify-content\`
+* \`flex-start\`: group items in the left (the start) of a container
+* \`flex-end\`: group items in the right of a container
+* \`center\`: group items in the horizontal center of a container
+* \`space-between\`: evenly distribute items in a container such that the first item
+aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items have
+equal space around them
+
+\`align-items\`
+* \`flex-start\`: align items across the top of the container
+* \`flex-end\`: align items across the bottom of the container
+* \`center\`: align items vertically across the center of the container
+* \`baseline\`: align items across the baseline of the container
+* \`stretch\`: stretch items to fill the container`,
       tldr: `Use \`justify-content\` and \`align-items\` to move your towers
-             into effective positions.`
+             into position.`
     },
     minimumScore: 80
   });
