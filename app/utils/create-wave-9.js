@@ -114,9 +114,34 @@ export default function createWave9() {
 
 The \`order\` property defines the order in which an item appears in the flex
 container and accepts both positive and negative integer values. All flex items
-begin with a default order of 0.`,
-    tldr: `Use \`justify-content\`, \`align-items\`, and \`order\` to move your
-           towers into effective positions.`
+begin with a default order of 0, so an item with an order greater than 0 will
+be repositioned relative to items still set to their default orders.
+
+Use \`justify-content\`, \`align-items\`, and \`order\` to move your towers into
+position.
+
+
+**justify-content**
+* \`flex-start\`: group items in the left (the start) of a container
+* \`flex-end\`: group items in the right of a container
+* \`center\`: group items in the horizontal center of a container
+* \`space-between\`: evenly distribute items in a container such that the first item
+aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items have
+equal space around them
+
+**align-items**
+* \`flex-start\`: align items across the top of the container
+* \`flex-end\`: align items across the bottom of the container
+* \`center\`: align items vertically across the center of the container
+* \`baseline\`: align items across the baseline of the container
+* \`stretch\`: stretch items to fill the container
+
+**order**
+* \`#\`: position an item relative to the other items in the container`,
+    tldr: `Move your towers into position by combining the container properties
+           \`justify-content\` and \`align-items\` with the item property
+           \`order\`. Remember that all items have a default order of 0.`
     },
     minimumScore: 80
   });
