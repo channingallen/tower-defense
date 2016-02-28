@@ -36,7 +36,7 @@ function addMobsToWave(wave) {
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 1500,
+      frequency: 1925,
       health: 300,
       maxHealth: 300,
       points: 20,
