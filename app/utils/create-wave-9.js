@@ -120,7 +120,6 @@ be repositioned relative to items still set to their default orders.
 Use \`justify-content\`, \`align-items\`, and \`order\` to move your towers into
 position.
 
-
 **justify-content**
 * \`flex-start\`: group items in the left (the start) of a container
 * \`flex-end\`: group items in the right of a container

@@ -110,9 +110,28 @@ export default function createWave10() {
     instructions: {
       main: `To vertically position individual items in a container, use the
              \`align-self\` property. \`align-self\` accepts the same values as
-             \`align-items\`.`,
+             \`align-items\`.
+
+Use \`justify-content\`, \`align-items\`, and \`align-self\` to move your towers
+into position.
+
+**justify-content**
+* \`flex-start\`: group items in the left (the start) of a container
+* \`flex-end\`: group items in the right of a container
+* \`center\`: group items in the horizontal center of a container
+* \`space-between\`: evenly distribute items in a container such that the first item
+aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items have
+equal space around them
+
+**align-items** and **align-self**
+* \`flex-start\`: align items across the top of the container
+* \`flex-end\`: align items across the bottom of the container
+* \`center\`: align items vertically across the center of the container
+* \`baseline\`: align items across the baseline of the container
+* \`stretch\`: stretch items to fill the container`,
       tldr: `Use \`justify-content\`, \`align-items\`, and \`align-self\` to
-             move your towers into effective positions.`},
+             move your towers into position.`},
     minimumScore: 80
   });
 
