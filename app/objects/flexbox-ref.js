@@ -52,7 +52,7 @@ const FlexboxRef = Ember.Object.extend({
   }).create(),
 
   item: Ember.Object.extend({
-    order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'initial', 'inherit'],
+    order: ['initial', 'inherit'],
 
     'align-self': [
       'auto',
@@ -63,7 +63,13 @@ const FlexboxRef = Ember.Object.extend({
       'baseline',
       'initial',
       'inherit'
-    ]
+    ],
+
+    _populateOrder: Ember.on('init', function () {
+      for (var i = -100; i < 101; i++) {
+        this.get('order').push(i);
+      }
+    })
   }).create()
 });
 
