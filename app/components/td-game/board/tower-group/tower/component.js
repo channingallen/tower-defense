@@ -29,8 +29,7 @@ TowerComponent.reopen({
       if (this.attrs.type === 2) {
         this.set('towerUpgraded', true);
 
-        const attackPower = this.attrs.tower.get('attackPower');
-        this.attrs.tower.set('attackPower', attackPower + 20);
+        this.attrs.tower.set('attackPower', 5);
       }
     });
   })
@@ -438,7 +437,9 @@ TowerComponent.reopen({
       const mobAlive = mob.get('health') > 0;
 
       if (mobInRange && mobAlive && !towerHasShot) {
-        towerHasShot = true;
+        if (!this.get('towerUpgraded')) {
+          towerHasShot = true;
+        }
 
         const mobId = mob.get('id');
         this.set('targetId', mobId);
