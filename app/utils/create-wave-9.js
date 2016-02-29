@@ -9,14 +9,14 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/path-0.png');
+  board.set('imageUrl', '/images/path-9.png');
 
   const pathObjects = [
     PathCoords.create({ x: 10, y: -3 }),
-    PathCoords.create({ x: 10, y: 40 }),
-    PathCoords.create({ x: 90, y: 40 }),
-    PathCoords.create({ x: 90, y: 20 }),
-    PathCoords.create({ x: 70, y: 20 }),
+    PathCoords.create({ x: 10, y: 30 }),
+    PathCoords.create({ x: 90, y: 30 }),
+    PathCoords.create({ x: 90, y: 10 }),
+    PathCoords.create({ x: 70, y: 10 }),
     PathCoords.create({ x: 70, y: 50 }),
     PathCoords.create({ x: 30, y: 50 }),
     PathCoords.create({ x: 30, y: 90 }),
@@ -36,14 +36,14 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 20;
+  const mobQuantity = 25;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 950,
+      frequency: 1000,
       health: 300,
       maxHealth: 300,
-      points: 5,
+      points: 4,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
       type: 'standard'
@@ -68,8 +68,8 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 25);
-  const towerGroup2 = getNewTowerGroup(1, 75);
+  const towerGroup1 = getNewTowerGroup(1, 17);
+  const towerGroup2 = getNewTowerGroup(1, 77);
 
   addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 2 }, { type: 1 }]);
   addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 2 }, { type: 1 }]);
