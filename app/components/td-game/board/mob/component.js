@@ -180,8 +180,6 @@ MobComponent.reopen({
 
         this._destroyMob();
       } else if (this.get('endPointReached')) {
-        this.attrs['subtract-points'](this.attrs.mob.get('points'));
-
         this._destroyMob();
       }
     }

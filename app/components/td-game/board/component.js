@@ -141,16 +141,6 @@ BoardComponent.reopen({
       } else {
         this.set('wavePoints', currentWavePoints + points);
       }
-    },
-
-    subtractPoints(points) {
-      const currentWavePoints = this.get('wavePoints');
-
-      if ((currentWavePoints - points) >= 0) {
-        this.set('wavePoints', currentWavePoints - points);
-      } else {
-        this.set('wavePoints', 0);
-      }
     }
   }
 });
