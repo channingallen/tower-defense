@@ -72,8 +72,8 @@ TowerComponent.reopen({
 
 TowerComponent.reopen({
   _clearPreviousStyles() {
-    this.$().css('order', '0');
     this.$().css('align-self', 'flex-start');
+    this.$().css('order', '0');
   },
 
   _getProperty(codeLine) {
