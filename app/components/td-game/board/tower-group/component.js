@@ -23,9 +23,9 @@ const TowerGroupComponent = Ember.Component.extend({
 
 TowerGroupComponent.reopen({
   _clearPreviousStyles() {
-    this.$().css('align-items', 'flex-start');
-    this.$().css('flex-direction', 'row');
-    this.$().css('justify-content', 'flex-start');
+    this.$().css('align-items', 'initial');
+    this.$().css('flex-direction', 'initial');
+    this.$().css('justify-content', 'initial');
   },
 
   _getProperty(codeLine) {
