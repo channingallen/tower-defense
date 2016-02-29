@@ -7,6 +7,8 @@ import Ember from 'ember';
 ////////////////
 
 const ProjectileComponent = Ember.Component.extend({
+  classNameBindings: ['attrs.upgraded:projectile--upgraded:projectile--standard'],
+  
   classNames: ['tower__projectile']
 });
 
