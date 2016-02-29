@@ -210,11 +210,9 @@ GameComponent.reopen({
   },
 
   _refreshOverlayAndModal() {
-    Ember.run.schedule('afterRender', this, () => {
-      this._hideGradeModal();
-      this._showInstructionsModal();
-      this._showOverlay();
-    });
+    this._hideGradeModal();
+    this._showInstructionsModal();
+    this._showOverlay();
   },
 
   _showOverlay() {
