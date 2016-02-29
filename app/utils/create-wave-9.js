@@ -12,7 +12,18 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-0.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 0, y: 0 })
+    PathCoords.create({ x: 10, y: -3 }),
+    PathCoords.create({ x: 10, y: 40 }),
+    PathCoords.create({ x: 90, y: 40 }),
+    PathCoords.create({ x: 90, y: 20 }),
+    PathCoords.create({ x: 70, y: 20 }),
+    PathCoords.create({ x: 70, y: 50 }),
+    PathCoords.create({ x: 30, y: 50 }),
+    PathCoords.create({ x: 30, y: 90 }),
+    PathCoords.create({ x: 10, y: 90 }),
+    PathCoords.create({ x: 10, y: 70 }),
+    PathCoords.create({ x: 90, y: 70 }),
+    PathCoords.create({ x: 90, y: 103 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -25,14 +36,14 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 6;
+  const mobQuantity = 20;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 2100,
+      frequency: 950,
       health: 300,
       maxHealth: 300,
-      points: 20,
+      points: 5,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
       type: 'standard'
@@ -57,11 +68,13 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(5, 30);
+  const towerGroup1 = getNewTowerGroup(1, 25);
+  const towerGroup2 = getNewTowerGroup(1, 75);
 
   addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 2 }, { type: 1 }]);
+  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 2 }, { type: 1 }]);
 
-  wave.set('towerGroups', Ember.A([towerGroup1]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
 }
 
 function addTowersToTowerGroup(towerGroup, specsForTowers) {
@@ -99,18 +112,15 @@ function generateIdForRecord() {
 export default function createWave9() {
   const wave = Wave.create({
     instructions: {
-      main: `The super towers are in bad positions again, but not ones you can
-             address with \`flex-direction\` or any other container property
-             you've learned. Instead you'll need to apply a style to the items
-             themselves.
+      main: `The super towers are in bad positions again, but this time you'll
+             need to apply styles to the items themselves.
 
 The \`order\` property defines the order in which an item appears in the flex
 container and accepts both positive and negative integer values. All flex items
 begin with a default order of 0, so an item with an order greater than 0 will
 be repositioned relative to items still set to their default orders.
 
-Use \`justify-content\`, \`align-items\`, and \`order\` to move your towers into
-position.
+Use \`justify-content\` and \`order\` to move your towers into position.
 
 **justify-content**
 * \`flex-start\`: group items in the left (the start) of a container
@@ -120,13 +130,6 @@ position.
 aligns to the left and the final item aligns to the right
 * \`space-around\`: evenly distribute items in a container such that all items have
 equal space around them
-
-**align-items**
-* \`flex-start\`: align items across the top of the container
-* \`flex-end\`: align items across the bottom of the container
-* \`center\`: align items vertically across the center of the container
-* \`baseline\`: align items across the baseline of the container
-* \`stretch\`: stretch items to fill the container
 
 **order**
 * \`#\`: position an item relative to the other items in the container`,
