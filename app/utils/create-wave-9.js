@@ -9,18 +9,10 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/path-9.png');
+  board.set('imageUrl', '/images/path-0.png');
 
   const pathObjects = [
-    PathCoords.create({ x: -3, y: 35 }),
-    PathCoords.create({ x: 35, y: 35 }),
-    PathCoords.create({ x: 35, y: 20 }),
-    PathCoords.create({ x: 65, y: 20 }),
-    PathCoords.create({ x: 65, y: 35 }),
-    PathCoords.create({ x: 90, y: 35 }),
-    PathCoords.create({ x: 90, y: 50 }),
-    PathCoords.create({ x: 65, y: 50 }),
-    PathCoords.create({ x: 65, y: 103 })
+    PathCoords.create({ x: 0, y: 0 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -107,10 +99,10 @@ function generateIdForRecord() {
 export default function createWave9() {
   const wave = Wave.create({
     instructions: {
-      main: `The super tower is in another bad position, but not one you can
+      main: `The super towers are in bad positions again, but not ones you can
              address with \`flex-direction\` or any other container property
-             you've learned. Instead you'll need to apply a style to the item
-             itself.
+             you've learned. Instead you'll need to apply a style to the items
+             themselves.
 
 The \`order\` property defines the order in which an item appears in the flex
 container and accepts both positive and negative integer values. All flex items
