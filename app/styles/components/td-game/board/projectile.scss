@@ -1,44 +1,24 @@
 $projectile-width: 10%;
-$particulates: 50;
+$particulates--standard: 40;
+$particulates--upgraded: 10;
 
-@for $i from 1 through $particulates {
+@for $i from 1 through $particulates--standard {
   @keyframes explode-#{$i} {
-    0% {
-      top: 0%;
-      left: 0%;
-    }
-    100% {
-      top: random(30) - 15 + %;
-      left: random(30) - 15 + %;
-      opacity: 0;
-    }
+    0% { top: 0%; left: 0%; }
+    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
   }
 
   @-moz-keyframes explode-#{$i} {
-    0% {
-      top: 0%;
-      left: 0%;
-    }
-    100% {
-      top: random(30) - 15 + %;
-      left: random(30) - 15 + %;
-      opacity: 0;
-    }
+    0% { top: 0%; left: 0%; }
+    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
   }
 
   @-webkit-keyframes "explode-#{$i}" {
-    0% {
-      top: 0%;
-      left: 0%;
-    }
-    100% {
-      top: random(30) - 15 + %;
-      left: random(30) - 15 + %;
-      opacity: 0;
-    }
+    0% { top: 0%; left: 0%; }
+    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
   }
 
-  div.projectile__particulate {
+  .projectile--standard .projectile__particulate {
     &:nth-child(#{$i}){
       animation-duration: 0.5s;
       animation-name: explode-#{$i};
@@ -46,6 +26,34 @@ $particulates: 50;
       animation-direction: alternate;
       animation-timing-function: ease-out;
       background: hsl(random(65), 85%, 50%);
+    }
+  }
+}
+
+@for $i from 1 through $particulates--upgraded {
+  @keyframes pop-#{$i} {
+    0% { top: 0%; left: 0%; }
+    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
+  }
+
+  @-moz-keyframes pop-#{$i} {
+    0% { top: 0%; left: 0%; }
+    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
+  }
+
+  @-webkit-keyframes "pop-#{$i}" {
+    0% { top: 0%; left: 0%; }
+    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
+  }
+
+  .projectile--upgraded .projectile__particulate {
+    &:nth-child(#{$i}){
+      animation-duration: 0.5s;
+      animation-name: pop-#{$i};
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-out;
+      background: hsl(random(65), 0%, 100%);
     }
   }
 }
