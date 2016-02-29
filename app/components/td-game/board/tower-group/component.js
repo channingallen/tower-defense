@@ -25,6 +25,7 @@ TowerGroupComponent.reopen({
   _clearPreviousStyles() {
     this.$().css('justify-content', 'flex-start');
     this.$().css('align-items', 'flex-start');
+    this.$().css('flex-direction', 'row');
   },
 
   _getProperty(codeLine) {
