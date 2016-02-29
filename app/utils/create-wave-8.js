@@ -38,14 +38,14 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 10;
+  const mobQuantity = 20;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 900,
+      frequency: 800,
       health: 300,
       maxHealth: 300,
-      points: 20,
+      points: 5,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
       type: 'standard'
@@ -114,10 +114,11 @@ function generateIdForRecord() {
 export default function createWave8() {
   const wave = Wave.create({
     instructions: {
-      main: `This time each group contains a super tower, which deals twice as
-             much damage as a normal tower. Unfortunately, none of the super
-             towers are effectively positioned in their groups. Use all of the
-             properties you've learned so far to score 80 or higher!
+      main: `This time each group contains a super tower, which deals less
+             damage but fires on every enemy in its attack range at once.
+             Unfortunately, none of the super towers are effectively positioned
+             in their groups. Use the properties you've learned to score 80 or
+             higher!
 
 **justify-content**
 * \`flex-start\`: group items in the left (the start) of a container
