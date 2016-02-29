@@ -29,7 +29,8 @@ TowerComponent.reopen({
       if (this.attrs.type === 2) {
         this.set('towerUpgraded', true);
 
-        this.attrs.tower.set('attackPower', 5);
+        const defaultAttackPower = this.attrs.tower.get('attackPower');
+        this.attrs.tower.set('attackPower', defaultAttackPower / 3);
       }
     });
   })
