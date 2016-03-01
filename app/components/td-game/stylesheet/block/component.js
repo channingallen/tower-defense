@@ -21,14 +21,19 @@ const BlockComponent = Ember.Component.extend({
 
 BlockComponent.reopen({
   _deleteCodeLine(id) {
+    const codeLines = this.get('codeLines');
+    if (!codeLines.isAny('submitted')) {
+      return;
+    }
+
     let index;
-    this.get('codeLines').forEach((codeLine) => {
+    codeLines.forEach((codeLine) => {
       if (id === codeLine.get('id')) {
-        index = this.get('codeLines').indexOf(codeLine);
+        index = codeLines.indexOf(codeLine);
       }
     });
 
-    this.get('codeLines').removeAt(index);
+    codeLines.removeAt(index);
   },
 
   codeLines: Ember.computed(
