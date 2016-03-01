@@ -22,14 +22,12 @@ const BlockComponent = Ember.Component.extend({
 BlockComponent.reopen({
   _deleteCodeLine(id) {
     const codeLines = this.get('codeLines');
-    if (!codeLines.isAny('submitted')) {
-      return;
-    }
-
     let index;
     codeLines.forEach((codeLine) => {
       if (id === codeLine.get('id')) {
-        index = codeLines.indexOf(codeLine);
+        if (codeLine.get('codeLine') || this.attrs.waveStarting) {
+          index = codeLines.indexOf(codeLine);
+        }
       }
     });
 

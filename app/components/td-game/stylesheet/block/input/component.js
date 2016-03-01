@@ -22,20 +22,37 @@ const InputComponent = Ember.Component.extend({
 
   actions: {
     handleInputEnter() {
-      if (this.get('inputValid')) {
-        this.attrs['submit-code-line'](
-          this.get('inputValue'),
-          this.attrs.codeLineId
-        );
-      } else if (this.get('inputEmpty')) {
-        this.attrs['delete-code-line'](this.attrs.codeLineId);
-      } else {
-        this.attrs['shake-stylesheet']();
-      }
+      this._submitCode();
     },
 
     handleKeyUp(keyUpVal) {
       this.set('inputValue', keyUpVal);
+    }
+  }
+});
+
+///////////////////////////////
+//                           //
+//   Submission Processing   //
+//                           //
+///////////////////////////////
+
+InputComponent.reopen({
+  _submitCode() {
+    if (this.get('inputValid')) {
+      this.attrs['submit-code-line'](
+        this.get('inputValue'),
+        this.attrs.codeLineId
+      );
+    } else if (this.get('inputEmpty')) {
+      this.attrs['delete-code-line'](this.attrs.codeLineId);
+    } else {
+      this.attrs['shake-stylesheet']();
+
+      this.attrs['submit-code-line'](
+        this.get('inputValue'),
+        this.attrs.codeLineId
+      );
     }
   }
 });
@@ -132,6 +149,8 @@ InputComponent.reopen({
     handleFocusOut() {
       const focusOutCount = this.get('focusOutCount');
       this.set('focusOutCount', focusOutCount + 1);
+
+      this._submitCode();
     }
   }
 });
