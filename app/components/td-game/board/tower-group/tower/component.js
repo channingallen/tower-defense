@@ -28,9 +28,6 @@ TowerComponent.reopen({
     Ember.run.schedule('afterRender', this, () => {
       if (this.attrs.type === 2) {
         this.set('towerUpgraded', true);
-
-        const defaultAttackPower = this.attrs.tower.get('attackPower');
-        this.attrs.tower.set('attackPower', defaultAttackPower / 3);
       }
     });
   })
@@ -468,7 +465,7 @@ TowerComponent.reopen({
       if (!this.get('isDestroying') && this.attrs.waveStarted) {
         this._attackMobsInRange();
       }
-    }, 500);
+    }, this.get('towerUpgraded') ? 1500 : 500);
   },
 
   _getTargetDistance(target) {
