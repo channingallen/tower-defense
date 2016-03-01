@@ -8,8 +8,15 @@ import Ember from 'ember';
 
 const ProjectileComponent = Ember.Component.extend({
   classNameBindings: ['attrs.upgraded:projectile--upgraded:projectile--standard'],
-  
-  classNames: ['tower__projectile']
+
+  classNames: ['tower__projectile'],
+
+  _applyBackgroundImage: Ember.on('didInsertElement', Ember.observer(
+    'attrs.backgroundImage',
+    function () {
+      this.$().css('background-image', `url('/images/explosion.gif')`);
+    }
+  ))
 });
 
 /////////////////////
@@ -23,31 +30,15 @@ ProjectileComponent.reopen({
     Ember.run.schedule('afterRender', this, () => {
       const targetPosX = this.attrs.targetPosX;
       const targetPosY = this.attrs.targetPosY;
-      this.$().css('left', `${targetPosX}%`);
-      this.$().css('top', `${targetPosY}%`);
+      this.$().css('left', `${targetPosX - 2}%`);
+      this.$().css('top', `${targetPosY - 1}%`);
 
       this.attrs['damage-mob'](this.attrs.targetId, this.attrs.attackPower);
 
       Ember.run.later(this, () => {
         this._destroy();
-      }, 500);
+      }, 300);
     });
-  })
-});
-
-//////////////////
-//              //
-//   Shrapnel   //
-//              //
-//////////////////
-
-ProjectileComponent.reopen({
-  particulates: [],
-
-  addParticulates: Ember.on('didInsertElement', function () {
-    for (let i = 0; i < 50; i++) {
-      this.get('particulates').addObject(i);
-    }
   })
 });
 

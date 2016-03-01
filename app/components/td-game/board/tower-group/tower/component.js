@@ -69,7 +69,6 @@ TowerComponent.reopen({
 
 TowerComponent.reopen({
   _clearPreviousStyles() {
-    // debugger; // TODO THIS COMMIT: remove this
     this.$().css('align-self', 'initial');
     this.$().css('order', 'initial');
   },
@@ -460,7 +459,6 @@ TowerComponent.reopen({
       this.set('targetId', null);
     }
 
-    // debugger; // TODO THIS COMMIT: remove this
     Ember.run.later(this, () => {
       if (!this.get('isDestroying') && this.attrs.waveStarted) {
         this._attackMobsInRange();

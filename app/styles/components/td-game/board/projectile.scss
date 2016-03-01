@@ -1,78 +1,8 @@
-$projectile-width: 10%;
-$particulates--standard: 40;
-$particulates--upgraded: 10;
-
-@for $i from 1 through $particulates--standard {
-  @keyframes explode-#{$i} {
-    0% { top: 0%; left: 0%; }
-    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
-  }
-
-  @-moz-keyframes explode-#{$i} {
-    0% { top: 0%; left: 0%; }
-    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
-  }
-
-  @-webkit-keyframes "explode-#{$i}" {
-    0% { top: 0%; left: 0%; }
-    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
-  }
-
-  .projectile--standard .projectile__particulate {
-    &:nth-child(#{$i}){
-      animation-duration: 0.5s;
-      animation-name: explode-#{$i};
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-timing-function: ease-out;
-      background: hsl(random(65), 85%, 50%);
-    }
-  }
-}
-
-@for $i from 1 through $particulates--upgraded {
-  @keyframes pop-#{$i} {
-    0% { top: 0%; left: 0%; }
-    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
-  }
-
-  @-moz-keyframes pop-#{$i} {
-    0% { top: 0%; left: 0%; }
-    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
-  }
-
-  @-webkit-keyframes "pop-#{$i}" {
-    0% { top: 0%; left: 0%; }
-    100% { top: random(30) - 15 + %; left: random(30) - 15 + %; opacity: 0; }
-  }
-
-  .projectile--upgraded .projectile__particulate {
-    &:nth-child(#{$i}){
-      animation-duration: 0.5s;
-      animation-name: pop-#{$i};
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-timing-function: ease-out;
-      background: hsl(random(65), 0%, 100%);
-    }
-  }
-}
+$projectile-width: 3.5%;
 
 .tower__projectile {
+  background-size: cover;
   height: $projectile-width;
   position: absolute;
   width: $projectile-width;
-}
-
-.projectile__shell {
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
-
-.projectile__particulate {
-  width: 2px;
-  height: 2px;
-  border-radius: 9999px;
-  position: absolute;
 }
