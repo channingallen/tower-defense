@@ -22,16 +22,38 @@ const BlockComponent = Ember.Component.extend({
 BlockComponent.reopen({
   _deleteCodeLine(id) {
     const codeLines = this.get('codeLines');
-    let index;
+    const codeLine = this._getCodeLineById(id);
+
+    if (codeLine.get('codeLine') || this.attrs.waveStarting || this._otherUnsubmittedCodeLinesExist(id)) {
+      const index = codeLines.indexOf(codeLine);
+      codeLines.removeAt(index);
+    }
+  },
+
+  _getCodeLineById(id) {
+    const codeLines = this.get('codeLines');
+    let targetCodeLine;
     codeLines.forEach((codeLine) => {
       if (id === codeLine.get('id')) {
-        if (codeLine.get('codeLine') || this.attrs.waveStarting) {
-          index = codeLines.indexOf(codeLine);
+        targetCodeLine = codeLine;
+      }
+    });
+
+    return targetCodeLine;
+  },
+
+  _otherUnsubmittedCodeLinesExist(id) {
+    const codeLines = this.get('codeLines');
+    let otherUnsubmittedCodeLinesExist = false;
+    codeLines.forEach((codeLine) => {
+      if (id !== codeLine.get('id')) {
+        if (!codeLine.get('submitted')) {
+          otherUnsubmittedCodeLinesExist = true;
         }
       }
     });
 
-    codeLines.removeAt(index);
+    return otherUnsubmittedCodeLinesExist;
   },
 
   codeLines: Ember.computed(
@@ -47,8 +69,6 @@ BlockComponent.reopen({
   actions: {
     deleteCodeLine(id) {
       this._deleteCodeLine(id);
-
-      this.attrs['update-unit-styles'](this.get('codeLines'));
     },
 
     submitCodeLine(codeStr, id) {
@@ -58,8 +78,6 @@ BlockComponent.reopen({
           unitCodeLine.set('submitted', true);
         }
       });
-
-      this.attrs['update-unit-styles'](this.get('codeLines'));
     }
   }
 });

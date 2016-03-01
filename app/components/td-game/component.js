@@ -96,26 +96,6 @@ GameComponent.reopen({
   }
 });
 
-////////////////////////
-//                    //
-//   Flexbox Styles   //
-//                    //
-////////////////////////
-
-GameComponent.reopen({
-  actions: {
-    setStyles(blockCodeLines) {
-      if (this.get('selectedTowerGroup')) {
-        this.set('selectedTowerGroup.styles', blockCodeLines);
-      }
-
-      if (this.get('selectedTower')) {
-        this.set('selectedTower.styles', blockCodeLines);
-      }
-    }
-  }
-});
-
 /////////////////////////
 //                     //
 //   Tower Selection   //
