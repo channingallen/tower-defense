@@ -61,8 +61,8 @@ function addTowerGroupsToWave(wave) {
   }
 
   // getNewTowerGroup = function(numRows, posY)
-  const towerGroup1 = getNewTowerGroup(3, 8);
-  const towerGroup2 = getNewTowerGroup(3, 55);
+  const towerGroup1 = getNewTowerGroup(3, 9);
+  const towerGroup2 = getNewTowerGroup(3, 59);
 
   // addTowersToTowerGroup = function(towerGroup, numTowers)
   addTowersToTowerGroup(towerGroup1, 2);
