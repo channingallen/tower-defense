@@ -7,9 +7,15 @@
     <div class="tower__pulse"></div>
   {{/if}}
 
-  <div class="tower__turret">
-    <div class="turret__cannon"></div>
-  </div>
+  {{#if towerUpgraded}}
+    <div class="tower__turret--upgraded"></div>
+    <div class="cannon cannon--1"></div>
+    <div class="cannon cannon--2"></div>
+  {{else}}
+    <div class="tower__turret">
+      <div class="turret__cannon turret__cannon--1"></div>
+    </div>
+  {{/if}}
 </div>
 
 {{#each projectiles as |projectile|}}

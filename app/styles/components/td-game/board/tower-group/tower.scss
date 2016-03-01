@@ -1,3 +1,39 @@
+@-webkit-keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes pulse {
   0% { transform: scale(0.3); opacity: 0.1; }
   25% { transform: scale(0.4); opacity: 0.3; }
@@ -65,6 +101,39 @@ $turret-color: hsl(0, 100%, 0%);
 
 .tower-group__tower--upgraded {
   background-color: hsl(0, 0%, 100%);
+
+  .tower__turret--upgraded {
+    background-color: $turret-color;
+    border-radius: 2px;
+    height: 50%;
+    width: 50%;
+
+    position: absolute;
+    top: 25%; left: 25%;
+  }
+
+  .cannon {
+    background-color: $turret-color;
+    border-radius: 3px;
+    position: absolute;
+    height: 120%;
+    width: 25%;
+    left: 38%;
+    top: -10%;
+  }
+
+  .cannon--1 {}
+
+  .cannon--2 {
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+
+    -webkit-transform: rotate(90deg);
+       -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+         -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
 }
 
 .tower__pulse {
@@ -107,6 +176,9 @@ $turret-color: hsl(0, 100%, 0%);
   background-color: $turret-color;
   border-radius: 3px;
   position: absolute;
+}
+
+.turret__cannon--1 {
   top: -10%; left: 50%;
   transform: translate(-50%,-50%);
 }
@@ -125,7 +197,7 @@ $turret-color: hsl(0, 100%, 0%);
 }
 
 .tower--colliding {
-  .tower__turret {
+  .tower__turret, .tower__turret--upgraded {
     -webkit-animation: redden-element 1.5s linear;
     -moz-animation: redden-element 1.5s linear;
     animation: redden-element 1.5s linear;
@@ -135,7 +207,7 @@ $turret-color: hsl(0, 100%, 0%);
     animation-iteration-count: infinite;
   }
 
-  .turret__cannon {
+  .turret__cannon, .turret__cannon--1, .cannon, .cannon--1, .cannon--2 {
     -webkit-animation: redden-element 1.5s linear;
     -moz-animation: redden-element 1.5s linear;
     animation: redden-element 1.5s linear;

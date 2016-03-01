@@ -381,7 +381,7 @@ TowerComponent.reopen({
   },
 
   _faceTarget: Ember.observer('targetId', function () {
-    if (!this.attrs.waveStarted || !this.get('targetId')) {
+    if (!this.attrs.waveStarted || !this.get('targetId') || this.get('towerUpgraded')) {
       return;
     }
 
@@ -415,6 +415,16 @@ TowerComponent.reopen({
         this._faceTarget();
       }
     }, 50);
+  }),
+
+  _startSpinning: Ember.observer('attrs.waveStarted', function () {
+    if (this.get('towerUpgraded') && this.attrs.waveStarted) {
+      this.$('.tower__body').css({'-webkit-animation': `rotating 2s linear infinite`,
+                                  '-moz-animation': `rotating 2s linear infinite`,
+                                  '-ms-animation': `rotating 2s linear infinite`,
+                                  '-o-animation': `rotating 2s linear infinite`,
+                                  'animation': `rotating 2s linear infinite`});
+    }
   })
 });
 
