@@ -114,8 +114,8 @@ function generateIdForRecord() {
 export default function createWave8() {
   const wave = Wave.create({
     instructions: {
-      main: `This time each group contains a super tower, which deals less
-             damage but fires on every enemy in its attack range at once.
+      main: `This time each group contains a super tower! Super towers take a
+             long time to reload but damage every enemy in their attack range.
              Unfortunately, none of the super towers are effectively positioned
              in their groups. Use the properties you've learned to score 80 or
              higher!
