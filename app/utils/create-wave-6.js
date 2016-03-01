@@ -39,7 +39,7 @@ function addMobsToWave(wave) {
       frequency: 1925,
       health: 300,
       maxHealth: 300,
-      points: 20,
+      points: 10,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
       type: 'standard'
