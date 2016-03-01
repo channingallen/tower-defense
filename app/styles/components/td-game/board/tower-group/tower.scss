@@ -97,6 +97,9 @@ $turret-color: hsl(0, 100%, 0%);
   height: 100%;
   position: relative;
   width: 100%;
+
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 .tower-group__tower--upgraded {
@@ -217,3 +220,18 @@ $turret-color: hsl(0, 100%, 0%);
     animation-iteration-count: infinite;
   }
 }
+
+// TODO: implement the tower radius below after determining how to prevent its
+//       element body from blocking the click selection of other towers
+//     - consider creating the element in the tower group's component via jquery
+//       and setting the absolute value of each tower radius to its respective
+//       tower (this will require that it be set relative to the board itself)
+// .tower__radius {
+//   background-color: hsla(0, 0%, 0%, 0.12);
+//   border-radius: 9999px;
+//   height: 710%;
+//   width: 710%;
+//   position: absolute;
+//   top: -305%;
+//   left: -305%;
+// }
