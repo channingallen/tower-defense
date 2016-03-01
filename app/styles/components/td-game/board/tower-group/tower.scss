@@ -35,27 +35,27 @@
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.3); opacity: 0.1; }
-  25% { transform: scale(0.4); opacity: 0.3; }
-  50% { transform: scale(0.5); opacity: 0.5; }
-  75% { transform: scale(1); opacity: 0.0; }
+  0% { transform: scale(0.6); opacity: 0.1; }
+  25% { transform: scale(0.8); opacity: 0.3; }
+  50% { transform: scale(1); opacity: 0.5; }
+  75% { transform: scale(2); opacity: 0.0; }
   100% { transform: scale(0); opacity: 0.0; }
 }
 
 @-moz-keyframes pulse {
-  0% { -moz-transform: scale(0.3); opacity: 0.1; }
-  25% { -moz-transform: scale(0.4); opacity: 0.3; }
-  50% { -moz-transform: scale(0.5); opacity: 0.5; }
-  75% { -moz-transform: scale(1); opacity: 0.0; }
-  100% { -moz-transform: scale(0); opacity: 0.0; }
+  0% { transform: scale(0.6); opacity: 0.1; }
+  25% { transform: scale(0.8); opacity: 0.3; }
+  50% { transform: scale(1); opacity: 0.5; }
+  75% { transform: scale(2); opacity: 0.0; }
+  100% { transform: scale(0); opacity: 0.0; }
 }
 
 @-webkit-keyframes "pulse" {
-  0% { -webkit-transform: scale(0.3); opacity: 0.1; }
-  25% { -webkit-transform: scale(0.4); opacity: 0.3; }
-  50% { -webkit-transform: scale(0.5); opacity: 0.5; }
-  75% { -webkit-transform: scale(1); opacity: 0.0; }
-  100% { -webkit-transform: scale(0); opacity: 0.0; }
+  0% { transform: scale(0.6); opacity: 0.1; }
+  25% { transform: scale(0.8); opacity: 0.3; }
+  50% { transform: scale(1); opacity: 0.5; }
+  75% { transform: scale(2); opacity: 0.0; }
+  100% { transform: scale(0); opacity: 0.0; }
 }
 
 @keyframes redden-element {
@@ -187,6 +187,8 @@ $turret-color: hsl(0, 100%, 0%);
 }
 
 .tower-group__tower--selected {
+  z-index: 0;
+
   .tower__pulse {
     display: block;
   }
@@ -221,17 +223,12 @@ $turret-color: hsl(0, 100%, 0%);
   }
 }
 
-// TODO: implement the tower radius below after determining how to prevent its
-//       element body from blocking the click selection of other towers
-//     - consider creating the element in the tower group's component via jquery
-//       and setting the absolute value of each tower radius to its respective
-//       tower (this will require that it be set relative to the board itself)
-// .tower__radius {
-//   background-color: hsla(0, 0%, 0%, 0.12);
-//   border-radius: 9999px;
-//   height: 710%;
-//   width: 710%;
-//   position: absolute;
-//   top: -305%;
-//   left: -305%;
-// }
+.tower__radius {
+  background-color: hsla(0, 0%, 100%, 0.12);
+  border-radius: 9999px;
+  height: 710%;
+  width: 710%;
+  position: absolute;
+  top: -305%;
+  left: -305%;
+}
