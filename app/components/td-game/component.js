@@ -33,6 +33,10 @@ GameComponent.reopen({
     }
   ),
 
+  towerStylesHidden: Ember.computed('currentWaveNumber', function () {
+    return this.get('currentWave.towerStylesHidden');
+  }),
+
   isFirstWave: Ember.computed('currentWaveNumber', function () {
     return this.get('currentWaveNumber') === 1 ? true : false;
   }),

@@ -62,7 +62,9 @@ StylesheetComponent.reopen({
   _getLinesForBraces() {
     let count = 0;
     const towerGroups = this.attrs.towerGroups;
-    let towersAndTowerGroups = towerGroups.concat(this.get('towers'));
+    let towersAndTowerGroups = this.attrs.towerStylesHidden ?
+                               towerGroups :
+                               towerGroups.concat(this.get('towers'));
 
     towersAndTowerGroups.forEach(() => {
       for (let i = 0; i < 2; i++) {
@@ -76,7 +78,9 @@ StylesheetComponent.reopen({
   _getLinesForInputs() {
     let count = 0;
     const towerGroupStyles = this.get('towerGroupStyles');
-    let towerAndTowerGroupStyles = towerGroupStyles.concat(this.get('towerStyles'));
+    let towerAndTowerGroupStyles = this.attrs.towerStylesHidden ?
+                                   towerGroupStyles :
+                                   towerGroupStyles.concat(this.get('towerStyles'));
 
     towerAndTowerGroupStyles.forEach(() => {
       count++;
@@ -90,7 +94,9 @@ StylesheetComponent.reopen({
     let count = 0;
     const numTowers = this.get('towers.length');
     const numTowerGroups = this.attrs.towerGroups.length;
-    const numTowersAndTowerGroups = numTowers + numTowerGroups;
+    const numTowersAndTowerGroups = this.attrs.towerStylesHidden ?
+                                    numTowerGroups :
+                                    numTowers + numTowerGroups;
     const numLineBreakLines = numTowersAndTowerGroups - 1;
 
     for (let i = 0; i < numLineBreakLines; i++) {

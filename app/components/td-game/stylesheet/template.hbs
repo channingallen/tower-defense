@@ -41,25 +41,28 @@
       <span class="block__brace">}</span>
     </li>
 
-    {{#each towerGroup.towers as |tower|}}
-      <li class="block__line block__brace-line">
-        <span class="block__selector">.{{tower.selector}}</span>
-        <span class="block__brace">{</span>
-      </li>
-      {{td-game/stylesheet/block finalInputFound=(readonly finalInputFound)
-                                 finalTowerId=(readonly finalTowerId)
-                                 firstTowerGroupId=(readonly firstTowerGroupId)
-                                 notify-final-input=(action "notifyFinalInput")
-                                 overlayShown=(readonly attrs.overlayShown)
-                                 select-tower=(action attrs.select-tower)
-                                 selectedTower=(readonly attrs.selectedTower)
-                                 shake-stylesheet=(action "shake")
-                                 tower=(readonly tower)
-                                 waveStarted=(readonly attrs.waveStarted)
-                                 waveStarting=(readonly waveStarting)}}
-      <li class="block__line block__brace-line block__brace-line--close">
-        <span class="block__brace">}</span>
-      </li>
-    {{/each}}
+    {{#if attrs.towerStylesHidden}}
+    {{else}}
+      {{#each towerGroup.towers as |tower|}}
+        <li class="block__line block__brace-line">
+          <span class="block__selector">.{{tower.selector}}</span>
+          <span class="block__brace">{</span>
+        </li>
+        {{td-game/stylesheet/block finalInputFound=(readonly finalInputFound)
+                                   finalTowerId=(readonly finalTowerId)
+                                   firstTowerGroupId=(readonly firstTowerGroupId)
+                                   notify-final-input=(action "notifyFinalInput")
+                                   overlayShown=(readonly attrs.overlayShown)
+                                   select-tower=(action attrs.select-tower)
+                                   selectedTower=(readonly attrs.selectedTower)
+                                   shake-stylesheet=(action "shake")
+                                   tower=(readonly tower)
+                                   waveStarted=(readonly attrs.waveStarted)
+                                   waveStarting=(readonly waveStarting)}}
+        <li class="block__line block__brace-line block__brace-line--close">
+          <span class="block__brace">}</span>
+        </li>
+      {{/each}}
+    {{/if}}
   {{/each}}
 </div>

@@ -103,6 +103,7 @@ function generateIdForRecord() {
 
 export default function createWave3() {
   const wave = Wave.create({
+    towerStylesHidden: true,
     instructions: {
       main: `A tower flashes red when it is positioned on the path, and you must
             reposition it before you can start the wave. Use \`justify-content\`

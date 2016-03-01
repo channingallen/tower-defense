@@ -103,6 +103,7 @@ function generateIdForRecord() {
 
 export default function createWave1() {
   const wave = Wave.create({
+    towerStylesHidden: true,
     instructions: {
       main: `Your job is to stop the incoming enemies from getting past
              your defenses. Unlike other tower defense games, however, you

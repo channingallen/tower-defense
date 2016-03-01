@@ -105,6 +105,7 @@ function generateIdForRecord() {
 
 export default function createWave4() {
   const wave = Wave.create({
+    towerStylesHidden: true,
     instructions: {
       main: `Now some of the groups have vertical space, which is the
              perfect opportunity to use the \`align-items\` property.

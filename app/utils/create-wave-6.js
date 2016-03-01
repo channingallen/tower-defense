@@ -107,6 +107,7 @@ function generateIdForRecord() {
 
 export default function createWave6() {
   const wave = Wave.create({
+    towerStylesHidden: true,
     instructions: {
       main: `Use the properties you've learned to score 80 or higher!
 

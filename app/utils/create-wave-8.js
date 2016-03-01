@@ -113,6 +113,7 @@ function generateIdForRecord() {
 
 export default function createWave8() {
   const wave = Wave.create({
+    towerStylesHidden: true,
     instructions: {
       main: `This time each group contains a super tower! Super towers take a
              long time to reload but damage every enemy in their attack range.

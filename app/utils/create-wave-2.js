@@ -107,6 +107,7 @@ function generateIdForRecord() {
 
 export default function createWave2() {
   const wave = Wave.create({
+    towerStylesHidden: true,
     instructions: {
       main: `Now you have more tower groups at your disposal! Use
             \`justify-content\` to move the towers into position.

@@ -107,6 +107,7 @@ function generateIdForRecord() {
 
 export default function createWave7() {
   const wave = Wave.create({
+    towerStylesHidden: true,
     instructions: {
       main: `This time you have more towers, but less horizontal room to work
              with.

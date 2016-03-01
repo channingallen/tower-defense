@@ -111,6 +111,7 @@ function generateIdForRecord() {
 
 export default function createWave5() {
   const wave = Wave.create({
+    towerStylesHidden: true,
     instructions: {
       main: `This time things are a bit trickier. Try combining
             \`justify-content\` and \`align-items\` to score 80 or higher!
