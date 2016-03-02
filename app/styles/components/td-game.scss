@@ -35,7 +35,7 @@ $td-game__item__margin-bottom: 20px;
   flex: 1 0 40%;
   flex-direction: column;
   font-family: $font-family--standard;
-  min-width: 300px;
+  min-width: 345px;
   overflow-y: auto;
   padding: 20px 30px 0px;
 }
@@ -167,7 +167,6 @@ $td-game__item__margin-bottom: 20px;
   background-color: hsl(0, 0%, 85%);
   color: hsl(0, 0%, 10%);
   cursor: pointer;
-  // font-weight: 400;
 
   &:hover {
     background-color: hsl(0, 0%, 100%);

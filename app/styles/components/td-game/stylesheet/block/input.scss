@@ -24,7 +24,7 @@
 
 .block__input {
   background-color: hsl(0, 0%, 70%);
-  width: 100% - ($width--line-number / 2);
+  width: 100%;
 
   &:focus {
     -webkit-animation: pulse-input 1.5s linear;
