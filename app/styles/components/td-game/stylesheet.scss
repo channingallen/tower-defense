@@ -88,11 +88,20 @@ $width--line-number: 5%;
 .stylesheet__hide-inputs {
   position: absolute;
   bottom: 10px;
+  cursor: pointer;
+}
+
+.hide-inputs__checkbox {
+  cursor: default;
 }
 
 .hide-inputs__text {
   color: gray;
   font-family: 'PT Sans', sans-serif;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 @import "stylesheet/block";
