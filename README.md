@@ -1,4 +1,4 @@
-# Flexbox Tower Defense
+# Flex Defense
 
 Tower Defense with a twist: all towers must be positioned using CSS Flexbox.
 
