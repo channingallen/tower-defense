@@ -107,6 +107,7 @@ function generateIdForRecord() {
 
 export default function createWave10() {
   const wave = Wave.create({
+    towerStylesHidden: false,
     instructions: {
       main: `To vertically position individual items in a container, use the
              \`align-self\` property. \`align-self\` accepts the same values as

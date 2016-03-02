@@ -88,4 +88,14 @@ $width--line-number: 5%;
   }
 }
 
+.stylesheet__hide-inputs {
+  position: absolute;
+  bottom: 10px;
+}
+
+.hide-inputs__text {
+  color: gray;
+  font-family: 'PT Sans', sans-serif;
+}
+
 @import "stylesheet/block";

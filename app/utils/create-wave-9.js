@@ -111,6 +111,7 @@ function generateIdForRecord() {
 
 export default function createWave9() {
   const wave = Wave.create({
+    towerStylesHidden: false,
     instructions: {
       main: `The super towers are in bad positions again, but this time you'll
              need to apply styles to the items themselves.

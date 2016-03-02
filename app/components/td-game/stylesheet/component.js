@@ -10,6 +10,28 @@ const StylesheetComponent = Ember.Component.extend({
   classNames: ['sidebar__stylesheet']
 });
 
+//////////////////////
+//                  //
+//   Tower Inputs   //
+//                  //
+//////////////////////
+
+StylesheetComponent.reopen({
+  towerInputsHidden: true,
+
+  hideTowerInputs: Ember.observer('attrs.towerStylesHidden', function () {
+    Ember.run.schedule('afterRender', this, () => {
+      this.set('towerInputsHidden', this.attrs.towerStylesHidden ? true : false);
+    });
+  }),
+
+  actions: {
+    toggleHideInputs() {
+      this.set('towerInputsHidden', !this.get('towerInputsHidden'));
+    }
+  }
+});
+
 /////////////////////////
 //                     //
 //   Wave Initiation   //

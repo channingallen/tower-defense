@@ -11,6 +11,14 @@
     </a>
   </button>
 
+  <div class="stylesheet__hide-inputs">
+    {{input class="hide-inputs__checkbox"
+            checked=towerInputsHidden
+            name="hideInputs"
+            type="checkbox"}}
+    <span class="hide-inputs__text" {{action "toggleHideInputs"}}>hide tower inputs</span>
+  </div>
+
   {{#unless attrs.waveStarted}}
     {{#if attrs.towersColliding}}
       <button class="stylesheet__start-wave-button">Start Wave</button>
