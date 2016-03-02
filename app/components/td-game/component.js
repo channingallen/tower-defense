@@ -33,10 +33,6 @@ GameComponent.reopen({
     }
   ),
 
-  towerStylesHidden: Ember.computed('currentWaveNumber', function () {
-    return this.get('currentWave.towerStylesHidden');
-  }),
-
   isFirstWave: Ember.computed('currentWaveNumber', function () {
     return this.get('currentWaveNumber') === 1 ? true : false;
   }),
@@ -372,6 +368,30 @@ GameComponent.reopen({
   actions: {
     openDropdown() {
       this.set('dropdownActive', true);
+    }
+  }
+});
+
+//////////////////////////////
+//                          //
+//   Tower Input Checkbox   //
+//                          //
+//////////////////////////////
+
+GameComponent.reopen({
+  towerStylesHidden: true,
+
+  _resetTowerInputsHidden: Ember.observer('currentWaveNumber', function () {
+    this.set('towerStylesHidden', this.get('currentWave.towerStylesHidden'));
+  }),
+
+  actions: {
+    hideTowerInputs() {
+      this.set('towerStylesHidden', true);
+    },
+
+    showTowerInputs() {
+      this.set('towerStylesHidden', false);
     }
   }
 });

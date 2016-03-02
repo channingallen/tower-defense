@@ -67,11 +67,13 @@
     </div>
 
     {{td-game/stylesheet currentWaveNumber=(readonly currentWaveNumber)
+                         hide-tower-inputs=(action "hideTowerInputs")
                          overlayShown=(readonly overlayShown)
                          select-tower=(action "selectTower")
                          select-tower-group=(action "selectTowerGroup")
                          selectedTower=(readonly selectedTower)
                          selectedTowerGroup=(readonly selectedTowerGroup)
+                         show-tower-inputs=(action "showTowerInputs")
                          show-overlay=(action "showOverlay")
                          start-wave=(action "startWave")
                          towersColliding=(readonly towersColliding)

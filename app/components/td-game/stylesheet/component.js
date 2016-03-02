@@ -19,10 +19,20 @@ const StylesheetComponent = Ember.Component.extend({
 StylesheetComponent.reopen({
   towerInputsHidden: true,
 
-  hideTowerInputs: Ember.observer('attrs.towerStylesHidden', function () {
-    Ember.run.schedule('afterRender', this, () => {
-      this.set('towerInputsHidden', this.attrs.towerStylesHidden ? true : false);
-    });
+  _showTowerInputs: Ember.observer('towerInputsHidden', function () {
+    if (!this.get('towerInputsHidden')) {
+      this.attrs['show-tower-inputs']();
+    }
+  }),
+
+  _hideTowerInputs: Ember.observer('towerInputsHidden', function () {
+    if (this.get('towerInputsHidden')) {
+      this.attrs['hide-tower-inputs']();
+    }
+  }),
+
+  _resetTowerInputsHidden: Ember.observer('attrs.towerStylesHidden', function () {
+    this.set('towerInputsHidden', this.attrs.towerStylesHidden);
   }),
 
   actions: {
@@ -150,6 +160,7 @@ StylesheetComponent.reopen({
     'attrs.towersGroups.[]',
     'attrs.waveStarted',
     'towerGroupStyles.[]',
+    'towerStylesHidden',
     'towers.[]',
     'towerStyles.[]',
     function () {
