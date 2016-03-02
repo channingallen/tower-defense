@@ -121,7 +121,8 @@ item aligns to the left and the final item aligns to the right
 * \`space-around\`: evenly distribute items in a container such that all items
 have equal space around them`,
       tldr: `Use the \`justify-content\` property to move these two towers into
-           position.`
+           position. Click the <i class="fa fa-question-circle"></i> button in
+           the stylesheet for a reminder on how the property works.`
     },
     minimumScore: 80
   });
