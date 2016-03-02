@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import createFlexboxRef from 'tower-defense/utils/create-flexbox-ref';
 import Projectile from 'tower-defense/objects/projectile';
 import { pathWidth } from 'tower-defense/objects/board';
 import { towerDimensions } from 'tower-defense/objects/tower';
@@ -148,7 +149,7 @@ TowerComponent.reopen({
           const property = this._getProperty(codeLine);
           const value = this._getValue(codeLine, property);
 
-          if (property && value) {
+          if (property && this._propertyValid(property) && value && this._valueValid(property, value)) {
             const semicolonFound = value[value.length - 1] === ';';
 
             if (semicolonFound) {
@@ -161,6 +162,42 @@ TowerComponent.reopen({
       });
     }
   )
+});
+
+////////////////////////////
+//                        //
+//   Flexbox Validation   //
+//                        //
+////////////////////////////
+
+TowerComponent.reopen({
+  flexboxRef: createFlexboxRef(),
+
+  _propertyValid(property) {
+    const propertyType = 'item';
+
+    return this.get('flexboxRef').get(propertyType)[property];
+  },
+
+  _valueValid(property, fullValue) {
+    const semicolonFound = fullValue[fullValue.length - 1] === ';';
+    let value;
+    if (semicolonFound) {
+      value = this._getValueWithoutSemiColon(fullValue);
+    } else {
+      value = fullValue;
+    }
+
+    const propertyType = 'item';
+    let valueFound = false;
+    this.get('flexboxRef').get(propertyType)[property].forEach(function (validValue) {
+      if (value === validValue.toString()) {
+        valueFound = true;
+      }
+    });
+
+    return valueFound;
+  }
 });
 
 /////////////////////////////
