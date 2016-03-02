@@ -126,6 +126,12 @@
           {{#if passed}}
             <div class="modal__grade">
               <p>Congratulations! You scored {{score}} points!</p>
+
+              {{#if isLastWave}}
+                <p>You beat the game! If you had a good time and want to support
+                   further development, spread the word about
+                   flexboxdefense.com!</p>
+              {{/if}}
             </div>
           {{else}}
             <div class="modal__grade">
