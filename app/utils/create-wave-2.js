@@ -115,11 +115,11 @@ export default function createWave2() {
 
 * \`flex-start\`: group items in the left (the start) of a container
 * \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the horizontal center of a container
-* \`space-between\`: evenly distribute items in a container such that the first item
-aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items have
-equal space around them`,
+* \`center\`: group items in the center of a container
+* \`space-between\`: evenly distribute items in a container such that the first
+item aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items
+have equal space around them`,
       tldr: `Use \`justify-content\` to move your towers into position.`
     },
     minimumScore: 80

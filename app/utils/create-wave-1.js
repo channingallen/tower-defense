@@ -105,27 +105,21 @@ export default function createWave1() {
   const wave = Wave.create({
     towerStylesHidden: true,
     instructions: {
-      main: `Your job is to stop the incoming enemies from getting past
-             your defenses. Unlike other tower defense games, however, you
-             must position your towers using CSS!
+      main: `Your job is to stop the incoming enemies from getting past your
+             defenses. Unlike other tower defense games, you must position your
+             towers using CSS!
 
 We'll start with container properties. Use the \`justify-content\` property to move
-the towers into effective positions. \`justify-content\` positions items
-horizontally in a container and accepts the following values:
+the towers into effective positions. \`justify-content\` positions a container's
+items horizontally and accepts the following values:
 
 * \`flex-start\`: group items in the left (the start) of a container
 * \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the horizontal center of a container
-* \`space-between\`: evenly distribute items in a container such that the first item
-aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items have
-equal space around them
-
-Press Enter to apply a line of code, and then click *Start Wave* to see how
-your towers fare! To remove a line of code that has already been applied, delete
-the line and press Enter.
-
-A final score of 80 or higher means your towers are well positioned!`,
+* \`center\`: group items in the center of a container
+* \`space-between\`: evenly distribute items in a container such that the first
+item aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items
+have equal space around them`,
       tldr: `Use the \`justify-content\` property to move these two towers into
            position.`
     },

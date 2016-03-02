@@ -114,7 +114,7 @@ export default function createWave9() {
     towerStylesHidden: false,
     instructions: {
       main: `The super towers are in bad positions again, but this time you'll
-             need to apply styles to the items themselves.
+             need to apply styles to the towers themselves.
 
 The \`order\` property defines the order in which an item appears in the flex
 container and accepts both positive and negative integer values. All flex items
@@ -126,11 +126,11 @@ Use \`justify-content\` and \`order\` to move your towers into position.
 **justify-content**
 * \`flex-start\`: group items in the left (the start) of a container
 * \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the horizontal center of a container
-* \`space-between\`: evenly distribute items in a container such that the first item
-aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items have
-equal space around them
+* \`center\`: group items in the center of a container
+* \`space-between\`: evenly distribute items in a container such that the first
+item aligns to the left and the final item aligns to the right
+* \`space-around\`: evenly distribute items in a container such that all items
+have equal space around them
 
 **order**
 * \`#\`: position an item relative to the other items in the container`,
