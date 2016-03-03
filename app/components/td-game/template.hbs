@@ -140,7 +140,9 @@
           {{/if}}
 
           <button class="modal__button" {{action "hideOverlay"}}>Try again</button>
-          <button class="modal__button" {{action "changeWaveNext"}}>Next wave</button>
+          {{#unless isLastWave}}
+            <button class="modal__button" {{action "changeWaveNext"}}>Next wave</button>
+          {{/unless}}
         {{else}}
           <button class="modal__button" {{action "hideOverlay"}}>Dismiss</button>
         {{/if}}
