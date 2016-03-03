@@ -9,6 +9,8 @@ import Ember from 'ember';
 const BoardComponent = Ember.Component.extend({
   classNames: ['td-game__board'],
 
+  waveCancelled: false,
+
   _applyBackgroundImage: Ember.on('didInsertElement', Ember.observer(
     'attrs.backgroundImage',
     function () {
@@ -37,6 +39,11 @@ BoardComponent.reopen({
 
 BoardComponent.reopen({
   _generateMobs() {
+    if (this.get('waveCancelled')) {
+      this.set('waveCancelled', false);
+      return;
+    }
+
     const mobIndex = this.get('mobIndex');
     const currentMob = this.attrs.waveMobs.objectAt(mobIndex);
     this.get('mobs').addObject(currentMob);
@@ -46,9 +53,28 @@ BoardComponent.reopen({
       this.incrementProperty('mobIndex');
 
       const mobFrequency = currentMob.get('frequency');
-      Ember.run.later(this, this._generateMobs, mobFrequency);
+      Ember.run.later(this, () => {
+        if (this.get('waveCancelled')) {
+          this.set('waveCancelled', false);
+          return;
+        }
+
+        this._generateMobs();
+      }, mobFrequency);
     }
   },
+
+  numMobsToTerminate: Ember.computed('attrs.waveStarted', function () {
+    const firstMob = this.attrs.waveMobs.objectAt(0);
+    const firstMobExists = !!firstMob;
+    if (firstMobExists) {
+      return firstMob.get('quantity');
+    } else {
+      return 5;
+    }
+  }),
+
+  numMobsTerminated: 0,
 
   mobFrequency: Ember.computed('mobIndex', function () {
     const mobIndex = this.get('mobIndex');
@@ -57,12 +83,18 @@ BoardComponent.reopen({
   }),
 
   kickOffMobGeneration: Ember.observer('attrs.waveStarted', function () {
-    if (!this.attrs.waveStarted || !this.attrs.waveMobs.get('length')) {
+    if (!this.attrs.waveStarted) {
       this.set('mobIndex', 0);
       this.set('mobs', []);
+
+      if (this.get('waveCancelled')) {
+        this.set('waveCancelled', false);
+      }
+
       return;
     }
 
+    this.set('numMobsTerminated', 0);
     this._generateMobs();
   })
 });
@@ -87,6 +119,13 @@ BoardComponent.reopen({
     });
   },
 
+  _resetMobs: Ember.observer('attrs.cancellingWave', function () {
+    if (this.attrs.cancellingWave) {
+      this.set('waveCancelled', true);
+      return;
+    }
+  }),
+
   actions: {
     damageMob(mobId, attackPower) {
       this._reduceMobHealth(mobId, attackPower);
@@ -95,6 +134,7 @@ BoardComponent.reopen({
     destroyMob(mob) {
       const mobIndex = this.get('mobs').indexOf(mob);
       this.get('mobs').removeAt(mobIndex);
+      this.incrementProperty('numMobsTerminated');
 
       mob.set('active', false);
     },
@@ -126,11 +166,14 @@ BoardComponent.reopen({
 BoardComponent.reopen({
   wavePoints: 0,
 
-  _getFinalScore: Ember.observer('mobs.@each.active', function () {
-    if (!this.get('mobs.length')) {
-      this.attrs['score-wave'](this.get('wavePoints'));
+  _getFinalScore: Ember.observer(
+    'numMobsTerminated',
+    function () {
+      if (this.get('numMobsTerminated') >= this.get('numMobsToTerminate')) {
+        this.attrs['score-wave'](this.get('wavePoints'));
+      }
     }
-  }),
+  ),
 
   actions: {
     addPoints(points) {

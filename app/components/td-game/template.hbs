@@ -66,7 +66,9 @@
       <div class="">{{{instructionsTldr}}}</div>
     </div>
 
-    {{td-game/stylesheet currentWaveNumber=(readonly currentWaveNumber)
+    {{td-game/stylesheet cancel-wave=(action "beginWaveCancellation")
+                         cancellingWave=(readonly cancellingWave)
+                         currentWaveNumber=(readonly currentWaveNumber)
                          hide-tower-inputs=(action "hideTowerInputs")
                          overlayShown=(readonly overlayShown)
                          select-tower=(action "selectTower")
@@ -100,6 +102,7 @@
 
   {{td-game/board add-colliding-tower=(action "addCollidingTower")
                   backgroundImage=(readonly currentWave.board.imageUrl)
+                  cancellingWave=(readonly cancellingWave)
                   minimumPoints=(readonly currentWave.minimumPoints)
                   path=(readonly currentWave.board.pathData)
                   remove-colliding-tower=(action "removeCollidingTower")

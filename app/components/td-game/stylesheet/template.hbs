@@ -27,6 +27,14 @@
     {{/if}}
   {{/unless}}
 
+  {{#if attrs.waveStarted}}
+    {{#if attrs.cancellingWave}}
+      <button class="stylesheet__cancel-wave-button">Cancel Wave</button>
+    {{else}}
+      <button class="stylesheet__cancel-wave-button stylesheet__cancel-wave-button--active" {{action "cancelWave"}}>Cancel Wave</button>
+    {{/if}}
+  {{/if}}
+
   {{#each attrs.towerGroups as |towerGroup|}}
     <li class="block__line block__brace-line">
       <span class="block__selector">.{{towerGroup.selector}}</span>

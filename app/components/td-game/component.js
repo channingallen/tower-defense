@@ -19,6 +19,8 @@ const GameComponent = Ember.Component.extend({
 /////////////////////////
 
 GameComponent.reopen({
+  cancellingWave: false,
+
   currentWaveNumber: 1,
 
   game: createGame(),
@@ -45,11 +47,21 @@ GameComponent.reopen({
 
   _resetGame: Ember.observer('waveStarted', function () {
     if (!this.get('waveStarted')) {
+      this.set('cancellingWave', false);
       this.set('game', createGame());
     }
   }),
 
   actions: {
+    beginWaveCancellation() {
+      this.set('cancellingWave', true);
+
+      const mobFrequency = this.get('currentWave.mobs').objectAt(0).get('frequency');
+      Ember.run.later(this, () => {
+        this.set('waveStarted', false);
+      }, mobFrequency);
+    },
+
     changeWaveNext() {
       if (this.get('waveStarted')) {
         console.error('You cannot start a new wave until this wave ends.');
@@ -256,6 +268,7 @@ GameComponent.reopen({
   score: null,
 
   actions: {
+
     scoreWave(wavePoints) {
       this.set('score', wavePoints);
 

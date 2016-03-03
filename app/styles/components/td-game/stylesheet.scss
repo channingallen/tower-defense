@@ -1,6 +1,7 @@
 $stylesheet__color--light: hsl(0, 0%, 80%);
 $stylesheet__line-height: 22px;
 $width--line-number: 5%;
+$button-color--cancel: hsl(0, 50%, 50%);
 
 .sidebar__stylesheet {
   border-radius: 4px;
@@ -70,6 +71,28 @@ $width--line-number: 5%;
 
   &:hover {
     background-color: darken($background-color--main, 7.5%);
+  }
+}
+
+.stylesheet__cancel-wave-button {
+  background-color: transparentize($button-color--cancel, 0.4);
+  border-radius: 4px;
+  bottom: 10px;
+  color: hsl(0, 100%, 100%);
+  display: inline-block;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  padding: 0.7em 1.2em;
+  position: absolute;
+  right: 10px;
+}
+
+.stylesheet__cancel-wave-button--active {
+  background-color: $button-color--cancel;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($button-color--cancel, 7.5%);
   }
 }
 

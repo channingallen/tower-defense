@@ -84,6 +84,20 @@ StylesheetComponent.reopen({
   }
 });
 
+///////////////////////////
+//                       //
+//   Wave Cancellation   //
+//                       //
+///////////////////////////
+
+StylesheetComponent.reopen({
+  actions: {
+    cancelWave() {
+      this.attrs['cancel-wave']();
+    }
+  }
+});
+
 /////////////////////
 //                 //
 //   Block Lines   //
