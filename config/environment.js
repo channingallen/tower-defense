@@ -15,10 +15,10 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com",
       'font-src': "'self' fonts.gstatic.com",
       'connect-src': "'self'",
-      'img-src': "'self'",
+      'img-src': "'self' https://www.google-analytics.com",
       'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
       'frame-src': "none"
     },
@@ -50,7 +50,9 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.googleAnalytics = {
+      webPropertyId: 'UA-74652614-1'
+    };
   }
 
   return ENV;
