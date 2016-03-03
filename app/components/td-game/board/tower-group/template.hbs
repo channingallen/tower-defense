@@ -16,13 +16,3 @@
                                     type=(readonly tower.type)
                                     waveStarted=(readonly attrs.waveStarted)}}
 {{/each}}
-
-<div class="board__tower-group--body">
-  {{#if selected}}
-    {{tool-tip selected=(readonly selected)
-               selector=(readonly attrs.towerGroup.selector)
-               type=(readonly "tower-group")}}
-
-    <div class="tower-group__pulse"></div>
-  {{/if}}
-</div>

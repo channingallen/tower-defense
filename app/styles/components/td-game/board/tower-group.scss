@@ -28,21 +28,20 @@ $pulse__color: hsla(60, 100%, 50%, 0.8);
   cursor: pointer;
   display: flex;
   width: 100%;
+}
+
+.board__tower-group--body {
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
 
   &:hover {
-    background-color: opacify($background-color, 0.25);
+    background-color: opacify($background-color, 0.1);
     box-shadow: 0 0 10px opacify($background-color, 0.6);
   }
 }
 
-.board__tower-group--body {
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}
-
 .tower-group__pulse {
-  display: none;
   background: $pulse__color;
 
   -webkit-border-radius: 4px;
@@ -63,12 +62,6 @@ $pulse__color: hsla(60, 100%, 50%, 0.8);
   position: absolute;
   top: 0%; left: 0%;
   opacity: 0;
-}
-
-.board__tower-group--selected {
-  .tower-group__pulse {
-    display: block;
-  }
 }
 
 @import "tower-group/tower";

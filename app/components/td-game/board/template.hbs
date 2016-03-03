@@ -23,9 +23,22 @@
 {{/if}}
 
 {{#each attrs.towerGroups as |towerGroup|}}
+  {{#unless attrs.waveStarted}}
+    <div class="board__tower-group--body"
+         id="tower-group--overlay-{{towerGroup.groupNum}}" {{action attrs.select-tower-group towerGroup}}>
+      {{#if (eq towerGroup selectedTowerGroup)}}
+        {{tool-tip selector=(readonly towerGroup.selector)
+                   type=(readonly "tower-group")}}
+
+        <div class="tower-group__pulse"></div>
+      {{/if}}
+    </div>
+  {{/unless}}
+
   {{td-game/board/tower-group add-colliding-tower=(action attrs.add-colliding-tower)
                               allTowers=(readonly towers)
                               damage-mob=(action "damageMob")
+                              groupNum=(readonly towerGroup.groupNum)
                               mobs=(readonly mobs)
                               numRows=(readonly towerGroup.numRows)
                               path=(readonly attrs.path)

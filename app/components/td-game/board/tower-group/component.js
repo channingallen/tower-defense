@@ -13,7 +13,11 @@ import { towerDimensions } from 'tower-defense/objects/tower';
 const TowerGroupComponent = Ember.Component.extend({
   classNameBindings: ['selected:board__tower-group--selected'],
 
-  classNames: ['board__tower-group']
+  classNames: ['board__tower-group'],
+
+  setElementId: Ember.on('init', function () {
+    this.set('elementId', `board__tower-group-${this.attrs.groupNum}`);
+  })
 });
 
 //////////////////////////////
@@ -173,6 +177,7 @@ TowerGroupComponent.reopen({
     this.$().css('height', `${heightPct}%`);
     this.$('.board__tower-group--body').css('height', `${heightPct}%`);
 
+    this.get('$groupOverlay').css('height', `${heightPct}%`);
   },
 
   _setPadding() {
@@ -188,13 +193,23 @@ TowerGroupComponent.reopen({
 
     this.$().css('margin-left', `${boardPaddingPct}%`);
     this.$().css('margin-top', `${this.attrs.posY - offsetTopPct}%`);
+
+    this.get('$groupOverlay').css('top', `${this.attrs.posY}%`);
+    this.get('$groupOverlay').css('left', `${boardPaddingPct}%`);
   },
 
   _setWidth() {
     const width = 100 - (boardPaddingPct * 2);
     this.$().css('width', `${width}%`);
     this.$('.board__tower-group--body').css('width', `${width}%`);
+
+    this.get('$groupOverlay').css('width', `${width}%`);
   },
+
+  $groupOverlay: Ember.computed(function () {
+    const groupNum = this.attrs.groupNum;
+    return Ember.$(`#tower-group--overlay-${groupNum}`);
+  }),
 
   _initializeStyles: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
@@ -233,16 +248,14 @@ TowerGroupComponent.reopen({
     }
   ),
 
-  _sendSelectAction: Ember.on('didInsertElement', function () {
-    this.$().click((clickEvent) => {
-      const $clickedEl = Ember.$(clickEvent.target);
-      const $towerParents = $clickedEl.parents('.tower-group__tower');
-      const isChildOfTower = $towerParents.length > 0;
-      if (!isChildOfTower) {
-        this.attrs.select();
-      }
-    });
-  })
+  _handleClick: Ember.on('click', function (clickEvent) {
+    const $clickedEl = Ember.$(clickEvent.target);
+    const $towerParents = $clickedEl.parents('.tower-group__tower');
+    const isChildOfTower = $towerParents.length > 0;
+    if (!isChildOfTower) {
+      this.attrs.select();
+    }
+  }),
 });
 
 export default TowerGroupComponent;
