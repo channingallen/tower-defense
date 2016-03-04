@@ -46,7 +46,7 @@ $td-game__item__margin-bottom: 20px;
 //            //
 ////////////////
 
-@media (max-width: 1185px) {
+@media (max-width: 1205px) {
   .td-game__header {
     align-items: center;
     flex-direction: column;
@@ -59,7 +59,7 @@ $td-game__item__margin-bottom: 20px;
   }
 }
 
-@media (min-width: 1186px) {
+@media (min-width: 1206px) {
   .header__title {
     font-size: 25px;
     font-weight: 600;
@@ -271,10 +271,6 @@ $td-game__item__margin-bottom: 20px;
   &:hover {
     color: white;
   }
-}
-
-audio {
-  display: none;
 }
 
 @import
