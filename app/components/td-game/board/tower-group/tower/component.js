@@ -549,6 +549,8 @@ TowerComponent.reopen({
 
       this.get('projectiles').addObject(newProjectile);
 
+      this._playCannonSound();
+
       return;
     }
   },
@@ -584,6 +586,23 @@ TowerComponent.reopen({
     });
     return needle;
   },
+
+  _playCannonSound() {
+    const cannonType = this.get('towerUpgraded') ? 2 : 1;
+    const $cannonSoundEl = Ember.$(
+      `<audio class="cannon-sound" autoplay>
+         <source src="/sounds/cannon-${cannonType}.mp3" type="audio/mpeg">
+       </audio>`
+     );
+
+     $cannonSoundEl.prop('volume', 0.5);
+
+     $cannonSoundEl.appendTo('.td-game__board');
+  },
+
+  _cleanUpAudioTags: Ember.on('willDestroyElement', function () {
+     Ember.$('.cannon-sound').remove();
+  }),
 
   actions: {
     destroyProjectile(projectileId) {

@@ -264,13 +264,17 @@ $td-game__item__margin-bottom: 20px;
 }
 
 .footer__text {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .footer__link {
   &:hover {
     color: white;
   }
+}
+
+audio {
+  display: none;
 }
 
 @import
