@@ -147,6 +147,13 @@
           {{#unless isLastWave}}
             <button class="modal__button" {{action "changeWaveNext"}}>Next wave</button>
           {{/unless}}
+        {{else if cancellationModalShown}}
+          <div class="modal__grade">
+            <p>Sorry! Flexbox Defense doesn't run well in the background just yet.</p>
+            <p>Mind trying again?</p>
+          </div>
+
+          <button class="modal__button" {{action "hideOverlay"}}>Try again</button>
         {{else}}
           <button class="modal__button" {{action "hideOverlay"}}>Dismiss</button>
         {{/if}}

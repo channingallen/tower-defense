@@ -19,8 +19,6 @@ const GameComponent = Ember.Component.extend({
 /////////////////////////
 
 GameComponent.reopen({
-  cancellingWave: false,
-
   currentWaveNumber: 1,
 
   game: createGame(),
@@ -53,15 +51,6 @@ GameComponent.reopen({
   }),
 
   actions: {
-    beginWaveCancellation() {
-      this.set('cancellingWave', true);
-
-      const mobFrequency = this.get('currentWave.mobs').objectAt(0).get('frequency');
-      Ember.run.later(this, () => {
-        this.set('waveStarted', false);
-      }, mobFrequency);
-    },
-
     changeWaveNext() {
       if (this.get('waveStarted')) {
         console.error('You cannot start a new wave until this wave ends.');
@@ -217,6 +206,7 @@ GameComponent.reopen({
         this._hideOverlay();
         this._hideInstructionsModal();
         this._hideGradeModal();
+        this._hideCancellationModal();
       }
     });
   }),
@@ -237,6 +227,7 @@ GameComponent.reopen({
       this._hideOverlay();
       this._hideInstructionsModal();
       this._hideGradeModal();
+      this._hideCancellationModal();
     },
 
     showOverlay() {
@@ -314,6 +305,52 @@ GameComponent.reopen({
   })
 });
 
+///////////////////////////
+//                       //
+//   Wave Cancellation   //
+//                       //
+///////////////////////////
+
+GameComponent.reopen({
+  cancellationModalShown: false,
+
+  cancellingWave: false,
+
+  _beginWaveCancellation() {
+    this.set('cancellingWave', true);
+
+    const mobFrequency = this.get('currentWave.mobs').objectAt(0).get('frequency');
+    Ember.run.later(this, () => {
+      this.set('waveStarted', false);
+    }, mobFrequency);
+  },
+
+  _hideCancellationModal() {
+    this.set('cancellationModalShown', false);
+  },
+
+  _showCancellationModal() {
+    this.set('cancellationModalShown', true);
+  },
+
+  // until timing functions account for tabbing out, cancel waves on blur
+  _autoBeginWaveCancellation: Ember.on('didInsertElement', function () {
+    Ember.$(window).on('blur', () => {
+      if (this.get('waveStarted')) {
+        this._beginWaveCancellation();
+
+        this._showCancellationModal();
+        this._showOverlay();
+      }
+    });
+  }),
+
+  actions: {
+    beginWaveCancellation() {
+      this._beginWaveCancellation();
+    }
+  }
+});
 ///////////////////////
 //                   //
 //   Dropdown Menu   //
