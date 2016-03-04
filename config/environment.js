@@ -35,6 +35,10 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    // ENV.googleAnalytics = {
+    //   tracker: 'analytics.js',
+    //   webPropertyId: 'UA-74652614-1'
+    // };
   }
 
   if (environment === 'test') {
@@ -51,6 +55,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.googleAnalytics = {
+      tracker: 'analytics.js',
       webPropertyId: 'UA-74652614-1'
     };
   }
