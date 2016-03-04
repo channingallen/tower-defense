@@ -12,12 +12,23 @@
   position: relative;
 }
 
-.board__points {
-  font-family: $font-family--standard;
+.board__info {
   left: 20px;
   position: absolute;
   top: 20px;
   z-index: 3;
+}
+
+.board__points {
+  color: hsl(0, 0%, 80%);
+  font-family: $font-family--standard;
+  margin-bottom: 10px;
+}
+
+.board__volume {
+  color: hsl(0, 0%, 80%);
+  cursor: pointer;
+  text-align: left;
 }
 
 @import

@@ -1,8 +1,18 @@
-{{#if attrs.waveStarted}}
-  <div class="board__points">
-    Points: {{wavePoints}}
-  </div>
+{{#unless attrs.overlayShown}}
+  <div class="board__info">
+    {{#if attrs.waveStarted}}
+      <div class="board__points">
+        Points: {{wavePoints}}
+      </div>
+    {{/if}}
 
+    <button class="board__volume" {{action "toggleVolume"}}>
+      <i class="fa fa-lg fa-{{volume}}"></i>
+    </button>
+  </div>
+{{/unless}}
+
+{{#if attrs.waveStarted}}
   {{#each mobs as |mob|}}
     {{td-game/board/mob add-points=(action "addPoints")
                         class=(readonly mob.posClass)
@@ -50,5 +60,6 @@
                               selectedTowerGroup=(readonly selectedTowerGroup)
                               select-tower=(action attrs.select-tower)
                               towerGroup=(readonly towerGroup)
+                              volumeKey=(readonly volumeKey)
                               waveStarted=(readonly attrs.waveStarted)}}
 {{/each}}

@@ -19,6 +19,33 @@ const BoardComponent = Ember.Component.extend({
   ))
 });
 
+///////////////////////
+//                   //
+//   Sound Effects   //
+//                   //
+///////////////////////
+
+BoardComponent.reopen({
+  volumeSettings: ['volume-up', 'volume-down', 'volume-off'],
+
+  volumeKey: 0,
+
+  volume: Ember.computed('volumeKey', function () {
+    const volumeKey = this.get('volumeKey');
+    return this.get('volumeSettings').objectAt(`${volumeKey}`);
+  }),
+
+  actions: {
+    toggleVolume() {
+      if (this.get('volumeKey') < 2) {
+        this.incrementProperty('volumeKey');
+      } else {
+        this.set('volumeKey', 0);
+      }
+    }
+  }
+});
+
 ////////////////////
 //                //
 //   Mob Basics   //

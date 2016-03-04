@@ -593,11 +593,24 @@ TowerComponent.reopen({
       `<audio class="cannon-sound" autoplay>
          <source src="/sounds/cannon-${cannonType}.mp3" type="audio/mpeg">
        </audio>`
-     );
+    );
 
-     $cannonSoundEl.prop('volume', 0.5);
+    $cannonSoundEl.appendTo('.td-game__board');
 
-     $cannonSoundEl.appendTo('.td-game__board');
+    //  volumeKey: 0: up, 1: down, 2: off
+    switch (this.attrs.volumeKey) {
+      case 0:
+        Ember.$('.cannon-sound').prop('volume', 0.5);
+        break;
+
+      case 1:
+        Ember.$('.cannon-sound').prop('volume', 0.2);
+        break;
+
+      case 2:
+        Ember.$('.cannon-sound').prop('volume', 0);
+        break;
+    }
   },
 
   _cleanUpAudioTags: Ember.on('willDestroyElement', function () {
