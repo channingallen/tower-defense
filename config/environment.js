@@ -18,7 +18,7 @@ module.exports = function(environment) {
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com",
       'font-src': "'self' fonts.gstatic.com",
       'connect-src': "'self'",
-      'img-src': "'self' https://www.google-analytics.com",
+      'img-src': "'self' https://www.google-analytics.com https://twitter.com",
       'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
       'frame-src': "none"
     },
