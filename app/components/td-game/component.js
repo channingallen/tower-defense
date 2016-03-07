@@ -190,8 +190,20 @@ GameComponent.reopen({
     this.set('overlayShown', false);
   },
 
-  _refreshOverlayAndModal() {
+  _hideOverlayAndModals() {
+    this._hideOverlay();
+    this._hideModalsOnly();
+  },
+
+  _hideModalsOnly() {
+    this._hideInstructionsModal();
     this._hideGradeModal();
+    this._hideCancellationModal();
+    this._hideSupportModal();
+  },
+
+  _refreshOverlayAndModal() {
+    this._hideModalsOnly();
     this._showInstructionsModal();
     this._showOverlay();
   },
@@ -203,10 +215,7 @@ GameComponent.reopen({
   _escapeOverlay: Ember.on('didInsertElement', function () {
     Ember.$(window).on('keydown', (keyEvent) => {
       if (this.get('overlayShown') && keyEvent.which === 27) {
-        this._hideOverlay();
-        this._hideInstructionsModal();
-        this._hideGradeModal();
-        this._hideCancellationModal();
+        this._hideOverlayAndModals();
       }
     });
   }),
@@ -217,17 +226,12 @@ GameComponent.reopen({
       // the directly-clicked element (event.target), must be the overlay
       // (event.currentTarget) for the overlay to remain
       if (event.currentTarget === event.target) {
-        this._hideOverlay();
-        this._hideInstructionsModal();
-        this._hideGradeModal();
+        this._hideOverlayAndModals();
       }
     },
 
     hideOverlay() {
-      this._hideOverlay();
-      this._hideInstructionsModal();
-      this._hideGradeModal();
-      this._hideCancellationModal();
+      this._hideOverlayAndModals();
     },
 
     showOverlay() {
@@ -237,11 +241,13 @@ GameComponent.reopen({
   }
 });
 
-//////////////////////////
-//                      //
-//   Score Management   //
-//                      //
-//////////////////////////
+
+////////////////////////////
+//                        //
+//      Modal: Grade      //
+//   (Score Management)   //
+//                        //
+////////////////////////////
 
 GameComponent.reopen({
   gradeModalShown: false,
@@ -259,7 +265,6 @@ GameComponent.reopen({
   score: null,
 
   actions: {
-
     scoreWave(wavePoints) {
       this.set('score', wavePoints);
 
@@ -279,11 +284,11 @@ GameComponent.reopen({
   }
 });
 
-//////////////////////
-//                  //
-//   Instructions   //
-//                  //
-//////////////////////
+/////////////////////////////
+//                         //
+//   Modal: Instructions   //
+//                         //
+/////////////////////////////
 
 GameComponent.reopen({
   instructionsModalShown: true,
@@ -305,11 +310,12 @@ GameComponent.reopen({
   })
 });
 
-///////////////////////////
-//                       //
-//   Wave Cancellation   //
-//                       //
-///////////////////////////
+/////////////////////////////
+//                         //
+//   Modal: Cancellation   //
+//   (Wave Cancellation)   //
+//                         //
+/////////////////////////////
 
 GameComponent.reopen({
   cancellationModalShown: false,
@@ -351,6 +357,36 @@ GameComponent.reopen({
     }
   }
 });
+
+////////////////////////
+//                    //
+//   Modal: Support   //
+//                    //
+////////////////////////
+
+GameComponent.reopen({
+  supportModalShown: false,
+
+  _hideSupportModal() {
+    this.set('supportModalShown', false);
+  },
+
+  _showSupportModal() {
+    this.set('supportModalShown', true);
+  },
+
+  actions: {
+    hideSupportModal() {
+      this.set('supportModalShown', false);
+    },
+
+    showSupportModal() {
+      this._hideModalsOnly();
+      this._showSupportModal();
+    }
+  }
+});
+
 ///////////////////////
 //                   //
 //   Dropdown Menu   //

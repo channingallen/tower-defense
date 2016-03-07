@@ -250,7 +250,7 @@ $td-game__item__margin-bottom: 20px;
   }
 }
 
-.modal__support-link {
+.modal__support-link, a.support__twitter-link {
   color: $background-color--main;
   cursor: pointer;
   font-family: $font-family--standard;
@@ -260,6 +260,17 @@ $td-game__item__margin-bottom: 20px;
     color: lighten($background-color--main, 15%);
     text-decoration: underline;
   }
+}
+
+.modal__support {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.support__form {
+  margin: 30px 0;
 }
 
 .modal code {
