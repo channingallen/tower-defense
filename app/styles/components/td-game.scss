@@ -228,6 +228,12 @@ $td-game__item__margin-bottom: 20px;
   }
 }
 
+.modal__actions {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}
+
 .modal__button {
   background-color: $background-color--main;
   border-radius: 4px;
@@ -241,6 +247,18 @@ $td-game__item__margin-bottom: 20px;
 
   &:hover {
     background-color: darken($background-color--main, 7.5%);
+  }
+}
+
+.modal__support-link {
+  color: $background-color--main;
+  cursor: pointer;
+  font-family: $font-family--standard;
+  text-decoration: underline;
+
+  &:hover {
+    color: lighten($background-color--main, 15%);
+    text-decoration: underline;
   }
 }
 

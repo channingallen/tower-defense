@@ -124,7 +124,11 @@
       <div class="modal">
         {{#if instructionsModalShown}}
           <div class="modal__instructions">{{{instructionsMain}}}</div>
-          <button class="modal__button" {{action "hideOverlay"}}>Ok, got it!</button>
+
+          <div class="modal__actions">
+            <button class="modal__button" {{action "hideOverlay"}}>Ok, got it!</button>
+            <a class="modal__support-link">Support this project</a>
+          </div>
 
         {{else if gradeModalShown}}
           {{#if passed}}
@@ -148,19 +152,30 @@
             </div>
           {{/if}}
 
-          <button class="modal__button" {{action "hideOverlay"}}>Try again</button>
-          {{#unless isLastWave}}
-            <button class="modal__button" {{action "changeWaveNext"}}>Next wave</button>
-          {{/unless}}
+          <div class="modal__actions">
+            <div class="modal__buttons">
+              <button class="modal__button" {{action "hideOverlay"}}>Try again</button>
+              {{#unless isLastWave}}
+              <button class="modal__button" {{action "changeWaveNext"}}>Next wave</button>
+              {{/unless}}
+            </div>
+            <a class="modal__support-link">Support this project</a>
+          </div>
         {{else if cancellationModalShown}}
           <div class="modal__grade">
             <p>Sorry! Flexbox Defense doesn't run well in the background just yet.</p>
             <p>Mind trying again?</p>
           </div>
 
-          <button class="modal__button" {{action "hideOverlay"}}>Try again</button>
+          <div class="modal__actions">
+            <button class="modal__button" {{action "hideOverlay"}}>Try again</button>
+            <a class="modal__support-link">Support this project</a>
+          </div>
         {{else}}
-          <button class="modal__button" {{action "hideOverlay"}}>Dismiss</button>
+          <div class="modal__actions">
+            <button class="modal__button" {{action "hideOverlay"}}>Dismiss</button>
+            <a class="modal__support-link">Support this project</a>
+          </div>
         {{/if}}
       </div>
     </div>
