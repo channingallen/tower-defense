@@ -66,19 +66,17 @@
     <span class="hide-inputs__text" {{action "toggleHideInputs"}}>hide tower inputs</span>
   </div>
 
-  {{#unless attrs.waveStarted}}
-    {{#if attrs.towersColliding}}
-      <button class="stylesheet__start-wave-button">Start Wave</button>
-    {{else}}
-      <button class="stylesheet__start-wave-button stylesheet__start-wave-button--active" {{action "startWave"}}>Start Wave</button>
-    {{/if}}
-  {{/unless}}
-
   {{#if attrs.waveStarted}}
     {{#if attrs.cancellingWave}}
       <button class="stylesheet__cancel-wave-button">Cancel Wave</button>
     {{else}}
       <button class="stylesheet__cancel-wave-button stylesheet__cancel-wave-button--active" {{action "cancelWave"}}>Cancel Wave</button>
+    {{/if}}
+  {{else}}
+    {{#if attrs.towersColliding}}
+      <button class="stylesheet__start-wave-button">Start Wave</button>
+    {{else}}
+      <button class="stylesheet__start-wave-button stylesheet__start-wave-button--active" {{action "startWave"}}>Start Wave</button>
     {{/if}}
   {{/if}}
 </div>
