@@ -47,7 +47,7 @@ $button-color--cancel: hsl(0, 50%, 50%);
   position: relative;
   width: 100%;
 
-  & > :last-child {
+  & > li:last-of-type {
     margin-bottom: 50px;
   }
 }
