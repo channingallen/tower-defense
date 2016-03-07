@@ -71,9 +71,10 @@ BlockComponent.reopen({
       this._deleteCodeLine(id);
     },
 
-    submitCodeLine(codeStr, id) {
+    submitCodeLine(codeStr, id, valid) {
       this.get('codeLines').forEach((unitCodeLine) => {
         if (unitCodeLine.get('id') === id) {
+          unitCodeLine.set('valid', valid);
           unitCodeLine.set('codeLine', codeStr);
           unitCodeLine.set('submitted', true);
         }

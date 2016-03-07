@@ -42,7 +42,8 @@ InputComponent.reopen({
     if (this.get('inputValid')) {
       this.attrs['submit-code-line'](
         this.get('inputValue'),
-        this.attrs.codeLineId
+        this.attrs.codeLineId,
+        true
       );
     } else if (this.get('inputEmpty')) {
       this.attrs['delete-code-line'](this.attrs.codeLineId);
@@ -51,7 +52,8 @@ InputComponent.reopen({
 
       this.attrs['submit-code-line'](
         this.get('inputValue'),
-        this.attrs.codeLineId
+        this.attrs.codeLineId,
+        false
       );
     }
   }
