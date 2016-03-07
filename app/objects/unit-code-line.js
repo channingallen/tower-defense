@@ -3,7 +3,8 @@ import Ember from 'ember';
 const UnitCodeLine = Ember.Object.extend({
   id: null,
   codeLine: undefined,
-  submitted: false
+  submitted: null,
+  valid: null
 });
 
 export default UnitCodeLine;

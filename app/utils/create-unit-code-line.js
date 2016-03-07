@@ -14,7 +14,9 @@ function generateIdForRecord() {
 
 export default function createUnitCodeLine() {
   const unitCodeLine = UnitCodeLine.create({
-    id: generateIdForRecord()
+    id: generateIdForRecord(),
+    submitted: false,
+    valid: false
   });
 
   return unitCodeLine;
