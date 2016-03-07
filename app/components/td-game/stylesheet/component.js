@@ -10,11 +10,11 @@ const StylesheetComponent = Ember.Component.extend({
   classNames: ['sidebar__stylesheet']
 });
 
-//////////////////////
-//                  //
-//   Tower Inputs   //
-//                  //
-//////////////////////
+/////////////////////////////
+//                         //
+//   Toggle Tower Inputs   //
+//                         //
+/////////////////////////////
 
 StylesheetComponent.reopen({
   towerInputsHidden: true,
@@ -289,6 +289,20 @@ StylesheetComponent.reopen({
   actions: {
     notifyFinalInput() {
       this.set('finalInputFound', true);
+    }
+  }
+});
+
+/////////////////////
+//                 //
+//   Help Button   //
+//                 //
+/////////////////////
+
+StylesheetComponent.reopen({
+  actions: {
+    showOverlay() {
+      this.attrs['show-overlay']();
     }
   }
 });
