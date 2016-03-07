@@ -25,8 +25,8 @@ const InputComponent = Ember.Component.extend({
       this._submitCode();
     },
 
-    handleKeyUp(keyUpVal) {
-      this.set('inputValue', keyUpVal);
+    handleKeyDown(keyDownVal) {
+      this.set('inputValue', keyDownVal);
     }
   }
 });
