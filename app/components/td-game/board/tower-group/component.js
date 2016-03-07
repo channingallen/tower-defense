@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import createFlexboxRef from 'tower-defense/utils/create-flexbox-ref';
 import { boardPaddingPct } from 'tower-defense/objects/board';
 import { spaceBetweenTowersPct } from 'tower-defense/objects/tower-group';
 import { towerDimensions } from 'tower-defense/objects/tower';

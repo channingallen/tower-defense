@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import createFlexboxRef from 'tower-defense/utils/create-flexbox-ref';
 import Projectile from 'tower-defense/objects/projectile';
 import { pathWidth } from 'tower-defense/objects/board';
 import { towerDimensions } from 'tower-defense/objects/tower';
