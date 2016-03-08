@@ -195,7 +195,7 @@ $td-game__item__margin-bottom: 20px;
   padding: 0px 5px 2px;
 }
 
-$tooltip--color: hsla(0, 0%, 0%, 0.5);
+$tooltip--color: hsla(0, 0%, 10%, 0.85);
 .instructions__tooltip {
   display: none;
   position: absolute;
@@ -241,7 +241,7 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
 }
 
 .tooltip__text {
-  background-color: hsla(0, 0%, 10%, 0.85);
+  background-color: $tooltip--color;
   border-radius: 2px;
   padding: 10px;
 }
