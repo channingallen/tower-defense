@@ -341,7 +341,7 @@ GameComponent.reopen({
 
   // until timing functions account for tabbing out, cancel waves on blur
   _autoBeginWaveCancellation: Ember.on('didInsertElement', function () {
-    Ember.$(window).on('blur', () => {
+    Ember.$(document).on('visibilitychange', () => {
       if (this.get('waveStarted')) {
         this._beginWaveCancellation();
 
