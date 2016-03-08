@@ -130,9 +130,9 @@ have equal space around them
 * \`center\`: align items across the center of the container
 * \`baseline\`: align items across the baseline of the container
 * \`stretch\`: stretch items to fill the container`,
-      tldr: `Use <span class="text__code">justify-content</span>, <span
-             class="text__code">align-items</span>, and <span
-             class="text__code">align-self</span> to move your towers into
+      tldr: `Use <span class="text__code">justify-content ▾</span>, <span
+             class="text__code">align-items ▾</span>, and <span
+             class="text__code">align-self ▾</span> to move your towers into
              position.`
     },
     minimumScore: 80

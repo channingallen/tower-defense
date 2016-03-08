@@ -181,7 +181,6 @@ $td-game__item__margin-bottom: 20px;
 .sidebar__instructions {
   flex: 0 0 auto;
   margin-bottom: $td-game__item__margin-bottom;
-  position: relative;
 
   ul {
     list-style: disc;
@@ -193,26 +192,24 @@ $td-game__item__margin-bottom: 20px;
   background-color: hsla(0, 0%, 0%, 0.3);
   color: hsl(0, 0%, 90%);
   cursor: help;
-  padding: 1px 5px 3px;
-  text-decoration: underline;
+  padding: 0px 5px 2px;
 }
 
 $tooltip--color: hsla(0, 0%, 0%, 0.5);
-
 .instructions__tooltip {
+  display: none;
   position: absolute;
 
   color: hsl(0, 0%, 85%);
   cursor: default;
   font-family: $font-family--monospace;
   font-weight: 500;
-  // height: 100%;
   position: absolute;
   max-width: 300px;
-  z-index: 1;
+  z-index: 2;
 
   & p {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -221,7 +218,8 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
   border-right: solid transparent 8px;
   content: " ";
   height: 0;
-  margin: 4px auto;
+  margin-top: 4px;
+  margin-left: 20px;
   width: 0;
 }
 
@@ -243,8 +241,9 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
 }
 
 .tooltip__text {
-  background-color: hsla(0, 0%, 10%, 0.7);
-  padding: 5px;
+  background-color: hsla(0, 0%, 10%, 0.85);
+  border-radius: 2px;
+  padding: 10px;
 }
 
 /////////////////

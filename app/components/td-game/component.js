@@ -115,10 +115,18 @@ GameComponent.reopen({
         if (!this.get('overlayShown')) {
           this.$('.text__code').on('mouseover', (mouseoverEvent) => {
             this.set('instructionToolTipShown', true);
-            this.set('instructionToolTipProperty', mouseoverEvent.target.textContent);
+
+            const $hoverElement = Ember.$(mouseoverEvent.target);
+            this.set('instructionToolTipProperty', $hoverElement.text());
+            Ember.$('.instructions__tooltip').css({
+              display: 'block',
+              left: `${$hoverElement.offset().left}px`,
+              top: `${$hoverElement.offset().top + 20}px`,
+            });
           });
 
           this.$('.text__code').on('mouseout', () => {
+            Ember.$('.instructions__tooltip').css('display', 'none');
             this.set('instructionToolTipShown', false);
             this.set('instructionToolTipProperty', null);
           });

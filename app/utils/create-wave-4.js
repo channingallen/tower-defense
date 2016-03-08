@@ -117,8 +117,8 @@ export default function createWave4() {
 * \`center\`: align items across the center of the container
 * \`baseline\`: align items across the baseline of the container
 * \`stretch\`: stretch items to fill the container`,
-      tldr: `Use <span class="text__code">align-items</span> to move your towers
-             into effective positions.`
+      tldr: `Use <span class="text__code">align-items ▾</span> to move your
+             towers into effective positions.`
     },
     minimumScore: 80
   });

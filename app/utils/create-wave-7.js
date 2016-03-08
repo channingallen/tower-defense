@@ -121,7 +121,7 @@ accepts the following values:
 * \`row-reverse\`: lay out items from right to left
 * \`column\`: lay out items from top to bottom
 * \`column-reverse\`: lay out items from bottom to top`,
-      tldr: `Use <span class="text__code">flex-direction</span> to move your
+      tldr: `Use <span class="text__code">flex-direction ▾</span> to move your
              towers into position.`
     },
     minimumScore: 80
