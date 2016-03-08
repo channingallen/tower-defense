@@ -135,7 +135,7 @@ have equal space around them
 **order**
 * \`#\`: position an item relative to the other items in the container`,
     tldr: `Move your towers into position by combining the container properties
-           \`justify-content\` and \`align-items\` with the item property
+           \`justify-content\` and align items with the item property
            \`order\`. Remember that all items have a default order of 0.`
     },
     minimumScore: 80
