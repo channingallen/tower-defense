@@ -97,6 +97,37 @@ GameComponent.reopen({
   }
 });
 
+//////////////////////////////
+//                          //
+//   Instructions Tooltip   //
+//                          //
+//////////////////////////////
+
+GameComponent.reopen({
+  instructionToolTipShown: false,
+
+  instructionToolTipProperty: null,
+
+  _showInstructionTooltip: Ember.on(
+    'didInsertElement',
+    Ember.observer('overlayShown', function () {
+      Ember.run.schedule('afterRender', this, () => {
+        if (!this.get('overlayShown')) {
+          this.$('.text__code').on('mouseover', (mouseoverEvent) => {
+            this.set('instructionToolTipShown', true);
+            this.set('instructionToolTipProperty', mouseoverEvent.target.textContent);
+          });
+
+          this.$('.text__code').on('mouseout', () => {
+            this.set('instructionToolTipShown', false);
+            this.set('instructionToolTipProperty', null);
+          });
+        }
+      });
+    })
+  )
+});
+
 /////////////////////////
 //                     //
 //   Tower Selection   //

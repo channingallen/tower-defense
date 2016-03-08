@@ -28,7 +28,7 @@
   to { -webkit-transform: translateY(0px); opacity: 1; }
 }
 
-$tooltip--color: hsla(0, 0%, 0%, 0.5);
+$tool-tip--color: hsla(0, 0%, 0%, 0.5);
 
 .tool-tip {
   color: hsl(0, 0%, 85%);
@@ -66,7 +66,7 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
 }
 
 .tool-tip__content nobr {
-  background-color: $tooltip--color;
+  background-color: $tool-tip--color;
   padding: 4px 5px;
 }
 
@@ -92,9 +92,9 @@ $tooltip--color: hsla(0, 0%, 0%, 0.5);
 }
 
 .tool-tip__caret--below {
-  border-bottom: solid $tooltip--color 8px;
+  border-bottom: solid $tool-tip--color 8px;
 }
 
 .tool-tip__caret--above {
-  border-top: solid $tooltip--color 8px;
+  border-top: solid $tool-tip--color 8px;
 }

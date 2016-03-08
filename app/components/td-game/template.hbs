@@ -63,7 +63,44 @@
     {{!-- TODO: make this a component --}}
     {{!-- Instructions --}}
     <div class="sidebar__instructions">
-      <div class="">{{{instructionsTldr}}}</div>
+      <div class="instructions__text">
+        {{{instructionsTldr}}}
+      </div>
+      {{#if instructionToolTipShown}}
+        <div class="instructions__tooltip">
+          <div class="tooltip__caret tooltip__caret--below"></div>
+          <div class="tooltip__content tooltip__content--below">
+            <div class="tooltip__text">
+              {{#if (eq instructionToolTipProperty "justify-content")}}
+                <p><u>flex-start</u>: group items in the left (the start) of a container</p>
+                <p><u>flex-end</u>: group items in the right of a container</p>
+                <p><u>center</u>: group items in the center of a container</p>
+                <p><u>space-between</u>: evenly distribute items in a container such that the first item aligns to the left and the final item aligns to the right</p>
+                <p><u>space-around</u>: evenly distribute items in a container such that all items have equal space around them</p>
+              {{else if (eq instructionToolTipProperty "align-items")}}
+                <p><u>flex-start</u>: align items across the top of the container</p>
+                <p><u>flex-end</u>: align items across the bottom of the container</p>
+                <p><u>center</u>: align items across the center of the container</p>
+                <p><u>baseline</u>: align items across the baseline of the container</p>
+                <p><u>stretch</u>: stretch items to fill the container</p>
+              {{else if (eq instructionToolTipProperty "flex-direction")}}
+                <p><u>row</u>: lay out items from left to right</p>
+                <p><u>row-reverse</u>: lay out items from right to left</p>
+                <p><u>column</u>: lay out items from top to bottom</p>
+                <p><u>column-reverse</u>: lay out items from bottom to top</p>
+              {{else if (eq instructionToolTipProperty "order")}}
+                <p><u>#</u>: position an item relative to the other items in the container</p>
+              {{else if (eq instructionToolTipProperty "align-self")}}
+                <p><u>flex-start</u>: align items across the top of the container</p>
+                <p><u>flex-end</u>: align items across the bottom of the container</p>
+                <p><u>center</u>: align items across the center of the container</p>
+                <p><u>baseline</u>: align items across the baseline of the container</p>
+                <p><u>stretch</u>: stretch items to fill the container</p>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
     </div>
 
     {{td-game/stylesheet cancel-wave=(action "beginWaveCancellation")

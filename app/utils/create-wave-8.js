@@ -140,8 +140,10 @@ have equal space around them
 * \`row-reverse\`: lay out items from right to left
 * \`column\`: lay out items from top to bottom
 * \`column-reverse\`: lay out items from bottom to top`,
-      tldr: `Use \`justify-content\`, \`align-items\`, and \`flex-direction\` to
-             move your towers into position.`
+      tldr: `Use <span class="text__code">justify-content</span>, <span
+             class="text__code">align-items</span>, and <span
+             class="text__code">flex-direction</span> to move your towers into
+             position.`
     },
     minimumScore: 80
   });

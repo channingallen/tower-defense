@@ -109,9 +109,9 @@ export default function createWave1() {
              defenses. Unlike other tower defense games, you must position your
              towers using CSS!
 
-We'll start with container properties. Use the \`justify-content\` property to move
-the towers into effective positions. \`justify-content\` positions a container's
-items horizontally and accepts the following values:
+We'll start with container properties. Use the \`justify-content\` property to
+move the towers into effective positions. \`justify-content\` positions a
+container's items horizontally and accepts the following values:
 
 * \`flex-start\`: group items in the left (the start) of a container
 * \`flex-end\`: group items in the right of a container
@@ -123,9 +123,10 @@ have equal space around them
 
 To move the container's towers to the center, for example, try
 \`justify-content: center;\``,
-      tldr: `Use the \`justify-content\` property to move these two towers into
-           position. Click the <i class="fa fa-question-circle"></i> button in
-           the stylesheet for a reminder on how the property works.`
+      tldr: `Use the <span class="text__code">justify-content</span>
+             property to move these two towers into position. Click the <i
+             class="fa fa-question-circle"></i> button in the stylesheet for a
+             reminder on how the property works.`
     },
     minimumScore: 80
   });

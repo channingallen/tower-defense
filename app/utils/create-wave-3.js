@@ -117,7 +117,8 @@ export default function createWave3() {
 item aligns to the left and the final item aligns to the right
 * \`space-around\`: evenly distribute items in a container such that all items
 have equal space around them`,
-      tldr: `Use \`justify-content\` to move your towers into position.`
+      tldr: `Use <span class="text__code">justify-content</span>
+             to move your towers into position.`
     },
     minimumScore: 80
   });
