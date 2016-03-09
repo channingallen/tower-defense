@@ -135,9 +135,9 @@ have equal space around them
 **order**
 * \`#\`: position an item relative to the other items in the container`,
     tldr: `Move your towers into position by combining the container properties
-           <span class="text__code">justify-content ▾</span> and <span
-           class="text__code">align-items ▾</span> with the item property <span
-           class="text__code">order ▾</span>. Remember that all items have a
+           <nobr class="text__code">justify-content ▾</nobr> and <nobr
+           class="text__code">align-items ▾</nobr> with the item property <nobr
+           class="text__code">order ▾</nobr>. Remember that all items have a
            default order of 0.`
     },
     minimumScore: 80

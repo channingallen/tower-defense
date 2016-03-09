@@ -123,7 +123,7 @@ have equal space around them
 
 To move the container's towers to the center, for example, try
 \`justify-content: center;\``,
-      tldr: `Use the <span class="text__code">justify-content ▾</span> property to
+      tldr: `Use the <nobr class="text__code">justify-content ▾</nobr> property to
              move these two towers into position. Click the <i
              class="fa fa-question-circle"></i> button in the stylesheet for a
              reminder on how the property works.`
