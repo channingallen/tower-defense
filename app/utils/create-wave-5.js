@@ -128,9 +128,7 @@ have equal space around them
 **align-items**
 * \`flex-start\`: align items across the top of the container
 * \`flex-end\`: align items across the bottom of the container
-* \`center\`: align items across the center of the container
-* \`baseline\`: align items across the baseline of the container
-* \`stretch\`: stretch items to fill the container`,
+* \`center\`: align items across the center of the container`,
       tldr: `Use <nobr class="text__code">justify-content ▾</nobr> and <nobr
              class="text__code">align-items ▾</nobr> to move your towers into
              position.`

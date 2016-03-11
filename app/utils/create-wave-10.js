@@ -128,8 +128,10 @@ have equal space around them
 * \`flex-start\`: align items across the top of the container
 * \`flex-end\`: align items across the bottom of the container
 * \`center\`: align items across the center of the container
-* \`baseline\`: align items across the baseline of the container
-* \`stretch\`: stretch items to fill the container`,
+
+<u>Reminder</u>: \`align-self\` and \`align-items\` also accept the values
+<i>baseline</i> and <i>stretch</i>, but these values cannot be used in Flexbox
+Defense.`,
       tldr: `Use <nobr class="text__code">justify-content ▾</nobr>, <nobr
              class="text__code">align-items ▾</nobr>, and <nobr
              class="text__code">align-self ▾</nobr> to move your towers into

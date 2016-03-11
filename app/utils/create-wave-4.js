@@ -115,8 +115,10 @@ export default function createWave4() {
 * \`flex-start\`: align items across the top of the container
 * \`flex-end\`: align items across the bottom of the container
 * \`center\`: align items across the center of the container
-* \`baseline\`: align items across the baseline of the container
-* \`stretch\`: stretch items to fill the container`,
+
+<u>Note</u>: \`align-items\` also accepts the values <i>baseline</i> (align items such
+that their baselines line up) and <i>stretch</i> (stretch items to fill the
+container), but these values cannot be used in Flexbox Defense.`,
       tldr: `Use <nobr class="text__code">align-items ▾</nobr> to move your
              towers into effective positions.`
     },

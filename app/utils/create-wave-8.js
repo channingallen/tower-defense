@@ -132,8 +132,6 @@ have equal space around them
 * \`flex-start\`: align items across the top of the container
 * \`flex-end\`: align items across the bottom of the container
 * \`center\`: align items across the center of the container
-* \`baseline\`: align items across the baseline of the container
-* \`stretch\`: stretch items to fill the container
 
 **flex-direction**
 * \`row\`: lay out items from left to right
