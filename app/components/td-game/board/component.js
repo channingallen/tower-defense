@@ -65,6 +65,8 @@ BoardComponent.reopen({
 ////////////////////////
 
 BoardComponent.reopen({
+  numMobsTerminated: 0,
+
   _generateMobs() {
     if (this.get('waveCancelled')) {
       this.set('waveCancelled', false);
@@ -91,6 +93,12 @@ BoardComponent.reopen({
     }
   },
 
+  mobFrequency: Ember.computed('mobIndex', function () {
+    const mobIndex = this.get('mobIndex');
+    const waveMob = this.attrs.waveMobs[mobIndex];
+    return waveMob.get('frequency');
+  }),
+
   numMobsToTerminate: Ember.computed('attrs.waveStarted', function () {
     const firstMob = this.attrs.waveMobs.objectAt(0);
     const firstMobExists = !!firstMob;
@@ -101,15 +109,7 @@ BoardComponent.reopen({
     }
   }),
 
-  numMobsTerminated: 0,
-
-  mobFrequency: Ember.computed('mobIndex', function () {
-    const mobIndex = this.get('mobIndex');
-    const waveMob = this.attrs.waveMobs[mobIndex];
-    return waveMob.get('frequency');
-  }),
-
-  kickOffMobGeneration: Ember.observer('attrs.waveStarted', function () {
+  _kickOffMobGeneration: Ember.observer('attrs.waveStarted', function () {
     if (!this.attrs.waveStarted) {
       this.set('mobIndex', 0);
       this.set('mobs', []);
@@ -166,18 +166,18 @@ BoardComponent.reopen({
       mob.set('active', false);
     },
 
-    updateMobClass(mobId, newClass) {
-      this.get('mobs').forEach((mob) => {
-        if (mobId === mob.get('id')) {
-          mob.set('posClass', newClass);
-        }
-      });
-    },
-
     reportMobPosition(mobId, axis, pos) {
       this.get('mobs').forEach((mob) => {
         if (mobId === mob.get('id')) {
           mob.set('pos' + axis, pos);
+        }
+      });
+    },
+
+    updateMobClass(mobId, newClass) {
+      this.get('mobs').forEach((mob) => {
+        if (mobId === mob.get('id')) {
+          mob.set('posClass', newClass);
         }
       });
     }
