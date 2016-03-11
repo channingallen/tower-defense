@@ -283,6 +283,7 @@ $tooltip--color: hsla(0, 0%, 10%, 0.85);
   align-items: baseline;
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .modal__button {
@@ -293,7 +294,6 @@ $tooltip--color: hsla(0, 0%, 10%, 0.85);
   display: inline-block;
   font-family: $font-family--standard;
   font-size: 16px;
-  margin-top: 15px;
   padding: 0.7em 1.2em;
 
   &:hover {
