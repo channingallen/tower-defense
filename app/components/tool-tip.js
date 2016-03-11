@@ -7,20 +7,15 @@ import Ember from 'ember';
 ////////////////
 
 const ToolTipComponent = Ember.Component.extend({
+  atTop: null,
+
   classNameBindings: ['atTop:tool-tip--below:tool-tip--above'],
 
   classNames: ['tool-tip'],
 
-  atTop: null,
-
-  updateAtTop: Ember.on('didInsertElement', function () {
-    const atTop = this.$().offset().top < 100;
-    this.set('atTop', atTop);
-  }),
-
-  keepTowerToolTipsOnScreen: Ember.on('didInsertElement', Ember.observer('atTop', function () {
+  _keepTowerToolTipsOnScreen: Ember.on('didInsertElement', Ember.observer('atTop', function () {
     const windowWidth = Ember.$(window).width();
-    const offsetLeft = this.$().offset  ().left;
+    const offsetLeft = this.$().offset().left;
     const textOuterWidth = this.$('nobr').outerWidth();
     const offsetLeftPlusOuterWidth = offsetLeft + textOuterWidth;
     const offsetRight = windowWidth - offsetLeftPlusOuterWidth;
@@ -31,7 +26,12 @@ const ToolTipComponent = Ember.Component.extend({
         this.$('.tool-tip__content').css('margin-left', `${offsetRight}px`);
       });
     }
-  }))
+  })),
+
+  _updateAtTop: Ember.on('didInsertElement', function () {
+    const atTop = this.$().offset().top < 100;
+    this.set('atTop', atTop);
+  })
 });
 
 export default ToolTipComponent;
