@@ -19,12 +19,6 @@ const StylesheetComponent = Ember.Component.extend({
 StylesheetComponent.reopen({
   towerInputsHidden: true,
 
-  _showTowerInputs: Ember.observer('towerInputsHidden', function () {
-    if (!this.get('towerInputsHidden')) {
-      this.attrs['show-tower-inputs']();
-    }
-  }),
-
   _hideTowerInputs: Ember.observer('towerInputsHidden', function () {
     if (this.get('towerInputsHidden')) {
       this.attrs['hide-tower-inputs']();
@@ -33,6 +27,12 @@ StylesheetComponent.reopen({
 
   _resetTowerInputsHidden: Ember.observer('attrs.towerStylesHidden', function () {
     this.set('towerInputsHidden', this.attrs.towerStylesHidden);
+  }),
+
+  _showTowerInputs: Ember.observer('towerInputsHidden', function () {
+    if (!this.get('towerInputsHidden')) {
+      this.attrs['show-tower-inputs']();
+    }
   }),
 
   actions: {
@@ -51,7 +51,7 @@ StylesheetComponent.reopen({
 StylesheetComponent.reopen({
   waveStarting: false,
 
-  _falsifyWaveStarting: Ember.observer('waveStarted', function () {
+  _cancelWaveStarting: Ember.observer('waveStarted', function () {
     if (this.attrs.waveStarted) {
       this.set('waveStarting', false);
     }
@@ -61,19 +61,20 @@ StylesheetComponent.reopen({
   _startWave: Ember.observer('attrs.overlayShown', function () {
     if (this.attrs.overlayShown) {
       Ember.$(window).off('keypress');
-    } else {
-      Ember.$(window).on('keypress', (keyEvent) => {
-        if (keyEvent.shiftKey && keyEvent.which === 13) {
-          if (this.attrs.towersColliding) {
-            this._shake();
-            return;
-          }
-
-          this.set('waveStarting', true);
-          this.attrs['start-wave']();
-        }
-      });
+      return;
     }
+
+    Ember.$(window).on('keypress', (keyEvent) => {
+      if (keyEvent.shiftKey && keyEvent.which === 13) {
+        if (this.attrs.towersColliding) {
+          this._shake();
+          return;
+        }
+
+        this.set('waveStarting', true);
+        this.attrs['start-wave']();
+      }
+    });
   }),
 
   actions: {
@@ -263,11 +264,11 @@ StylesheetComponent.reopen({
 /////////////////////////
 
 StylesheetComponent.reopen({
+  finalInputFound: false,
+
   finalTowerId: null,
 
   firstTowerGroupId: null,
-
-  finalInputFound: false,
 
   _setFirstAndFinalUnitIds: Ember.on('init', Ember.observer(
     'attrs.currentWaveNumber',
