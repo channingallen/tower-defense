@@ -97,44 +97,6 @@ GameComponent.reopen({
   }
 });
 
-//////////////////////////////
-//                          //
-//   Instructions Tooltip   //
-//                          //
-//////////////////////////////
-
-GameComponent.reopen({
-  instructionToolTipShown: false,
-
-  instructionToolTipProperty: null,
-
-  _showInstructionTooltip: Ember.on(
-    'didInsertElement',
-    Ember.observer('overlayShown', function () {
-      Ember.run.schedule('afterRender', this, () => {
-        if (!this.get('overlayShown')) {
-          this.$('.text__code').on('mouseover', (mouseoverEvent) => {
-            this.set('instructionToolTipShown', true);
-
-            const $hoverElement = Ember.$(mouseoverEvent.target);
-            this.set('instructionToolTipProperty', $hoverElement.text());
-            Ember.$('.instructions__tooltip').css({
-              display: 'block',
-              left: `${$hoverElement.offset().left}px`,
-              top: `${$hoverElement.offset().top + 20}px`,
-            });
-          });
-
-          this.$('.text__code').on('mouseout', () => {
-            Ember.$('.instructions__tooltip').css('display', 'none');
-            this.set('instructionToolTipShown', false);
-            this.set('instructionToolTipProperty', null);
-          });
-        }
-      });
-    })
-  )
-});
 
 /////////////////////////
 //                     //
@@ -216,6 +178,176 @@ GameComponent.reopen({
   }
 });
 
+//////////////////////////////
+//                          //
+//   Instructions Tooltip   //
+//                          //
+//////////////////////////////
+
+GameComponent.reopen({
+  instructionToolTipProperty: null,
+
+  instructionToolTipShown: false,
+
+  _showInstructionTooltip: Ember.on(
+    'didInsertElement',
+    Ember.observer('overlayShown', function () {
+      Ember.run.schedule('afterRender', this, () => {
+        if (!this.get('overlayShown')) {
+          this.$('.text__code').on('mouseover', (mouseoverEvent) => {
+            this.set('instructionToolTipShown', true);
+
+            const $hoverElement = Ember.$(mouseoverEvent.target);
+            this.set('instructionToolTipProperty', $hoverElement.text());
+            Ember.$('.instructions__tooltip').css({
+              display: 'block',
+              left: `${$hoverElement.offset().left}px`,
+              top: `${$hoverElement.offset().top + 20}px`,
+            });
+          });
+
+          this.$('.text__code').on('mouseout', () => {
+            Ember.$('.instructions__tooltip').css('display', 'none');
+            this.set('instructionToolTipShown', false);
+            this.set('instructionToolTipProperty', null);
+          });
+        }
+      });
+    })
+  )
+});
+
+///////////////////////
+//                   //
+//   Dropdown Menu   //
+//                   //
+///////////////////////
+
+GameComponent.reopen({
+  closeDropdownFn: null,
+
+  dropdownActive: false,
+
+  numDropdownClicks: 0,
+
+  _deactivateDropdown(clickEvent) {
+    clickEvent.stopPropagation();
+
+    const $clickedElement = Ember.$(clickEvent.target);
+    const clickedDropdownBtn = $clickedElement.hasClass('nav__button--selector') ||
+                               $clickedElement.parents('.nav__button--selector').length > 0;
+    const clickedButtonMenu = $clickedElement.hasClass('button__menu') ||
+                              $clickedElement.parents('.button__menu').length > 0;
+
+    if (clickedDropdownBtn) {
+      this.incrementProperty('numDropdownClicks');
+    }
+
+    if (clickedDropdownBtn && this.get('numDropdownClicks') < 2 || clickedButtonMenu) {
+      return;
+    }
+
+    this.set('numDropdownClicks', 0);
+    this.set('dropdownActive', false);
+  },
+
+  waveLinks: Ember.computed('game', function () {
+    let waveLink = [];
+
+    for (let i = 1; i <= this.get('game.waves.length'); i++) {
+      waveLink.addObject(i);
+    }
+
+    return waveLink;
+  }),
+
+  _toggleDropdown: Ember.observer('dropdownActive', function () {
+    if (this.get('dropdownActive')) {
+      const closeDropdownFn = Ember.run.bind(this, '_deactivateDropdown');
+
+      Ember.$(window).on('click', closeDropdownFn);
+
+      this.set('closeDropdownFn', closeDropdownFn);
+    } else {
+      Ember.$(window).off('click', this.get('closeDropdownFn'));
+    }
+  }),
+
+  _preventSidebarScroll: Ember.observer('dropdownActive', function () {
+    if (this.get('dropdownActive')) {
+      this.$('.td-game__sidebar').css('overflow-y', 'visible');
+    } else {
+      this.$('.td-game__sidebar').css('overflow-y', 'auto');
+    }
+  }),
+
+  actions: {
+    openDropdown() {
+      this.set('dropdownActive', true);
+    }
+  }
+});
+
+//////////////////////////////
+//                          //
+//   Tower Input Checkbox   //
+//                          //
+//////////////////////////////
+
+GameComponent.reopen({
+  towerStylesHidden: true,
+
+  _resetTowerStylesHidden: Ember.observer('currentWaveNumber', function () {
+    this.set('towerStylesHidden', this.get('currentWave.towerStylesHidden'));
+  }),
+
+  actions: {
+    hideTowerInputs() {
+      this.set('towerStylesHidden', true);
+    },
+
+    showTowerInputs() {
+      this.set('towerStylesHidden', false);
+    }
+  }
+});
+
+////////////////////////
+//                    //
+//   Deselect Units   //
+//                    //
+////////////////////////
+
+GameComponent.reopen({
+  _handleClick: Ember.on('didInsertElement', function () {
+    this.$().click((clickEvent) => {
+      const $clickedEl = Ember.$(clickEvent.target);
+
+      const $towerGroupParents = $clickedEl.closest('.board__tower-group');
+      const isChildOfTowerGroup = $towerGroupParents.length > 0;
+
+      const $inputContainerParents = $clickedEl.closest('.block__input-container');
+      const isChildOfInputContainer = $inputContainerParents.length > 0;
+
+      const $toolTipParents = $clickedEl.closest('.tool-tip');
+      const isChildOfToolTip = $toolTipParents.length > 0;
+
+      const isOverlay = $clickedEl.hasClass('overlay');
+
+      const isPulse = $clickedEl.hasClass('tower-group__pulse');
+
+      if (!isChildOfTowerGroup &&
+          !isChildOfInputContainer &&
+          !isChildOfToolTip &&
+          !isOverlay &&
+          !isPulse) {
+        this.set('selectedTower', null);
+        this.set('selectedTowerGroup', null);
+      }
+    });
+  })
+});
+
 /////////////////
 //             //
 //   Overlay   //
@@ -225,6 +357,13 @@ GameComponent.reopen({
 GameComponent.reopen({
   overlayShown: true,
 
+  _hideModalsOnly() {
+    this._hideInstructionsModal();
+    this._hideGradeModal();
+    this._hideCancellationModal();
+    this._hideSupportModal();
+  },
+
   _hideOverlay() {
     this.set('overlayShown', false);
   },
@@ -232,13 +371,6 @@ GameComponent.reopen({
   _hideOverlayAndModals() {
     this._hideOverlay();
     this._hideModalsOnly();
-  },
-
-  _hideModalsOnly() {
-    this._hideInstructionsModal();
-    this._hideGradeModal();
-    this._hideCancellationModal();
-    this._hideSupportModal();
   },
 
   _refreshOverlayAndModal() {
@@ -293,6 +425,8 @@ GameComponent.reopen({
 
   passed: false,
 
+  score: null,
+
   _hideGradeModal() {
     this.set('gradeModalShown', false);
   },
@@ -300,8 +434,6 @@ GameComponent.reopen({
   _showGradeModal() {
     this.set('gradeModalShown', true);
   },
-
-  score: null,
 
   actions: {
     scoreWave(wavePoints) {
@@ -424,137 +556,6 @@ GameComponent.reopen({
       this._showSupportModal();
     }
   }
-});
-
-///////////////////////
-//                   //
-//   Dropdown Menu   //
-//                   //
-///////////////////////
-
-GameComponent.reopen({
-  closeDropdownFn: null,
-
-  dropdownActive: false,
-
-  numDropdownClicks: 0,
-
-  _deactivateDropdown(clickEvent) {
-    clickEvent.stopPropagation();
-
-    const $clickedElement = Ember.$(clickEvent.target);
-    const clickedDropdownBtn = $clickedElement.hasClass('nav__button--selector') ||
-                               $clickedElement.parents('.nav__button--selector').length > 0;
-    const clickedButtonMenu = $clickedElement.hasClass('button__menu') ||
-                              $clickedElement.parents('.button__menu').length > 0;
-
-    if (clickedDropdownBtn) {
-      this.incrementProperty('numDropdownClicks');
-    }
-
-    if (clickedDropdownBtn && this.get('numDropdownClicks') < 2 || clickedButtonMenu) {
-      return;
-    }
-
-    this.set('numDropdownClicks', 0);
-    this.set('dropdownActive', false);
-  },
-
-  waveLinks: Ember.computed('game', function () {
-    let waveLink = [];
-
-    for (let i = 1; i <= this.get('game.waves.length'); i++) {
-      waveLink.addObject(i);
-    }
-
-    return waveLink;
-  }),
-
-  _toggleDropdown: Ember.observer('dropdownActive', function () {
-    if (this.get('dropdownActive')) {
-      const closeDropdownFn = Ember.run.bind(this, '_deactivateDropdown');
-
-      Ember.$(window).on('click', closeDropdownFn);
-
-      this.set('closeDropdownFn', closeDropdownFn);
-    } else {
-      Ember.$(window).off('click', this.get('closeDropdownFn'));
-    }
-  }),
-
-  _preventSidebarScroll: Ember.observer('dropdownActive', function () {
-    if (this.get('dropdownActive')) {
-      this.$('.td-game__sidebar').css('overflow-y', 'visible');
-    } else {
-      this.$('.td-game__sidebar').css('overflow-y', 'auto');
-    }
-  }),
-
-  actions: {
-    openDropdown() {
-      this.set('dropdownActive', true);
-    }
-  }
-});
-
-//////////////////////////////
-//                          //
-//   Tower Input Checkbox   //
-//                          //
-//////////////////////////////
-
-GameComponent.reopen({
-  towerStylesHidden: true,
-
-  _resetTowerInputsHidden: Ember.observer('currentWaveNumber', function () {
-    this.set('towerStylesHidden', this.get('currentWave.towerStylesHidden'));
-  }),
-
-  actions: {
-    hideTowerInputs() {
-      this.set('towerStylesHidden', true);
-    },
-
-    showTowerInputs() {
-      this.set('towerStylesHidden', false);
-    }
-  }
-});
-
-////////////////////////
-//                    //
-//   Deselect Units   //
-//                    //
-////////////////////////
-
-GameComponent.reopen({
-  _sendSelectAction: Ember.on('didInsertElement', function () {
-    this.$().click((clickEvent) => {
-      const $clickedEl = Ember.$(clickEvent.target);
-
-      const $towerGroupParents = $clickedEl.closest('.board__tower-group');
-      const isChildOfTowerGroup = $towerGroupParents.length > 0;
-
-      const $inputContainerParents = $clickedEl.closest('.block__input-container');
-      const isChildOfInputContainer = $inputContainerParents.length > 0;
-
-      const $toolTipParents = $clickedEl.closest('.tool-tip');
-      const isChildOfToolTip = $toolTipParents.length > 0;
-
-      const isOverlay = $clickedEl.hasClass('overlay');
-
-      const isPulse = $clickedEl.hasClass('tower-group__pulse');
-
-      if (!isChildOfTowerGroup &&
-          !isChildOfInputContainer &&
-          !isChildOfToolTip &&
-          !isOverlay &&
-          !isPulse) {
-        this.set('selectedTower', null);
-        this.set('selectedTowerGroup', null);
-      }
-    });
-  })
 });
 
 export default GameComponent;
