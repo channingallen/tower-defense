@@ -77,6 +77,14 @@ InputComponent.reopen({
     inputEl.focus();
   },
 
+  shouldFocusNewInput: Ember.computed('attrs.blockSubmitted', function () {
+    if (!this.attrs.finalInputFound || this.attrs.overlayShown) {
+      return false;
+    }
+
+    return !this.attrs.blockSubmitted;
+  }),
+
   _focusIfFirstInput: Ember.on('didInsertElement',
     Ember.observer('overlayShown', function () {
       Ember.run.schedule('afterRender', this, () => {
@@ -95,14 +103,6 @@ InputComponent.reopen({
       }
     }
   ),
-
-  focusNewInput: Ember.computed('attrs.blockSubmitted', function () {
-    if (!this.attrs.finalInputFound || this.attrs.overlayShown) {
-      return false;
-    }
-
-    return !this.attrs.blockSubmitted;
-  }),
 
   _notifyOnFinalInput: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
@@ -173,6 +173,13 @@ InputComponent.reopen({
     return inputValueLowerCase.substring(0, colonLocation);
   },
 
+  _getValWithoutSemiColon(val) {
+    const lastIndex = val.length - 1;
+    if (val[lastIndex] === ';') {
+      return val.substring(0, lastIndex);
+    }
+  },
+
   _propertyFound() {
     if (this.get('inputEmpty')) {
       return false;
@@ -180,13 +187,6 @@ InputComponent.reopen({
 
     const colonLocation = this.get('inputValue').indexOf(':');
     return colonLocation < 1 ? false : true;
-  },
-
-  _getValWithoutSemiColon(val) {
-    const lastIndex = val.length - 1;
-    if (val[lastIndex] === ';') {
-      return val.substring(0, lastIndex);
-    }
   },
 
   _validPropertyFound() {
