@@ -24,7 +24,7 @@ TowerComponent.reopen({
 
   towerUpgraded: false,
 
-  applyTowerType: Ember.on('didInsertElement', function () {
+  _applyTowerType: Ember.on('didInsertElement', function () {
     Ember.run.schedule('afterRender', this, () => {
       if (this.attrs.type === 2) {
         this.set('towerUpgraded', true);
@@ -55,7 +55,7 @@ TowerComponent.reopen({
     }
   ),
 
-  _sendSelectAction: Ember.on('click', function () {
+  _handleClick: Ember.on('click', function () {
     this.attrs.select();
   })
 });
@@ -495,10 +495,6 @@ TowerComponent.reopen({
 /////////////////////
 
 TowerComponent.reopen({
-  projectiles: Ember.computed(function () {
-    return [];
-  }),
-
   _buildProjectile(mobId) {
     const targetedMob = this._getMobById(mobId);
     if (targetedMob) {
@@ -565,17 +561,18 @@ TowerComponent.reopen({
       case 0:
         this.$('.cannon-sound').prop('volume', 0.5);
         break;
-
       case 1:
         this.$('.cannon-sound').prop('volume', 0.2);
         break;
-
       case 2:
         this.$('.cannon-sound').prop('volume', 0);
         break;
     }
 
+    // batch remove audio tags
     Ember.run.later(this, () => {
+      // allow this._cleanUpAudioTags to remove
+      // remainder of tags on this.willDestroyElement
       if (this.isDestroying) {
         return;
       }
@@ -583,6 +580,10 @@ TowerComponent.reopen({
       this.$(`.cannon-sound-${mobId}`).remove();
     }, this.get('towerUpgraded') ? 3000 : 2000);
   },
+
+  projectiles: Ember.computed(function () {
+    return [];
+  }),
 
   _cleanUpAudioTags: Ember.on('willDestroyElement', function () {
     this.$('.cannon-sound').remove();
