@@ -14,7 +14,7 @@ const TowerGroupComponent = Ember.Component.extend({
 
   classNames: ['board__tower-group'],
 
-  setElementId: Ember.on('init', function () {
+  _setElementId: Ember.on('init', function () {
     this.set('elementId', `board__tower-group-${this.attrs.groupNum}`);
   })
 });
