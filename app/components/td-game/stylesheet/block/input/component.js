@@ -25,8 +25,17 @@ const InputComponent = Ember.Component.extend({
       this._submitCode();
     },
 
-    handleKeyDown(keyDownVal) {
-      this.set('inputValue', keyDownVal);
+    handleKeyDown(keyDownVal, keyDownEvent) {
+      const tabKey = 9;
+      const enterKey = 13;
+      if (keyDownEvent.which === tabKey || keyDownEvent.which === enterKey) {
+        console.log(`handleKeyDown`); // TODO THIS COMMIT: remove this
+        this.set('inputValue', keyDownVal);
+      }
+    },
+
+    handleKeyUp(keyUpVal) {
+      this.set('inputValue', keyUpVal);
     }
   }
 });
