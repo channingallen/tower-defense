@@ -12,14 +12,18 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-10.png');
 
   const pathObjects = [
-    PathCoords.create({ x: -3, y: 75 }),
-    PathCoords.create({ x: 15, y: 75 }),
-    PathCoords.create({ x: 15, y: 25 }),
-    PathCoords.create({ x: 50, y: 25 }),
-    PathCoords.create({ x: 50, y: 75 }),
-    PathCoords.create({ x: 85, y: 75 }),
-    PathCoords.create({ x: 85, y: 25 }),
-    PathCoords.create({ x: 103, y: 25 })
+    PathCoords.create({ x: 10, y: -3 }),
+    PathCoords.create({ x: 10, y: 30 }),
+    PathCoords.create({ x: 90, y: 30 }),
+    PathCoords.create({ x: 90, y: 10 }),
+    PathCoords.create({ x: 70, y: 10 }),
+    PathCoords.create({ x: 70, y: 50 }),
+    PathCoords.create({ x: 30, y: 50 }),
+    PathCoords.create({ x: 30, y: 90 }),
+    PathCoords.create({ x: 10, y: 90 }),
+    PathCoords.create({ x: 10, y: 70 }),
+    PathCoords.create({ x: 90, y: 70 }),
+    PathCoords.create({ x: 90, y: 103 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -32,14 +36,14 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 10;
+  const mobQuantity = 25;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 2000,
+      frequency: 700,
       health: 300,
       maxHealth: 300,
-      points: 10,
+      points: 4,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
       type: 'standard'
@@ -64,13 +68,13 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(7, 32);
+  const towerGroup1 = getNewTowerGroup(1, 17);
+  const towerGroup2 = getNewTowerGroup(1, 77);
 
-  addTowersToTowerGroup(towerGroup1, [
-    { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
-  ]);
+  addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 2 }, { type: 1 }]);
+  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 2 }, { type: 1 }]);
 
-  wave.set('towerGroups', Ember.A([towerGroup1]));
+  wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
 }
 
 function addTowersToTowerGroup(towerGroup, specsForTowers) {
@@ -109,11 +113,15 @@ export default function createWave10() {
   const wave = Wave.create({
     towerStylesHidden: false,
     instructions: {
-      main: `To vertically position individual towers, use \`align-self\`, which
-             accepts the same values as \`align-items\`.
+      main: `The super towers are in bad positions again, but this time you'll
+             need to apply styles to the towers themselves.
 
-Use \`justify-content\`, \`align-items\`, and \`align-self\` to move your towers
-into position.
+The \`order\` property defines the order in which an item appears in the flex
+container and accepts both positive and negative integer values. All flex items
+begin with a default order of 0, so an item with an order greater than 0 will
+be repositioned relative to items still set to their default orders.
+
+Use \`justify-content\` and \`order\` to move your towers into position.
 
 **justify-content**
 * \`flex-start\`: group items in the left (the start) of a container
@@ -124,18 +132,12 @@ item aligns to the left and the final item aligns to the right
 * \`space-around\`: evenly distribute items in a container such that all items
 have equal space around them
 
-**align-items** and **align-self**
-* \`flex-start\`: align items across the top of the container
-* \`flex-end\`: align items across the bottom of the container
-* \`center\`: align items across the center of the container
-
-<u>Reminder</u>: \`align-self\` and \`align-items\` also accept the values
-<i>baseline</i> and <i>stretch</i>, but these values cannot be used in Flexbox
-Defense.`,
-      tldr: `Use <nobr class="text__code">justify-content ▾</nobr>, <nobr
-             class="text__code">align-items ▾</nobr>, and <nobr
-             class="text__code">align-self ▾</nobr> to move your towers into
-             position.`
+**order**
+* \`#\`: position an item relative to the other items in the container`,
+    tldr: `Move your towers into position by combining the container property
+           <nobr class="text__code">justify-content ▾</nobr> with the item
+           property <nobr class="text__code">order ▾</nobr>. Remember that all
+           items have a default order of 0.`
     },
     minimumScore: 80
   });

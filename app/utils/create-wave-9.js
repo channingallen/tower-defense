@@ -12,18 +12,20 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-9.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 10, y: -3 }),
-    PathCoords.create({ x: 10, y: 30 }),
-    PathCoords.create({ x: 90, y: 30 }),
+    PathCoords.create({ x: 90, y: -3 }),
+    PathCoords.create({ x: 90, y: 35 }),
+    PathCoords.create({ x: 71, y: 35 }),
+    PathCoords.create({ x: 71, y: 10 }),
     PathCoords.create({ x: 90, y: 10 }),
-    PathCoords.create({ x: 70, y: 10 }),
-    PathCoords.create({ x: 70, y: 50 }),
-    PathCoords.create({ x: 30, y: 50 }),
-    PathCoords.create({ x: 30, y: 90 }),
+    PathCoords.create({ x: 90, y: 10 }),
+    PathCoords.create({ x: 90, y: 50 }),
+    PathCoords.create({ x: 40, y: 50 }),
+    PathCoords.create({ x: 40, y: 10 }),
+    PathCoords.create({ x: 10, y: 10 }),
     PathCoords.create({ x: 10, y: 90 }),
-    PathCoords.create({ x: 10, y: 70 }),
-    PathCoords.create({ x: 90, y: 70 }),
-    PathCoords.create({ x: 90, y: 103 })
+    PathCoords.create({ x: 30, y: 90 }),
+    PathCoords.create({ x: 30, y: 70 }),
+    PathCoords.create({ x: 103, y: 70 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -36,14 +38,14 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 25;
+  const mobQuantity = 20;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 700,
+      frequency: 800,
       health: 300,
       maxHealth: 300,
-      points: 4,
+      points: 5,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
       type: 'standard'
@@ -68,11 +70,11 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 17);
-  const towerGroup2 = getNewTowerGroup(1, 77);
+  const towerGroup1 = getNewTowerGroup(1, 20);
+  const towerGroup2 = getNewTowerGroup(5, 65);
 
-  addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 2 }, { type: 1 }]);
-  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 2 }, { type: 1 }]);
+  addTowersToTowerGroup(towerGroup1, [{ type: 2 }, { type: 1 }, { type: 1 }]);
+  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 1 }, { type: 2 }]);
 
   wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
 }
@@ -111,17 +113,11 @@ function generateIdForRecord() {
 
 export default function createWave9() {
   const wave = Wave.create({
-    towerStylesHidden: false,
+    towerStylesHidden: true,
     instructions: {
-      main: `The super towers are in bad positions again, but this time you'll
-             need to apply styles to the towers themselves.
-
-The \`order\` property defines the order in which an item appears in the flex
-container and accepts both positive and negative integer values. All flex items
-begin with a default order of 0, so an item with an order greater than 0 will
-be repositioned relative to items still set to their default orders.
-
-Use \`justify-content\` and \`order\` to move your towers into position.
+      main: `This time each group contains a super tower! Super towers take a
+             while to reload but damage every enemy in their attack range. Use
+             the properties you've learned to score 80 or higher!
 
 **justify-content**
 * \`flex-start\`: group items in the left (the start) of a container
@@ -132,12 +128,20 @@ item aligns to the left and the final item aligns to the right
 * \`space-around\`: evenly distribute items in a container such that all items
 have equal space around them
 
-**order**
-* \`#\`: position an item relative to the other items in the container`,
-    tldr: `Move your towers into position by combining the container property
-           <nobr class="text__code">justify-content ▾</nobr> with the item
-           property <nobr class="text__code">order ▾</nobr>. Remember that all
-           items have a default order of 0.`
+**align-items**
+* \`flex-start\`: align items across the top of the container
+* \`flex-end\`: align items across the bottom of the container
+* \`center\`: align items across the center of the container
+
+**flex-direction**
+* \`row\`: lay out items from left to right
+* \`row-reverse\`: lay out items from right to left
+* \`column\`: lay out items from top to bottom
+* \`column-reverse\`: lay out items from bottom to top`,
+      tldr: `Use <nobr class="text__code">justify-content ▾</nobr>, <nobr
+             class="text__code">align-items ▾</nobr>, and <nobr
+             class="text__code">flex-direction ▾</nobr> to move your towers into
+             position.`
     },
     minimumScore: 80
   });

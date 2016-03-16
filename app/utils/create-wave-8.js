@@ -9,23 +9,11 @@ import Wave from 'tower-defense/objects/wave';
 
 function addBoardToWave(wave) {
   const board = Board.create();
-  board.set('imageUrl', '/images/path-8.png');
+  board.set('imageUrl', '/images/path-0.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 90, y: -3 }),
-    PathCoords.create({ x: 90, y: 35 }),
-    PathCoords.create({ x: 71, y: 35 }),
-    PathCoords.create({ x: 71, y: 10 }),
-    PathCoords.create({ x: 90, y: 10 }),
-    PathCoords.create({ x: 90, y: 10 }),
-    PathCoords.create({ x: 90, y: 50 }),
-    PathCoords.create({ x: 40, y: 50 }),
-    PathCoords.create({ x: 40, y: 10 }),
-    PathCoords.create({ x: 10, y: 10 }),
-    PathCoords.create({ x: 10, y: 90 }),
-    PathCoords.create({ x: 30, y: 90 }),
-    PathCoords.create({ x: 30, y: 70 }),
-    PathCoords.create({ x: 103, y: 70 })
+    PathCoords.create({ x: 15, y: -3 }),
+    PathCoords.create({ x: 15, y: 103 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -38,14 +26,14 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 20;
+  const mobQuantity = 10;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 800,
+      frequency: 900,
       health: 300,
       maxHealth: 300,
-      points: 5,
+      points: 10,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
       type: 'standard'
@@ -70,11 +58,17 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 20);
+  // getNewTowerGroup = function(numRows, posY)
+  const towerGroup1 = getNewTowerGroup(5, 15);
   const towerGroup2 = getNewTowerGroup(5, 65);
 
-  addTowersToTowerGroup(towerGroup1, [{ type: 2 }, { type: 1 }, { type: 1 }]);
-  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 1 }, { type: 2 }]);
+  // addTowersToTowerGroup = function(towerGroup, numTowers)
+  addTowersToTowerGroup(towerGroup1, [
+    { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
+  ]);
+  addTowersToTowerGroup(towerGroup2, [
+    { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
+  ]);
 
   wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
 }
@@ -115,33 +109,20 @@ export default function createWave8() {
   const wave = Wave.create({
     towerStylesHidden: true,
     instructions: {
-      main: `This time each group contains a super tower! Super towers take a
-             while to reload but damage every enemy in their attack range. Use
-             the properties you've learned to score 80 or higher!
+      main: `This time you have more towers, but less horizontal room to work
+             with.
 
-**justify-content**
-* \`flex-start\`: group items in the left (the start) of a container
-* \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the center of a container
-* \`space-between\`: evenly distribute items in a container such that the first
-item aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items
-have equal space around them
+The \`flex-direction\` property is your answer. \`flex-direction\` defines the
+directional layout of the items in the flex container. Flex items can lay out
+either in horizontal rows or vertical columns. Accordingly, \`flex-direction\`
+accepts the following values:
 
-**align-items**
-* \`flex-start\`: align items across the top of the container
-* \`flex-end\`: align items across the bottom of the container
-* \`center\`: align items across the center of the container
-
-**flex-direction**
 * \`row\`: lay out items from left to right
 * \`row-reverse\`: lay out items from right to left
 * \`column\`: lay out items from top to bottom
 * \`column-reverse\`: lay out items from bottom to top`,
-      tldr: `Use <nobr class="text__code">justify-content ▾</nobr>, <nobr
-             class="text__code">align-items ▾</nobr>, and <nobr
-             class="text__code">flex-direction ▾</nobr> to move your towers into
-             position.`
+      tldr: `Use <nobr class="text__code">flex-direction ▾</nobr> to move your
+             towers into position.`
     },
     minimumScore: 80
   });
