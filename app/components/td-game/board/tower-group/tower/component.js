@@ -138,6 +138,7 @@ TowerComponent.reopen({
 
       this._clearPreviousStyles();
       if (!styleFound || codeLineEmpty) {
+        this.incrementProperty('positionChangeCount');
         return;
       }
 
@@ -153,8 +154,10 @@ TowerComponent.reopen({
 
             if (semicolonFound) {
               this.$().css(property, this._getValueWithoutSemiColon(value));
+              this.incrementProperty('positionChangeCount');
             } else {
               this.$().css(property, value);
+              this.incrementProperty('positionChangeCount');
             }
           }
         }
@@ -170,6 +173,14 @@ TowerComponent.reopen({
 /////////////////////////////
 
 TowerComponent.reopen({
+  // This must be manually incremented each time a tower style is applied (e.g.
+  // via this.incrementProperty('positionChangeCount'), as found at the end of
+  // this._updateCodeLines() above). Otherwise, centerLeftPct and centerTopPct
+  // won't wait for the jQuery positional updates at the end of
+  // this._updateCodeLines(), since each of these functions are triggered by
+  // many of the same properties.
+  positionChangeCount: 0,
+
   // the % distance the center of the tower is from the left of the board
   centerLeftPct: Ember.computed(
     'attrs.stylesInitialized',
@@ -180,6 +191,7 @@ TowerComponent.reopen({
     'attrs.tower.styles.@each.codeLine',
     'attrs.tower.styles.@each.submitted',
     'elementInserted',
+    'positionChangeCount',
     function () {
       if (!this.get('elementInserted')) {
         return null;
@@ -212,6 +224,7 @@ TowerComponent.reopen({
     'attrs.tower.styles.@each.codeLine',
     'attrs.tower.styles.@each.submitted',
     'elementInserted',
+    'positionChangeCount',
     function () {
       if (!this.get('elementInserted')) {
         return null;
