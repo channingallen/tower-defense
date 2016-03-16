@@ -12,14 +12,20 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-0.png');
 
   const pathObjects = [
-    PathCoords.create({ x: -3, y: 75 }),
-    PathCoords.create({ x: 15, y: 75 }),
+    PathCoords.create({ x: -3, y: 10 }),
+    PathCoords.create({ x: 15, y: 10 }),
     PathCoords.create({ x: 15, y: 25 }),
-    PathCoords.create({ x: 50, y: 25 }),
-    PathCoords.create({ x: 50, y: 75 }),
+    PathCoords.create({ x: 5, y: 25 }),
+    PathCoords.create({ x: 5, y: 60 }),
+    PathCoords.create({ x: 40, y: 60 }),
+    PathCoords.create({ x: 40, y: 42 }),
+    PathCoords.create({ x: 60, y: 42 }),
+    PathCoords.create({ x: 60, y: 60 }),
+    PathCoords.create({ x: 95, y: 60 }),
+    PathCoords.create({ x: 95, y: 75 }),
     PathCoords.create({ x: 85, y: 75 }),
-    PathCoords.create({ x: 85, y: 25 }),
-    PathCoords.create({ x: 103, y: 25 })
+    PathCoords.create({ x: 85, y: 90 }),
+    PathCoords.create({ x: 103, y: 90 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -32,14 +38,14 @@ function addBoardToWave(wave) {
 function addMobsToWave(wave) {
   const mobs = [];
 
-  const mobQuantity = 10;
+  const mobQuantity = 20;
   for (var i = 0; i < mobQuantity; i++) {
     const newMob = Mob.create({
       id: generateIdForRecord(),
-      frequency: 2000,
+      frequency: 1350,
       health: 300,
       maxHealth: 300,
-      points: 10,
+      points: 5,
       quantity: mobQuantity,
       speed: 10, // seconds to cross one axis of the board
       type: 'standard'
@@ -64,10 +70,10 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(7, 32);
+  const towerGroup1 = getNewTowerGroup(14, 15);
 
   addTowersToTowerGroup(towerGroup1, [
-    { type: 1 }, { type: 1 }, { type: 1 }, { type: 1 }
+    { type: 2 }, { type: 1 }, { type: 2 }, { type: 1 }, { type: 2 }
   ]);
 
   wave.set('towerGroups', Ember.A([towerGroup1]));
