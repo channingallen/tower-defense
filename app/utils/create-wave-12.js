@@ -73,7 +73,7 @@ function addTowerGroupsToWave(wave) {
   const towerGroup1 = getNewTowerGroup(14, 15);
 
   addTowersToTowerGroup(towerGroup1, [
-    { type: 2 }, { type: 1 }, { type: 2 }, { type: 1 }, { type: 2 }
+    { type: 2 }, { type: 1 }, { type: 1 }, { type: 2 }, { type: 2 }
   ]);
 
   wave.set('towerGroups', Ember.A([towerGroup1]));
@@ -140,10 +140,12 @@ items have equal space around them
 
 **order**
 * \`#\`: position an item relative to the other items in the container`,
-      tldr: `Use <nobr class="text__code">justify-content ▾</nobr>, <nobr
-             class="text__code">align-items ▾</nobr>, and <nobr
-             class="text__code">align-self ▾</nobr> to move your towers into
-             position.`
+      tldr: `Use the properties you've learned to move your towers into
+             position: <nobr class="text__code">justify-content ▾</nobr>, <nobr
+             class="text__code">align-items ▾</nobr>, <nobr
+             class="text__code">flex-direction ▾</nobr>, <nobr
+             class="text__code">order ▾</nobr>, <nobr
+             class="text__code">align-self ▾</nobr>.`
     },
     minimumScore: 80
   });
