@@ -72,26 +72,26 @@
           <div class="tooltip__content tooltip__content--below">
             <div class="tooltip__text">
               {{#if (eq instructionToolTipProperty "justify-content ▾")}}
-                <p><u>flex-start</u>: group items in the left (the start) of a container</p>
-                <p><u>flex-end</u>: group items in the right of a container</p>
-                <p><u>center</u>: group items in the center of a container</p>
-                <p><u>space-between</u>: evenly distribute items in a container such that the first item aligns to the left and the final item aligns to the right</p>
-                <p><u>space-around</u>: evenly distribute items in a container such that all items have equal space around them</p>
+                <p><u>flex-start</u>: group items at the start of a container's main axis</p>
+                <p><u>flex-end</u>: group items at the end of the main axis</p>
+                <p><u>center</u>: group items in the center of the main axis</p>
+                <p><u>space-between</u>: evenly distribute items along the main axis such that the first item aligns at the start and the final item aligns at the end</p>
+                <p><u>space-around</u>: evenly distribute items along the main axis such that all items have equal space around them</p>
               {{else if (eq instructionToolTipProperty "align-items ▾")}}
-                <p><u>flex-start</u>: align items across the top of the container</p>
-                <p><u>flex-end</u>: align items across the bottom of the container</p>
-                <p><u>center</u>: align items across the center of the container</p>
+                <p><u>flex-start</u>: align items across the start of a container's cross axis</p>
+                <p><u>flex-end</u>: align items across the end of the cross axis</p>
+                <p><u>center</u>: align items across the center of the cross axis</p>
               {{else if (eq instructionToolTipProperty "flex-direction ▾")}}
-                <p><u>row</u>: lay out items from left to right</p>
-                <p><u>row-reverse</u>: lay out items from right to left</p>
-                <p><u>column</u>: lay out items from top to bottom</p>
-                <p><u>column-reverse</u>: lay out items from bottom to top</p>
+                <p><u>row</u>: lay out the main axis from left to right</p>
+                <p><u>row-reverse</u>: lay out the main axis from right to left</p>
+                <p><u>column</u>: lay out the main axis from top to bottom</p>
+                <p><u>column-reverse</u>: lay out the main axis from bottom to top</p>
               {{else if (eq instructionToolTipProperty "order ▾")}}
                 <p><u>#</u>: position an item relative to the other items in the container</p>
               {{else if (eq instructionToolTipProperty "align-self ▾")}}
-                <p><u>flex-start</u>: align items across the top of the container</p>
-                <p><u>flex-end</u>: align items across the bottom of the container</p>
-                <p><u>center</u>: align items across the center of the container</p>
+                <p><u>flex-start</u>: align item at the start of a container's cross axis</p>
+                <p><u>flex-end</u>: align item at the end of the cross axis</p>
+                <p><u>center</u>: align item at the center of the cross axis</p>
               {{/if}}
             </div>
           </div>
