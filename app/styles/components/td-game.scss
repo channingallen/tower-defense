@@ -117,10 +117,10 @@ $td-game__item__margin-bottom: 20px;
 
 .button__menu {
   position: absolute;
-  left: -1px;
+  left: 20px;
   top: 45px;
   z-index: 2;
-  width: 100%;
+  width: 165px;
 
   &:before {
     border-left: solid transparent 8px;
@@ -153,7 +153,11 @@ $td-game__item__margin-bottom: 20px;
   width: 29px;
   margin: 0 10px 10px 0;
 
-  &:nth-child(5) {
+  &:nth-child(4) {
+    margin-right: 0
+  }
+
+  &:nth-child(8) {
     margin-right: 0
   }
 
