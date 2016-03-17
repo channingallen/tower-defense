@@ -109,16 +109,17 @@ export default function createWave4() {
     instructions: {
       main: `Now some of the groups have vertical space, which is the perfect
              opportunity to use the \`align-items\` property. \`align-items\`
-             positions a container's items vertically and accepts the following
-             values:
+             positions a container's items across its **cross axis** and accepts
+             the following values:
 
-* \`flex-start\`: align items across the top of the container
-* \`flex-end\`: align items across the bottom of the container
-* \`center\`: align items across the center of the container
+* \`flex-start\`: align items across the start of a container's cross axis
+* \`flex-end\`: align items across the end of the cross axis
+* \`center\`: align items across the center of the cross axis
 
-<u>Note</u>: \`align-items\` also accepts the values <i>baseline</i> (align items such
-that their baselines line up) and <i>stretch</i> (stretch items to fill the
-container), but these values cannot be used in Flexbox Defense.`,
+<u>Note</u>: \`align-items\` also accepts the values <i>baseline</i> (align
+items such that their baselines line up) and <i>stretch</i> (stretch items such
+that they span the entire cross axis), but these values cannot be used in
+Flexbox Defense.`,
       tldr: `Use <nobr class="text__code">align-items ▾</nobr> to move your
              towers into effective positions.`
     },

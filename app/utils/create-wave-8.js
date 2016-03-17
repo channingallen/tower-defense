@@ -111,18 +111,30 @@ export default function createWave8() {
   const wave = Wave.create({
     towerStylesHidden: true,
     instructions: {
-      main: `This time you have more towers, but less horizontal room to work
-             with.
+      main: `Now \`flex-direction\` must be combined with a property you've
+             learned previously. You'll be responsible for determining which
+             one! Remember: \`flex-direction\` can change the directional layout
+             of the axes.
 
-The \`flex-direction\` property is your answer. \`flex-direction\` defines the
-directional layout of the items in the flex container. Flex items can lay out
-either in horizontal rows or vertical columns. Accordingly, \`flex-direction\`
-accepts the following values:
+**flex-direction**
+* \`row\`: lay out the main axis from left to right
+* \`row-reverse\`: lay out the main axis from right to left
+* \`column\`: lay out the main axis from top to bottom
+* \`column-reverse\`: lay out the main axis from bottom to top
 
-* \`row\`: lay out items from left to right
-* \`row-reverse\`: lay out items from right to left
-* \`column\`: lay out items from top to bottom
-* \`column-reverse\`: lay out items from bottom to top`,
+**justify-content**
+* \`flex-start\`: group items at the start of a container's main axis
+* \`flex-end\`: group items at the end of the main axis
+* \`center\`: group items in the center of the main axis
+* \`space-between\`: evenly distribute items along the main axis such that the
+first item aligns at the start and the final item aligns at the end
+* \`space-around\`: evenly distribute items along the main axis such that all
+items have equal space around them
+
+**align-items**
+* \`flex-start\`: align items across the start of a container's cross axis
+* \`flex-end\`: align items across the end of the cross axis
+* \`center\`: align items across the center of the cross axis`,
       tldr: `Use <nobr class="text__code">flex-direction ▾</nobr> to move your
              towers into position.`
     },

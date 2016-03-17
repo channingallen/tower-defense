@@ -113,14 +113,21 @@ export default function createWave7() {
              with.
 
 The \`flex-direction\` property is your answer. \`flex-direction\` defines the
-directional layout of the items in the flex container. Flex items can lay out
-either in horizontal rows or vertical columns. Accordingly, \`flex-direction\`
-accepts the following values:
+directional layout of the main and cross axes in the flex container.
 
-* \`row\`: lay out items from left to right
-* \`row-reverse\`: lay out items from right to left
-* \`column\`: lay out items from top to bottom
-* \`column-reverse\`: lay out items from bottom to top`,
+For example, although the main axis lays out horizontally and the cross
+axis lays out vertically by default, \`flex-direction\` can *rotate* the axes
+such that the main axis lays out vertically and the cross axis lays out
+horizontally. Here's what this looks like:
+
+<img src="images/flexbox-column.png" class="instructions__diagram" alt="flexbox diagram">
+
+Accordingly, \`flex-direction\` accepts the following values:
+
+* \`row\`: lay out the main axis from left to right
+* \`row-reverse\`: lay out the main axis from right to left
+* \`column\`: lay out the main axis from top to bottom
+* \`column-reverse\`: lay out the main axis from bottom to top`,
       tldr: `Use <nobr class="text__code">flex-direction ▾</nobr> to move your
              towers into position.`
     },

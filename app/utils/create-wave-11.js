@@ -112,24 +112,24 @@ export default function createWave11() {
       main: `To vertically position individual towers, use \`align-self\`, which
              accepts the same values as \`align-items\`.
 
-Use \`justify-content\`, \`align-items\`, and \`align-self\` to move your towers
+Use \`justify-content\` and \`align-self\` to move your towers
 into position.
 
 **justify-content**
-* \`flex-start\`: group items in the left (the start) of a container
-* \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the center of a container
-* \`space-between\`: evenly distribute items in a container such that the first
-item aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items
-have equal space around them
+* \`flex-start\`: group items at the start of a container's main axis
+* \`flex-end\`: group items at the end of the main axis
+* \`center\`: group items in the center of the main axis
+* \`space-between\`: evenly distribute items along the main axis such that the
+first item aligns at the start and the final item aligns at the end
+* \`space-around\`: evenly distribute items along the main axis such that all
+items have equal space around them
 
-**align-items** and **align-self**
-* \`flex-start\`: align items across the top of the container
-* \`flex-end\`: align items across the bottom of the container
-* \`center\`: align items across the center of the container
+**align-self**
+* \`flex-start\`: align item at the start of a container's cross axis
+* \`flex-end\`: align item at the end of the cross axis
+* \`center\`: align item at the center of the cross axis
 
-<u>Reminder</u>: \`align-self\` and \`align-items\` also accept the values
+<u>Reminder</u>: \`align-self\`, like \`align-items\`, also accepts the values
 <i>baseline</i> and <i>stretch</i>, but these values cannot be used in Flexbox
 Defense.`,
       tldr: `Use <nobr class="text__code">justify-content ▾</nobr>, <nobr

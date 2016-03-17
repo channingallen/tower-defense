@@ -110,13 +110,13 @@ export default function createWave3() {
             to get your towers into better positions. \`justify-content\`
             accepts the following values:
 
-* \`flex-start\`: group items in the left (the start) of a container
-* \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the center of a container
-* \`space-between\`: evenly distribute items in a container such that the first
-item aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items
-have equal space around them`,
+* \`flex-start\`: group items at the start of a container's main axis
+* \`flex-end\`: group items at the end of the main axis
+* \`center\`: group items in the center of the main axis
+* \`space-between\`: evenly distribute items along the main axis such that the
+first item aligns at the start and the final item aligns at the end
+* \`space-around\`: evenly distribute items along the main axis such that all
+items have equal space around them`,
       tldr: `Use <nobr class="text__code">justify-content ▾</nobr>
              to move your towers into position.`
     },

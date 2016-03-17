@@ -112,18 +112,18 @@ export default function createWave6() {
       main: `Use the properties you've learned to score 80 or higher!
 
 **justify-content**
-* \`flex-start\`: group items in the left (the start) of a container
-* \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the center of a container
-* \`space-between\`: evenly distribute items in a container such that the first
-item aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items
-have equal space around them
+* \`flex-start\`: group items at the start of a container's main axis
+* \`flex-end\`: group items at the end of the main axis
+* \`center\`: group items in the center of the main axis
+* \`space-between\`: evenly distribute items along the main axis such that the
+first item aligns at the start and the final item aligns at the end
+* \`space-around\`: evenly distribute items along the main axis such that all
+items have equal space around them
 
 **align-items**
-* \`flex-start\`: align items across the top of the container
-* \`flex-end\`: align items across the bottom of the container
-* \`center\`: align items across the center of the container`,
+* \`flex-start\`: align items across the start of a container's cross axis
+* \`flex-end\`: align items across the end of the cross axis
+* \`center\`: align items across the center of the cross axis`,
       tldr: `Use <nobr class="text__code">justify-content ▾</nobr> and <nobr
              class="text__code">align-items ▾</nobr> to move your towers into
              position.`

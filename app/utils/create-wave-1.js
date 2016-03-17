@@ -109,20 +109,25 @@ export default function createWave1() {
              defenses. Unlike other tower defense games, you must position your
              towers using CSS!
 
-We'll start with container properties. Use the \`justify-content\` property to
-move the towers into effective positions. \`justify-content\` positions a
-container's items horizontally and accepts the following values:
+We'll start with container properties. A flexbox container has a main axis and a
+cross axis.
 
-* \`flex-start\`: group items in the left (the start) of a container
-* \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the center of a container
-* \`space-between\`: evenly distribute items in a container such that the first
-item aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items
-have equal space around them
+<img src="images/flexbox-row.png" class="instructions__diagram" alt="flexbox diagram">
 
-To move the container's towers to the center, for example, try
-\`justify-content: center;\``,
+Use the \`justify-content\` property on the tower group container to move
+your towers into effective positions. \`justify-content\` positions a container's
+items along the **main axis** and accepts the following values:
+
+* \`flex-start\`: group items at the start of a container's main axis
+* \`flex-end\`: group items at the end of the main axis
+* \`center\`: group items in the center of the main axis
+* \`space-between\`: evenly distribute items along the main axis such that the
+first item aligns at the start and the final item aligns at the end
+* \`space-around\`: evenly distribute items along the main axis such that all
+items have equal space around them
+
+Try \`justify-content: center;\` for example, to move the container's towers to
+the center of the main axis.`,
       tldr: `Use the <nobr class="text__code">justify-content ▾</nobr> property to
              move these two towers into position. Click the <i
              class="fa fa-question-circle"></i> button in the stylesheet for a

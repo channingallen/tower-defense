@@ -115,29 +115,31 @@ export default function createWave12() {
   const wave = Wave.create({
     towerStylesHidden: false,
     instructions: {
-      main: `To vertically position individual towers, use \`align-self\`, which
-             accepts the same values as \`align-items\`.
-
-Use \`justify-content\`, \`align-items\`, and \`align-self\` to move your towers
-into position.
+      main: `This last one's pretty tricky! Use the properties you've learned to
+             score 80 or higher!
 
 **justify-content**
-* \`flex-start\`: group items in the left (the start) of a container
-* \`flex-end\`: group items in the right of a container
-* \`center\`: group items in the center of a container
-* \`space-between\`: evenly distribute items in a container such that the first
-item aligns to the left and the final item aligns to the right
-* \`space-around\`: evenly distribute items in a container such that all items
-have equal space around them
+* \`flex-start\`: group items at the start of a container's main axis
+* \`flex-end\`: group items at the end of the main axis
+* \`center\`: group items in the center of the main axis
+* \`space-between\`: evenly distribute items along the main axis such that the
+first item aligns at the start and the final item aligns at the end
+* \`space-around\`: evenly distribute items along the main axis such that all
+items have equal space around them
 
 **align-items** and **align-self**
-* \`flex-start\`: align items across the top of the container
-* \`flex-end\`: align items across the bottom of the container
-* \`center\`: align items across the center of the container
+* \`flex-start\`: align item(s) across the start of a container's cross axis
+* \`flex-end\`: align item(s) across the end of the cross axis
+* \`center\`: align item(s) across the center of the cross axis
 
-<u>Reminder</u>: \`align-self\` and \`align-items\` also accept the values
-<i>baseline</i> and <i>stretch</i>, but these values cannot be used in Flexbox
-Defense.`,
+**flex-direction**
+* \`row\`: lay out the main axis from left to right
+* \`row-reverse\`: lay out the main axis from right to left
+* \`column\`: lay out the main axis from top to bottom
+* \`column-reverse\`: lay out the main axis from bottom to top
+
+**order**
+* \`#\`: position an item relative to the other items in the container`,
       tldr: `Use <nobr class="text__code">justify-content ▾</nobr>, <nobr
              class="text__code">align-items ▾</nobr>, and <nobr
              class="text__code">align-self ▾</nobr> to move your towers into
