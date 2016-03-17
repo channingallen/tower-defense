@@ -135,8 +135,10 @@ items have equal space around them
 * \`flex-start\`: align items across the start of a container's cross axis
 * \`flex-end\`: align items across the end of the cross axis
 * \`center\`: align items across the center of the cross axis`,
-      tldr: `Use <nobr class="text__code">flex-direction ▾</nobr> to move your
-             towers into position.`
+      tldr: `Use <nobr class="text__code">flex-direction ▾</nobr> and either
+             <nobr class="text__code">justify-content ▾</nobr> or <nobr
+             class="text__code">align-items ▾</nobr> to move your towers
+             into position.`
     },
     minimumScore: 80
   });
