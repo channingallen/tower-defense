@@ -258,7 +258,7 @@ $tooltip--color: hsla(0, 0%, 10%, 0.85);
   height: 100vh;
   left: 0;
   overflow: auto;
-  padding-top: 6%;
+  padding-top: 3%;
   position: absolute;
   top: 0;
   width: 100vw;
@@ -277,6 +277,11 @@ $tooltip--color: hsla(0, 0%, 10%, 0.85);
     list-style: disc;
     padding-left: 35px;
   }
+}
+
+.instructions__diagram {
+  height: 200px;
+  margin-left: 22%;
 }
 
 .modal__actions {
