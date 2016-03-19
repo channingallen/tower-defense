@@ -115,7 +115,7 @@ export default function createWave12() {
   const wave = Wave.create({
     towerStylesHidden: false,
     instructions: {
-      main: `This last one's pretty tricky! Use the properties you've learned to
+      main: `This last one's pretty tough! Use the properties you've learned to
              score 80 or higher!
 
 **justify-content**
