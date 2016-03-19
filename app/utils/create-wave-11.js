@@ -132,8 +132,7 @@ items have equal space around them
 <u>Reminder</u>: \`align-self\`, like \`align-items\`, also accepts the values
 <i>baseline</i> and <i>stretch</i>, but these values cannot be used in Flexbox
 Defense.`,
-      tldr: `Use <nobr class="text__code">justify-content ▾</nobr>, <nobr
-             class="text__code">align-items ▾</nobr>, and <nobr
+      tldr: `Use <nobr class="text__code">justify-content ▾</nobr> and <nobr
              class="text__code">align-self ▾</nobr> to move your towers into
              position.`
     },
