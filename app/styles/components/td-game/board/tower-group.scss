@@ -36,8 +36,8 @@ $pulse__color: hsla(60, 100%, 50%, 0.8);
   width: 100%;
 
   &:hover {
-    background-color: opacify($background-color, 0.1);
-    box-shadow: 0 0 10px opacify($background-color, 0.6);
+    background-color: opacify($background-color, 0.01);
+    box-shadow: 0 0 40px opacify($background-color, 0.05);
   }
 }
 
