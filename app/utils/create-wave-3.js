@@ -12,10 +12,12 @@ function addBoardToWave(wave) {
   board.set('imageUrl', '/images/path-3.png');
 
   const pathObjects = [
-    PathCoords.create({ x: 12, y: 103 }),
-    PathCoords.create({ x: 12, y: 20 }),
-    PathCoords.create({ x: 85, y: 20 }),
-    PathCoords.create({ x: 85, y: 103 })
+    PathCoords.create({ x: -3, y: 70 }),
+    PathCoords.create({ x: 12, y: 70 }),
+    PathCoords.create({ x: 12, y: 30 }),
+    PathCoords.create({ x: 85, y: 30 }),
+    PathCoords.create({ x: 85, y: 70 }),
+    PathCoords.create({ x: 103, y: 70 })
   ];
 
   pathObjects.forEach((pathObject) => {
@@ -60,30 +62,32 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
-  const towerGroup1 = getNewTowerGroup(1, 10);
-  const towerGroup2 = getNewTowerGroup(1, 60);
+  // getNewTowerGroup = function(numRows, posY)
+  const towerGroup1 = getNewTowerGroup(1, 19);
+  const towerGroup2 = getNewTowerGroup(1, 50);
 
-  addTowersToTowerGroup(towerGroup1, 1);
-  addTowersToTowerGroup(towerGroup2, 2);
+  // addTowersToTowerGroup = function(towerGroup, specsForTowers)
+  addTowersToTowerGroup(towerGroup1, [{ type: 1 }]);
+  addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 1 }]);
 
   wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
 }
 
-function addTowersToTowerGroup(towerGroup, numTowers) {
-  function getNewTower(towerNum) {
+function addTowersToTowerGroup(towerGroup, specsForTowers) {
+  function getNewTower(towerNum, type) {
     return Tower.create({
       id: generateIdForRecord(),
       attackPower: 20,
       attackRange: 20,
       selector: `tower-${towerGroup.get('groupNum')}-${towerNum}`,
-      type: 1,
+      type,
       styles: Ember.A([createUnitCodeLine()])
     });
   }
 
-  let newTowers = Ember.A([]);
-  for (var i = 1; i < numTowers + 1; i++) {
-    newTowers.addObject(getNewTower(i));
+  let newTowers = [];
+  for (var i = 1; i < specsForTowers.length + 1; i++) {
+    newTowers.addObject(getNewTower(i, specsForTowers.objectAt(i - 1).type));
   }
 
   towerGroup.set('towers', newTowers);
