@@ -70,9 +70,11 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
+  // getNewTowerGroup = function(numRows, posY)
   const towerGroup1 = getNewTowerGroup(1, 20);
   const towerGroup2 = getNewTowerGroup(5, 65);
 
+  // addTowersToTowerGroup = function(towerGroup, specsForTowers)
   addTowersToTowerGroup(towerGroup1, [{ type: 2 }, { type: 1 }, { type: 1 }]);
   addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 1 }, { type: 2 }]);
 

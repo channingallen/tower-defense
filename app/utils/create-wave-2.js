@@ -62,32 +62,34 @@ function addTowerGroupsToWave(wave) {
     });
   }
 
+  // getNewTowerGroup = function(numRows, posY)
   const towerGroup1 = getNewTowerGroup(1, 20);
   const towerGroup2 = getNewTowerGroup(1, 47);
   const towerGroup3 = getNewTowerGroup(1, 75);
 
-  addTowersToTowerGroup(towerGroup1, 1);
-  addTowersToTowerGroup(towerGroup2, 1);
-  addTowersToTowerGroup(towerGroup3, 1);
+  // addTowersToTowerGroup = function(towerGroup, specsForTowers)
+  addTowersToTowerGroup(towerGroup1, [{ type: 1 }]);
+  addTowersToTowerGroup(towerGroup2, [{ type: 1 }]);
+  addTowersToTowerGroup(towerGroup3, [{ type: 1 }]);
 
   wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2, towerGroup3]));
 }
 
-function addTowersToTowerGroup(towerGroup, numTowers) {
-  function getNewTower(towerNum) {
+function addTowersToTowerGroup(towerGroup, specsForTowers) {
+  function getNewTower(towerNum, type) {
     return Tower.create({
       id: generateIdForRecord(),
       attackPower: 20,
       attackRange: 20,
       selector: `tower-${towerGroup.get('groupNum')}-${towerNum}`,
-      type: 1,
+      type,
       styles: Ember.A([createUnitCodeLine()])
     });
   }
 
-  let newTowers = Ember.A([]);
-  for (var i = 1; i < numTowers + 1; i++) {
-    newTowers.addObject(getNewTower(i));
+  let newTowers = [];
+  for (var i = 1; i < specsForTowers.length + 1; i++) {
+    newTowers.addObject(getNewTower(i, specsForTowers.objectAt(i - 1).type));
   }
 
   towerGroup.set('towers', newTowers);
