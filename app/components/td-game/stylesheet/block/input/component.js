@@ -46,8 +46,21 @@ const InputComponent = Ember.Component.extend({
 ///////////////////////////////
 
 InputComponent.reopen({
+  _appendSemicolon() {
+    const inputValue = this.get('inputValue');
+    this.set('inputValue', inputValue.concat(';'));
+  },
+
+  _checkForSemicolon() {
+    return this.get('inputValue').endsWith(';');
+  },
+
   _submitCode() {
     if (this.get('inputValid')) {
+      if (!this._checkForSemicolon()) {
+        this._appendSemicolon();
+      }
+
       this.attrs['submit-code-line'](
         this.get('inputValue'),
         this.attrs.codeLineId,
