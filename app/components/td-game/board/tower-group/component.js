@@ -108,6 +108,12 @@ TowerGroupComponent.reopen({
           const value = this._getValue(codeLine, property);
 
           if (property && value && style.get('valid')) {
+            const propertyIsflexDirection = property === 'flex-direction';
+            const flexDirectionAllowed = this.attrs.towerGroup.get('flexDirectionAllowed');
+            if (propertyIsflexDirection && !flexDirectionAllowed) {
+              return;
+            }
+
             const semicolonFound = value[value.length - 1] === ';';
 
             if (semicolonFound) {
