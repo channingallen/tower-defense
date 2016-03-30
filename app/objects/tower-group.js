@@ -4,6 +4,7 @@ export const spaceBetweenTowersPct = 1;
 
 const TowerGroup = Ember.Object.extend({
   id: null,
+  flexDirectionAllowed: null,
   groupNum: null,
   numRows: 1,
   posY: 'board__tower-group--position-y0',

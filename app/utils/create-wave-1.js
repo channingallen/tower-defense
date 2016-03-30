@@ -67,6 +67,7 @@ function addTowerGroupsToWave(wave) {
 
   // addTowersToTowerGroup = function(towerGroup, specsForTowers)
   addTowersToTowerGroup(towerGroup1, [{ type: 1 }, { type: 1 }]);
+  determineFlexDirectionEligibility(towerGroup1);
 
   wave.set('towerGroups', Ember.A([towerGroup1]));
 }
@@ -89,6 +90,15 @@ function addTowersToTowerGroup(towerGroup, specsForTowers) {
   }
 
   towerGroup.set('towers', newTowers);
+}
+
+function determineFlexDirectionEligibility(towerGroup) {
+  const numTowers = towerGroup.get('towers.length');
+  const numRows = towerGroup.get('numRows');
+
+  if (numRows >= numTowers) {
+    towerGroup.set('flexDirectionAllowed', true);
+  }
 }
 
 function generateIdForRecord() {
