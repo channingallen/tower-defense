@@ -1,6 +1,13 @@
 import Ember from 'ember';
 import createFlexboxRef from 'tower-defense/utils/create-flexbox-ref';
 
+/**
+ * Basics
+ * Submission Processing
+ * Focus
+ * Flexbox Validation
+ */
+
 ////////////////
 //            //
 //   Basics   //
@@ -233,7 +240,8 @@ InputComponent.reopen({
     const startIndex = property.length + 1;
     const endIndex = this.get('inputValue.length');
 
-    let fullValue = this.get('inputValue').substring(startIndex, endIndex).trim();
+    const inputValueLowerCase = this.get('inputValue').toLowerCase();
+    let fullValue = inputValueLowerCase.substring(startIndex, endIndex).trim();
     const semicolonFound = fullValue[fullValue.length - 1] === ';';
     let value;
     if (semicolonFound) {
