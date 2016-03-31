@@ -1,5 +1,15 @@
 import Ember from 'ember';
 
+/**
+ * Basics
+ * Sound Effects
+ * Mob Basics
+ * Mob Generation
+ * Mob Modification
+ * Wave Scoring
+ * Reset
+ */
+
 ////////////////
 //            //
 //   Basics   //

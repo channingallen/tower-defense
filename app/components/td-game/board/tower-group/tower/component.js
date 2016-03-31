@@ -3,6 +3,19 @@ import Projectile from 'tower-defense/objects/projectile';
 import { pathWidth } from 'tower-defense/objects/board';
 import { towerDimensions } from 'tower-defense/objects/tower';
 
+/**
+ * Basics
+ * Upgrade Management
+ * Tower Selection
+ * Code Line Management
+ * Position Management
+ * Path Collision Detection
+ * Sizing
+ * Rotation (facing targets)
+ * Targeting
+ * Projectiles
+ */
+
 ////////////////
 //            //
 //   Basics   //

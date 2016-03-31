@@ -2,6 +2,21 @@ import Ember from 'ember';
 import createGame from 'tower-defense/utils/create-game';
 /* global marked */
 
+/**
+ * Basics
+ * Wave Management
+ * Tower Selection
+ * Tower Collisions
+ * Instructions Tooltip
+ * Dropdown Menu
+ * Tower Input Checkbox
+ * Deselect Units
+ * Modal: Grade (Score Management)
+ * Modal: Instructions
+ * Modal: Cancellation (Wave Cancellation)
+ * Modal: Support
+ */
+
 ////////////////
 //            //
 //   Basics   //

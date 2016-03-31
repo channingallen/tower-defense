@@ -1,6 +1,13 @@
 import Ember from 'ember';
 import { mobDimensions } from 'tower-defense/objects/mob';
 
+/**
+ * Basics
+ * Movement
+ * Position Reporting
+ * Termination
+ */
+
 ////////////////
 //            //
 //   Basics   //

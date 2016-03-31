@@ -1,5 +1,16 @@
 import Ember from 'ember';
 
+/**
+ * Basics
+ * Toggle Tower Inputs
+ * Wave Initiation
+ * Wave Cancellation
+ * Block Lines
+ * Shake Error
+ * Input Reporting
+ * Help Button
+ */
+
 ////////////////
 //            //
 //   Basics   //

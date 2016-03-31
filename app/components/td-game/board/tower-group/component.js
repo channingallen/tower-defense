@@ -3,6 +3,13 @@ import { boardPaddingPct } from 'tower-defense/objects/board';
 import { spaceBetweenTowersPct } from 'tower-defense/objects/tower-group';
 import { towerDimensions } from 'tower-defense/objects/tower';
 
+/**
+ * Basics
+ * Code Line Management
+ * Sizing
+ * Selection
+ */
+
 ////////////////
 //            //
 //   Basics   //

@@ -123,6 +123,10 @@ InputComponent.reopen({
     })
   ),
 
+  // This function will only fire if the current input field was manually
+  // selected (by a click or tab event) or if it is the unsubmitted input at the
+  // end of the block. The business logic contained in the block's
+  // _focusProperInput() function determines when to select which.
   _focusMatchedInput: Ember.observer(
     'attrs.inputIdToFocus',
     function () {
