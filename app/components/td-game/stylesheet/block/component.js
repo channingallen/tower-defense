@@ -1,6 +1,13 @@
 import Ember from 'ember';
 import createUnitCodeLine from 'tower-defense/utils/create-unit-code-line';
 
+/**
+ * Basics
+ * Code Line Management
+ * Wave Initiation
+ * Auto Focus
+ */
+
 ////////////////
 //            //
 //   Basics   //
@@ -137,10 +144,21 @@ BlockComponent.reopen({
       const codeLines = this.get('codeLines');
       if (codeLines.isEvery('submitted')) {
         codeLines.addObject(createUnitCodeLine());
+
+        Ember.run.schedule('afterRender', this, () => {
+          this.set('inputIdSelectedManually', null);
+          this._focusProperInput(); // TODO THIS COMMIT: confirm this works
+        });
       }
     }
   ),
 
+  // Two separate processes invoke this autofocusing function:
+  // 1. The tower or group containing this block is selected and the watched
+  //    objects change.
+  // 2. A codeline submission from *within* this block triggers a new input to
+  //    be created, and this function is called *explicitly*. For an example
+  //    see the final lines of _ensureUnsubmittedCodeLinesExist above.
   _focusProperInput: Ember.observer(
     'attrs.selectedTower',
     'attrs.selectedTowerGroup',
@@ -150,7 +168,6 @@ BlockComponent.reopen({
       if (this.attrs.waveStarted) {
         return;
       }
-
       const towerSelected = this.attrs.selectedTower &&
         this.attrs.selectedTower === this.attrs.tower;
 
