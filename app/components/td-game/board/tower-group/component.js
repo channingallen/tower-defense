@@ -115,9 +115,15 @@ TowerGroupComponent.reopen({
           const value = this._getValue(codeLine, property);
 
           if (property && value && style.get('valid')) {
-            const propertyIsflexDirection = property === 'flex-direction';
+            const valueIsColumnOrCReverse = value === 'column;' || value === 'column-reverse;';
+
+            // NOTE: 'flexDirectionAllowed' is a misnomer; we are not checking
+            //       for the flex-direction property but rather for its value.
+            //       Accordingly, this variable and the towerGroup property it
+            //       references should be changed to something like
+            //       'flexDirectionColOrColReverse' for clarity's sake.
             const flexDirectionAllowed = this.attrs.towerGroup.get('flexDirectionAllowed');
-            if (propertyIsflexDirection && !flexDirectionAllowed) {
+            if (valueIsColumnOrCReverse && !flexDirectionAllowed) {
               return;
             }
 

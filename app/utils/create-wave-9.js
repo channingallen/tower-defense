@@ -77,7 +77,7 @@ function addTowerGroupsToWave(wave) {
   // addTowersToTowerGroup = function(towerGroup, specsForTowers)
   addTowersToTowerGroup(towerGroup1, [{ type: 2 }, { type: 1 }, { type: 1 }]);
   addTowersToTowerGroup(towerGroup2, [{ type: 1 }, { type: 1 }, { type: 2 }]);
-  towerGroup1.set('flexDirectionAllowed', true);
+  determineFlexDirectionEligibility(towerGroup1);
   determineFlexDirectionEligibility(towerGroup2);
 
   wave.set('towerGroups', Ember.A([towerGroup1, towerGroup2]));
