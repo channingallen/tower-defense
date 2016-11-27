@@ -521,6 +521,8 @@ TowerComponent.reopen({
 /////////////////////
 
 TowerComponent.reopen({
+  cannonBlast: null,
+
   _buildProjectile(mobId) {
     const targetedMob = this._getMobById(mobId);
     if (targetedMob) {
@@ -574,45 +576,26 @@ TowerComponent.reopen({
 
   _playCannonSound(mobId) {
     const cannonType = this.get('towerUpgraded') ? 2 : 1;
-    const $cannonSoundEl = Ember.$(
-      `<audio class="cannon-sound cannon-sound-${mobId}" autoplay>
-         <source src="/sounds/cannon-${cannonType}.mp3" type="audio/mpeg">
-       </audio>`
-    );
+    this.set('cannonBlast', new Audio(`/sounds/cannon-${cannonType}.mp3`));
 
-    $cannonSoundEl.appendTo(this.$());
-
-    //  volumeKey: 0: up, 1: down, 2: off
+    // volumeKey: 0: up, 1: down, 2: off
     switch (this.attrs.volumeKey) {
       case 0:
-        this.$('.cannon-sound').prop('volume', 0.5);
+        this.set('cannonBlast.volume', 0.5);
         break;
       case 1:
-        this.$('.cannon-sound').prop('volume', 0.2);
+        this.set('cannonBlast.volume', 0.2);
         break;
       case 2:
-        this.$('.cannon-sound').prop('volume', 0);
+        this.set('cannonBlast.volume', 0);
         break;
     }
-
-    // batch remove audio tags
-    Ember.run.later(this, () => {
-      // allow this._cleanUpAudioTags to remove
-      // remainder of tags on this.willDestroyElement
-      if (this.isDestroying) {
-        return;
-      }
-
-      this.$(`.cannon-sound-${mobId}`).remove();
-    }, this.get('towerUpgraded') ? 3000 : 2000);
+    this.get('cannonBlast').play();
+    this.set('cannonBlast', null);
   },
 
   projectiles: Ember.computed(function () {
     return [];
-  }),
-
-  _cleanUpAudioTags: Ember.on('willDestroyElement', function () {
-    this.$('.cannon-sound').remove();
   }),
 
   actions: {
